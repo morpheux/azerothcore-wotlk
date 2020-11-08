@@ -13,6 +13,8 @@
 # This is done EACH compile so they can be alerted about the consequences.
 #
 
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/PlayerInfoAtLogin_SC.cpp")
+
 # Add source files
 AC_ADD_SCRIPT_LOADER("PlayerInfoAtLogin" "${CMAKE_CURRENT_LIST_DIR}/src/player_info_at_login_loader.cpp")
 

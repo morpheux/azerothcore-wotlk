@@ -13,6 +13,8 @@
 # This is done EACH compile so they can be alerted about the consequences.
 #
 
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/GMChatColor_SC.cpp")
+
 # Add source files
 AC_ADD_SCRIPT_LOADER("GMChatColor" "${CMAKE_CURRENT_LIST_DIR}/src/gm_chat_color_loader.cpp")
 
