@@ -730,7 +730,7 @@ public:
             {
                 uint8 spellRank = GetSpellInfo()->GetRank();
                 ItemPosCountVec dest;
-                InventoryResult msg = caster->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, iTypes[spellRank - 1][0], 1, nullptr);
+                InventoryResult msg = caster->CanStoreNewItem(nullptr_BAG, nullptr_SLOT, dest, iTypes[spellRank - 1][0], 1, nullptr);
                 if (msg != EQUIP_ERR_OK)
                     return SPELL_FAILED_TOO_MANY_OF_ITEM;
             }
@@ -950,7 +950,7 @@ public:
             if (AuraEffect const* glyph = GetTarget()->GetAuraEffect(SPELL_WARLOCK_GLYPH_OF_SIPHON_LIFE, EFFECT_0))
                 AddPct(amount, glyph->GetAmount());
 
-            GetTarget()->CastCustomSpell(SPELL_WARLOCK_SIPHON_LIFE_HEAL, SPELLVALUE_BASE_POINT0, amount, GetTarget(), true, NULL, aurEff);
+            GetTarget()->CastCustomSpell(SPELL_WARLOCK_SIPHON_LIFE_HEAL, SPELLVALUE_BASE_POINT0, amount, GetTarget(), true, nullptr, aurEff);
         }
 
         void Register()
@@ -1153,7 +1153,7 @@ public:
             PreventDefaultAction();
 
             int32 heal = CalculatePct(int32(eventInfo.GetDamageInfo()->GetDamage()), aurEff->GetAmount());
-            GetTarget()->CastCustomSpell(SPELL_WARLOCK_FEL_SYNERGY_HEAL, SPELLVALUE_BASE_POINT0, heal, (Unit*)NULL, true, NULL, aurEff); // TARGET_UNIT_PET
+            GetTarget()->CastCustomSpell(SPELL_WARLOCK_FEL_SYNERGY_HEAL, SPELLVALUE_BASE_POINT0, heal, (Unit*)nullptr, true, nullptr, aurEff); // TARGET_UNIT_PET
         }
 
         void Register()
@@ -1208,7 +1208,7 @@ public:
             if (Unit* caster = GetCaster())
             {
                 int32 amount = aurEff->GetAmount();
-                GetTarget()->CastCustomSpell(caster, SPELL_WARLOCK_HAUNT_HEAL, &amount, NULL, NULL, true, NULL, aurEff, GetCasterGUID());
+                GetTarget()->CastCustomSpell(caster, SPELL_WARLOCK_HAUNT_HEAL, &amount, nullptr, nullptr, true, nullptr, aurEff, GetCasterGUID());
             }
         }
 
@@ -1254,7 +1254,7 @@ public:
                     int32 damage = aurEff->GetBaseAmount();
                     damage = aurEff->GetSpellInfo()->Effects[EFFECT_0].CalcValue(caster, &damage, nullptr) * 9;
                     // backfire damage and silence
-                    caster->CastCustomSpell(dispelInfo->GetDispeller(), SPELL_WARLOCK_UNSTABLE_AFFLICTION_DISPEL, &damage, nullptr, nullptr, true, NULL, aurEff);
+                    caster->CastCustomSpell(dispelInfo->GetDispeller(), SPELL_WARLOCK_UNSTABLE_AFFLICTION_DISPEL, &damage, nullptr, nullptr, true, nullptr, aurEff);
                 }
         }
 
@@ -1302,7 +1302,7 @@ public:
                 return;
 
             if (GetCaster()->ToPlayer()->isHonorOrXPTarget(GetTarget()))
-                GetCaster()->CastSpell(GetTarget(), SPELL_WARLOCK_CURSE_OF_DOOM_EFFECT, true, NULL, aurEff);
+                GetCaster()->CastSpell(GetTarget(), SPELL_WARLOCK_CURSE_OF_DOOM_EFFECT, true, nullptr, aurEff);
         }
 
         void Register()
@@ -1417,7 +1417,7 @@ public:
         void HandleProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
         {
             PreventDefaultAction();
-            GetTarget()->CastSpell(eventInfo.GetProcTarget(), SPELL_WARLOCK_GLYPH_OF_SHADOWFLAME, true, NULL, aurEff);
+            GetTarget()->CastSpell(eventInfo.GetProcTarget(), SPELL_WARLOCK_GLYPH_OF_SHADOWFLAME, true, nullptr, aurEff);
         }
 
         void Register()
