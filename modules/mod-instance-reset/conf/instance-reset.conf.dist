@@ -1,0 +1,16 @@
+[worldserver]
+
+#
+# Enable the module
+# default: true
+#
+
+instanceReset.Enable=true
+
+#############
+#
+# Only remove save of the normal instances.
+# default: true
+#
+
+instanceReset.NormalModeOnly = true
