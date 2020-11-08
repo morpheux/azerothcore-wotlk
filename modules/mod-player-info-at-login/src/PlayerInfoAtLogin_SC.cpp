@@ -17,10 +17,9 @@
 
 #include "Log.h"
 #include "ScriptMgr.h"
-#include "GameConfig.h"
+#include "Config.h"
 #include "Chat.h"
 #include "Player.h"
-#include "GameTime.h"
 
 class PlayerInfoAtLogin_Player : public PlayerScript
 {
@@ -37,7 +36,7 @@ public:
         std::string NameLink = handler.GetNameLink(player);
         std::string PlayerName = player->GetName();
         uint32 PlayerOnlineCount = sWorld->GetPlayerCount();
-        std::string ServerUptime = secsToTimeString(GameTime::GetUptime());
+        std::string ServerUptime = sWorld->GetUptime();
         std::string PlayerIP = player->GetSession()->GetRemoteAddress();
         uint32 GMLevel = player->GetSession()->GetSecurity();
         uint32 connPeak = sWorld->GetMaxActiveSessionCount();
