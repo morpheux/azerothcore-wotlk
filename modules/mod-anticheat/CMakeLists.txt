@@ -1,20 +1,11 @@
-#
-# This file is part of the WarheadCore Project. See AUTHORS file for Copyright information
-#
-# This file is free software; as a special exception the author gives
-# unlimited permission to copy and/or distribute it, with or without
-# modifications, as long as this notice is preserved.
-#
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
-# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-#
-# User has manually chosen to ignore the git-tests, so throw them a warning.
-# This is done EACH compile so they can be alerted about the consequences.
-#
+CU_SET_PATH("CMAKE_MOD_ANTICHEAT_DIR" "${CMAKE_CURRENT_LIST_DIR}")
 
-# Add source files
-AC_ADD_SCRIPT_LOADER("Anticheat" "${CMAKE_CURRENT_LIST_DIR}/src/anticheat_loader.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/PassiveAnticheat.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/AnticheatMgr.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/AnticheatScripts.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/AnticheatData.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/cs_anticheat.cpp")
 
-# Add config file
-AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/Anticheat.conf.dist")
+AC_ADD_SCRIPT_LOADER("PassiveAnticheat" "${CMAKE_CURRENT_LIST_DIR}/src/loader.h")
+
+CU_ADD_HOOK(AFTER_WORLDSERVER_CMAKE "${CMAKE_CURRENT_LIST_DIR}/src/cmake/after_ws_install.cmake")

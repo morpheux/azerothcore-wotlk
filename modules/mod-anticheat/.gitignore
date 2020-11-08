@@ -1,25 +1,37 @@
+# ignore file
+#
+
 !.gitignore
 
 #
-#Generic
+# OS specific
 #
-
-.directory
-.mailmap
-*.orig
-*.rej
-*.*~
-.hg/
-*.kdev*
+# MacOS
 .DS_Store
-CMakeLists.txt.user
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+
+
+#
+# Editors / debuggers / other output files
+#
+*~
 *.bak
+*.orig
 *.patch
 *.diff
-*.REMOTE.*
-*.BACKUP.*
-*.BASE.*
-*.LOCAL.*
+callgrind.out.*
+
+#
+# Git stuff
+#
+# stgit directories
+patches-*
+.git/
+*.rej
+
 
 #
 # IDE & other softwares
@@ -27,9 +39,8 @@ CMakeLists.txt.user
 /.settings/
 /.externalToolBuilders/*
 # exclude in all levels
-nbproject/
-.sync.ffs_db
-*.kate-swp
+nbproject/private/
+*.ffs_db
 
 #
 # Eclipse
@@ -44,5 +55,22 @@ tmp/
 local.properties
 .settings/
 .loadpath
-.project
+
+# External tool builders
+.externalToolBuilders/
+/node_modules
+/npm-debug.*
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
 .cproject
+
+# PDT-specific
+.buildpath
+
+# TeXlipse plugin
+.texlipse
+
+
