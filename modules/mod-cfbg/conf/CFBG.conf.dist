@@ -1,0 +1,39 @@
+#
+# This file is part of the WarheadCore Project. See AUTHORS file for Copyright information
+#
+# This file is free software; as a special exception the author gives
+# unlimited permission to copy and/or distribute it, with or without
+# modifications, as long as this notice is preserved.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+# User has manually chosen to ignore the git-tests, so throw them a warning.
+# This is done EACH compile so they can be alerted about the consequences.
+#
+
+########################################
+# CFBG module configuration
+########################################
+[worldserver]
+
+###################################################################################################
+#   CFBG
+#   
+#   CFBG.Enable
+#       Description: Enable mixed alliance and horde in one battleground 
+#       Default: 0
+#
+#   CFBG.Include.Avg.Ilvl.Enable
+#       Description: Enable check average item level for bg
+#       Default: 0
+#
+#   CFBG.Players.Count.In.Group
+#       Description: Maximum players in party for enter queue
+#       Default: 3
+#
+
+CFBG.Enable = 0
+CFBG.IncludeAvgIlvl.Enable = 0
+CFBG.PlayersCountInGroup = 3
