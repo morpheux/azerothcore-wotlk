@@ -14,7 +14,7 @@
 #
 
 # Add source files
-AC_ADD_MODULES_SOURCE("PlayerInfoAtLogin")
+AC_ADD_SCRIPT_LOADER("PlayerInfoAtLogin" "${CMAKE_CURRENT_LIST_DIR}/src/player_info_at_login_loader.cpp")
 
 # Add config file
 AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/PlayerInfoAtLogin.conf.dist")

@@ -14,7 +14,7 @@
 #
 
 # Add source files
-AC_ADD_MODULES_SOURCE("GMChatColor")
+AC_ADD_SCRIPT_LOADER("GMChatColor" "${CMAKE_CURRENT_LIST_DIR}/src/gm_chat_color_loader.cpp")
 
 # Add config file
 AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/GMChatColor.conf.dist")

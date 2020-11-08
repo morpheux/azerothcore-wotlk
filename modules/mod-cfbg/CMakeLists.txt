@@ -13,8 +13,13 @@
 # This is done EACH compile so they can be alerted about the consequences.
 #
 
-# Add source files
-AC_ADD_MODULES_SOURCE("CFBG")
+# Add cpp files
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/CFBG.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/CFBG_SC.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/CFBG.h")
+
+# Add scripts to script loader
+AC_ADD_SCRIPT_LOADER("CFBG" "${CMAKE_CURRENT_LIST_DIR}/src/cfbg_loader.cpp")
 
 # Add config file
 AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/CFBG.conf.dist")

@@ -14,7 +14,7 @@
 #
 
 # Add source files
-AC_ADD_MODULES_SOURCE("DuelReset")
+AC_ADD_SCRIPT_LOADER("DuelReset" "${CMAKE_CURRENT_LIST_DIR}/src/duel_reset_loader.cpp")
 
 # Add config file
 AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/DuelReset.conf.dist")
