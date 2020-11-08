@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+#
+# CUSTOM
+#
+
+DB_CHARACTERS_CUSTOM_PATHS+=(
+	$MOD_GUILDHOUSE_ROOT"/sql/characters/"
+)
+
+DB_WORLD_CUSTOM_PATHS+=(
+	$MOD_GUILDHOUSE_ROOT"/sql/world/"
+)
