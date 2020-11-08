@@ -6881,6 +6881,10 @@ uint32 ObjectMgr::GeneratePetNumber()
 void ObjectMgr::LoadCorpses()
 {
     uint32 oldMSTime = getMSTime();
+	
+	CharacterDatabase.Query(CharacterDatabase.GetPreparedStatement(CHAR_DEL_CORPSE_TABLE))
+
+	PreparedQueryResult result = CharacterDatabase.Query(CharacterDatabase.GetPreparedStatement(CHAR_SEL_CORPSES));
 
     PreparedQueryResult result = CharacterDatabase.Query(CharacterDatabase.GetPreparedStatement(CHAR_SEL_CORPSES));
     if (!result)
