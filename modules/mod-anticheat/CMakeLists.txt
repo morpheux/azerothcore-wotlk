@@ -14,7 +14,7 @@
 #
 
 # Add source files
-AC_ADD_MODULES_SOURCE("Anticheat")
+AC_ADD_SCRIPT_LOADER("Anticheat" "${CMAKE_CURRENT_LIST_DIR}/src/anticheat_loader.cpp")
 
 # Add config file
 AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/Anticheat.conf.dist")
