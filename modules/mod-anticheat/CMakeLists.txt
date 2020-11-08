@@ -14,7 +14,7 @@
 #
 
 # Add source files
-WH_ADD_MODULES_SOURCE("Anticheat")
+AC_ADD_MODULES_SOURCE("Anticheat")
 
 # Add config file
-WH_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/Anticheat.conf.dist")
+AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/Anticheat.conf.dist")
