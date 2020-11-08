@@ -43,7 +43,8 @@ enum WarlockSpells
     SPELL_WARLOCK_LIFE_TAP_ENERGIZE_2               = 32553,
     SPELL_WARLOCK_SOULSHATTER                       = 32835,
     SPELL_WARLOCK_SIPHON_LIFE_HEAL                  = 63106,
-    SPELL_WARLOCK_UNSTABLE_AFFLICTION_DISPEL        = 31117
+    SPELL_WARLOCK_UNSTABLE_AFFLICTION_DISPEL        = 31117,
+    SPELL_WARLOCK_PET_CRIT                          = 35695
 };
 
 enum WarlockSpellIcons
@@ -390,6 +391,44 @@ public:
             }
         }
 
+        void CalculateAmountCritMelee(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
+        {
+            if (Player* owner = GetUnitOwner()->GetOwner()->ToPlayer())
+            {
+                    // For others recalculate it from:
+                    float CritMelee = 0.0f;
+                    // Crit from Agility
+                    CritMelee += owner->GetMeleeCritFromAgility();
+                    // Increase crit from SPELL_AURA_MOD_WEAPON_CRIT_PERCENT
+                    CritMelee += owner->GetTotalAuraModifier(SPELL_AURA_MOD_WEAPON_CRIT_PERCENT);
+                    // Increase crit from SPELL_AURA_MOD_CRIT_PCT
+                    CritMelee += owner->GetTotalAuraModifier(SPELL_AURA_MOD_CRIT_PCT);
+                    // Increase crit melee from melee crit ratings
+                    CritMelee += owner->GetRatingBonusValue(CR_CRIT_MELEE);
+
+                    amount += int32(CritMelee);
+            }
+        }
+
+        void CalculateAmountCritSpell(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
+        {
+            if (Player* owner = GetUnitOwner()->GetOwner()->ToPlayer())
+            {
+                // For others recalculate it from:
+                float CritSpell = 0.0f;
+                // Crit from Intellect
+                CritSpell += owner->GetSpellCritFromIntellect();
+                // Increase crit from SPELL_AURA_MOD_SPELL_CRIT_CHANCE
+                CritSpell += owner->GetTotalAuraModifier(SPELL_AURA_MOD_SPELL_CRIT_CHANCE);
+                // Increase crit from SPELL_AURA_MOD_CRIT_PCT
+                CritSpell += owner->GetTotalAuraModifier(SPELL_AURA_MOD_CRIT_PCT);
+                // Increase crit spell from spell crit ratings
+                CritSpell += owner->GetRatingBonusValue(CR_CRIT_SPELL);
+
+                amount += int32(CritSpell);
+            }
+        }
+
         void CalcPeriodic(AuraEffect const* /*aurEff*/, bool& isPeriodic, int32& amplitude)
         {
             isPeriodic = true;
@@ -435,6 +474,16 @@ public:
             {
                 DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_warl_generic_scaling_AuraScript::CalculateAPAmount, EFFECT_ALL, SPELL_AURA_MOD_ATTACK_POWER);
                 DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_warl_generic_scaling_AuraScript::CalculateSPAmount, EFFECT_ALL, SPELL_AURA_MOD_DAMAGE_DONE);
+            }
+
+            switch (m_scriptSpellId)
+            {
+            case SPELL_WARLOCK_PET_CRIT:
+                    DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_warl_generic_scaling_AuraScript::CalculateAmountCritSpell, EFFECT_0, SPELL_AURA_MOD_SPELL_CRIT_CHANCE);
+                    DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_warl_generic_scaling_AuraScript::CalculateAmountCritMelee, EFFECT_1, SPELL_AURA_MOD_WEAPON_CRIT_PERCENT);
+                    break;
+                default:
+                    break;
             }
 
             DoEffectCalcPeriodic += AuraEffectCalcPeriodicFn(spell_warl_generic_scaling_AuraScript::CalcPeriodic, EFFECT_ALL, SPELL_AURA_ANY);
@@ -1159,7 +1208,7 @@ public:
             if (Unit* caster = GetCaster())
             {
                 int32 amount = aurEff->GetAmount();
-                GetTarget()->CastCustomSpell(caster, SPELL_WARLOCK_HAUNT_HEAL, &amount, nullptr, nullptr, true, NULL, aurEff, GetCasterGUID());
+                GetTarget()->CastCustomSpell(caster, SPELL_WARLOCK_HAUNT_HEAL, &amount, NULL, NULL, true, NULL, aurEff, GetCasterGUID());
             }
         }
 

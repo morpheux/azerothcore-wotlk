@@ -48,7 +48,9 @@ enum HunterSpells
     SPELL_HUNTER_SNIPER_TRAINING_BUFF_R1            = 64418,
     SPELL_HUNTER_VICIOUS_VIPER                      = 61609,
     SPELL_HUNTER_VIPER_ATTACK_SPEED                 = 60144,
-    SPELL_DRAENEI_GIFT_OF_THE_NAARU                 = 59543
+    SPELL_DRAENEI_GIFT_OF_THE_NAARU                 = 59543,
+    SPELL_HUNTER_PET_CRIT                           = 19591
+
 };
 
 // Ours
@@ -252,6 +254,44 @@ public:
             }
         }
 
+        void CalculateAmountCritMelee(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
+        {
+            if (Player* owner = GetUnitOwner()->GetOwner()->ToPlayer())
+            {
+                    // For others recalculate it from:
+                    float CritMelee = 0.0f;
+                    // Crit from Agility
+					CritMelee += owner->GetMeleeCritFromAgility();
+                    // Increase crit from SPELL_AURA_MOD_WEAPON_CRIT_PERCENT
+                    CritMelee += owner->GetTotalAuraModifier(SPELL_AURA_MOD_WEAPON_CRIT_PERCENT);
+                    // Increase crit from SPELL_AURA_MOD_CRIT_PCT
+                    CritMelee += owner->GetTotalAuraModifier(SPELL_AURA_MOD_CRIT_PCT);
+                    // Increase crit melee from melee crit ratings
+                    CritMelee += owner->GetRatingBonusValue(CR_CRIT_MELEE);
+
+                    amount += int32(CritMelee);
+            }
+        }
+
+        void CalculateAmountCritSpell(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
+        {
+            if (Player* owner = GetUnitOwner()->GetOwner()->ToPlayer())
+            {
+                // For others recalculate it from:
+                float CritSpell = 0.0f;
+                // Crit from Intellect
+                CritSpell += owner->GetSpellCritFromIntellect();
+                // Increase crit from SPELL_AURA_MOD_SPELL_CRIT_CHANCE
+                CritSpell += owner->GetTotalAuraModifier(SPELL_AURA_MOD_SPELL_CRIT_CHANCE);
+                // Increase crit from SPELL_AURA_MOD_CRIT_PCT
+                CritSpell += owner->GetTotalAuraModifier(SPELL_AURA_MOD_CRIT_PCT);
+                // Increase crit spell from spell crit ratings
+                CritSpell += owner->GetRatingBonusValue(CR_CRIT_SPELL);
+
+                amount += int32(CritSpell);
+            }
+        }
+
         void CalcPeriodic(AuraEffect const* /*aurEff*/, bool& isPeriodic, int32& amplitude)
         {
             isPeriodic = true;
@@ -294,6 +334,16 @@ public:
                 DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_hun_generic_scaling_AuraScript::CalculateStatAmount, EFFECT_ALL, SPELL_AURA_MOD_STAT);
                 DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_hun_generic_scaling_AuraScript::CalculateAPAmount, EFFECT_ALL, SPELL_AURA_MOD_ATTACK_POWER);
                 DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_hun_generic_scaling_AuraScript::CalculateSPAmount, EFFECT_ALL, SPELL_AURA_MOD_DAMAGE_DONE);
+            }
+
+            switch (m_scriptSpellId)
+            {
+                case SPELL_HUNTER_PET_CRIT:
+                    DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_hun_generic_scaling_AuraScript::CalculateAmountCritMelee, EFFECT_0, SPELL_AURA_MOD_WEAPON_CRIT_PERCENT);
+                    DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_hun_generic_scaling_AuraScript::CalculateAmountCritSpell, EFFECT_1, SPELL_AURA_MOD_SPELL_CRIT_CHANCE);
+                    break;
+                default:
+                    break;
             }
 
             DoEffectCalcPeriodic += AuraEffectCalcPeriodicFn(spell_hun_generic_scaling_AuraScript::CalcPeriodic, EFFECT_ALL, SPELL_AURA_ANY);
@@ -674,7 +724,7 @@ public:
         {
             Unit* caster = GetCaster();
             int32 healthModSpellBasePoints0 = int32(caster->CountPctFromMaxHealth(30));
-            caster->CastCustomSpell(caster, SPELL_HUNTER_PET_LAST_STAND_TRIGGERED, &healthModSpellBasePoints0, nullptr, nullptr, true, nullptr);
+            caster->CastCustomSpell(caster, SPELL_HUNTER_PET_LAST_STAND_TRIGGERED, &healthModSpellBasePoints0, NULL, NULL, true, NULL);
         }
 
         void Register()
