@@ -3307,7 +3307,7 @@ public:
 		ChrClassesEntry const* classEntry = sChrClassesStore.LookupEntry(chr->getClass());
         if (!classEntry)
         {
-            sLog->outError("Class %u not found in DBC (Wrong DBC files?)", player->getClass());
+            sLog->outError("Class %u not found in DBC (Wrong DBC files?)", chr->getClass());
             return false;
         }
 
