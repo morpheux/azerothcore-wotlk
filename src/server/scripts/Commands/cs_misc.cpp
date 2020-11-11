@@ -3330,21 +3330,14 @@ public:
 	    if (chr && chr->isDead() && !chr->HasAura(26680))
 	        chr->ResurrectPlayer(0.1f);
 
-        // reset m_form if no aura
-        if (!chr->HasAuraType(SPELL_AURA_MOD_SHAPESHIFT))
-            chr->SetShapeshiftForm(FORM_NONE);
-
         chr->setFactionForRace(chr->getRace());
 
         chr->SetUInt32Value(UNIT_FIELD_BYTES_0, ((chr->getRace()) | (chr->getClass() << 8) | (chr->getGender() << 16) | (powerType << 24)));
 
-        // reset only if player not in some form;
-        if (chr->GetShapeshiftForm() == FORM_NONE)
-            chr->InitDisplayIds();
-
         chr->SetByteValue(UNIT_FIELD_BYTES_2, 1, UNIT_BYTE2_FLAG_PVP);
         chr->SetUInt32Value(UNIT_FIELD_FLAGS, UNIT_FLAG_PVP_ATTACKABLE);
-        //-1 is default value
+
+		//-1 is default value
         chr->SetUInt32Value(PLAYER_FIELD_WATCHED_FACTION_INDEX, uint32(-1));
 
 	    if (chr && chr->GetTeamId() == TEAM_ALLIANCE && !chr->HasAura(26680))
