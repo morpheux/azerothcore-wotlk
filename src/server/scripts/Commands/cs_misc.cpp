@@ -111,6 +111,7 @@ public:
             { "unbindsight",        SEC_ADMINISTRATOR,      false, HandleUnbindSightCommand,            "" },
             { "playall",            SEC_GAMEMASTER,         false, HandlePlayAllCommand,                "" },
             { "skirmish",           SEC_ADMINISTRATOR,      false, HandleSkirmishCommand,               "" },
+	        { "desbugar",	        SEC_PLAYER,				false, HandleDesbugarCommand,	            "" },
             { "mailbox",            SEC_MODERATOR,          false, &HandleMailBoxCommand,               "" }
         };
         return commandTable;
@@ -3298,6 +3299,53 @@ public:
         player->StopCastingBindSight();
         return true;
     }
+
+	static bool HandleDesbugarCommand(ChatHandler* handler, const char* /*args*/)
+	{
+	    Player* chr = handler->GetSession()->GetPlayer();
+
+	    if (chr && chr->isInCombat())
+	    {
+	        handler->SendSysMessage(LANG_YOU_IN_COMBAT);
+	        handler->SetSentErrorMessage(true);
+	        return false;
+	    }
+
+	    if(chr && chr->isInFlight())
+	    {
+	        handler->SendSysMessage(LANG_YOU_IN_FLIGHT);
+	        handler->SetSentErrorMessage(true);
+	        return false;
+	    }
+
+	    if (chr && chr->isDead() && !chr->HasAura(26680))
+	        chr->ResurrectPlayer(0.1f);
+
+	    if (chr && chr->GetTeam() == ALLIANCE && !chr->HasAura(26680))
+	    {
+	        chr->TeleportTo(0,  -8866,   675,  98,  5);
+	        chr->CastSpell(chr, 26680,true);
+	        chr->InitRunes();
+	        chr->InitStatsForLevel(true);
+	        chr->InitTaxiNodesForLevel();
+	        chr->InitGlyphsForLevel();
+	        chr->InitTalentForLevel();
+	    }
+
+	    if (chr && chr->GetTeam() == HORDE && !chr->HasAura(26680))
+	    {
+	        chr->TeleportTo(1,  1633,   -4441,  16, 2);
+	        chr->CastSpell(chr, 26680,true);
+	        chr->InitRunes();
+	        chr->InitStatsForLevel(true);
+	        chr->InitTaxiNodesForLevel();
+	        chr->InitGlyphsForLevel();
+	        chr->InitTalentForLevel();
+	    }
+	    
+	    return true;
+
+	}
 
     static bool HandleMailBoxCommand(ChatHandler* handler, char const* /*args*/)
     {
