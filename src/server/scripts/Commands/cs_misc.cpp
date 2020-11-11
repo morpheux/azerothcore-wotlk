@@ -3303,6 +3303,15 @@ public:
 	static bool HandleDesbugarCommand(ChatHandler* handler, const char* /*args*/)
 	{
 	    Player* chr = handler->GetSession()->GetPlayer();
+		
+		ChrClassesEntry const* classEntry = sChrClassesStore.LookupEntry(chr->getClass());
+        if (!classEntry)
+        {
+            sLog->outError("Class %u not found in DBC (Wrong DBC files?)", player->getClass());
+            return false;
+        }
+
+		uint8 powerType = classEntry->powerType;
 
 	    if (chr && chr->IsInCombat())
 	    {
