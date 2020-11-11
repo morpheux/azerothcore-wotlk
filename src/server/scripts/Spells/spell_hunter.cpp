@@ -204,7 +204,7 @@ public:
             if (Unit* owner = GetUnitOwner()->GetOwner())
             {
                 // xinef: by default pet inherits 45% of stamina
-                int32 modifier = 90;
+                int32 modifier = 60;
 
                 // xinef: Wild Hunt bonus for stamina
                 if  (AuraEffect* wildHuntEff = GetUnitOwner()->GetDummyAuraEffect(SPELLFAMILY_PET, 3748, EFFECT_0))
