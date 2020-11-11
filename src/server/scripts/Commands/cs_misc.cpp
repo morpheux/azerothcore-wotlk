@@ -3304,14 +3304,14 @@ public:
 	{
 	    Player* chr = handler->GetSession()->GetPlayer();
 
-	    if (chr && chr->isInCombat())
+	    if (chr && chr->IsInCombat())
 	    {
 	        handler->SendSysMessage(LANG_YOU_IN_COMBAT);
 	        handler->SetSentErrorMessage(true);
 	        return false;
 	    }
 
-	    if(chr && chr->isInFlight())
+	    if(chr && chr->IsInFlight())
 	    {
 	        handler->SendSysMessage(LANG_YOU_IN_FLIGHT);
 	        handler->SetSentErrorMessage(true);
@@ -3321,7 +3321,7 @@ public:
 	    if (chr && chr->isDead() && !chr->HasAura(26680))
 	        chr->ResurrectPlayer(0.1f);
 
-	    if (chr && chr->GetTeam() == ALLIANCE && !chr->HasAura(26680))
+	    if (chr && chr->GetTeamId() == TEAM_ALLIANCE && !chr->HasAura(26680))
 	    {
 	        chr->TeleportTo(0,  -8866,   675,  98,  5);
 	        chr->CastSpell(chr, 26680,true);
@@ -3332,7 +3332,7 @@ public:
 	        chr->InitTalentForLevel();
 	    }
 
-	    if (chr && chr->GetTeam() == HORDE && !chr->HasAura(26680))
+	    if (chr && chr->GetTeamId() == TEAM_HORDE && !chr->HasAura(26680))
 	    {
 	        chr->TeleportTo(1,  1633,   -4441,  16, 2);
 	        chr->CastSpell(chr, 26680,true);
