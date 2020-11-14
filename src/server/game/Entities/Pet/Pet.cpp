@@ -23,7 +23,7 @@
 #include "InstanceScript.h"
 #include "ArenaSpectator.h"
 
-#define PET_XP_FACTOR 0.05f
+#define PET_XP_FACTOR 0.50f
 
 Pet::Pet(Player* owner, PetType type) : Guardian(nullptr, owner ? owner->GetGUID() : 0, true),
     m_usedTalentCount(0), m_removed(false), m_owner(owner),
