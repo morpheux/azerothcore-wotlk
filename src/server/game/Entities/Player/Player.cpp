@@ -7384,7 +7384,7 @@ bool Player::RewardHonor(Unit* uVictim, uint32 groupsize, int32 honor, bool awar
             uint32 killer_title = 0;
             if(PLAYER_TITLE_MASK_ALL_PVP & ktitle)
             {
-                for(int i = ((GetTeam() == ALLIANCE) ? 1:HKRANKMAX);i!=((GetTeam() == ALLIANCE) ? HKRANKMAX : (2*HKRANKMAX-1));i++)
+                for(int i = ((GetTeamId() == TEAM_ALLIANCE) ? 1:HKRANKMAX);i!=((GetTeamId() == TEAM_ALLIANCE) ? HKRANKMAX : (2*HKRANKMAX-1));i++)
                 {
                     if(ktitle & (1<<i))
                         killer_title = i;
@@ -7392,7 +7392,7 @@ bool Player::RewardHonor(Unit* uVictim, uint32 groupsize, int32 honor, bool awar
             }
             if(PLAYER_TITLE_MASK_ALL_PVP & vtitle)
             {
-                for(int i = ((victim->GetTeam() == ALLIANCE) ? 1:HKRANKMAX);i!=((victim->GetTeam() == ALLIANCE) ? HKRANKMAX : (2*HKRANKMAX-1));i++)
+                for(int i = ((victim->GetTeamId() == TEAM_ALLIANCE) ? 1:HKRANKMAX);i!=((victim->GetTeamId() == TEAM_ALLIANCE) ? HKRANKMAX : (2*HKRANKMAX-1));i++)
                 {
                     if(vtitle & (1<<i))
                         victim_title = i;
