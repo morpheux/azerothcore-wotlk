@@ -2176,7 +2176,7 @@ uint8 Player::GetChatTag() const
     uint8 tag = CHAT_TAG_NONE;
 
     if (isGMChat())
-        tag |= CHAT_TAG_GM;
+        tag |= CHAT_TAG_DEV;
     if (isDND())
         tag |= CHAT_TAG_DND;
     if (isAFK())
