@@ -7421,7 +7421,7 @@ bool Player::RewardHonor(Unit* uVictim, uint32 groupsize, int32 honor, bool awar
                 rank_diff = (victim_rank>(killer_title - (HKRANKMAX-1) +4))? (victim_rank - (killer_title - (HKRANKMAX-1) + 4)) : 0;
 
             honor_f = ceil(acore::Honor::hk_honor_at_level_f(k_level) * (v_level - k_grey) / (k_level - k_grey));
-			//honor *= 1 + sWorld.getRate(RATE_PVP_RANK_EXTRA_HONOR)*(((float)rank_diff) / 10.0f);
+			honor_f *= 1 + sWorld->getRate(RATE_PVP_RANK_EXTRA_HONOR)*(((float)rank_diff) / 10.0f);
 
             // count the number of playerkills in one day
             ApplyModUInt32Value(PLAYER_FIELD_KILLS, 1, true);
@@ -7526,7 +7526,7 @@ void Player::UpdateKnownTitles()
         {
             new_title = ((max_rank) ? (HKRANKMAX-1) : (i-1));
             if (new_title > 0)
-                new_title += ((GetTeam() == ALLIANCE) ? 0 : (HKRANKMAX-1));
+                new_title += ((GetTeamId() == TEAM_ALLIANCE) ? 0 : (HKRANKMAX-1));
             break;
         }
     }
