@@ -921,8 +921,8 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_GM_CHAT]               = sConfigMgr->GetIntDefault("GM.Chat", 2);
     m_int_configs[CONFIG_GM_WHISPERING_TO]      = sConfigMgr->GetIntDefault("GM.WhisperingTo", 2);
 	
-	rate_values[RATE_PVP_RANK_EXTRA_HONOR] = ConfigMgr->GetFloatDefault("PvPRank.Rate.ExtraHonor", 1);
-    std::string s_pvp_ranks = ConfigMgr->GetStringDefault("PvPRank.HKPerRank", "125,250,1250,2500,5000,10000,12500,15000,20000,25000,31250,37500,50000,62500");
+	rate_values[RATE_PVP_RANK_EXTRA_HONOR] = sConfigMgr->GetFloatDefault("PvPRank.Rate.ExtraHonor", 1);
+    std::string s_pvp_ranks = sConfigMgr->GetStringDefault("PvPRank.HKPerRank", "125,250,1250,2500,5000,10000,12500,15000,20000,25000,31250,37500,50000,62500");
     char *c_pvp_ranks = const_cast<char*>(s_pvp_ranks.c_str());
     for (int i = 0; i !=HKRANKMAX; i++)
     {
