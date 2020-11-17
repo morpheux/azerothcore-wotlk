@@ -56,6 +56,9 @@ enum Spells
     SPELL_MORTAL_WOUND                      = 71127,
     SPELL_DECIMATE                          = 71123,
     SPELL_AWAKEN_PLAGUED_ZOMBIES            = 71159,
+    
+    //MISC
+	SPELL_TWILIGHT_PRECISION                = 78243,
 };
 
 #define MUTATED_INFECTION RAID_MODE<int32>(69674, 71224, 73022, 73023)
@@ -139,6 +142,7 @@ public:
                 return;
             }
 
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
             // schedule events
             events.Reset();
             events.ScheduleEvent(EVENT_SLIME_SPRAY, 20000);

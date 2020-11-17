@@ -102,7 +102,10 @@ enum Spells
     SPELL_TWILIGHT_MENDING              = 75509,
     SPELL_TWILIGHT_REALM                = 74807,
     SPELL_DUSK_SHROUD                   = 75476,
-    SPELL_COPY_DAMAGE                   = 74810
+    SPELL_COPY_DAMAGE                   = 74810,
+    
+    //MISC
+	SPELL_TWILIGHT_PRECISION            = 78243,
 };
 
 enum Events
@@ -287,6 +290,7 @@ public:
             Talk(SAY_AGGRO);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me, 1);
 
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
             events.ScheduleEvent(EVENT_CLEAVE, urand(8000, 10000));
             events.ScheduleEvent(EVENT_TAIL_LASH, 10000);
             events.ScheduleEvent(EVENT_BREATH, urand(10000, 15000));
@@ -448,6 +452,7 @@ public:
 
         void EnterCombat(Unit*  /*who*/)
         {
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
             _events.Reset();
             _events.ScheduleEvent(EVENT_CLEAVE, urand(8000, 10000));
             _events.ScheduleEvent(EVENT_TAIL_LASH, 10000);

@@ -97,6 +97,10 @@ enum Spells
     // Unholy Infusion
     SPELL_UNHOLY_INFUSION                   = 71516,
     SPELL_UNHOLY_INFUSION_CREDIT            = 71518,
+
+    //MISC
+	SPELL_TWILIGHT_PRECISION                = 78243,
+
 };
 
 enum PutricideData
@@ -290,6 +294,7 @@ public:
             }
 
             bEnteredCombat = true;
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
             me->CastSpell(me, SPELL_OOZE_TANK_PROTECTION, true);
             events.Reset();
             events.ScheduleEvent(EVENT_BERSERK, 600000);

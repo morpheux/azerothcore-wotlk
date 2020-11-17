@@ -72,6 +72,9 @@ enum Spells
     SPELL_FOCUS_FIRE            = 71350,
     SPELL_ORDER_WHELP           = 71357,
     SPELL_CONCUSSIVE_SHOCK      = 71337,
+
+    //MISC
+	SPELL_TWILIGHT_PRECISION    = 78243,
 };
 
 enum Shadowmourne
@@ -328,6 +331,8 @@ public:
 
             summons.DespawnAll();
             events.Reset();
+
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
             events.ScheduleEvent(EVENT_BERSERK, 600000);
             events.ScheduleEvent(EVENT_AIR_PHASE, 50000);
             events.ScheduleEvent(EVENT_CLEAVE, 10000, EVENT_GROUP_LAND_PHASE);

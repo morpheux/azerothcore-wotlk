@@ -38,6 +38,9 @@ enum Spells
     SPELL_MORTAL_WOUND          = 71127,
     SPELL_DECIMATE              = 71123,
     SPELL_PLAGUE_STENCH         = 71805,
+    
+    //MISC
+	SPELL_TWILIGHT_PRECISION    = 78243,
 };
 
 // Used for HasAura checks
@@ -104,6 +107,7 @@ public:
                 return;
             }
 
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
             events.ScheduleEvent(EVENT_BERSERK, 300000);
             events.ScheduleEvent(EVENT_INHALE_BLIGHT, urand(25000, 30000));
             events.ScheduleEvent(EVENT_GAS_SPORE, urand(20000, 25000));

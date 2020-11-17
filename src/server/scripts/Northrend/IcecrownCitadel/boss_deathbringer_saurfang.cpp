@@ -100,6 +100,9 @@ enum Spells
 
     SPELL_RIDE_VEHICLE                  = 70640, // Outro
     SPELL_ACHIEVEMENT                   = 72928,
+
+    //MISC
+	SPELL_TWILIGHT_PRECISION            = 78243,    
 };
 
 // Helper to get id of the aura on different modes (HasAura(baseId) wont work)
@@ -268,6 +271,8 @@ public:
             me->RemoveAurasDueToSpell(SPELL_BLOOD_POWER);
             DoCast(me, SPELL_BLOOD_POWER, true);
 
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
+            
             if (!instance->CheckRequiredBosses(DATA_DEATHBRINGER_SAURFANG, who->ToPlayer()))
             {
                 EnterEvadeMode();

@@ -41,6 +41,9 @@ enum Spells
     // Coldflame
     SPELL_COLDFLAME_PASSIVE     = 69145,
     SPELL_COLDFLAME_SUMMON      = 69147,
+
+    //MISC
+	SPELL_TWILIGHT_PRECISION    = 78243,    
 };
 
 
@@ -120,6 +123,7 @@ public:
         void EnterCombat(Unit* /*who*/)
         {
             Talk(SAY_AGGRO);
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
             me->setActive(true);
             DoZoneInCombat();
             instance->SetBossState(DATA_LORD_MARROWGAR, IN_PROGRESS);

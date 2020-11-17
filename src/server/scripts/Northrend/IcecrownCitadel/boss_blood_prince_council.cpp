@@ -96,6 +96,10 @@ enum Spells
     // Shock Vortex
     SPELL_SHOCK_VORTEX_PERIODIC         = 71945,
     SPELL_SHOCK_VORTEX_DUMMY            = 72633,
+
+    //MISC
+	SPELL_TWILIGHT_PRECISION            = 78243,
+
 };
 
 enum Events
@@ -239,6 +243,7 @@ public:
                 return;
             }
 
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
             me->RemoveAurasDueToSpell(SPELL_FEIGN_DEATH); // just in case
             me->setActive(true);
             DoZoneInCombat();
@@ -498,6 +503,7 @@ public:
                 return;
             }
 
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
             me->RemoveAurasDueToSpell(SPELL_FEIGN_DEATH); // just in case
             me->setActive(true);
             DoZoneInCombat();
@@ -782,6 +788,7 @@ public:
                 return;
             }
 
+            me->AddAura(SPELL_TWILIGHT_PRECISION, me);
             instance->SetBossState(DATA_BLOOD_PRINCE_COUNCIL, IN_PROGRESS);
             instance->SetData(DATA_ORB_WHISPERER_ACHIEVEMENT, 1);
             me->RemoveAurasDueToSpell(SPELL_FEIGN_DEATH); // just in case
