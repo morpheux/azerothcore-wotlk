@@ -167,6 +167,9 @@ enum Spells
     SPELL_SHOCKWAVE                     = 72149,
     SPELL_ENRAGE                        = 72143,
     SPELL_FRENZY                        = 28747,
+
+	//MISC
+	SPELL_TWILIGHT_PRECISION            = 78243,
 };
 
 #define NECROTIC_PLAGUE_LK   RAID_MODE<uint32>(70337, 73912, 73913, 73914)
@@ -675,6 +678,7 @@ public:
             me->setActive(true);
             me->SetInCombatWithZone();
             me->RemoveAurasDueToSpell(SPELL_EMOTE_SIT_NO_SHEATH); // just to be sure
+			me->AddAura(SPELL_TWILIGHT_PRECISION, me);
 
             events.ScheduleEvent(EVENT_BERSERK, 900000, EVENT_GROUP_BERSERK);
             events.ScheduleEvent(EVENT_SUMMON_SHAMBLING_HORROR, 15000, EVENT_GROUP_ABILITIES);
