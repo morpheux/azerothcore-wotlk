@@ -7526,7 +7526,7 @@ void Player::UpdateKnownTitles()
         {
             new_title = ((max_rank) ? (HKRANKMAX-1) : (i-1));
             if (new_title > 0)
-                new_title += ((GetTeamId() == TEAM_ALLIANCE) ? 0 : (HKRANKMAX-1));
+                new_title += ((getRace(true) == RACE_HUMAN || getRace(true) == RACE_DWARF || getRace(true) == RACE_GNOME || getRace(true) == RACE_NIGHTELF || getRace(true) == RACE_DRAENEI) ? 0 : (HKRANKMAX-1));
             break;
         }
     }
