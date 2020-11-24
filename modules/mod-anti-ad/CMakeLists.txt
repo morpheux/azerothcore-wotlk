@@ -14,7 +14,7 @@
 #
 
 # Add source files
-WH_ADD_MODULES_SOURCE("AntiAD")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/AntiAD_SC.cpp")
 
 # Add config file
-WH_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/AntiAD.conf.dist")
+AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/AntiAD.conf.dist")
