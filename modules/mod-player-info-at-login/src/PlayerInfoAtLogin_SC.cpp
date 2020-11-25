@@ -31,8 +31,6 @@ public:
     {
         ChatHandler handler(player->GetSession());
 
-		handler.PSendSysMessage("|cffff0000##############################|r");
-
         std::string NameLink = handler.GetNameLink(player);
         std::string PlayerName = player->GetName();
         uint32 PlayerOnlineCount = sWorld->GetPlayerCount();
@@ -41,14 +39,14 @@ public:
         uint32 GMLevel = player->GetSession()->GetSecurity();
         uint32 connPeak = sWorld->GetMaxActiveSessionCount();
 
-        
-        //handler.PSendSysMessage("|cffff0000# |cff00ff00Oi,|r %s", PlayerName.c_str());
-		//handler.PSendSysMessage("|cffff0000# |cff00ff00Level da Conta:|r %u", GMLevel);
-        //handler.PSendSysMessage("|cffff0000# |cff00ff00Seu IP:|r %s", PlayerIP.c_str());
-        //handler.PSendSysMessage("|cffff0000# |cff00ff00Tempo do Servidor Online:|r %s", ServerUptime.c_str());
+		handler.PSendSysMessage("|cffff0000##############################|r");        
+        handler.PSendSysMessage("|cffff0000# |cff00ff00Oi,|r %s", PlayerName.c_str());
+		handler.PSendSysMessage("|cffff0000# |cff00ff00Level da Conta:|r %u", GMLevel);
+        handler.PSendSysMessage("|cffff0000# |cff00ff00Seu IP:|r %s", PlayerIP.c_str());
+        handler.PSendSysMessage("|cffff0000# |cff00ff00Tempo do Servidor Online:|r %s", ServerUptime.c_str());
 		
-		//if (GMLevel)
-			//handler.PSendSysMessage("|cffff0000# |cff00ff00Agora|r %u |cff00ff00jogadores online|r |cff00ff00(max:|r %u|cff00ff00)|r", PlayerOnlineCount, connPeak);
+		if (GMLevel)
+			handler.PSendSysMessage("|cffff0000# |cff00ff00Agora|r %u |cff00ff00jogadores online|r |cff00ff00(max:|r %u|cff00ff00)|r", PlayerOnlineCount, connPeak);
 					
         handler.PSendSysMessage("|cffff0000##############################|r");
     }
