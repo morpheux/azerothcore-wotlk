@@ -13,8 +13,11 @@
 # This is done EACH compile so they can be alerted about the consequences.
 #
 
-# Add source files
-WH_ADD_MODULES_SOURCE("PlayerInfoAtLogin")
+# Add cpp files
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/PlayerInfoAtLogin_SC.cpp")
+
+# Add scripts to script loader
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/player_info_at_login_loader.cpp")
 
 # Add config file
 WH_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/PlayerInfoAtLogin.conf.dist")

@@ -336,7 +336,7 @@ private:
 
         if (count >= 36)
         {
-            ChatHandler(player->GetSession()).SendSysMessage("You can not join because you have too many talent points in a forbidden tree. (Heal / Tank)");
+            ChatHandler(player->GetSession()).SendSysMessage("Voce nao pode joinar arena com specs de (Heal / Tank).");
             return false;
         }
 
