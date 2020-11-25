@@ -20,43 +20,23 @@
 #include "ScriptedGossip.h"
 #include "Chat.h"
 
-//Config
-std::vector<uint32> forbiddenTalents;
-
 // TalentTab.dbc -> TalentTabID
 const uint32 FORBIDDEN_TALENTS_IN_1V1_ARENA[] =
 {
     // Healer
-    //201, // PriestDiscipline
-    //202, // PriestHoly
-    //382, // PaladinHoly
-    //262, // ShamanRestoration
-    //282, // DruidRestoration
+    201, // PriestDiscipline
+    202, // PriestHoly
+    382, // PaladinHoly
+    262, // ShamanRestoration
+    282, // DruidRestoration
 
     // Tanks
-    //383, // PaladinProtection
-    //163, // WarriorProtection
+    383, // PaladinProtection
+    163, // WarriorProtection
 
     0 // End
 };
 
-class configloader_1v1arena : public WorldScript
-{
-public:
-    configloader_1v1arena() : WorldScript("configloader_1v1arena") {}
-
-
-    virtual void OnAfterConfigLoad(bool /*Reload*/) override
-    {
-        std::string blockedTalentsStr = sConfigMgr->GetStringDefault("Arena1v1.ForbiddenTalentsIDs", "");
-        Tokenizer toks(blockedTalentsStr, ',');
-        for (auto&& token : toks)
-        {
-            forbiddenTalents.push_back(std::stoi(token));
-        }
-    }
-
-};
 class npc_1v1arena : public CreatureScript
 {
 public:
@@ -332,26 +312,27 @@ private:
         if (sConfigMgr->GetBoolDefault("Arena1v1BlockForbiddenTalents", true) == false)
             return true;
 
-        uint32 count = 0;
+		uint32 count = 0;
+		for (uint32 talentId = 0; talentId < sTalentStore.GetNumRows(); ++talentId)
+		{
+			TalentEntry const* talentInfo = sTalentStore.LookupEntry(talentId);
+	
+			if (!talentInfo)
+				continue;
 
-        for (uint32 talentId = 0; talentId < sTalentStore.GetNumRows(); ++talentId)
-        {
-            TalentEntry const* talentInfo = sTalentStore.LookupEntry(talentId);
+			for (int8 rank = MAX_TALENT_RANK - 1; rank >= 0; --rank)
+			{
+				if (talentInfo->RankID[rank] == 0)
+					continue;
 
-            if (!talentInfo)
-                continue;
-
-            if (std::find(forbiddenTalents.begin(), forbiddenTalents.end(), talentInfo->TalentID) != forbiddenTalents.end())
-            {
-                ChatHandler(player->GetSession()).SendSysMessage("You can not join because you have forbidden talents.");
-                return false;
-            }
-
-
-            for (int8 rank = MAX_TALENT_RANK - 1; rank >= 0; --rank)
-                if (talentInfo->RankID[rank] == 0)
-                    continue;
-        }
+				if (player->HasTalent(talentInfo->RankID[rank], player->GetActiveSpec()))
+				{
+					for (int8 i = 0; FORBIDDEN_TALENTS_IN_1V1_ARENA[i] != 0; i++)
+						if (FORBIDDEN_TALENTS_IN_1V1_ARENA[i] == talentInfo->TalentTab)
+							count += rank + 1;
+				}
+			}
+		}
 
         if (count >= 36)
         {
