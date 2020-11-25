@@ -20,4 +20,4 @@ AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/PlayerInfoAtLogin_SC.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/player_info_at_login_loader.cpp")
 
 # Add config file
-WH_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/PlayerInfoAtLogin.conf.dist")
+AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/PlayerInfoAtLogin.conf.dist")
