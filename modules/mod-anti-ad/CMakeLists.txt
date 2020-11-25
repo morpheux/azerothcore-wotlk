@@ -14,10 +14,7 @@
 #
 
 # Add source files
-AC_ADD_MODULES_SOURCE("AntiAD")
-
-AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/mod_guild_house_v2.cpp")
-AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/mod_guild_house_npc.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/anti_ad_loader.cpp")
 
 # Add config file
 AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/AntiAD.conf.dist")
