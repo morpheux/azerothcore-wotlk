@@ -15,16 +15,16 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _ANTI_AD_LOADER_H_
-#define _ANTI_AD_LOADER_H_
+#ifndef _PLAYER_INFO_AT_LOGIN_LOADER_H_
+#define _PLAYER_INFO_AT_LOGIN_LOADER_H_
 
 // From SC
-void AddSC_AntiAD();
+void AddSC_PlayerInfoAtLogin();
 
 // Add all
-void AddAntiADScripts()
+void AddPlayerInfoAtLoginScripts()
 {
-    AddSC_AntiAD();
+    AddSC_PlayerInfoAtLogin();
 }
 
-#endif /* _ANTI_AD_LOADER_H_ */
+#endif /* _PLAYER_INFO_AT_LOGIN_LOADER_H_ */

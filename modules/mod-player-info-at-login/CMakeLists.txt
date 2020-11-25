@@ -14,7 +14,7 @@
 #
 
 # Add source files
-AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/anti_ad_loader.cpp")
+WH_ADD_MODULES_SOURCE("PlayerInfoAtLogin")
 
 # Add config file
-AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/AntiAD.conf.dist")
+WH_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/PlayerInfoAtLogin.conf.dist")
