@@ -17,4 +17,4 @@
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/PlayerInfoAtLogin_SC.cpp")
 
 # Add scripts to script loader
-AC_ADD_SCRIPT_LOADER("${CMAKE_CURRENT_LIST_DIR}/src/player_info_at_login_loader.cpp")
+AC_ADD_SCRIPT_LOADER("PlayerInfoAtLogin" "${CMAKE_CURRENT_LIST_DIR}/src/player_info_at_login_loader.cpp")
