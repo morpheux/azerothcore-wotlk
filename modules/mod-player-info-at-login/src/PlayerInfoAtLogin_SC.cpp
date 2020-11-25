@@ -34,7 +34,7 @@ public:
         std::string NameLink = handler.GetNameLink(player);
         std::string PlayerName = player->GetName();
         uint32 PlayerOnlineCount = sWorld->GetPlayerCount();
-        std::string ServerUptime = sWorld->GetUptime();
+        std::string ServerUptime = secsToTimeString(sWorld->GetUptime());
         std::string PlayerIP = player->GetSession()->GetRemoteAddress();
         uint32 GMLevel = player->GetSession()->GetSecurity();
         uint32 connPeak = sWorld->GetMaxActiveSessionCount();
