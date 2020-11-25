@@ -56,5 +56,4 @@ public:
 void AddSC_PlayerInfoAtLogin()
 {
     new PlayerInfoAtLogin_Player();
-    new PlayerInfoAtLogin_World();
 }
