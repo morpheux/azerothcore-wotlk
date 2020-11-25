@@ -20,8 +20,11 @@
 #include "ScriptedGossip.h"
 #include "Chat.h"
 
+//Config
+std::vector<uint32> forbiddenTalents;
+
 // TalentTab.dbc -> TalentTabID
-/* const uint32 FORBIDDEN_TALENTS_IN_1V1_ARENA[] =
+const uint32 FORBIDDEN_TALENTS_IN_1V1_ARENA[] =
 {
     // Healer
     //201, // PriestDiscipline
@@ -36,19 +39,24 @@
 
     0 // End
 };
-*/
-class arena1v1announce : public PlayerScript
+
+class configloader_1v1arena : public WorldScript
 {
 public:
-    arena1v1announce() : PlayerScript("arena1v1announce") { }
+    configloader_1v1arena() : WorldScript("configloader_1v1arena") {}
 
-    void OnLogin(Player* pPlayer) override
+
+    virtual void OnAfterConfigLoad(bool /*Reload*/) override
     {
-        if (sConfigMgr->GetBoolDefault("Arena1v1Announcer.Enable", true))
-            ChatHandler(pPlayer->GetSession()).SendSysMessage("This server is running the |cff4CFF00Arena 1v1 |rmodule.");
+        std::string blockedTalentsStr = sConfigMgr->GetStringDefault("Arena1v1.ForbiddenTalentsIDs", "");
+        Tokenizer toks(blockedTalentsStr, ',');
+        for (auto&& token : toks)
+        {
+            forbiddenTalents.push_back(std::stoi(token));
+        }
     }
-};
 
+};
 class npc_1v1arena : public CreatureScript
 {
 public:
@@ -333,6 +341,13 @@ private:
             if (!talentInfo)
                 continue;
 
+            if (std::find(forbiddenTalents.begin(), forbiddenTalents.end(), talentInfo->TalentID) != forbiddenTalents.end())
+            {
+                ChatHandler(player->GetSession()).SendSysMessage("You can not join because you have forbidden talents.");
+                return false;
+            }
+
+
             for (int8 rank = MAX_TALENT_RANK - 1; rank >= 0; --rank)
                 if (talentInfo->RankID[rank] == 0)
                     continue;
@@ -350,6 +365,6 @@ private:
 
 void AddSC_npc_1v1arena()
 {
-    new arena1v1announce();
+	new configloader_1v1arena();
     new npc_1v1arena();
 }

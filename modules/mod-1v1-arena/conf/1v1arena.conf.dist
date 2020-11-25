@@ -63,4 +63,12 @@ Arena.1v1.ArenaPointsMulti = 0.64
 Arena1v1BlockForbiddenTalents = 1
 
 #
+#    Arena1v1.ForbiddenTalentsIDs
+#        Description: List to block specific talents id in arena. See TalentTab.dbc for available talents (you will need an DBC-Editor). The list is coma(,) separated and should have no spaces
+#        Default:     "0" - (no talent blocked)
+#		 Example:     "201,202,382,362,282,383,163"
+
+Arena1v1.ForbiddenTalentsIDs = "201,202,382,362,282,383,163"
+
+#
 ###################################################################################################
