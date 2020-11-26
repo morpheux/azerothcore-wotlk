@@ -55,7 +55,7 @@ public:
 private:
     void SetColorMessage(Player* player, std::string& Message)
     {
-        if (AccountMgr::IsPlayerAccount(player->GetSession()->GetSecurity()) || !player->isGMChat() || Message.empty())
+        if (AccountMgr::IsPlayerAccount(player->GetSession()->GetSecurity()) || Message.empty())
             return;
 
         uint8 gmLevel = player->GetSession()->GetSecurity();
