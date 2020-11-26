@@ -14,4 +14,4 @@ Boss.Announcer.Announce = 1
 
 # Remove Aura such as bloodlust debuff upon boss kill?
 
-Boss.Announcer.RemoveAuraUponKill = 0
+Boss.Announcer.RemoveAuraUponKill = 1
