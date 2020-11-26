@@ -79,13 +79,13 @@ public:
                         // if we are in group lets get guild of the leader
                         if (player->GetGroup() && itr->GetSource()->GetGroup()->IsLeader(itr->GetSource()->GetGUID())) {
                             if (!itr->GetSource()->GetGuild()) {
-                                g_name = "< No Guild >";
+                                g_name = "< Sem Guild >";
                             } else {
                                 g_name = itr->GetSource()->GetGuildName();
                             }
                         }
 
-                        g_name = "< No Guild >";
+                        g_name = "< Sem Guild >";
                     }
                     else
                         g_name = player->GetGuildName();
@@ -94,7 +94,7 @@ public:
                 stream << "|CFF" << tag_colour << "|r|cff" << plr_colour << " " << p_name << "|r's Guild |cff" << guild_colour << "" << g_name << "|r acabou de matar |CFF" << boss_colour << "[" << boss_name << "]|r com |cff" << alive_text << "" << Alive_players << " /" << IsNormal << "|r players vivos em " << IsHeroicMode << " mode, com o grupo de |cff" << tag_colour << "Tank: " << Tanks  <<"|r |cff" << guild_colour <<
                     " Healers: "<< Healers << "|r |cff" << boss_colour << " DPS: " << DPS << "|r";
 					
-				if (player->GetMap()->IsHeroic())
+				if (player->GetMap()->IsHeroic() || boss_name = "The Lich King")
                 sWorld->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
 
 
