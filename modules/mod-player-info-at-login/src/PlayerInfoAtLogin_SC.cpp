@@ -20,7 +20,7 @@
 #include "Config.h"
 #include "Chat.h"
 #include "Player.h"
-#include "Time.h"
+#include <time.h>
 
 class PlayerInfoAtLogin_Player : public PlayerScript
 {
