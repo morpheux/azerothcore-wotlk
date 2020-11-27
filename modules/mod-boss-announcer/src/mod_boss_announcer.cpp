@@ -8,8 +8,6 @@
 #include "InstanceScript.h"
 #include "Chat.h"
 
-static bool removeAura, BossAnnouncerEnable, BossAnnounceToPlayerOnLogin;
-
 class Boss_Announcer : public PlayerScript
 {
 public:
