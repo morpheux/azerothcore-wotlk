@@ -12,8 +12,8 @@ StartGuild.Announce = 0
 
 # The GUID for each faction's starting guild
 # Note: if AllowTwoSide.Interaction.Guild = 1, you can set the same number for both factions
-StartGuild.Horde = 1
-StartGuild.Alliance = 2
+StartGuild.Horde = 33
+StartGuild.Alliance = 32
 
 #
 # StartGuild.Level
@@ -24,4 +24,4 @@ StartGuild.Alliance = 2
 # Enable = level (ex. 10)
 #
 
-StartGuild.Level = 0
+StartGuild.Level = 10
