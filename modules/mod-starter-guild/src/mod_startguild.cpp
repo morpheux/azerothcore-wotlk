@@ -95,7 +95,7 @@ public:
 			}
 
             		uint8 level = sConfigMgr->GetIntDefault("StartGuild.Level", 0);
-            		if (level > 0 && player->getLevel() == level && !player->GetGuild()) {
+            		if (level > 0 && player->getLevel() >= level && !player->GetGuild()) {
                 		addPlayerToGuild(player);
             		}
 		}
@@ -105,7 +105,7 @@ public:
 	void OnFirstLogin(Player* player)
 	{
 		// If enabled...
-		if (sConfigMgr->GetBoolDefault("StartGuild.Enable", true) && sConfigMgr->GetIntDefault("StartGuild.Level", 0) == 0)
+		if (sConfigMgr->GetBoolDefault("StartGuild.Enable", true) && sConfigMgr->GetIntDefault("StartGuild.Level", 0) == 1)
 		{
         	        addPlayerToGuild(player);
 		}
