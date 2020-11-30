@@ -152,7 +152,7 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, PvPDiffi
     ginfo->_groupType = index;
 
     // ETMAXX ARENA 1v1 MESSAGE
-    uint8 arenabracket
+    uint8 arenabracket = 0;
     if(ginfo->ArenaType == 5)
         arenabracket = 1
     else
