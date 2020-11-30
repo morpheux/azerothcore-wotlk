@@ -154,9 +154,9 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, PvPDiffi
     // ETMAXX ARENA 1v1 MESSAGE
     uint8 arenabracket = 0;
     if(ginfo->ArenaType == 5)
-        arenabracket = 1
+        arenabracket = 1;
     else
-        arenabracket = ginfo->ArenaType
+        arenabracket = ginfo->ArenaType;
     // END
 
     // announce world (this doesn't need mutex)
