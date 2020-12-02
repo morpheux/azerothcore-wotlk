@@ -7561,7 +7561,7 @@ void Player::ModifyHonorPoints(int32 value, SQLTransaction* trans /*=NULL*/)
         newValue = 0;
     SetHonorPoints(uint32(newValue));
 
-    if (trans && !trans->null())
+    if (trans)
     {
         PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UDP_CHAR_HONOR_POINTS);
         stmt->setUInt32(0, newValue);
@@ -7577,7 +7577,7 @@ void Player::ModifyArenaPoints(int32 value, SQLTransaction* trans /*=NULL*/)
         newValue = 0;
     SetArenaPoints(uint32(newValue));
 
-    if (trans && !trans->null())
+    if (trans)
     {
         PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UDP_CHAR_ARENA_POINTS);
         stmt->setUInt32(0, newValue);
@@ -7603,8 +7603,23 @@ uint32 Player::GetGroupIdFromStorage(uint32 guid)
 uint32 Player::GetArenaTeamIdFromStorage(uint32 guid, uint8 slot)
 {
     if (GlobalPlayerData const* playerData = sWorld->GetGlobalPlayerData(guid))
-        return playerData->arenaTeamId[slot];
+    {
+        auto itr = playerData->arenaTeamId.find(slot);
+        if (itr != playerData->arenaTeamId.end())
+        {
+            return itr->second;
+        }
+    }
     return 0;
+}
+
+
+void Player::SetArenaTeamInfoField(uint8 slot, ArenaTeamInfoType type, uint32 value)
+{
+    if (slot < MAX_ARENA_SLOT)
+    {
+        SetUInt32Value(PLAYER_FIELD_ARENA_TEAM_INFO_1_1 + (slot * ARENA_TEAM_END) + type, value);
+    }
 }
 
 uint32 Player::GetArenaTeamIdFromDB(uint64 guid, uint8 type)
@@ -8049,7 +8064,7 @@ void Player::_ApplyItemMods(Item* item, uint8 slot, bool apply)
 
     uint8 attacktype = Player::GetAttackBySlot(slot);
 
-    if (proto->Socket[0].Color)                              //only (un)equipping of items with sockets can influence metagems, so no need to waste time with normal items
+    if (item->HasSocket())                              //only (un)equipping of items with sockets can influence metagems, so no need to waste time with normal items
         CorrectMetaGemEnchants(slot, apply);
 
     if (attacktype < MAX_ATTACK)
@@ -17767,7 +17782,7 @@ void Player::_LoadArenaTeamInfo()
 {
     memset((void*)&m_uint32Values[PLAYER_FIELD_ARENA_TEAM_INFO_1_1], 0, sizeof(uint32) * MAX_ARENA_SLOT * ARENA_TEAM_END);
 
-    for (uint8 slot = 0; slot <= 2; ++slot)
+    for (uint8 slot = 0; slot < MAX_ARENA_SLOT; ++slot)
         if (uint32 arenaTeamId = Player::GetArenaTeamIdFromStorage(GetGUIDLow(), slot))
         {
             ArenaTeam* arenaTeam = sArenaTeamMgr->GetArenaTeamById(arenaTeamId);
@@ -20175,7 +20190,7 @@ void Player::_SaveMail(SQLTransaction& trans)
 
 void Player::_SaveQuestStatus(SQLTransaction& trans)
 {
-    bool isTransaction = !trans.null();
+    bool isTransaction = static_cast<bool>(trans);
     if (!isTransaction)
         trans = CharacterDatabase.BeginTransaction();
 
@@ -21684,6 +21699,38 @@ void Player::LeaveAllArenaTeams(uint64 guid)
     } while (result->NextRow());
 }
 
+
+uint32 Player::GetArenaTeamId(uint8 slot) const
+{
+    uint32 rtVal = 0;
+    if (slot >= MAX_ARENA_SLOT)
+    {
+        sScriptMgr->GetCustomGetArenaTeamId(this, slot, rtVal);
+    }
+    else
+    {
+        rtVal = GetUInt32Value(PLAYER_FIELD_ARENA_TEAM_INFO_1_1 + (slot * ARENA_TEAM_END) + ARENA_TEAM_ID);
+    }
+
+    return rtVal;
+}
+
+
+uint32 Player::GetArenaPersonalRating(uint8 slot) const
+{
+    uint32 rtVal = 0;
+    if (slot >= MAX_ARENA_SLOT)
+    {
+        sScriptMgr->GetCustomGetArenaTeamId(this, slot, rtVal);
+    }
+    else
+    {
+        rtVal = GetUInt32Value(PLAYER_FIELD_ARENA_TEAM_INFO_1_1 + (slot * ARENA_TEAM_END) + ARENA_TEAM_PERSONAL_RATING);
+    }
+
+    return rtVal;
+}
+
 void Player::SetRestBonus(float rest_bonus_new)
 {
     // Prevent resting on max level
@@ -22344,6 +22391,9 @@ uint32 Player::GetMaxPersonalArenaRatingRequirement(uint32 minarenaslot) const
                 max_personal_rating = p_rating;
         }
     }
+
+    sScriptMgr->OnGetMaxPersonalArenaRatingRequirement(this, minarenaslot, max_personal_rating);
+
     return max_personal_rating;
 }
 
@@ -22635,7 +22685,7 @@ bool Player::EnchantmentFitsRequirements(uint32 enchantmentcondition, int8 slot)
         if (i == slot)
             continue;
         Item* pItem2 = GetItemByPos(INVENTORY_SLOT_BAG_0, i);
-        if (pItem2 && !pItem2->IsBroken() && pItem2->GetTemplate()->Socket[0].Color)
+        if (pItem2 && !pItem2->IsBroken() && pItem2->HasSocket())
         {
             for (uint32 enchant_slot = SOCK_ENCHANTMENT_SLOT; enchant_slot <= PRISMATIC_ENCHANTMENT_SLOT; ++enchant_slot)
             {
@@ -22717,7 +22767,7 @@ void Player::CorrectMetaGemEnchants(uint8 exceptslot, bool apply)
 
         Item* pItem = GetItemByPos(INVENTORY_SLOT_BAG_0, slot);
 
-        if (!pItem || !pItem->GetTemplate()->Socket[0].Color)
+        if (!pItem || !pItem->HasSocket())
             continue;
 
         for (uint32 enchant_slot = SOCK_ENCHANTMENT_SLOT; enchant_slot < SOCK_ENCHANTMENT_SLOT + 3; ++enchant_slot)
@@ -23679,6 +23729,22 @@ void Player::SetDailyQuestStatus(uint32 quest_id)
             m_DailyQuestChanged = true;
         }
     }
+}
+
+bool Player::IsDailyQuestDone(uint32 quest_id)
+{
+    if (sObjectMgr->GetQuestTemplate(quest_id))
+    {
+        for (uint32 quest_daily_idx = 0; quest_daily_idx < PLAYER_MAX_DAILY_QUESTS; ++quest_daily_idx)
+        {
+            if (GetUInt32Value(PLAYER_FIELD_DAILY_QUESTS_1 + quest_daily_idx) == quest_id)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 void Player::SetWeeklyQuestStatus(uint32 quest_id)
