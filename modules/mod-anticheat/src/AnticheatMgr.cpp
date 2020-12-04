@@ -94,7 +94,7 @@ void AnticheatMgr::FlyHackDetection(Player* player, MovementInfo  movementInfo)
         return;
 
 	/*Thanks to @LilleCarl for info to check extra flag*/
-	bool stricterChecks = true;
+    bool stricterChecks = true;
 	if (sConfigMgr->GetBoolDefault("Anticheat.StricterFlyHackCheck", false))
 		stricterChecks = !(movementInfo.HasMovementFlag(MOVEMENTFLAG_ASCENDING) && !player->IsInWater());
 
