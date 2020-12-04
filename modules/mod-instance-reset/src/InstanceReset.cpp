@@ -34,7 +34,7 @@ public:
                 BoundInstancesMap const& m_boundInstances = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
                 for (BoundInstancesMap::const_iterator itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
                 {
-                    InstanceSave* save = itr->second.save;
+                    //InstanceSave* save = itr->second.save;
                     if (itr->first != player->GetMapId())
                     {
                         //uint32 resetTime = itr->second.extended ? save->GetExtendedResetTime() : save->GetResetTime();
