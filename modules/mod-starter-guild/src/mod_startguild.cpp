@@ -95,7 +95,7 @@ public:
 			}
 
             		uint8 level = sConfigMgr->GetIntDefault("StartGuild.Level", 0);
-            		if (level > 0 && player->getLevel() >= level && !player->GetGuild()) {
+            		if (level > 0 && player->getLevel() <= 79 && !player->GetGuild()) {
                 		addPlayerToGuild(player);
             		}
 		}
