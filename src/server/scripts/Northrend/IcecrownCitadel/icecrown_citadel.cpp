@@ -1997,6 +1997,39 @@ public:
     }
 };
 
+class spell_generic_remove_empowered_blood : public SpellScriptLoader
+{
+public:
+    spell_generic_remove_empowered_blood() : SpellScriptLoader("spell_generic_remove_empowered_blood") { }
+
+	class spell_generic_remove_empowered_blood_SpellScript  : public SpellScript
+	{
+		PrepareSpellScript(spell_generic_remove_empowered_blood_SpellScript);
+
+		bool Validate(SpellInfo const* /*spell*/) override
+		{
+			return ValidateSpellInfo({ SPELL_EMPOWERED_BLOOD });
+		}
+
+		void HandleScript(SpellEffIndex /*effIndex*/)
+		{
+			GetHitUnit()->RemoveAurasDueToSpell(SPELL_EMPOWERED_BLOOD);
+		}
+	
+		void Register()
+		{
+			OnEffectHitTarget += SpellEffectFn(spell_generic_remove_empowered_blood_SpellScript::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
+		}
+	};
+	
+	    SpellScript* GetSpellScript() const
+    {
+        return new spell_generic_remove_empowered_blood_SpellScript();
+    }
+	
+};
+
+
 class spell_icc_geist_alarm : public SpellScriptLoader
 {
 public:
@@ -3777,6 +3810,7 @@ void AddSC_icecrown_citadel()
     new npc_frostwing_vrykul();
     new npc_impaling_spear();
     new npc_arthas_teleport_visual();
+	new spell_generic_remove_empowered_blood;
     new spell_icc_stoneform();
     new spell_icc_sprit_alarm();
     new spell_icc_geist_alarm();

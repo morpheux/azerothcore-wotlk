@@ -52,6 +52,9 @@ enum SharedSpells
     // Shadowmourne questline
     SPELL_UNSATED_CRAVING               = 71168,
     SPELL_SHADOWS_FATE                  = 71169,
+	
+	// Empowering Blood Orb
+    SPELL_EMPOWERED_BLOOD               = 70227,
 
     // Misc
     SPELL_WEB_BEAM                      = 69887,

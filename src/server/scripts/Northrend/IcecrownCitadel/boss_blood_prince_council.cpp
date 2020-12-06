@@ -86,6 +86,7 @@ enum Spells
     SPELL_KINETIC_BOMB                  = 72080,
     SPELL_SHOCK_VORTEX                  = 72037,
     SPELL_EMPOWERED_SHOCK_VORTEX        = 72039,
+	SPELL_REMOVE_EMPOWERED_BLOOD        = 72131,
 
     // Kinetic Bomb
     SPELL_UNSTABLE                      = 72059,
@@ -789,6 +790,7 @@ public:
             }
 
             me->AddAura(SPELL_TWILIGHT_PRECISION, me);
+			me->CastSpell(me, SPELL_REMOVE_EMPOWERED_BLOOD, true);
             instance->SetBossState(DATA_BLOOD_PRINCE_COUNCIL, IN_PROGRESS);
             instance->SetData(DATA_ORB_WHISPERER_ACHIEVEMENT, 1);
             me->RemoveAurasDueToSpell(SPELL_FEIGN_DEATH); // just in case

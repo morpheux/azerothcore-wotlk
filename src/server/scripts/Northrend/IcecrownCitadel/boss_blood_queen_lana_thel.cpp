@@ -54,9 +54,10 @@ enum Spells
     SPELL_INCITE_TERROR                     = 73070,
     SPELL_BLOODBOLT_WHIRL                   = 71772,
     SPELL_ANNIHILATE                        = 71322,
+	SPELL_CLEAR_ALL_STATUS_AILMENTS         = 70939,
     
     //MISC
-	SPELL_TWILIGHT_PRECISION    = 78243,
+	SPELL_TWILIGHT_PRECISION    			= 78243,
 };
 
 enum Shadowmourne
@@ -171,6 +172,7 @@ public:
             me->CastSpell(me, SPELL_SHROUD_OF_SORROW, true);
             me->CastSpell(me, SPELL_FRENZIED_BLOODTHIRST_VISUAL, true);
             me->AddAura(SPELL_TWILIGHT_PRECISION, me);
+			me->CastSpell(me, SPELL_CLEAR_ALL_STATUS_AILMENTS, true);
             events.Reset();
             events.ScheduleEvent(EVENT_BERSERK, 330000);
             events.ScheduleEvent(EVENT_VAMPIRIC_BITE, 15000);
