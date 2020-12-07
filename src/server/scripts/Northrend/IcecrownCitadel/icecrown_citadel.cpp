@@ -2008,7 +2008,11 @@ public:
 
 		bool Validate(SpellInfo const* /*spell*/) override
 		{
-			return ValidateSpellInfo({ SPELL_EMPOWERED_BLOOD });
+			if (!sSpellMgr->GetSpellInfo(SPELL_EMPOWERED_BLOOD))
+                return false;
+            return true;
+			
+			
 		}
 
 		void HandleScript(SpellEffIndex /*effIndex*/)
@@ -2016,7 +2020,7 @@ public:
 			GetHitUnit()->RemoveAurasDueToSpell(SPELL_EMPOWERED_BLOOD);
 		}
 	
-		void Register()
+		void Register() override
 		{
 			OnEffectHitTarget += SpellEffectFn(spell_generic_remove_empowered_blood_SpellScript::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
 		}
