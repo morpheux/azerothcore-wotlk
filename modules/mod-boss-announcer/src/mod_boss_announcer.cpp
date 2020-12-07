@@ -57,14 +57,14 @@ public:
                     if (!itr->GetSource())
                         continue;
 
-                    if (itr->GetSource()->IsAlive() && !itr->GetSource()->IsGameMaster)
+                    if (itr->GetSource()->IsAlive() && !itr->GetSource()->IsGameMaster())
                         Alive_players++;
 
-                    if (itr->GetSource()->HasHealSpec() && !itr->GetSource()->IsGameMaster)
+                    if (itr->GetSource()->HasHealSpec() && !itr->GetSource()->IsGameMaster())
                         Healers++;
-                    else if (itr->GetSource()->HasTankSpec() && !itr->GetSource()->IsGameMaster)
+                    else if (itr->GetSource()->HasTankSpec() && !itr->GetSource()->IsGameMaster())
                         Tanks++;
-                    else if (!itr->GetSource()->IsGameMaster)
+                    else if (!itr->GetSource()->IsGameMaster())
                         DPS++;
 
                     uint32 buff = itr->GetSource()->GetTeamId() == TEAM_ALLIANCE ? 57723 : 57724;
