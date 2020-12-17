@@ -1,0 +1,23 @@
+[worldserver]
+
+#
+# Minim ammount to make a player be on a KillStreak
+# default: 10
+#
+
+KillStreak.MinAmount = 10
+
+#
+# PVPToken to reward the players who are on killstreak
+# default: 10
+#
+
+KillStreak.PVPToken = 29434
+
+#
+# Send the killstreak announce globally or on the specific zone of the killer
+# default: True  ( Global )
+#          False (  Zone  )
+#
+
+KillStreak.AnnounceGlobal = true
