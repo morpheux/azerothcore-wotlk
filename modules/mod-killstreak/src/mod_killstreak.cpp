@@ -2,10 +2,9 @@
     This plugin can be used for common player customizations
  */
 
-#include "ScriptPCH.h"
+#include "ScriptMgr.h"
 #include "Config.h"
 #include <unordered_map>
-
 
 uint32 conf_minAmmount = 0;
 uint32 conf_PVPToken = 0;
@@ -82,7 +81,7 @@ public:
         if(KillingStreak[killerGUID].LastKillTime == 0){
             KillingStreak[killerGUID].LastKillTime = sWorld->GetGameTime();
         }
-        else if  (sWorld->GetGameTime() - KillingStreak[killerGUID].LastKillTime >= 2 * 60) { // hold the kill streak only for 2 minutes
+        else if  (sWorld->GetGameTime() - KillingStreak[killerGUID].LastKillTime >= 5 * 60) { // hold the kill streak only for 5 minutes
             KillingStreak[killerGUID].KillStreak = 0;
             KillingStreak[killerGUID].LastKillTime = sWorld->GetGameTime();
             KillingStreak[killerGUID].LastGUIDKill = 0;
