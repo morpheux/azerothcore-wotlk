@@ -72,6 +72,7 @@ public:
         uint32 victimGUID;
         killerGUID = pKiller->GetGUID();
         victimGUID = pVictim->GetGUID();
+		char msg[1000];
 
         //uint32 currentTime = sWorld->GetGameTime();
         if(killerGUID == victimGUID)
@@ -89,35 +90,40 @@ public:
         if(KillingStreak[killerGUID].LastGUIDKill == victimGUID) {
             //return;
         }
-        KillingStreak[killerGUID].KillStreak++;
+
+		if (KillingStreak[victimGUID].KillStreak >= 5)
+		{
+			sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r e encerrou sua sequência de kills!", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
+			SendKillStreakMessage(pKiller, msg);
+		}
+		
+		KillingStreak[killerGUID].KillStreak++;		
         KillingStreak[victimGUID].KillStreak = 0;
         KillingStreak[killerGUID].LastGUIDKill = victimGUID;
         KillingStreak[victimGUID].LastGUIDKill = 0;
         KillingStreak[victimGUID].LastKillTime = 0;
 
-        char msg[1000];
-
         if (KillingStreak[killerGUID].KillStreak % conf_minAmmount == 0) {
             pKiller->AddItem(conf_PVPToken, KillingStreak[killerGUID].KillStreak);
             switch (KillingStreak[killerGUID].KillStreak / conf_minAmmount) {
             case 1:
-                sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r e esta em |cff00FF96Killing Spree|r!", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
+                sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r e esta em |cff00FF96Killing Spree (5kills)|r!", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
                 SendKillStreakMessage(pKiller, msg);
                 break;
             case 2:
-                sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r e esta |cffA330C9Dominando|r!", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
+                sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r e esta |cffA330C9Dominando (10 kills)|r!", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
                 SendKillStreakMessage(pKiller, msg);
                 break;
             case 3:
-                sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r e esta |cffFF7D0AUnstoppable|r.", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
+                sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r e esta |cffFF7D0AUnstoppable (15 kills)|r.", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
                 SendKillStreakMessage(pKiller, msg);
                 break;
             case 4:
-                sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r. |cff40C7EBGODLIKE|r!", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
+                sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r. |cff40C7EBGODLIKE (20 kills)|r!", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
                 SendKillStreakMessage(pKiller, msg);
                 break;
             case 5:
-                sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r. |cffCC0000ALGUEM PARE ESTE CARA|r!.", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
+                sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r. |cffCC0000ALGUEM PARE ESTE CARA (25 kills)|r!.", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
                 SendKillStreakMessage(pKiller, msg);
                 break;
             }
