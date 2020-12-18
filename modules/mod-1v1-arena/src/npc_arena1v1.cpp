@@ -32,7 +32,7 @@ const uint32 FORBIDDEN_TALENTS_IN_1V1_ARENA[] =
 
     // Tanks
     383, // PaladinProtection
-    163, // WarriorProtection
+    //163, // WarriorProtection
 
     0 // End
 };
