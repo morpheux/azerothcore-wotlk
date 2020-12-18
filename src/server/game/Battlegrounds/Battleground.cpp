@@ -729,6 +729,27 @@ void Battleground::UpdateWorldStateForPlayer(uint32 Field, uint32 Value, Player*
     player->GetSession()->SendPacket(&data);
 }
 
+// BSWOW Morphe 06/09/2017 - Formatar os Numeros // BG Announcer
+using namespace std;
+
+string commify(unsigned long long n)
+{
+    string numero;
+    int cnt = 0;
+    do
+    {
+        numero.insert(0, 1, char('0' + n % 10));
+        n /= 10;
+        if (++cnt == 3 && n)
+        {
+            numero.insert(0, 1, '.');
+            cnt = 0;
+        }
+    } while (n);
+    return numero;
+}
+// BSWOW Morphe 06/09/2017 - Fim Formatar os Numeros // BG Announcer
+
 void Battleground::EndBattleground(TeamId winnerTeamId)
 {
     // xinef: if this is true, it means that endbattleground is called second time
@@ -752,6 +773,12 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
     uint32 winnerMatchmakerRating = 0;
     int32  winnerChange = 0;
     int32  winnerMatchmakerChange = 0;
+	uint32 top_kb_count = 0;
+	uint32 top_damage_count = 0;
+	uint32 top_healing_count = 0;
+	std::string kb_player;
+	std::string damage_player;
+	std::string healing_player;
 
     int32 winmsg_id = 0;
 
@@ -982,7 +1009,30 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
         uint32 winner_arena = player->GetRandomWinner() ? sWorld->getIntConfig(CONFIG_BG_REWARD_WINNER_ARENA_LAST) : sWorld->getIntConfig(CONFIG_BG_REWARD_WINNER_ARENA_FIRST);
 
         sScriptMgr->OnBattlegroundEndReward(this, player, winnerTeamId);
-
+		
+		if (isBattleground())
+		{
+			BattlegroundScoreMap::const_iterator score = PlayerScores.find(player->GetGUID().GetCounter());
+			
+			//Guardar Informacoes do Jogador
+			uint32 old_kb_count = score->second->GetKillingBlows();
+			uint32 old_damage_count = score->second->GetDamageDone();
+			uint32 old_heling_count = score->second->GetHealingDone();
+			
+			
+			if (top_kb_count < old_kb_count){
+				top_kb_count = old_kb_count;
+				kb_player = player->GetName().c_str();}
+			
+			if (top_damage_count < old_damage_count){
+				top_damage_count = old_damage_count;
+				damage_player = player->GetName().c_str();}
+			
+			if (top_healing_count < old_healing_count){
+				top_healing_count = old_heling_count;
+				healing_player = player->GetName().c_str();}
+		}
+			
         // Reward winner team
         if (bgTeamId == winnerTeamId)
         {
@@ -1061,6 +1111,140 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
     sEluna->OnBGEnd(this, GetBgTypeID(), GetInstanceID(), winnerTeamId);
 #endif
 }
+
+// ANNOUNCE TOP KILLS E HEALING E DAMAGE
+
+			//Inicializando
+			std::string FACTION_ICON;
+			std::string RACE_ICON;
+			std::string CLASS_COLOR;
+			std::ostringstream sskb;
+			std::ostringstream ssdamage;
+			std::ostringstream sshealing;
+			
+            // Icone da Faccao
+            if (player->GetTeam() == TEAM_ALLIANCE)
+                FACTION_ICON = "|TInterface\\pvpframe\\pvp-currency-alliance:16|t";
+            else
+                FACTION_ICON = "|TInterface\\pvpframe\\pvp-currency-horde:15|t";
+             //Verificar a raca para inserir o icone no announce
+            switch (player->getRace())
+            {
+            case RACE_BLOODELF:
+                if (player->getGender() == GENDER_FEMALE)
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Bloodelf_Female:15|t";
+                else
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Bloodelf_Male:15|t";
+                break;
+            case RACE_DRAENEI:
+                if (player->getGender() == GENDER_FEMALE)
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Draenei_Female:15|t";
+                else
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Draenei_Male:15|t";
+                break;
+            case RACE_DWARF:
+                if (player->getGender() == GENDER_FEMALE)
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Dwarf_Female:15|t";
+                else
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Dwarf_Male:15|t";
+                break;
+            case RACE_GNOME:
+                if (player->getGender() == GENDER_FEMALE)
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Gnome_Female:15|t";
+                else
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Gnome_Male:15|t";
+                break;
+            case RACE_HUMAN:
+                if (player->getGender() == GENDER_FEMALE)
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Human_Female:15|t";
+                else
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Human_Male:15|t";
+                break;
+            case RACE_NIGHTELF:
+                if (player->getGender() == GENDER_FEMALE)
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Nightelf_Female:15|t";
+                else
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Nightelf_Male:15|t";
+                break;
+            case RACE_ORC:
+                if (player->getGender() == GENDER_FEMALE)
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Orc_Female:15|t";
+                else
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Orc_Male:15|t";
+                break;
+            case RACE_TAUREN:
+                if (player->getGender() == GENDER_FEMALE)
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Tauren_Female:15|t";
+                else
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Tauren_Male:15|t";
+                break;
+            case RACE_TROLL:
+                if (player->getGender() == GENDER_FEMALE)
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Troll_Female:15|t";
+                else
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Troll_Male:15|t";
+                break;
+            case RACE_UNDEAD_PLAYER:
+                if (player->getGender() == GENDER_FEMALE)
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Undead_Female:15|t";
+                else
+                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Undead_Male:15|t";
+                break;
+            default:
+                break;
+            }
+
+            //Verificar a Classe para colorir o nome do Player
+            switch (player->getClass())
+            {
+            case CLASS_DEATH_KNIGHT:
+                CLASS_COLOR = "|cffC41F3B";
+                break;
+            case CLASS_DRUID:
+                CLASS_COLOR = "|cffFF7D0A";
+                break;
+            case CLASS_HUNTER:
+                CLASS_COLOR = "|cffABD473";
+                break;
+            case CLASS_MAGE:
+                CLASS_COLOR = "|cff69CCF0";
+                break;
+            case CLASS_PALADIN:
+                CLASS_COLOR = "|cffF58CBA";
+                break;
+            case CLASS_PRIEST:
+                CLASS_COLOR = "|cffFFFFFF";
+                break;
+            case CLASS_ROGUE:
+                CLASS_COLOR = "|cffFFF569";
+                break;
+            case CLASS_SHAMAN:
+                CLASS_COLOR = "|cff0070DE";
+                break;
+            case CLASS_WARLOCK:
+                CLASS_COLOR = "|cff9482C9";
+                break;
+            case CLASS_WARRIOR:
+                CLASS_COLOR = "|cffC79C6E";
+                break;
+            default:
+                break;
+            }
+
+        sskb << "|cffffffff[Battleground Evento]|r: O jogador " << FACTION_ICON.c_str() << " " << RACE_ICON.c_str() << " " << CLASS_COLOR.c_str() << kb_player << "|r foi o melhor em kills na BG com |cffffa500[" << top_kb_count << "]|r kills. ";
+		ssdamage << "|cffffffff[Battleground Evento]|r: O jogador " << FACTION_ICON.c_str() << " " << RACE_ICON.c_str() << " " << CLASS_COLOR.c_str() << damage_player << "|r foi o melhor em dano na BG com |cffffa500[" << top_damage_count << "]|r de dano. ";
+		sshealing << "|cffffffff[Battleground Evento]|r: O jogador " << FACTION_ICON.c_str() << " " << RACE_ICON.c_str() << " " << CLASS_COLOR.c_str() << healing_player << "|r foi o melhor em cura na BG com |cffffa500[" << top_healing_count << "]|r de cura. ";
+		
+		// Enviar o Announce para todos no servidor
+		sWorld->SendGlobalText(sskb.str().c_str(), NULL);
+		sWorld->SendGlobalText(ssdamage.str().c_str(), NULL);
+		sWorld->SendGlobalText(sshealing.str().c_str(), NULL);
+
+// END ANNOUNCE
+
+
+
+
 
 uint32 Battleground::GetBonusHonorFromKill(uint32 kills) const
 {
