@@ -1029,7 +1029,7 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
 				damage_player = player->GetName().c_str();}
 			
 			if (top_healing_count < old_healing_count){
-				top_healing_count = old_heling_count;
+				top_healing_count = old_healing_count;
 				healing_player = player->GetName().c_str();}
 		}
 			
