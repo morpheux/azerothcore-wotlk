@@ -1017,7 +1017,7 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
 			//Guardar Informacoes do Jogador
 			uint32 old_kb_count = score->second->GetKillingBlows();
 			uint32 old_damage_count = score->second->GetDamageDone();
-			uint32 old_heling_count = score->second->GetHealingDone();
+			uint32 old_healing_count = score->second->GetHealingDone();
 			
 			
 			if (top_kb_count < old_kb_count){
