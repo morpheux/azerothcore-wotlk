@@ -1012,7 +1012,7 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
 		
 		if (isBattleground())
 		{
-			BattlegroundScoreMap::const_iterator score = PlayerScores.find(player->GetGUID().GetCounter());
+			BattlegroundScoreMap::const_iterator score = PlayerScores.find(player->GetGUID());
 			
 			//Guardar Informacoes do Jogador
 			uint32 old_kb_count = score->second->GetKillingBlows();
