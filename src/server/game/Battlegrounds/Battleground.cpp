@@ -1107,144 +1107,141 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
     if (winmsg_id)
         SendMessageToAll(winmsg_id, CHAT_MSG_BG_SYSTEM_NEUTRAL);
 
+    // ANNOUNCE TOP KILLS E HEALING E DAMAGE
+
+            //Inicializando
+    std::string FACTION_ICON;
+    std::string RACE_ICON;
+    std::string CLASS_COLOR;
+    std::ostringstream sskb;
+    std::ostringstream ssdamage;
+    std::ostringstream sshealing;
+
+    // Icone da Faccao
+    if (player->GetTeam() == TEAM_ALLIANCE)
+        FACTION_ICON = "|TInterface\\pvpframe\\pvp-currency-alliance:16|t";
+    else
+        FACTION_ICON = "|TInterface\\pvpframe\\pvp-currency-horde:15|t";
+    //Verificar a raca para inserir o icone no announce
+    switch (player->getRace())
+    {
+    case RACE_BLOODELF:
+        if (player->getGender() == GENDER_FEMALE)
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Bloodelf_Female:15|t";
+        else
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Bloodelf_Male:15|t";
+        break;
+    case RACE_DRAENEI:
+        if (player->getGender() == GENDER_FEMALE)
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Draenei_Female:15|t";
+        else
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Draenei_Male:15|t";
+        break;
+    case RACE_DWARF:
+        if (player->getGender() == GENDER_FEMALE)
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Dwarf_Female:15|t";
+        else
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Dwarf_Male:15|t";
+        break;
+    case RACE_GNOME:
+        if (player->getGender() == GENDER_FEMALE)
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Gnome_Female:15|t";
+        else
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Gnome_Male:15|t";
+        break;
+    case RACE_HUMAN:
+        if (player->getGender() == GENDER_FEMALE)
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Human_Female:15|t";
+        else
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Human_Male:15|t";
+        break;
+    case RACE_NIGHTELF:
+        if (player->getGender() == GENDER_FEMALE)
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Nightelf_Female:15|t";
+        else
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Nightelf_Male:15|t";
+        break;
+    case RACE_ORC:
+        if (player->getGender() == GENDER_FEMALE)
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Orc_Female:15|t";
+        else
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Orc_Male:15|t";
+        break;
+    case RACE_TAUREN:
+        if (player->getGender() == GENDER_FEMALE)
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Tauren_Female:15|t";
+        else
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Tauren_Male:15|t";
+        break;
+    case RACE_TROLL:
+        if (player->getGender() == GENDER_FEMALE)
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Troll_Female:15|t";
+        else
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Troll_Male:15|t";
+        break;
+    case RACE_UNDEAD_PLAYER:
+        if (player->getGender() == GENDER_FEMALE)
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Undead_Female:15|t";
+        else
+            RACE_ICON = "|TInterface/ICONS/Achievement_Character_Undead_Male:15|t";
+        break;
+    default:
+        break;
+    }
+
+    //Verificar a Classe para colorir o nome do Player
+    switch (player->getClass())
+    {
+    case CLASS_DEATH_KNIGHT:
+        CLASS_COLOR = "|cffC41F3B";
+        break;
+    case CLASS_DRUID:
+        CLASS_COLOR = "|cffFF7D0A";
+        break;
+    case CLASS_HUNTER:
+        CLASS_COLOR = "|cffABD473";
+        break;
+    case CLASS_MAGE:
+        CLASS_COLOR = "|cff69CCF0";
+        break;
+    case CLASS_PALADIN:
+        CLASS_COLOR = "|cffF58CBA";
+        break;
+    case CLASS_PRIEST:
+        CLASS_COLOR = "|cffFFFFFF";
+        break;
+    case CLASS_ROGUE:
+        CLASS_COLOR = "|cffFFF569";
+        break;
+    case CLASS_SHAMAN:
+        CLASS_COLOR = "|cff0070DE";
+        break;
+    case CLASS_WARLOCK:
+        CLASS_COLOR = "|cff9482C9";
+        break;
+    case CLASS_WARRIOR:
+        CLASS_COLOR = "|cffC79C6E";
+        break;
+    default:
+        break;
+    }
+
+    sskb << "|cffffffff[Battleground Evento]|r: O jogador " << FACTION_ICON.c_str() << " " << RACE_ICON.c_str() << " " << CLASS_COLOR.c_str() << kb_player << "|r foi o melhor em kills na BG com |cffffa500[" << top_kb_count << "]|r kills. ";
+    ssdamage << "|cffffffff[Battleground Evento]|r: O jogador " << FACTION_ICON.c_str() << " " << RACE_ICON.c_str() << " " << CLASS_COLOR.c_str() << damage_player << "|r foi o melhor em dano na BG com |cffffa500[" << top_damage_count << "]|r de dano. ";
+    sshealing << "|cffffffff[Battleground Evento]|r: O jogador " << FACTION_ICON.c_str() << " " << RACE_ICON.c_str() << " " << CLASS_COLOR.c_str() << healing_player << "|r foi o melhor em cura na BG com |cffffa500[" << top_healing_count << "]|r de cura. ";
+
+    // Enviar o Announce para todos no servidor
+    sWorld->SendGlobalText(sskb.str().c_str(), NULL);
+    sWorld->SendGlobalText(ssdamage.str().c_str(), NULL);
+    sWorld->SendGlobalText(sshealing.str().c_str(), NULL);
+
+    // END ANNOUNCE
+
+
 #ifdef ELUNA
     sEluna->OnBGEnd(this, GetBgTypeID(), GetInstanceID(), winnerTeamId);
 #endif
 }
-
-// ANNOUNCE TOP KILLS E HEALING E DAMAGE
-
-			//Inicializando
-			std::string FACTION_ICON;
-			std::string RACE_ICON;
-			std::string CLASS_COLOR;
-			std::ostringstream sskb;
-			std::ostringstream ssdamage;
-			std::ostringstream sshealing;
-			
-            // Icone da Faccao
-            if (player->GetTeam() == TEAM_ALLIANCE)
-                FACTION_ICON = "|TInterface\\pvpframe\\pvp-currency-alliance:16|t";
-            else
-                FACTION_ICON = "|TInterface\\pvpframe\\pvp-currency-horde:15|t";
-             //Verificar a raca para inserir o icone no announce
-            switch (player->getRace())
-            {
-            case RACE_BLOODELF:
-                if (player->getGender() == GENDER_FEMALE)
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Bloodelf_Female:15|t";
-                else
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Bloodelf_Male:15|t";
-                break;
-            case RACE_DRAENEI:
-                if (player->getGender() == GENDER_FEMALE)
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Draenei_Female:15|t";
-                else
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Draenei_Male:15|t";
-                break;
-            case RACE_DWARF:
-                if (player->getGender() == GENDER_FEMALE)
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Dwarf_Female:15|t";
-                else
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Dwarf_Male:15|t";
-                break;
-            case RACE_GNOME:
-                if (player->getGender() == GENDER_FEMALE)
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Gnome_Female:15|t";
-                else
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Gnome_Male:15|t";
-                break;
-            case RACE_HUMAN:
-                if (player->getGender() == GENDER_FEMALE)
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Human_Female:15|t";
-                else
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Human_Male:15|t";
-                break;
-            case RACE_NIGHTELF:
-                if (player->getGender() == GENDER_FEMALE)
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Nightelf_Female:15|t";
-                else
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Nightelf_Male:15|t";
-                break;
-            case RACE_ORC:
-                if (player->getGender() == GENDER_FEMALE)
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Orc_Female:15|t";
-                else
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Orc_Male:15|t";
-                break;
-            case RACE_TAUREN:
-                if (player->getGender() == GENDER_FEMALE)
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Tauren_Female:15|t";
-                else
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Tauren_Male:15|t";
-                break;
-            case RACE_TROLL:
-                if (player->getGender() == GENDER_FEMALE)
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Troll_Female:15|t";
-                else
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Troll_Male:15|t";
-                break;
-            case RACE_UNDEAD_PLAYER:
-                if (player->getGender() == GENDER_FEMALE)
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Undead_Female:15|t";
-                else
-                    RACE_ICON = "|TInterface/ICONS/Achievement_Character_Undead_Male:15|t";
-                break;
-            default:
-                break;
-            }
-
-            //Verificar a Classe para colorir o nome do Player
-            switch (player->getClass())
-            {
-            case CLASS_DEATH_KNIGHT:
-                CLASS_COLOR = "|cffC41F3B";
-                break;
-            case CLASS_DRUID:
-                CLASS_COLOR = "|cffFF7D0A";
-                break;
-            case CLASS_HUNTER:
-                CLASS_COLOR = "|cffABD473";
-                break;
-            case CLASS_MAGE:
-                CLASS_COLOR = "|cff69CCF0";
-                break;
-            case CLASS_PALADIN:
-                CLASS_COLOR = "|cffF58CBA";
-                break;
-            case CLASS_PRIEST:
-                CLASS_COLOR = "|cffFFFFFF";
-                break;
-            case CLASS_ROGUE:
-                CLASS_COLOR = "|cffFFF569";
-                break;
-            case CLASS_SHAMAN:
-                CLASS_COLOR = "|cff0070DE";
-                break;
-            case CLASS_WARLOCK:
-                CLASS_COLOR = "|cff9482C9";
-                break;
-            case CLASS_WARRIOR:
-                CLASS_COLOR = "|cffC79C6E";
-                break;
-            default:
-                break;
-            }
-
-        sskb << "|cffffffff[Battleground Evento]|r: O jogador " << FACTION_ICON.c_str() << " " << RACE_ICON.c_str() << " " << CLASS_COLOR.c_str() << kb_player << "|r foi o melhor em kills na BG com |cffffa500[" << top_kb_count << "]|r kills. ";
-		ssdamage << "|cffffffff[Battleground Evento]|r: O jogador " << FACTION_ICON.c_str() << " " << RACE_ICON.c_str() << " " << CLASS_COLOR.c_str() << damage_player << "|r foi o melhor em dano na BG com |cffffa500[" << top_damage_count << "]|r de dano. ";
-		sshealing << "|cffffffff[Battleground Evento]|r: O jogador " << FACTION_ICON.c_str() << " " << RACE_ICON.c_str() << " " << CLASS_COLOR.c_str() << healing_player << "|r foi o melhor em cura na BG com |cffffa500[" << top_healing_count << "]|r de cura. ";
-		
-		// Enviar o Announce para todos no servidor
-		sWorld->SendGlobalText(sskb.str().c_str(), NULL);
-		sWorld->SendGlobalText(ssdamage.str().c_str(), NULL);
-		sWorld->SendGlobalText(sshealing.str().c_str(), NULL);
-
-// END ANNOUNCE
-
-
-
-
 
 uint32 Battleground::GetBonusHonorFromKill(uint32 kills) const
 {
