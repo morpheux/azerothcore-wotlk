@@ -773,12 +773,12 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
     uint32 winnerMatchmakerRating = 0;
     int32  winnerChange = 0;
     int32  winnerMatchmakerChange = 0;
-	uint32 top_kb_count = 0;
-	uint32 top_damage_count = 0;
-	uint32 top_healing_count = 0;
-	std::string kb_player;
-	std::string damage_player;
-	std::string healing_player;
+	//uint32 top_kb_count = 0;
+	//uint32 top_damage_count = 0;
+	//uint32 top_healing_count = 0;
+	//std::string kb_player;
+	//std::string damage_player;
+	//std::string healing_player;
 
     int32 winmsg_id = 0;
 
