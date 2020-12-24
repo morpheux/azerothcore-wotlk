@@ -124,7 +124,7 @@ public:
         uint64 _oozeFloodDummyGUIDs[4][2];
         uint8 _oozeFloodStage;
 
-        void Reset()
+        void Reset() override
         {
             infectionCooldown = 14000;
             memset(&_oozeFloodDummyGUIDs, 0, sizeof(_oozeFloodDummyGUIDs));
@@ -133,7 +133,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void EnterCombat(Unit* who) override
         {
             if (!instance->CheckRequiredBosses(DATA_ROTFACE, who->ToPlayer()))
             {
@@ -177,7 +177,7 @@ public:
             }
         }
 
-        void JustDied(Unit* /*killer*/)
+        void JustDied(Unit* /*killer*/) override
         {
             instance->DoRemoveAurasDueToSpellOnPlayers(MUTATED_INFECTION);
             _JustDied();
@@ -186,13 +186,13 @@ public:
                 professor->AI()->DoAction(ACTION_ROTFACE_DEATH);
         }
 
-        void JustReachedHome()
+        void JustReachedHome() override
         {
             _JustReachedHome();
             instance->SetBossState(DATA_ROTFACE, FAIL);
         }
 
-        void JustSummoned(Creature* summon)
+        void JustSummoned(Creature* summon) override
         {
             if (me->IsAlive() && me->IsInCombat() && !me->IsInEvadeMode())
                 summons.Summon(summon);
@@ -200,13 +200,13 @@ public:
                 summon->DespawnOrUnsummon(1);
         }
 
-        void KilledUnit(Unit* victim)
+        void KilledUnit(Unit* victim) override
         {
             if (victim->GetTypeId() == TYPEID_PLAYER)
                 Talk(SAY_KILL);
         }
 
-        void EnterEvadeMode()
+        void EnterEvadeMode() override
         {
             me->SetControlled(false, UNIT_STATE_ROOT);
             me->DisableRotate(false);
@@ -215,7 +215,7 @@ public:
                 professor->AI()->EnterEvadeMode();
         }
 
-        void SpellHitTarget(Unit* target, SpellInfo const* spell)
+        void SpellHitTarget(Unit* target, SpellInfo const* spell) override
         {
             switch (spell->Id)
             {
@@ -243,7 +243,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim() || !CheckInRoom())
                 return;
@@ -321,7 +321,7 @@ public:
         }
     };
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return GetIcecrownCitadelAI<boss_rotfaceAI>(creature);
     }
@@ -345,7 +345,7 @@ public:
         EventMap events;
         InstanceScript* instance;
 
-        void IsSummonedBy(Unit* summoner)
+        void IsSummonedBy(Unit* summoner) override
         {
             if (!summoner)
                 return;
@@ -354,14 +354,14 @@ public:
             AttackStart(summoner);
         }
 
-        void JustDied(Unit* /*killer*/)
+        void JustDied(Unit* /*killer*/) override
         {
             if (Creature* rotface = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_ROTFACE)))
                 rotface->AI()->SummonedCreatureDespawn(me);
             me->DespawnOrUnsummon(0);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (firstUpdate)
             {
@@ -394,13 +394,13 @@ public:
             DoMeleeAttackIfReady();
         }
 
-        void EnterEvadeMode()
+        void EnterEvadeMode() override
         {
             me->SetInCombatWithZone();
         }
     };
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return GetIcecrownCitadelAI<npc_little_oozeAI>(creature);
     }
@@ -424,26 +424,26 @@ public:
         EventMap events;
         InstanceScript* instance;
 
-        void IsSummonedBy(Unit* /*summoner*/)
+        void IsSummonedBy(Unit* /*summoner*/) override
         {
             if (Player* p = me->SelectNearestPlayer(100.0f))
                 AttackStart(p);
         }
 
-        void JustDied(Unit* /*killer*/)
+        void JustDied(Unit* /*killer*/) override
         {
             if (Creature* rotface = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_ROTFACE)))
                 rotface->AI()->SummonedCreatureDespawn(me);
             me->DespawnOrUnsummon();
         }
 
-        void DoAction(int32 action)
+        void DoAction(int32 action) override
         {
             if (action == EVENT_STICKY_OOZE)
                 events.CancelEvent(EVENT_STICKY_OOZE);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (firstUpdate)
             {
@@ -479,13 +479,13 @@ public:
                 DoMeleeAttackIfReady();
         }
 
-        void EnterEvadeMode()
+        void EnterEvadeMode() override
         {
             me->SetInCombatWithZone();
         }
     };
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return GetIcecrownCitadelAI<npc_big_oozeAI>(creature);
     }
@@ -500,7 +500,7 @@ public:
     {
         PrepareSpellScript(spell_rotface_mutated_infection_SpellScript);
 
-        bool Load()
+        bool Load() override
         {
             _target = nullptr;
             return true;
@@ -535,7 +535,7 @@ public:
                     caster->AI()->Talk(EMOTE_MUTATED_INFECTION, target);
         }
 
-        void Register()
+        void Register() override
         {
             OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_rotface_mutated_infection_SpellScript::FilterTargets, EFFECT_0, TARGET_UNIT_SRC_AREA_ENEMY);
             OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_rotface_mutated_infection_SpellScript::ReplaceTargets, EFFECT_1, TARGET_UNIT_SRC_AREA_ENEMY);
@@ -555,18 +555,18 @@ public:
             GetTarget()->CastSpell(GetTarget(), GetSpellInfo()->Effects[2].CalcValue(), true);
         }
 
-        void Register()
+        void Register() override
         {
             AfterEffectRemove += AuraEffectRemoveFn(spell_rotface_mutated_infection_AuraScript::ExtraRemoveEffect, EFFECT_0, SPELL_AURA_PERIODIC_DAMAGE, AURA_EFFECT_HANDLE_REAL);
         }
     };
 
-    SpellScript* GetSpellScript() const
+    SpellScript* GetSpellScript() const override
     {
         return new spell_rotface_mutated_infection_SpellScript();
     }
 
-    AuraScript* GetAuraScript() const
+    AuraScript* GetAuraScript() const override
     {
         return new spell_rotface_mutated_infection_AuraScript();
     }
@@ -596,13 +596,13 @@ public:
                 GetCaster()->ToCreature()->DespawnOrUnsummon();
         }
 
-        void Register()
+        void Register() override
         {
             OnEffectHitTarget += SpellEffectFn(spell_rotface_little_ooze_combine_SpellScript::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
         }
     };
 
-    SpellScript* GetSpellScript() const
+    SpellScript* GetSpellScript() const override
     {
         return new spell_rotface_little_ooze_combine_SpellScript();
     }
@@ -674,13 +674,13 @@ public:
             GetHitCreature()->DespawnOrUnsummon();
         }
 
-        void Register()
+        void Register() override
         {
             OnEffectHitTarget += SpellEffectFn(spell_rotface_large_ooze_combine_SpellScript::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
         }
     };
 
-    SpellScript* GetSpellScript() const
+    SpellScript* GetSpellScript() const override
     {
         return new spell_rotface_large_ooze_combine_SpellScript();
     }
@@ -737,13 +737,13 @@ public:
             GetHitCreature()->DespawnOrUnsummon();
         }
 
-        void Register()
+        void Register() override
         {
             OnEffectHitTarget += SpellEffectFn(spell_rotface_large_ooze_buff_combine_SpellScript::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
         }
     };
 
-    SpellScript* GetSpellScript() const
+    SpellScript* GetSpellScript() const override
     {
         return new spell_rotface_large_ooze_buff_combine_SpellScript();
     }
@@ -758,7 +758,7 @@ public:
     {
         PrepareSpellScript(spell_rotface_unstable_ooze_explosion_init_SpellScript);
 
-        bool Validate(SpellInfo const* /*spell*/)
+        bool Validate(SpellInfo const* /*spell*/) override
         {
             if (!sSpellMgr->GetSpellInfo(SPELL_UNSTABLE_OOZE_EXPLOSION_TRIGGER))
                 return false;
@@ -777,13 +777,13 @@ public:
             GetCaster()->CastSpell(dummy, SPELL_UNSTABLE_OOZE_EXPLOSION_TRIGGER, true);
         }
 
-        void Register()
+        void Register() override
         {
             OnEffectHitTarget += SpellEffectFn(spell_rotface_unstable_ooze_explosion_init_SpellScript::HandleCast, EFFECT_0, SPELL_EFFECT_FORCE_CAST);
         }
     };
 
-    SpellScript* GetSpellScript() const
+    SpellScript* GetSpellScript() const override
     {
         return new spell_rotface_unstable_ooze_explosion_init_SpellScript();
     }
@@ -814,13 +814,13 @@ public:
                     rotface->CastSpell(x, y, z, triggered_spell_id, true/*, nullptr, nullptr, GetCaster()->GetGUID()*/); // caster not available on clientside, no log in such case
         }
 
-        void Register()
+        void Register() override
         {
             OnEffectHit += SpellEffectFn(spell_rotface_unstable_ooze_explosion_SpellScript::CheckTarget, EFFECT_0, SPELL_EFFECT_TRIGGER_MISSILE);
         }
     };
 
-    SpellScript* GetSpellScript() const
+    SpellScript* GetSpellScript() const override
     {
         return new spell_rotface_unstable_ooze_explosion_SpellScript();
     }
@@ -848,13 +848,13 @@ public:
             target->ToCreature()->DespawnOrUnsummon(60000);
         }
 
-        void Register()
+        void Register() override
         {
             OnEffectPeriodic += AuraEffectPeriodicFn(spell_rotface_unstable_ooze_explosion_suicide_AuraScript::DespawnSelf, EFFECT_2, SPELL_AURA_PERIODIC_TRIGGER_SPELL);
         }
     };
 
-    AuraScript* GetAuraScript() const
+    AuraScript* GetAuraScript() const override
     {
         return new spell_rotface_unstable_ooze_explosion_suicide_AuraScript();
     }
@@ -870,13 +870,13 @@ public:
     {
         npc_precious_iccAI(Creature* creature) : ScriptedAI(creature), summons(me) {}
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* /*target*/)
+        void EnterCombat(Unit* /*target*/) override
         {
             me->setActive(true);
             events.ScheduleEvent(EVENT_DECIMATE, urand(20000, 25000));
@@ -884,19 +884,19 @@ public:
             events.ScheduleEvent(EVENT_SUMMON_ZOMBIES, urand(25000, 30000));
         }
 
-        void JustSummoned(Creature* summon)
+        void JustSummoned(Creature* summon) override
         {
             summons.Summon(summon);
             if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0))
                 summon->AI()->AttackStart(target);
         }
 
-        void SummonedCreatureDespawn(Creature* summon)
+        void SummonedCreatureDespawn(Creature* summon) override
         {
             summons.Despawn(summon);
         }
 
-        void JustDied(Unit* /*killer*/)
+        void JustDied(Unit* /*killer*/) override
         {
             summons.DespawnAll();
             if (InstanceScript* _instance = me->GetInstanceScript())
@@ -905,7 +905,7 @@ public:
                         rotface->AI()->Talk(SAY_PRECIOUS_DIES);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;
@@ -946,7 +946,7 @@ public:
         SummonList summons;
     };
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return GetIcecrownCitadelAI<npc_precious_iccAI>(creature);
     }

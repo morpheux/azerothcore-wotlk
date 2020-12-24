@@ -582,7 +582,7 @@ public:
     public:
         spell_trigger_spell_from_caster_SpellScript(uint32 triggerId) : SpellScript(), _triggerId(triggerId) { }
 
-        bool Validate(SpellInfo const* /*spell*/)
+        bool Validate(SpellInfo const* /*spell*/) override
         {
             if (!sSpellMgr->GetSpellInfo(_triggerId))
                 return false;
@@ -594,7 +594,7 @@ public:
             GetCaster()->CastSpell(GetHitUnit(), _triggerId, true);
         }
 
-        void Register()
+        void Register() override
         {
             AfterHit += SpellHitFn(spell_trigger_spell_from_caster_SpellScript::HandleTrigger);
         }
@@ -602,7 +602,7 @@ public:
         uint32 _triggerId;
     };
 
-    SpellScript* GetSpellScript() const
+    SpellScript* GetSpellScript() const override
     {
         return new spell_trigger_spell_from_caster_SpellScript(_triggerId);
     }
