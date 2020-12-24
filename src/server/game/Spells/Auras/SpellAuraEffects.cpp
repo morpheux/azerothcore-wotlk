@@ -6220,7 +6220,7 @@ void AuraEffect::HandlePeriodicDamageAurasTick(Unit* target, Unit* caster) const
 
     int32 dmg = damage;
     if (CanApplyResilience())
-        Unit::ApplyResilience(target, NULL, &dmg, crit, CR_CRIT_TAKEN_SPELL * 1.2f);
+        Unit::ApplyResilience(target, NULL, (&dmg * 0,90f), crit, CR_CRIT_TAKEN_SPELL);
     damage = dmg;
 
     Unit::CalcAbsorbResist(caster, target, GetSpellInfo()->GetSchoolMask(), DOT, damage, &absorb, &resist, GetSpellInfo());
