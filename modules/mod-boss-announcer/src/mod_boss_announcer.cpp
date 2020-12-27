@@ -72,21 +72,13 @@ public:
                     if (itr->GetSource()->HasAura(buff))
                         itr->GetSource()->RemoveAura(buff);
 
-                    if (!player->GetGuild())
-                    {
-                        // if we are in group lets get guild of the leader
-                        if (player->GetGroup() && itr->GetSource()->GetGroup()->IsLeader(itr->GetSource()->GetGUID())) {
-                            if (!itr->GetSource()->GetGuild()) {
-                                g_name = "< Sem Guild >";
-                            } else {
-                                g_name = itr->GetSource()->GetGuildName();
-                            }
+                    // if we are in group lets get guild of the leader
+                    if (itr->GetSource()->GetGroup()->IsLeader(itr->GetSource()->GetGUID())) {
+                        if (!itr->GetSource()->GetGuild()) {
+                            g_name = "< Sem Guild >";
+                        } else {
+                            g_name = itr->GetSource()->GetGuildName();
                         }
-
-                        g_name = "< Sem Guild >";
-                    }
-                    else
-                        g_name = player->GetGuildName();
                 }
 
                 stream << "|CFF" << tag_colour << "|r|cff" << plr_colour << " " << p_name << "|r's Guild |cff" << guild_colour << "" << g_name << "|r acabou de matar |CFF" << boss_colour << "[" << boss_name << "]|r com |cff" << alive_text << "" << Alive_players << " /" << IsNormal << "|r players vivos em " << IsHeroicMode << " mode, com o grupo de |cff" << tag_colour << "Tank: " << Tanks  <<"|r |cff" << guild_colour <<
