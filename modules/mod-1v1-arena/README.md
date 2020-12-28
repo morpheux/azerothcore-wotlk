@@ -1,8 +1,7 @@
 # ![logo](https://raw.githubusercontent.com/azerothcore/azerothcore.github.io/master/images/logo-github.png) AzerothCore
-#
-- Latest build status with azerothcore: [![Build Status](https://travis-ci.org/azerothcore/mod-1v1-arena.svg?branch=master)](https://travis-ci.org/azerothcore/mod-1v1-arena)
-# mod-1v1-Arena
+## mod-1v1-Arena
 ### This is a module for [AzerothCore](http://www.azerothcore.org)
+- Latest build status with azerothcore: [![Build Status](https://github.com/azerothcore/mod-1v1-arena/workflows/core-build/badge.svg?branch=master&event=push)](https://github.com/azerothcore/mod-1v1-arena)
 
 #### Features:
 -1v1 Rated Arena Games
