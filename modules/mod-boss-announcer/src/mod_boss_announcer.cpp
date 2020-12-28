@@ -101,7 +101,7 @@ public:
 
                 p_name = player->GetGroup()->GetLeaderName();
 
-                stream << "|CFF" << tag_colour << "|r|cff" << plr_colour << " " << p_name << "|r's e seu grupo acabou de matar |CFF" << boss_colour << "[" << boss_name << "]|r";
+                stream2 << "|CFF" << tag_colour << "|r|cff" << plr_colour << " " << p_name << "|r's e seu grupo acabou de matar |CFF" << boss_colour << "[" << boss_name << "]|r";
 
                 sWorld->SendServerMessage(SERVER_MSG_STRING, stream2.str().c_str());
 
