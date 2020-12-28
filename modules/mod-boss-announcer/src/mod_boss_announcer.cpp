@@ -91,6 +91,21 @@ public:
 
 
             }
+            else if (boss->GetName() == "Thrall" || boss->GetName() == "King Varian Wrynn") {
+
+                std::ostringstream stream2;
+                std::string tag_colour = "7bbef7";
+                std::string plr_colour = "7bbef7";
+                std::string p_name;
+                std::string boss_name = boss->GetName();
+
+                p_name = player->GetGroup()->GetLeaderName();
+
+                stream << "|CFF" << tag_colour << "|r|cff" << plr_colour << " " << p_name << "|r's e seu grupo acabou de matar |CFF" << boss_colour << "[" << boss_name << "]|r";
+
+                sWorld->SendServerMessage(SERVER_MSG_STRING, stream2.str().c_str());
+
+            }
     }
 };
 
