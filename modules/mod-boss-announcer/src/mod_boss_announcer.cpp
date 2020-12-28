@@ -96,6 +96,7 @@ public:
                 std::ostringstream stream2;
                 std::string tag_colour = "7bbef7";
                 std::string plr_colour = "7bbef7";
+				std::string boss_colour = "ff0000";
                 std::string p_name;
                 std::string boss_name = boss->GetName();
 
