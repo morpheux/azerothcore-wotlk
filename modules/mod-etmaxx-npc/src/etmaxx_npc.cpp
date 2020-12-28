@@ -29,7 +29,7 @@ public:
         return true;
     }
 
-    void OnGossipSelect(Player* player, Item* /*item*/, uint32 /*sender*/, uint32 action) override
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 action)
     {
         player->PlayerTalkClass->ClearMenus();
 
@@ -40,6 +40,10 @@ public:
             ChatHandler(player->GetSession()).PSendSysMessage("CHAT OUTPUT: Please log out for race change.");
             break;
 		}
+		
+		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+		
+		return true;
 	}
 };
 
