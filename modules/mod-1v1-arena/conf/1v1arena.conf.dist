@@ -16,7 +16,7 @@ Arena1v1.Enable = 1
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Arena1v1.Announcer = 1
+Arena1v1.Announcer = 0
 
 #
 #    Arena1v1.MinLevel
@@ -67,7 +67,7 @@ Arena1v1.BlockForbiddenTalents = 1
 #        Default:     "0" - (no talent blocked)
 #		 Example:     "201,202,382,362,282,383,163"
 
-Arena1v1.ForbiddenTalentsIDs = "0"
+Arena1v1.ForbiddenTalentsIDs = "201, 202, 382, 262, 282"
 
 
 #
