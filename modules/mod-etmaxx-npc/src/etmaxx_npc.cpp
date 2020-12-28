@@ -29,7 +29,6 @@ class etmaxx_npc : public CreatureScript
 public:
     etmaxx_npc() : CreatureScript("etmaxx_npc") { }
 
-    // Step 1
     bool OnGossipHello(Player* player, Creature* creature) 
     {
             player->PlayerTalkClass->ClearMenus();
@@ -47,9 +46,6 @@ public:
 				}else{
 				player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitedirewolf:50:50|tHorn of the Arctic Wolf", GOSSIP_SENDER_MAIN, 3);
 				}
-			}
-				
-				player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitetiger:50:50|t ou |TInterface/Icons/Ability_mount_whitedirewolf:50:50|t", GOSSIP_SENDER_MAIN, 3);
 			}
 
 			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
