@@ -111,7 +111,7 @@ public:
 
         if (player->InBattlegroundQueueForBattlegroundQueueType(bgQueueTypeId))
         {
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Queue leave 1v1 Arena", GOSSIP_SENDER_MAIN, 3, "Are you sure?", 0, false);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Sair da fila de Arena 1v1", GOSSIP_SENDER_MAIN, 3, "Você tem certeza ?", 0, false);
         }
         else
         {
