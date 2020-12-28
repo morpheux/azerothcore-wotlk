@@ -65,7 +65,7 @@ public:
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
             break;
         case 3:
-            if (player->GetTeamId == TEAM_ALLIANCE) {
+            if (player->GetTeamId() == TEAM_ALLIANCE) {
                 player->AddItem(12302, -1);
                 player->AddItem(12302, 1);
             }
