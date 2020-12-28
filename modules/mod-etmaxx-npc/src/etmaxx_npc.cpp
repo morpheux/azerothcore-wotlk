@@ -34,6 +34,8 @@ public:
             player->AddItem(54811, 1)
             ChatHandler(player->GetSession()).PSendSysMessage("CHAT OUTPUT: Please log out for race change.");
             break;
+		}
+	}
 };
 
 void AddNpcEtmaxxScripts()
