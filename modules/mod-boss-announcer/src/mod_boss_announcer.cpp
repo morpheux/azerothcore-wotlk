@@ -73,7 +73,7 @@ public:
                         itr->GetSource()->RemoveAura(buff);
 
                     // if we are in group lets get guild of the leader
-                    if (itr->GetSource()->GetGroup()->IsLeader(itr->GetSource()->GetGUID())) 
+                    if (player->GetGroup() && itr->GetSource()->GetGroup()->IsLeader(itr->GetSource()->GetGUID())) 
 					{
                         if (!itr->GetSource()->GetGuild()) {
                             g_name = "< Sem Guild >";
