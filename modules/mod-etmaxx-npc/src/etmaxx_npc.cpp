@@ -8,19 +8,19 @@
 
 /*
     // Gossip defines
-    GOSSIP_ACTION_TRADE                 = 1,
-    GOSSIP_ACTION_TRAIN                 = 2,
-    GOSSIP_ACTION_TAXI                  = 3,
-    GOSSIP_ACTION_GUILD                 = 4,
-    GOSSIP_ACTION_BATTLE                = 5,
-    GOSSIP_ACTION_BANK                  = 6,
-    GOSSIP_ACTION_INN                   = 7,
-    GOSSIP_ACTION_HEAL                  = 8,
-    GOSSIP_ACTION_TABARD                = 9,
-    GOSSIP_ACTION_AUCTION               = 10,
-    GOSSIP_ACTION_INN_INFO              = 11,
-    GOSSIP_ACTION_UNLEARN               = 12,
-    GOSSIP_ACTION_INFO_DEF              = 1000,
+    GOSSIP_ACTION_TRADE                 = 1, BAGZINHA
+    GOSSIP_ACTION_TRAIN                 = 2, ASINHA
+    GOSSIP_ACTION_TAXI                  = 3, LIVRINHO
+    GOSSIP_ACTION_GUILD                 = 4, ENGRENAGEM
+    GOSSIP_ACTION_BATTLE                = 5, ENGRENAGEM
+    GOSSIP_ACTION_BANK                  = 6, BAG COM DINDIN
+    GOSSIP_ACTION_INN                   = 7, 3 PONTINHOS
+    GOSSIP_ACTION_HEAL                  = 8, TABARD
+    GOSSIP_ACTION_TABARD                = 9, ESPADAS
+    GOSSIP_ACTION_AUCTION               = 10, PONTINHO
+    GOSSIP_ACTION_INN_INFO              = 11, BALAO
+    GOSSIP_ACTION_UNLEARN               = 12, BALAO
+    GOSSIP_ACTION_INFO_DEF              = 1000, NAO USAR
 */
 
 
@@ -35,26 +35,13 @@ public:
             player->PlayerTalkClass->ClearMenus();
 
             if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 62500 && !player->HasSpell(75614))
-                player->ADD_GOSSIP_ITEM(1, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 1);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 1);
 
             if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 50000 && !player->HasSpell(43688))
-                player->ADD_GOSSIP_ITEM(1, "|TInterface/Icons/Ability_druid_challangingroar:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_druid_challangingroar:50:50|tAmani War Bear", GOSSIP_SENDER_MAIN, 2);
 
-
-
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_TRADE, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed1", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_TRAIN, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_TAXI, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_GUILD, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_BATTLE, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_BANK, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_INN, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_HEAL, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_TABARD, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_INN_INFO, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_UNLEARN, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 2);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_INFO_DEF, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed1000", GOSSIP_SENDER_MAIN, 2);
+            if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 37500 && (!player->HasSpell(16056) || !player->HasSpell(16081)))
+                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitetiger:50:50|t ou |TInterface/Icons/Ability_mount_whitedirewolf:50:50|t", GOSSIP_SENDER_MAIN, 3);
 
 			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -76,6 +63,18 @@ public:
             player->AddItem(55293, -1);
             player->AddItem(55293, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
+            break;
+        case 3:
+            if (player->GetTeamId == TEAM_ALLIANCE) {
+                player->AddItem(12302, -1);
+                player->AddItem(12302, 1);
+            }
+            else {
+                player->AddItem(12351, -1);
+                player->AddItem(12351, 1);
+            }
+            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
+
             break;
 		}
 		
