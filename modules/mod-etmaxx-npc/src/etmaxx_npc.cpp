@@ -60,22 +60,22 @@ public:
         switch (action)
         {
         case 1:
-            player->AddItem(54811, -1);
+            player->RemoveMItem(54811);
             player->AddItem(54811, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
             break;
         case 2:
-            player->AddItem(55293, -1);
+            player->RemoveMItem(55293);
             player->AddItem(55293, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
             break;
         case 3:
             if (player->GetTeamId(true) == TEAM_ALLIANCE) {
-                player->AddItem(12302, -1);
+                player->RemoveMItem(12302);
                 player->AddItem(12302, 1);
             }
             else {
-                player->AddItem(12351, -1);
+                player->RemoveMItem(12351);
                 player->AddItem(12351, 1);
             }
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
