@@ -41,7 +41,16 @@ public:
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_druid_challangingroar:50:50|tAmani War Bear", GOSSIP_SENDER_MAIN, 2);
 
             if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 37500 && (!player->HasSpell(16056) || !player->HasSpell(16081)))
-                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitetiger:50:50|t ou |TInterface/Icons/Ability_mount_whitedirewolf:50:50|t", GOSSIP_SENDER_MAIN, 3);
+			{
+				if (player->GetTeamId(true) == TEAM_ALLIANCE) {
+				player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitetiger:50:50|tReins of the Ancient Frostsaber", GOSSIP_SENDER_MAIN, 3);
+				}else{
+				player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitedirewolf:50:50|tHorn of the Arctic Wolf", GOSSIP_SENDER_MAIN, 3);
+				}
+			}
+				
+				player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitetiger:50:50|t ou |TInterface/Icons/Ability_mount_whitedirewolf:50:50|t", GOSSIP_SENDER_MAIN, 3);
+			}
 
 			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
