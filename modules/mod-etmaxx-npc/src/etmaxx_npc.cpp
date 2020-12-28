@@ -20,7 +20,8 @@ public:
             player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/INV_BannerPVP_01:50:50|tUNUSED", GOSSIP_SENDER_MAIN, 2);
             player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/Achievement_BG_returnXflags_def_WSG:50:50|tUNUSED2", GOSSIP_SENDER_MAIN, 3);
             player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/INV_Inscription_Scroll:50:50|tUNUSED3", GOSSIP_SENDER_MAIN, 4);
-            player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, i->GetGUID());
+            
+			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
     }
