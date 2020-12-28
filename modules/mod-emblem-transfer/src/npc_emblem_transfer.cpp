@@ -48,22 +48,22 @@ public:
         if (penalty > 0.0f)
         {
             std::stringstream ss;
-            ss << "Transferences will be applied a " << (penalty * 100.0f) << "% penalty. For every 10, you will receive " << (10 * (1.0f - penalty)) << ".";
+            ss << "Taxa de transferencia cobrada: " << (penalty * 100.0f) << "Para cada 10, você receberá " << (10 * (1.0f - penalty)) << ".";
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, ss.str().c_str(), GOSSIP_SENDER_MAIN, ACTION_NONE);
         }
 
         if (sConfigMgr->GetBoolDefault("EmblemTransfer.allowEmblemsFrost", true))
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transfer my Emblems of Frost", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_FROST);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transferir Emblems of Frost", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_FROST);
 
         if (sConfigMgr->GetBoolDefault("EmblemTransfer.allowEmblemsTriumph", false))
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transfer my Emblems of Triumph", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_TRIUMPH);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transferir Emblems of Triumph", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_TRIUMPH);
 
         if (sConfigMgr->GetBoolDefault("EmblemTransfer.allowEmblemsConquest", false))
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transfer my Emblems of Conquest", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_CONQUEST);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transferir Emblems of Conquest", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_CONQUEST);
 
         QueryResult result = CharacterDatabase.PQuery("SELECT 1 FROM emblem_transferences WHERE receiver_guid = %u AND active = 1 LIMIT 1", player->GetSession()->GetGuidLow());
         if (result)
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Get my transfered emblems", GOSSIP_SENDER_MAIN, ACTION_RETRIEVE_EMBLEMS);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Pegar Meus Emblemas Transferidos", GOSSIP_SENDER_MAIN, ACTION_RETRIEVE_EMBLEMS);
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -120,7 +120,7 @@ public:
                 } while (result->NextRow());
 
                 CharacterDatabase.PExecute("UPDATE emblem_transferences SET active = 0, received_timestamp = CURRENT_TIMESTAMP WHERE receiver_guid = %u AND active = 1", player->GetSession()->GetGuidLow());
-                player->GetSession()->SendNotification("Thank you for using the emblem transfer service!");
+                player->GetSession()->SendNotification("Obrigado por usar o sistema de transferencia de Emblemas");
                 return OnGossipSelect(player, creature, sender, ACTION_CLOSE);
             }
         }
@@ -151,7 +151,7 @@ public:
 
             if (emblems < minAmount)
             {
-                player->GetSession()->SendNotification("You don't have enough emblems! The minimum amount is %d", minAmount);
+                player->GetSession()->SendNotification("Você não tem Emblemas o suficiente! A quantidade minima é: %d", minAmount);
                 return OnGossipSelect(player, creature, sender, ACTION_CLOSE);
             }
 
@@ -159,7 +159,7 @@ public:
         }
         // Player selected a character to transfer
         else {
-            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "Last step: Amount of emblems", sender, action, "Enter the amount of emblems to transfer:", 0, true);
+            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "Ultima Etapa: Quantidade de Emblemas", sender, action, "Digite a quantidade de Emblemas que deseja Transferir e clique em OK: ", 0, true);
         }
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -171,7 +171,7 @@ public:
     {
         if (!isNumber(code))
         {
-            player->GetSession()->SendNotification("Please enter a valid number!");
+            player->GetSession()->SendNotification("Digite um número válido!");
             return OnGossipSelect(player, creature, sender, ACTION_CLOSE);
         }
 
@@ -199,14 +199,14 @@ public:
         // Deku: emblemId should NEVER be 0
         if (emblemId == 0)
         {
-            player->GetSession()->SendNotification("There was a problem processing your request. Please notify an administrator.");
+            player->GetSession()->SendNotification("Problema ao Processar sua solicitação. Favor notificar um GM.");
             return OnGossipSelect(player, creature, sender, ACTION_CLOSE);
         }
         
         emblemsCount = player->GetItemCount(emblemId);
         if (emblemsCount < transferAmount)
         {
-            player->GetSession()->SendNotification("You don't have enough emblems!");
+            player->GetSession()->SendNotification("Você não tem Emblemas suficientes!");
             return OnGossipSelect(player, creature, sender, ACTION_CLOSE);
         }
 
@@ -216,7 +216,7 @@ public:
         player->DestroyItemCount(emblemId, transferAmount, true, false);
         
         player->PlayerTalkClass->ClearMenus(); // Clear window before farewell
-        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TAXI, "Transfer completed! Log in with your other character to retrieve the emblems", GOSSIP_SENDER_MAIN, ACTION_CLOSE);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TAXI, "Transferencia Concluida! Venha com seu Personagem aqui para receber os Emblemas transferidos", GOSSIP_SENDER_MAIN, ACTION_CLOSE);
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
