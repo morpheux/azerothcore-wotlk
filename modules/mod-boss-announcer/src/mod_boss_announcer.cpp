@@ -100,7 +100,10 @@ public:
                 std::string p_name;
                 std::string boss_name = boss->GetName();
 
-                p_name = player->GetGroup()->GetLeaderName();
+                if (!player->GetGroup())
+                    p_name = player->GetName();
+                else
+                    p_name = player->GetGroup()->GetLeaderName();
 
                 stream2 << "|CFF" << tag_colour << "|r|cff" << plr_colour << " " << p_name << "|r's e seu grupo acabou de matar |CFF" << boss_colour << "[" << boss_name << "]|r";
 
