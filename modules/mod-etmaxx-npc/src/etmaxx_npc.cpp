@@ -72,12 +72,16 @@ public:
         case 3:
 		{
             if (player->GetTeamId(true) == TEAM_ALLIANCE)
+			{
                 player->DestroyItemCount(12302, 1, true);
                 player->AddItem(12302, 1);
+			}
 				
-			if (player->GetTeamId(true) == TEAM_HORDE)	
+			if (player->GetTeamId(true) == TEAM_HORDE)
+			{
                 player->DestroyItemCount(12351, 1, true);
                 player->AddItem(12351, 1);
+			}
         }
         
 			ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
