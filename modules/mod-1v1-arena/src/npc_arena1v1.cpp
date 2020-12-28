@@ -115,22 +115,22 @@ public:
         }
         else
         {
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Queue enter 1v1 Arena (UnRated)", GOSSIP_SENDER_MAIN, 20);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Entrar na fila de Arena 1v1 (Normal)", GOSSIP_SENDER_MAIN, 20);
         }
 
         if (!player->GetArenaTeamId(ArenaTeam::GetSlotByType(ARENA_TEAM_1V1)))
         {
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Create new 1v1 Arena Team", GOSSIP_SENDER_MAIN, 1, "Are you sure?", sConfigMgr->GetIntDefault("Arena1v1.Costs", 400000), false);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Criar um novo time de Arena 1v1", GOSSIP_SENDER_MAIN, 1, "Você tem certeza?", sConfigMgr->GetIntDefault("Arena1v1.Costs", 400000), false);
         }
         else
         {
             if (!player->InBattlegroundQueueForBattlegroundQueueType(bgQueueTypeId))
             {
-                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Queue enter 1v1 Arena (Rated)", GOSSIP_SENDER_MAIN, 2);
-                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Arenateam Clear", GOSSIP_SENDER_MAIN, 5, "Are you sure?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Entrar na fila de Arena 1v1 (Ranked)", GOSSIP_SENDER_MAIN, 2);
+                AddGossipItemFor(player, GOSSIP_ICON_CHAT, "DELETAR seu time de Arena 1v1", GOSSIP_SENDER_MAIN, 5, "Você tem certeza?", 0, false);
             }
 
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Shows your statistics", GOSSIP_SENDER_MAIN, 4);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Mostrar Minhas Estatística", GOSSIP_SENDER_MAIN, 4);
         }
 
         SendGossipMenuFor(player, 68, creature);
@@ -157,7 +157,7 @@ public:
             }
             else
             {
-                handler.PSendSysMessage("You have to be level %u + to create a 1v1 arena team.", sConfigMgr->GetIntDefault("Arena1v1.MinLevel", 70));
+                handler.PSendSysMessage("Você precisa estar no nível %u para criar um time de Arena 1v1", sConfigMgr->GetIntDefault("Arena1v1.MinLevel", 70));
                 CloseGossipMenuFor(player);
                 return true;
             }
@@ -167,7 +167,7 @@ public:
         case 2: // Join Queue Arena (rated)
         {
             if (Arena1v1CheckTalents(player) && !JoinQueueArena(player, creature, true))
-                handler.SendSysMessage("Something went wrong when joining the queue.");
+                handler.SendSysMessage("Algo de errado aconteceu ao entrar na Fila.");
 
             CloseGossipMenuFor(player);
             return true;
@@ -177,7 +177,7 @@ public:
         case 20: // Join Queue Arena (unrated)
         {
             if (Arena1v1CheckTalents(player) && !JoinQueueArena(player, creature, false))
-                handler.SendSysMessage("Something went wrong when joining the queue.");
+                handler.SendSysMessage("Algo de errado aconteceu ao entrar na Fila.");
 
             CloseGossipMenuFor(player);
             return true;
@@ -207,10 +207,10 @@ public:
                 std::stringstream s;
                 s << "Rating: " << at->GetStats().Rating;
                 s << "\nRank: " << at->GetStats().Rank;
-                s << "\nSeason Games: " << at->GetStats().SeasonGames;
-                s << "\nSeason Wins: " << at->GetStats().SeasonWins;
-                s << "\nWeek Games: " << at->GetStats().WeekGames;
-                s << "\nWeek Wins: " << at->GetStats().WeekWins;
+                s << "\nPartidas da Temporada: " << at->GetStats().SeasonGames;
+                s << "\nPartidas Vencidas: " << at->GetStats().SeasonWins;
+                s << "\nPartidas da Semana: " << at->GetStats().WeekGames;
+                s << "\nVitórias da Semana: " << at->GetStats().WeekWins;
 
                 ChatHandler(player->GetSession()).PSendSysMessage(SERVER_MSG_STRING, s.str().c_str());
             }
@@ -222,7 +222,7 @@ public:
             WorldPacket Data;
             Data << player->GetArenaTeamId(ArenaTeam::GetSlotByType(ARENA_TEAM_1V1));
             player->GetSession()->HandleArenaTeamLeaveOpcode(Data);
-            handler.SendSysMessage("Arenateam deleted!");
+            handler.SendSysMessage("Time de Arena 1v1 deletado !");
             CloseGossipMenuFor(player);
             return true;
         }
@@ -330,7 +330,7 @@ private:
         // Check if player is already in an arena team
         if (player->GetArenaTeamId(slot))
         {
-            player->GetSession()->SendArenaTeamCommandResult(ERR_ARENA_TEAM_CREATE_S, player->GetName(), "You are already in an arena team!", ERR_ALREADY_IN_ARENA_TEAM);
+            player->GetSession()->SendArenaTeamCommandResult(ERR_ARENA_TEAM_CREATE_S, player->GetName(), "Você já está em um time de Arena 1v1", ERR_ALREADY_IN_ARENA_TEAM);
             return false;
         }
 
@@ -361,7 +361,7 @@ private:
         // Register arena team
         sArenaTeamMgr->AddArenaTeam(arenaTeam);
 
-        ChatHandler(player->GetSession()).SendSysMessage("1v1 Arenateam successfully created!");
+        ChatHandler(player->GetSession()).SendSysMessage("Time de Arena 1v1 criado com sucesso");
 
         return true;
     }
@@ -385,7 +385,7 @@ private:
 
             if (std::find(forbiddenTalents.begin(), forbiddenTalents.end(), talentInfo->TalentID) != forbiddenTalents.end())
             {
-                ChatHandler(player->GetSession()).SendSysMessage("You can not join because you have forbidden talents.");
+                ChatHandler(player->GetSession()).SendSysMessage("Você não pode entrar na fila de Arena 1v1 pois está com a Spec errada");
                 return false;
             }
 
@@ -396,7 +396,7 @@ private:
 
         if (count >= 36)
         {
-            ChatHandler(player->GetSession()).SendSysMessage("You can not join because you have too many talent points in a forbidden tree. (Heal / Tank)");
+            ChatHandler(player->GetSession()).SendSysMessage("Você não pode entrar na Fila de Arena 1v1 pois possui muitos pontos na Build de Heal");
             return false;
         }
 
