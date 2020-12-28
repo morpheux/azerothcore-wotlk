@@ -48,7 +48,7 @@ public:
         if (penalty > 0.0f)
         {
             std::stringstream ss;
-            ss << "Taxa de transferencia cobrada: " << (penalty * 100.0f) << "Para cada 10, você receberá " << (10 * (1.0f - penalty)) << ".";
+            ss << "Taxa de transferencia cobrada: " << (penalty * 100.0f) << "%, ou seja, Para cada 10, você receberá " << (10 * (1.0f - penalty)) << ".";
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, ss.str().c_str(), GOSSIP_SENDER_MAIN, ACTION_NONE);
         }
 
@@ -159,7 +159,7 @@ public:
         }
         // Player selected a character to transfer
         else {
-            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "Ultima Etapa: Quantidade de Emblemas", sender, action, "Digite a quantidade de Emblemas que deseja Transferir e clique em OK: ", 0, true);
+            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_MONEY_BAG, "Ultima Etapa: Quantidade de Emblemas", sender, action, "Na Proxima janela, digita a quantidade de Emblemas que deseja transferir e clique em Accept", 0, true);
         }
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
