@@ -25,25 +25,21 @@ constexpr uint32 ARENA_TEAM_1V1 = 1;
 constexpr uint32 ARENA_TYPE_1V1 = 1;
 constexpr BattlegroundQueueTypeId bgQueueTypeId = (BattlegroundQueueTypeId)((int)BATTLEGROUND_QUEUE_5v5 + 1);
 
-//Config
-std::vector<uint32> forbiddenTalents;
-
-class configloader_1v1arena : public WorldScript
+// TalentTab.dbc -> TalentTabID
+const uint32 FORBIDDEN_TALENTS_IN_1V1_ARENA[] =
 {
-public:
-    configloader_1v1arena() : WorldScript("configloader_1v1arena") {}
+    // Healer
+    201, // PriestDiscipline
+    202, // PriestHoly
+    382, // PaladinHoly
+    262, // ShamanRestoration
+    282, // DruidRestoration
 
+    // Tanks
+    //383, // PaladinProtection
+    //163, // WarriorProtection
 
-    virtual void OnAfterConfigLoad(bool /*Reload*/) override
-    {
-        std::string blockedTalentsStr = sConfigMgr->GetStringDefault("Arena1v1.ForbiddenTalentsIDs", "");
-        Tokenizer toks(blockedTalentsStr, ',');
-        for (auto&& token : toks)
-        {
-            forbiddenTalents.push_back(std::stoi(token));
-        }
-    }
-
+    0 // End
 };
 
 class playerscript_1v1arena : public PlayerScript
@@ -366,33 +362,35 @@ private:
         return true;
     }
 
-    bool Arena1v1CheckTalents(Player* player)
+bool Arena1v1CheckTalents(Player* player)
     {
         if (!player)
             return false;
 
-        if (sConfigMgr->GetBoolDefault("Arena1v1.BlockForbiddenTalents", true) == false)
+        if (sConfigMgr->GetBoolDefault("Arena1v1BlockForbiddenTalents", true) == false)
             return true;
 
-        uint32 count = 0;
+		uint32 count = 0;
+		for (uint32 talentId = 0; talentId < sTalentStore.GetNumRows(); ++talentId)
+		{
+			TalentEntry const* talentInfo = sTalentStore.LookupEntry(talentId);
+	
+			if (!talentInfo)
+				continue;
 
-        for (uint32 talentId = 0; talentId < sTalentStore.GetNumRows(); ++talentId)
-        {
-            TalentEntry const* talentInfo = sTalentStore.LookupEntry(talentId);
+			for (int8 rank = MAX_TALENT_RANK - 1; rank >= 0; --rank)
+			{
+				if (talentInfo->RankID[rank] == 0)
+					continue;
 
-            if (!talentInfo)
-                continue;
-
-            if (std::find(forbiddenTalents.begin(), forbiddenTalents.end(), talentInfo->TalentID) != forbiddenTalents.end())
-            {
-                ChatHandler(player->GetSession()).SendSysMessage("Você não pode entrar na fila de Arena 1v1 pois está com a Spec errada");
-                return false;
-            }
-
-            for (int8 rank = MAX_TALENT_RANK - 1; rank >= 0; --rank)
-                if (talentInfo->RankID[rank] == 0)
-                    continue;
-        }
+				if (player->HasTalent(talentInfo->RankID[rank], player->GetActiveSpec()))
+				{
+					for (int8 i = 0; FORBIDDEN_TALENTS_IN_1V1_ARENA[i] != 0; i++)
+						if (FORBIDDEN_TALENTS_IN_1V1_ARENA[i] == talentInfo->TalentTab)
+							count += rank + 1;
+				}
+			}
+		}
 
         if (count >= 36)
         {
@@ -458,7 +456,6 @@ public:
 
 void AddSC_npc_1v1arena()
 {
-    new configloader_1v1arena();
     new playerscript_1v1arena();
     new npc_1v1arena();
     new team_1v1arena();
