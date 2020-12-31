@@ -25,6 +25,12 @@ public:
     {
         ClearGossipMenuFor(player);
         uint32 diff = 2;
+        bool reseteiicc;
+        bool reseeteioutras;
+
+        reseteiicc == false;
+        reseeteioutras == false;
+
         if (action == GOSSIP_ACTION_INFO_DEF + 1)
         {
             if (!sConfigMgr->GetBoolDefault("instanceReset.NormalModeOnly", true))
@@ -41,19 +47,38 @@ public:
                         //uint32 ttr = (resetTime >= time(nullptr) ? resetTime - time(nullptr) : 0);
 
                         if (itr->first == 631) {
-                            creature->MonsterWhisper("Achei o mapa 631", player);
+                            if (player->HasItemCount(60000, 1, true)) {
+                                player->DestroyItemCount(60000, 1, true);
+                                sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
+                                reseteiicc == true;
+                            }
                         }
                         else {
-                            creature->MonsterWhisper("Achei outro mapa", player);
+                            sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
+                            reseeteioutras == true;
                         }
-                        sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
+
                         itr = m_boundInstances.begin();
                     }
                     else
                         ++itr;
                 }
             }
-            creature->MonsterWhisper("Seus cooldowns foram resetados" , player);
+
+            if (reseteiicc && reseeteioutras) {
+                creature->MonsterWhisper("Todos os cooldowns das suas instances e dungeons foram resetados.", player);
+            }
+            else if(reseteiicc && !reseeteioutras){
+                creature->MonsterWhisper("Todas as suas Icecrown Citadel normais foram resetadas.", player);
+            }
+            else if (!reseteiicc && reseeteioutras) {
+                creature->MonsterWhisper("Todas as suas Dungeons e Instancias excluindo Icecrown Citadel normais foram resetadas.", player);
+            }
+            else {
+                creature->MonsterWhisper("Não encontrei instances para resetar.", player);
+            }
+
+
             CloseGossipMenuFor(player);
         }
         return true;
