@@ -17,6 +17,7 @@ public:
             return true;
         ClearGossipMenuFor(player);
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias normais.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias heroicas.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
@@ -45,14 +46,19 @@ public:
                         //uint32 resetTime = itr->second.extended ? save->GetExtendedResetTime() : save->GetResetTime();
                         //uint32 ttr = (resetTime >= time(nullptr) ? resetTime - time(nullptr) : 0);
 
-                        if (itr->first == 631) {
+                        if (itr->first == 631)
+                        {
                             if (player->HasItemCount(60000, 1, true)) {
                                 player->DestroyItemCount(60000, 1, true);
-                                sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
+                                sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(0), true, player);
+                                sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(1), true, player);
                                 reseteiicc = true;
                             }
-                        }
-                        else {
+                            else {
+                                creature->MonsterWhisper("Você precisa de 1 EtMaXx ICC Normal Reset Mark para resetar a dificuldade Normal de Icecrown Citadel", player);
+                            }
+
+                        } else {
                             sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
                             reseeteioutras = true;
                         }
@@ -68,13 +74,69 @@ public:
                 creature->MonsterWhisper("Todos os cooldowns das suas instances e dungeons foram resetados.", player);
             }
             else if(reseteiicc && !reseeteioutras){
-                creature->MonsterWhisper("Todas as suas Icecrown Citadel normais foram resetadas.", player);
+                creature->MonsterWhisper("Todas as suas Icecrown Citadel foram resetadas.", player);
             }
             else if (!reseteiicc && reseeteioutras) {
-                creature->MonsterWhisper("Todas as suas Dungeons e Instancias excluindo Icecrown Citadel normais foram resetadas.", player);
+                creature->MonsterWhisper("Todas as suas Dungeons e Instancias excluindo Icecrown Citadel foram resetadas.", player);
             }
             else {
-                creature->MonsterWhisper("Não encontrei instances para resetar.", player);
+                creature->MonsterWhisper("Não encontrei instances ou dungeons para resetar.", player);
+            }
+
+
+            CloseGossipMenuFor(player);
+        }
+
+        if (action == GOSSIP_ACTION_INFO_DEF + 2)
+        {
+            if (!sConfigMgr->GetBoolDefault("instanceReset.NormalModeOnly", true))
+                diff = MAX_DIFFICULTY;
+            for (uint8 i = 0; i < diff; ++i)
+            {
+                BoundInstancesMap const& m_boundInstances = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
+                for (BoundInstancesMap::const_iterator itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
+                {
+                    //InstanceSave* save = itr->second.save;
+                    if (itr->first != player->GetMapId())
+                    {
+                        //uint32 resetTime = itr->second.extended ? save->GetExtendedResetTime() : save->GetResetTime();
+                        //uint32 ttr = (resetTime >= time(nullptr) ? resetTime - time(nullptr) : 0);
+
+                        if (itr->first == 631) {
+                            if (player->HasItemCount(60001, 1, true)) {
+                                player->DestroyItemCount(60001, 1, true);
+                                sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(2), true, player);
+                                sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(3), true, player);
+                                reseteiicc = true;
+                            }
+                            else {
+                                creature->MonsterWhisper("Você precisa de 1 EtMaXx ICC Heroic Reset Mark para resetar a dificuldade Heroic de Icecrown Citadel", player);
+                            }
+
+                        } else {
+                            sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(2), true, player);
+                            sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(3), true, player);
+                            reseeteioutras = true;
+                        }
+
+                        itr = m_boundInstances.begin();
+                    }
+                    else
+                        ++itr;
+                }
+            }
+
+            if (reseteiicc && reseeteioutras) {
+                creature->MonsterWhisper("Todos os cooldowns das suas instances e dungeons foram resetados.", player);
+            }
+            else if (reseteiicc && !reseeteioutras) {
+                creature->MonsterWhisper("Todas as suas Icecrown Citadel foram resetadas.", player);
+            }
+            else if (!reseteiicc && reseeteioutras) {
+                creature->MonsterWhisper("Todas as suas Dungeons e Instancias excluindo Icecrown Citadel foram resetadas.", player);
+            }
+            else {
+                creature->MonsterWhisper("Não encontrei instances ou dungeons para resetar.", player);
             }
 
 
@@ -110,4 +172,3 @@ void AddInstanceResetScripts() {
     new instanceReset();
     new instanceResetWorld(); 
 }
-
