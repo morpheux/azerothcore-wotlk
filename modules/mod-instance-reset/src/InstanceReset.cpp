@@ -17,7 +17,7 @@ public:
             return true;
         ClearGossipMenuFor(player);
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias normais.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
-        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias heroicas.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+        //AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias heroicas.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
@@ -33,9 +33,7 @@ public:
 
         if (action == GOSSIP_ACTION_INFO_DEF + 1)
         {
-            if (!sConfigMgr->GetBoolDefault("instanceReset.NormalModeOnly", true))
-                diff = MAX_DIFFICULTY;
-            for (uint8 i = 0; i < diff; ++i)
+            for (uint8 i = 0; i < MAX_DIFFICULTY; ++i)
             {
                 BoundInstancesMap const& m_boundInstances = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
                 for (BoundInstancesMap::const_iterator itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
@@ -48,18 +46,22 @@ public:
 
                         if (itr->first == 631)
                         {
-                            if (player->HasItemCount(60000, 1, true)) {
+                            if (player->HasItemCount(60000, 1, true))
+                            {
                                 player->DestroyItemCount(60000, 1, true);
                                 sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(0), true, player);
                                 sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(1), true, player);
                                 reseteiicc = true;
+                            }else {
+                                sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(0), true, player);
+                                creature->MonsterWhisper("Icecrown Citadel 10N Resetada", player);
+                                creature->MonsterWhisper("Você precisa de 1 EtMaXx ICC Normal Reset Mark para resetar a 25 Normal de Icecrown Citadel", player);
                             }
-                            else {
-                                creature->MonsterWhisper("Você precisa de 1 EtMaXx ICC Normal Reset Mark para resetar a dificuldade Normal de Icecrown Citadel", player);
-                            }
-
                         } else {
-                            sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
+                            sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(0), true, player);
+							sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(1), true, player);
+							sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(2), true, player);
+							sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(3), true, player);
                             reseeteioutras = true;
                         }
 
