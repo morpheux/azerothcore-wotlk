@@ -45,6 +45,8 @@ public:
         AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn Stable Master", GOSSIP_SENDER_MAIN, 28690, "Spawn a Stable Master?", GuildHouseVendor, false);
         AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn Class Trainer", GOSSIP_SENDER_MAIN, 2);
         AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn Vendor", GOSSIP_SENDER_MAIN, 3);
+        AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn EtMaxX Recipes", GOSSIP_SENDER_MAIN, 5);
+        AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn EtMaxX Reagents", GOSSIP_SENDER_MAIN, 9);
         AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn City Portals / Objects", GOSSIP_SENDER_MAIN, 4);
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Spawn Bank", GOSSIP_SENDER_MAIN, 30605, "Spawn a banker?", GuildHouseBank, false);
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Spawn Auctioneer", GOSSIP_SENDER_MAIN, 6, "Spawn an auctioneer", GuildHouseAuctioneer, false);
@@ -112,6 +114,26 @@ public:
             AddGossipItemFor(player, GOSSIP_ICON_TAXI, "Portal: Shattrath", GOSSIP_SENDER_MAIN, 191013, "Add Shattrath Portal?", GuildHousePortal, false);
             AddGossipItemFor(player, GOSSIP_ICON_TAXI, "Portal: Dalaran", GOSSIP_SENDER_MAIN, 195682, "Add Dalaran Portal?", GuildHousePortal, false);
 
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Go Back!", GOSSIP_SENDER_MAIN, 9);
+            SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, m_creature->GetGUID());
+            break;
+        case 5: // spawn etmaxx recipe
+            ClearGossipMenuFor(player);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Recipe Books", GOSSIP_SENDER_MAIN, 50050, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Recipe Leather A-F", GOSSIP_SENDER_MAIN, 50051, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Recipe Leather G-R", GOSSIP_SENDER_MAIN, 50052, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Recipe Leather S-Z", GOSSIP_SENDER_MAIN, 50053, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Recipe Tailor A-G", GOSSIP_SENDER_MAIN, 50054, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Recipe Tailor H-Z", GOSSIP_SENDER_MAIN, 50055, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Engineering A-Z", GOSSIP_SENDER_MAIN, 50056, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Blacksmith A-R", GOSSIP_SENDER_MAIN, 50057, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Blacksmith S-Z", GOSSIP_SENDER_MAIN, 50059, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Cooking A-Z", GOSSIP_SENDER_MAIN, 50060, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Alchemy A-Z", GOSSIP_SENDER_MAIN, 50061, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Enchanting A-G", GOSSIP_SENDER_MAIN, 50062, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Enchanting H-Z", GOSSIP_SENDER_MAIN, 50063, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Jewelcrafting A-K", GOSSIP_SENDER_MAIN, 50064, "Spawn Recipe?", GuildHouseProf, false);
+            AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Jewelcrafting L-Z", GOSSIP_SENDER_MAIN, 50065, "Spawn Recipe?", GuildHouseProf, false);
             AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Go Back!", GOSSIP_SENDER_MAIN, 9);
             SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, m_creature->GetGUID());
             break;
@@ -187,6 +209,25 @@ public:
         case 33623: // Fishing 
         case 33621: // First Aid
             cost = GuildHouseProf;
+            SpawnNPC(action, player);
+            break;
+        case 50050:
+        case 50051:
+        case 50052:
+        case 50053:
+        case 50054:
+        case 50055:
+        case 50056:
+        case 50057:
+        case 50059:
+        case 50060:
+        case 50061:
+        case 50062:
+        case 50063:
+        case 50064:
+        case 50065:
+        case 191000:
+            cost = GuildHouseTrainer;
             SpawnNPC(action, player);
             break;
         case 28692: // Trade supplies
