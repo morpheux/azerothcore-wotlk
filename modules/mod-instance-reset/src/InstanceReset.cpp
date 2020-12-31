@@ -27,9 +27,8 @@ public:
         uint32 diff = 2;
         bool reseteiicc;
         bool reseeteioutras;
-
-        reseteiicc == false;
-        reseeteioutras == false;
+        reseteiicc = false;
+        reseeteioutras = false;
 
         if (action == GOSSIP_ACTION_INFO_DEF + 1)
         {
@@ -50,12 +49,12 @@ public:
                             if (player->HasItemCount(60000, 1, true)) {
                                 player->DestroyItemCount(60000, 1, true);
                                 sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
-                                reseteiicc == true;
+                                reseteiicc = true;
                             }
                         }
                         else {
                             sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
-                            reseeteioutras == true;
+                            reseeteioutras = true;
                         }
 
                         itr = m_boundInstances.begin();
