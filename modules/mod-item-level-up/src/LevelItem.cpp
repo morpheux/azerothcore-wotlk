@@ -40,18 +40,6 @@ public:
     }
 };
 
-// Announce
-class mod_levelitem_Announce : public PlayerScript
-{
-
-public:
-    mod_levelitem_Announce() : PlayerScript("mod_levelitem_Announce") {}
-
-    void OnLogin(Player* player) override
-    {
-    }
-};
-
 class LevelItem : public ItemScript
 {
 public:
@@ -89,6 +77,5 @@ public:
 void AddLevelItemScripts()
 {
     new mod_levelitem_Conf();
-    new mod_levelitem_Announce();
     new LevelItem();
 }
