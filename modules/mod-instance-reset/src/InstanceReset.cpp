@@ -39,6 +39,13 @@ public:
                     {
                         //uint32 resetTime = itr->second.extended ? save->GetExtendedResetTime() : save->GetResetTime();
                         //uint32 ttr = (resetTime >= time(nullptr) ? resetTime - time(nullptr) : 0);
+
+                        if (itr->first == 631) {
+                            creature->MonsterWhisper("Achei o mapa 631", player);
+                        }
+                        else {
+                            creature->MonsterWhisper("Achei outro mapa", player);
+                        }
                         sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
                         itr = m_boundInstances.begin();
                     }

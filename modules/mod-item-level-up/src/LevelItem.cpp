@@ -49,10 +49,6 @@ public:
 
     void OnLogin(Player* player) override
     {
-        if (sConfigMgr->GetBoolDefault("Arena1v1Announcer.Enable", true))
-        {
-            ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00Level Item |rmodule.");
-        }
     }
 };
 
