@@ -94,6 +94,7 @@ public:
 		if (KillingStreak[victimGUID].KillStreak >= 5)
 		{
 			sprintf(msg, "|cffFF0000[Sistema PvP]|r %s%s|r matou %s%s|r e encerrou sua sequência de kills!", kill_streak_ClassColor[pKiller->getClass() - 1].c_str(), pKiller->GetName().c_str(), pVictim->GetName().c_str(), kill_streak_ClassColor[pVictim->getClass() - 1].c_str());
+			pKiller->AddItem(conf_PVPToken, 1);
 			SendKillStreakMessage(pKiller, msg);
 		}
 		
