@@ -175,7 +175,7 @@ public:
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 5000
+        case 5000:
             OnGossipHello(player, creature);
             break;
 		}
