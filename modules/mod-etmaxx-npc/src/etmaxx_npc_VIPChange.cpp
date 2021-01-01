@@ -25,10 +25,10 @@
 */
 
 
-class etmaxx_npc : public CreatureScript
+class etmaxx_npc_VIPChange : public CreatureScript
 {
 public:
-    etmaxx_npc() : CreatureScript("etmaxx_npc_VIPChange") { }
+    etmaxx_npc_VIPChange() : CreatureScript("etmaxx_npc_VIPChange") { }
 
     bool OnGossipHello(Player* player, Creature* creature) 
     {
