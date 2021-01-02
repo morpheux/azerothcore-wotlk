@@ -1,2 +1,1 @@
 void AddNpcEtmaxxScripts();
-void AddNpcEtmaxxVIPChange();
