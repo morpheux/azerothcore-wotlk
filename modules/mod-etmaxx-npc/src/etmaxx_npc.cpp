@@ -105,10 +105,6 @@ public:
 enum Actions
 {
     ACTION_NONE = 0,
-    ACTION_RETRIEVE_EMBLEMS = 1001,
-    ACTION_TRANSFER_FROST = 1002,
-    ACTION_TRANSFER_TRIUMPH = 1003,
-    ACTION_TRANSFER_CONQUEST = 1004,
     ACTION_CLOSE = 1005
 };
 
@@ -201,7 +197,7 @@ public:
             player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_104:25:25|tVIP One Hand Axe", GOSSIP_SENDER_MAIN, 2);
             if (action == 2)
             {
-                ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
+                ChatHandler(player->GetSession()).PSendSysMessage("Entrei nesse IF");
             }
             break;
         case 2:
