@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "ScriptedGossip.h"
 #include "Language.h"
+#include <Chat/Chat.h>
 
 /*
     // Gossip defines
