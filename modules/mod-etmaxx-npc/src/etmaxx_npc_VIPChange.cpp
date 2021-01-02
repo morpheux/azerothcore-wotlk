@@ -25,10 +25,10 @@
 */
 
 
-class etmaxx_npc_VIPChange : public CreatureScript
+class etmaxx_npc_vipchange : public CreatureScript
 {
 public:
-    etmaxx_npc_VIPChange() : CreatureScript("etmaxx_npc_VIPChange") { }
+    etmaxx_npc_vipchange() : CreatureScript("etmaxx_npc_vipchange") { }
 
     bool OnGossipHello(Player* player, Creature* creature) 
     {
@@ -189,5 +189,5 @@ public:
 
 void AddNpcEtmaxxVIPChange()
 {
-    new etmaxx_npc_VIPChange();
+    new etmaxx_npc_vipchange();
 }

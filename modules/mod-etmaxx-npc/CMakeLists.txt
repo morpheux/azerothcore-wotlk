@@ -1,8 +1,7 @@
 CU_SET_PATH("CMAKE_EMBLEM_TRANSFER_DIR" "${CMAKE_CURRENT_LIST_DIR}")
 
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/etmaxx_npc.cpp")
-
-AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/etmaxx_npc_VIPChange.cpp")
+AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/etmaxx_npc_vipchange.cpp")
 
 AC_ADD_SCRIPT_LOADER("NpcEtmaxx" "${CMAKE_CURRENT_LIST_DIR}/src/loader.h")
 
