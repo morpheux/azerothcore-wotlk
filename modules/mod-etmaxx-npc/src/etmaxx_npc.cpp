@@ -102,6 +102,16 @@ public:
 /////////////	EtMaXx Trocadorius NPC								///////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
+enum Actions
+{
+    ACTION_NONE = 0,
+    ACTION_RETRIEVE_EMBLEMS = 1001,
+    ACTION_TRANSFER_FROST = 1002,
+    ACTION_TRANSFER_TRIUMPH = 1003,
+    ACTION_TRANSFER_CONQUEST = 1004,
+    ACTION_CLOSE = 1005
+};
+
 class etmaxx_vip : public CreatureScript
 {
 public:
@@ -111,7 +121,7 @@ public:
     {
             player->PlayerTalkClass->ClearMenus();
 
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "!!! ATENÇÃO !!! - Este NPC irá DESTRUIR seu item VIP para te dar uma EtMaXx Upgrade Mark", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "!!! ATENÇÃO !!! - Este NPC irá DESTRUIR seu item VIP para te dar uma EtMaXx Upgrade Mark", GOSSIP_SENDER_MAIN, ACTION_NONE);
 
             if (player->HasItemCount(40402,1))
                 player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_61:25:25|tVIP Tank Axe", GOSSIP_SENDER_MAIN, 1);
@@ -170,12 +180,29 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
+        if (action == ACTION_CLOSE)
+        {
+            player->CLOSE_GOSSIP_MENU();
+            return true;
+        }
+
+        if (action == ACTION_NONE)
+        {
+            return OnGossipHello(player, creature);
+        }
+
+
         switch (action)
         {
         case 1:
-            player->DestroyItemCount(40402, 1, true);
-            player->AddItem(60007, 1);
-            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
+            //player->DestroyItemCount(40402, 1, true);
+            //player->AddItem(60007, 1);
+            //ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_104:25:25|tVIP One Hand Axe", GOSSIP_SENDER_MAIN, 2);
+            if (action == 2)
+            {
+                ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
+            }
             break;
         case 2:
             player->DestroyItemCount(47898, 1, true);
