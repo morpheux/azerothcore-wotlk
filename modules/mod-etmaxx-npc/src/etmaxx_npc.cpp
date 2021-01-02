@@ -117,13 +117,9 @@ public:
     {
             player->PlayerTalkClass->ClearMenus();
 
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "!!! ATENÇÃO !!! - Este NPC irá DESTRUIR seu item VIP para te dar uma EtMaXx Upgrade Mark", GOSSIP_SENDER_MAIN, ACTION_NONE);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "!!! ATENÇÃO !!! - Este NPC irá DESTRUIR seu item VIP para te dar uma EtMaXx Upgrade Mark", GOSSIP_SENDER_MAIN, 1);
 
-            if (player->HasItemCount(40402,1))
-                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_61:25:25|tVIP Tank Axe", GOSSIP_SENDER_MAIN, 1);
-
-            if (player->HasItemCount(47898, 1))
-                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_104:25:25|tVIP One Hand Axe", GOSSIP_SENDER_MAIN, 2);
+            /*
 
             if (player->HasItemCount(34179, 1))
                 player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_offhand_sunwell_d_02:25:25|tVIP Off-Hand Caster", GOSSIP_SENDER_MAIN, 3);
@@ -165,7 +161,7 @@ public:
                 player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_shield_73:25:25|tVIP Shield Tank", GOSSIP_SENDER_MAIN, 15);
 
             if (player->HasItemCount(47517, 1))
-                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_sword_144:25:25|tVIP Main-Hand Sword Spell", GOSSIP_SENDER_MAIN, 16);
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_sword_144:25:25|tVIP Main-Hand Sword Spell", GOSSIP_SENDER_MAIN, 16);*/
 
 			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -176,107 +172,145 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        if (action == ACTION_CLOSE)
+        /*if (action == ACTION_CLOSE)
         {
             player->CLOSE_GOSSIP_MENU();
             return true;
-        }
-
-        if (action == ACTION_NONE)
-        {
-            return OnGossipHello(player, creature);
-        }
-
+        }*/
 
         switch (action)
         {
         case 1:
-            //player->DestroyItemCount(40402, 1, true);
-            //player->AddItem(60007, 1);
-            //ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
-            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_104:25:25|tVIP One Hand Axe", GOSSIP_SENDER_MAIN, 2);
-            if (action == 2)
-            {
-                ChatHandler(player->GetSession()).PSendSysMessage("Entrei nesse IF");
-            }
+
+            if (player->HasItemCount(40402, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_61:25:25|tVIP Tank Axe", GOSSIP_SENDER_MAIN, 2);
+
+            if (player->HasItemCount(47898, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_104:25:25|tVIP One Hand Axe", GOSSIP_SENDER_MAIN, 3);
+
+            if (player->HasItemCount(34179, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_offhand_sunwell_d_02:25:25|tVIP Off-Hand Caster", GOSSIP_SENDER_MAIN, 4);
+
+            if (player->HasItemCount(34206, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_offhand_sunwell_d_01:25:25|tVIP Off-Hand Healer", GOSSIP_SENDER_MAIN, 5);
+
+            if (player->HasItemCount(49888, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_113:25:25|tVIP Two-Hand Axe", GOSSIP_SENDER_MAIN, 6);
+
+            if (player->HasItemCount(49981, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_weapon_crossbow_38:25:25|tVIP Crossbow", GOSSIP_SENDER_MAIN, 7);
+
+            if (player->HasItemCount(51450, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_weapon_rifle_39:25:25|tVIP Gun", GOSSIP_SENDER_MAIN, 8);
+
+            if (player->HasItemCount(51561, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_weapon_rifle_39:25:25|tVIP Tank Gun", GOSSIP_SENDER_MAIN, 9);
+
+            if (player->HasItemCount(50303, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_mace_78:25:25|tVIP One-Hand Mace", GOSSIP_SENDER_MAIN, 10);
+
+            if (player->HasItemCount(40395, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_mace_82:25:25|tVIP Main-Hand Mace Spell", GOSSIP_SENDER_MAIN, 11);
+
+            if (player->HasItemCount(42322, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_hammer_31:25:25|tVIP Two-Hand Mace", GOSSIP_SENDER_MAIN, 12);
+
+            if (player->HasItemCount(49301, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_spear_08:25:25|tVIP Polearm Hunter", GOSSIP_SENDER_MAIN, 13);
+
+            if (player->HasItemCount(51791, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_shield_74:25:25|tVIP Shield Spell", GOSSIP_SENDER_MAIN, 14);
+
+            if (player->HasItemCount(47079, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_shield_69:25:25|tVIP Shield Healer", GOSSIP_SENDER_MAIN, 15);
+
+            if (player->HasItemCount(50794, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_shield_73:25:25|tVIP Shield Tank", GOSSIP_SENDER_MAIN, 16);
+
+            if (player->HasItemCount(47517, 1))
+                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_sword_144:25:25|tVIP Main-Hand Sword Spell", GOSSIP_SENDER_MAIN, 17);
             break;
+
+
         case 2:
+            player->DestroyItemCount(40402, 1, true);
+            player->AddItem(60007, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
+
+        case 3:
             player->DestroyItemCount(47898, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 3:
+        case 4:
             player->DestroyItemCount(34179, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 4:
+        case 5:
             player->DestroyItemCount(34206, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 5:
+        case 6:
             player->DestroyItemCount(49888, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.!");
             break;
-        case 6:
+        case 7:
             player->DestroyItemCount(49981, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 7:
+        case 8:
             player->DestroyItemCount(51450, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 8:
+        case 9:
             player->DestroyItemCount(51561, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 9:
+        case 10:
             player->DestroyItemCount(50303, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 10:
+        case 11:
             player->DestroyItemCount(40395, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 11:
+        case 12:
             player->DestroyItemCount(42322, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 12:
+        case 13:
             player->DestroyItemCount(49301, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 13:
+        case 14:
             player->DestroyItemCount(51791, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 14:
+        case 15:
             player->DestroyItemCount(47079, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 15:
+        case 16:
             player->DestroyItemCount(50794, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             break;
-        case 16:
+        case 17:
             player->DestroyItemCount(47517, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
-            break;
-        case 5000:
-            OnGossipHello(player, creature);
             break;
 		}
 		
