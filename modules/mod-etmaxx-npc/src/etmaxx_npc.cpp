@@ -119,7 +119,7 @@ public:
 
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "!!! ATENÇÃO !!! - Este NPC irá --> DESTRUIR <-- seu item VIP para te dar uma EtMaXx Upgrade Mark", GOSSIP_SENDER_MAIN, 5000);
 
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "----------------------------------------------------------------------------------------", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "-------------------------------------------------------------------", GOSSIP_SENDER_MAIN, 5000);
 
             if (player->HasItemCount(40402, 1))
                 player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_61:25:25|tVIP Tank Axe", GOSSIP_SENDER_MAIN, 2);
@@ -410,6 +410,7 @@ public:
             player->DestroyItemCount(40704, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
+            OnGossipHello(player, creature);
             break;
 
         case 33:
