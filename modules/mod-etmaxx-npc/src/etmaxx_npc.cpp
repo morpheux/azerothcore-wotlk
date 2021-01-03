@@ -117,9 +117,9 @@ public:
     {
             player->PlayerTalkClass->ClearMenus();
 
-            if (!(player->HasItemCount(60007, 1)) || player->HasItemCount(60007, 1)) {
+            
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "!!! ATENÇÃO !!! - Este NPC irá DESTRUIR seu item VIP para te dar uma EtMaXx Upgrade Mark", GOSSIP_SENDER_MAIN, 1);
-            }
+          
             
 			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -194,6 +194,7 @@ public:
             player->DestroyItemCount(40402, 1, true);
             player->AddItem(60007, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
+            break;
 
         case 3:
             player->DestroyItemCount(47898, 1, true);
