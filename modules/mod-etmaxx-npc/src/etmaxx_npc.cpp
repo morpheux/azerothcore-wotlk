@@ -117,8 +117,10 @@ public:
     {
             player->PlayerTalkClass->ClearMenus();
 
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "!!! ATENÇÃO !!! - Este NPC irá DESTRUIR seu item VIP para te dar uma EtMaXx Upgrade Mark", GOSSIP_SENDER_MAIN, 1);
-
+            if (!(player->HasItemCount(60007, 1)) || player->HasItemCount(60007, 1)) {
+                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "!!! ATENÇÃO !!! - Este NPC irá DESTRUIR seu item VIP para te dar uma EtMaXx Upgrade Mark", GOSSIP_SENDER_MAIN, 1);
+            }
+            
 			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
