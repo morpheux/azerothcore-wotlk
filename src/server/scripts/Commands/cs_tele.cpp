@@ -339,7 +339,7 @@ public:
 
         QueryResult vipdaylock = CharacterDatabase.PQuery("SELECT vipdiscounted FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetAccountId());
 
-        if (vipdaylock = 0) {
+        if (vipdaylock == 0) {
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
             handler->SendSysMessage(60002);
             handler->SetSentErrorMessage(true);
