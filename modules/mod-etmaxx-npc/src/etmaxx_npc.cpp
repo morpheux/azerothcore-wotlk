@@ -493,7 +493,7 @@ public:
     uint32 bpvip = 0;
     uint32 points = 0;
 
-    bool OnGossipHello(Player* player, Creature* creature)
+    bool OnGossipHello(Player* player/*, Creature* creature*/)
         {
             player->PlayerTalkClass->ClearMenus();
 
@@ -514,7 +514,7 @@ public:
 
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 100);
 
-
+            return true;
 
         };
 
