@@ -288,6 +288,18 @@ public:
 
         Player* me = handler->GetSession()->GetPlayer();
 
+        QueryResult vipcheck = CharacterDatabase.PQuery("SELECT dp FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetAccountId());
+
+        if (vipcheck > 0) {
+            handler->SendSysMessage(60000);
+            handler->SetSentErrorMessage(true);
+        }
+        else {
+            handler->SendSysMessage(60001);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
         // id, or string, or [name] Shift-click form |color|Htele:id|h[name]|h|r
         GameTele const* tele = handler->extractGameTeleFromLink((char*)args);
 
@@ -324,6 +336,7 @@ public:
             me->SaveRecallPosition();
 
         me->TeleportTo(tele->mapId, tele->position_x, tele->position_y, tele->position_z, tele->orientation);
+        CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=%u-1, vipdiscounted=1 WHERE id='%u';", vipcheck, me->GetSession()->GetAccountId());
         return true;
     }
 };
