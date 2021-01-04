@@ -492,18 +492,20 @@ public:
         if (result) {
             Field* fields = result->Fetch();
             bpvip = fields[0].GetUInt32();
-            queryok = true;
-        }
-        else {
-            queryok = false;
         }
 
-        if (queryok) {
+
+
+
+        if (result)
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_61:25:25|tVIP Tank Axe", GOSSIP_SENDER_MAIN, 5000);
+
+        /*if (queryok) {
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "JA TENHO BP VIP", GOSSIP_SENDER_MAIN, 5000);
         }
         else {
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "NAO TENHO BP VIP", GOSSIP_SENDER_MAIN, 3000);
-        }
+        }*/
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
