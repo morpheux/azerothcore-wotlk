@@ -492,7 +492,7 @@ public:
 
         }
         else {
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 3000);
         }
         
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -507,9 +507,13 @@ public:
         switch (action)
         {
         case 5000:
-            ChatHandler(player->GetSession()).PSendSysMessage("Teste1");
+            ChatHandler(player->GetSession()).PSendSysMessage("Teste5000");
+            break;
+        case 3000:
+            ChatHandler(player->GetSession()).PSendSysMessage("Teste3000");
             break;
         }
+
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
