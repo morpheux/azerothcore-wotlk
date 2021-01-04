@@ -493,7 +493,7 @@ public:
     uint32 bpvip = 0;
     uint32 points = 0;
 
-    bool OnGossipHello(Player* player/*, Creature* creature*/)
+    bool OnGossipHello(Player* player, Creature* creature)
         {
             player->PlayerTalkClass->ClearMenus();
 
