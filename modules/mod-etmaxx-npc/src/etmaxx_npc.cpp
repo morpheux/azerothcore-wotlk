@@ -484,7 +484,7 @@ public:
         QueryResult result = CharacterDatabase.PQuery("SELECT guid, bpvip, points FROM battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
 
         if (result) {
-
+            ChatHandler(player->GetSession()).PSendSysMessage("Entrei nesse IF");
             Field* fields = result->Fetch();
             uint32 guid = fields[0].GetUInt32();
             uint32 bpvip = fields[1].GetUInt32();
@@ -496,6 +496,7 @@ public:
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Ver Meus pontos", GOSSIP_SENDER_MAIN, 2);
 
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Vim Entregar uma EtMaXx BattlePass Mark", GOSSIP_SENDER_MAIN, 3);
+                ChatHandler(player->GetSession()).PSendSysMessage("E nesse aqui");
             }
             else {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do EtMaXx BattlePass VIP", GOSSIP_SENDER_MAIN, 1);
@@ -510,7 +511,7 @@ public:
             
         }
 
-        
+        ChatHandler(player->GetSession()).PSendSysMessage("Não Entrei em nada");
         
     };
 
