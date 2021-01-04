@@ -529,7 +529,7 @@ public:
         case 2:
             if (player->HasItemCount(60000, 1)) {
                 player->DestroyItemCount(60000, 1, true);
-                CharacterDatabase.PExecute("UPDATE battlepass SET bpvip = 1, WHERE guid = %u", player->GetSession()->GetGuidLow());
+                CharacterDatabase.PExecute("UPDATE battlepass SET bpvip = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir o EtMaXx VIP Battle Pass");
             }
             else {
