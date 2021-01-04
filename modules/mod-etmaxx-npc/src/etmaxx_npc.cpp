@@ -497,8 +497,13 @@ public:
 
 
 
-        if (result)
-            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_61:25:25|tVIP Tank Axe", GOSSIP_SENDER_MAIN, 5000);
+        if (result) {
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_61:25:25|tTenho Passe", GOSSIP_SENDER_MAIN, 5000);
+        }
+        else {
+            player->ADD_GOSSIP_ITEM(NULL, "Nao Tenho Passe", GOSSIP_SENDER_MAIN, 5000);
+        }
+            
 
         /*if (queryok) {
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "JA TENHO BP VIP", GOSSIP_SENDER_MAIN, 5000);
