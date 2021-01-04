@@ -287,8 +287,6 @@ public:
             return false;
 
         Player* me = handler->GetSession()->GetPlayer();
-        uint32 dp = 0;
-        uint32 vipdiscounted = 0;
 
         // Verifica se o usuário possui pontos de donate
         QueryResult result1 = CharacterDatabase.PQuery("SELECT dp FROM etmaxxweb.users WHERE id = '%u' and dp > '0';", me->GetSession()->GetAccountId());
