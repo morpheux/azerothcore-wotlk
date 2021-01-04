@@ -507,7 +507,7 @@ public:
         switch (action)
         {
         case 5000:
-            OnGossipHello(player, creature);
+            ChatHandler(player->GetSession()).PSendSysMessage("Teste1");
             break;
         }
 
