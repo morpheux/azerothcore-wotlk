@@ -494,23 +494,13 @@ public:
             bpvip = fields[0].GetUInt32();
         }
 
-
-
-
         if (result) {
-            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_61:25:25|tTenho Passe", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(NULL, "Mostrar meus", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(NULL, "Tenho Passe", GOSSIP_SENDER_MAIN, 5000);
         }
         else {
-            player->ADD_GOSSIP_ITEM(NULL, "Nao Tenho Passe", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(NULL, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 1);
         }
-            
-
-        /*if (queryok) {
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "JA TENHO BP VIP", GOSSIP_SENDER_MAIN, 5000);
-        }
-        else {
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "NAO TENHO BP VIP", GOSSIP_SENDER_MAIN, 3000);
-        }*/
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -523,8 +513,10 @@ public:
 
         switch (action)
         {
-        case 3000:
-            ChatHandler(player->GetSession()).PSendSysMessage("NAO TENHO BP VIP");
+        case 1:
+            CharacterDatabase.PExecute("INSERT INTO battlepass(guid, bpvip, points) VALUES (%u, %u, %u)", player->GetSession()->GetGuidLow(), 0, 0);
+            ChatHandler(player->GetSession()).PSendSysMessage("Parabens, agora você está com Battle Pass Ativo");
+            OnGossipHello(player, creature);
             break;
         case 5000:
             ChatHandler(player->GetSession()).PSendSysMessage("JA TENHO BP VIP");
