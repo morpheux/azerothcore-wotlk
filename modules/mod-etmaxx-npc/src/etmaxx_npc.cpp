@@ -494,13 +494,22 @@ public:
             bpvip = fields[0].GetUInt32();
         }
 
-        if (result) {
-            player->ADD_GOSSIP_ITEM(NULL, "Mostrar meus", GOSSIP_SENDER_MAIN, 5000);
-            player->ADD_GOSSIP_ITEM(NULL, "Tenho Passe", GOSSIP_SENDER_MAIN, 5000);
+        if (result && bpvip == 0) {
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero participar do Battle Pass VIP", GOSSIP_SENDER_MAIN, 2);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx Battle Pass Mark", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", GOSSIP_SENDER_MAIN, 5000);
+        }
+        else if(result && bpvip == 1) {
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx Battle Pass Mark", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", GOSSIP_SENDER_MAIN, 5000);
         }
         else {
-            player->ADD_GOSSIP_ITEM(NULL, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 1);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 1);
         }
+
+        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "-------------", GOSSIP_SENDER_MAIN, 5000);
+
+
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -515,11 +524,17 @@ public:
         {
         case 1:
             CharacterDatabase.PExecute("INSERT INTO battlepass(guid, bpvip, points) VALUES (%u, %u, %u)", player->GetSession()->GetGuidLow(), 0, 0);
-            ChatHandler(player->GetSession()).PSendSysMessage("Parabens, agora você está com Battle Pass Ativo");
-            OnGossipHello(player, creature);
+            ChatHandler(player->GetSession()).PSendSysMessage("Parabens, agora você está com Battle Pass Ativo. Fale com o NPC novamente");
             break;
-        case 5000:
-            ChatHandler(player->GetSession()).PSendSysMessage("JA TENHO BP VIP");
+        case 2:
+            if (player->HasItemCount(60000, 1)) {
+                player->DestroyItemCount(60000, 1, true);
+                CharacterDatabase.PExecute("UPDATE battlepass SET bpvip = 1, WHERE guid = %u", player->GetSession()->GetGuidLow());
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir o EtMaXx VIP Battle Pass");
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de um EtMaXx VIP Battle Pass Mark para participar do Battle Pass VIP. Você pode adquirir essa Mark no site: www.etmaxx.com.br");
+            }
             break;
         }
 
