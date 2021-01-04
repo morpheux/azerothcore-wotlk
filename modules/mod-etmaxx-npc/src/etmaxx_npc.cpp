@@ -481,20 +481,30 @@ public:
 
     uint32 bpvip = 0;
     uint32 points = 0;
+    bool queryok = false;
+    
+
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
         player->PlayerTalkClass->ClearMenus();
-        QueryResult result = CharacterDatabase.PQuery("SELECT guid FROM battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+        QueryResult result = CharacterDatabase.PQuery("SELECT bpvip FROM battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
         if (result) {
-
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Mostrar Meu Pontos do Passe", GOSSIP_SENDER_MAIN, 5000);
-
+            Field* fields = result->Fetch();
+            bpvip = fields[0].GetUInt32();
+            queryok = true;
         }
         else {
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 3000);
+            queryok = false;
         }
-        
+
+        if (queryok) {
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "JA TENHO BP VIP", GOSSIP_SENDER_MAIN, 5000);
+        }
+        else {
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "NAO TENHO BP VIP", GOSSIP_SENDER_MAIN, 3000);
+        }
+
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
@@ -506,11 +516,11 @@ public:
 
         switch (action)
         {
-        case 5000:
-            ChatHandler(player->GetSession()).PSendSysMessage("Teste5000");
-            break;
         case 3000:
-            ChatHandler(player->GetSession()).PSendSysMessage("Teste3000");
+            ChatHandler(player->GetSession()).PSendSysMessage("NAO TENHO BP VIP");
+            break;
+        case 5000:
+            ChatHandler(player->GetSession()).PSendSysMessage("JA TENHO BP VIP");
             break;
         }
 
