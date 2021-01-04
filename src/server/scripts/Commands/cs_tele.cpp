@@ -287,11 +287,13 @@ public:
             return false;
 
         Player* me = handler->GetSession()->GetPlayer();
+        uint32 dp = 0;
+        uint32 vipdiscounted = 0;
 
-        QueryResult vipcheck = CharacterDatabase.PQuery("SELECT dp FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetAccountId());
-        uint8 dp = (*vipcheck)[0].GetUInt8();
+        QueryResult result1 = CharacterDatabase.PQuery("SELECT dp FROM etmaxxweb.users WHERE id = '%u' and dp > '0';", me->GetSession()->GetAccountId());
+        QueryResult result2 = CharacterDatabase.PQuery("SELECT vipdiscounted FROM etmaxxweb.users WHERE id = '%u' and vipdiscounted = '0';", me->GetSession()->GetAccountId());
 
-        if (dp > 0) {
+        if (result1) {
             handler->SendSysMessage(60000);
             handler->SetSentErrorMessage(true);
             return false;
@@ -334,13 +336,7 @@ public:
 
         me->TeleportTo(tele->mapId, tele->position_x, tele->position_y, tele->position_z, tele->orientation);
 
-        QueryResult vipdaylock = CharacterDatabase.PQuery("SELECT vipdiscounted FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetAccountId());
-        uint8 vipdiscounted = (*vipdaylock)[0].GetUInt8();
-
-        handler->SendSysMessage(dp);
-        handler->SendSysMessage(vipdiscounted);
-
-        if (vipdiscounted == 0) {
+        if (result2) {
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
             handler->SendSysMessage(60001);
             handler->SetSentErrorMessage(true);
