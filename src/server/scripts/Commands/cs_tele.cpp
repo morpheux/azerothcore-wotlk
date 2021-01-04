@@ -336,7 +336,15 @@ public:
             me->SaveRecallPosition();
 
         me->TeleportTo(tele->mapId, tele->position_x, tele->position_y, tele->position_z, tele->orientation);
-        CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
+
+        QueryResult vipdaylock = CharacterDatabase.PQuery("SELECT vipdiscounted FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetAccountId());
+
+        if (vipdaylock = 0) {
+            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
+            handler->SendSysMessage(60002);
+            handler->SetSentErrorMessage(true);
+        }
+            
         return true;
     }
 };
