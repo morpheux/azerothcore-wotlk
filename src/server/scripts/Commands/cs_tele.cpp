@@ -282,7 +282,7 @@ public:
     }
 
     static bool HandleTeleCommand(ChatHandler* handler, const char* args)
-    {
+    {   
         if (!*args)
             return false;
 
@@ -336,7 +336,7 @@ public:
             me->SaveRecallPosition();
 
         me->TeleportTo(tele->mapId, tele->position_x, tele->position_y, tele->position_z, tele->orientation);
-        CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=%u-1, vipdiscounted=1 WHERE id='%u';", vipcheck, me->GetSession()->GetAccountId());
+        CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
         return true;
     }
 };
