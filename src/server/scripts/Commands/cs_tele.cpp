@@ -290,10 +290,12 @@ public:
         uint32 dp = 0;
         uint32 vipdiscounted = 0;
 
+        // Verifica se o usuário possui pontos de donate
         QueryResult result1 = CharacterDatabase.PQuery("SELECT dp FROM etmaxxweb.users WHERE id = '%u' and dp > '0';", me->GetSession()->GetAccountId());
+        // Verifica se o usuário já teve seus pontos descontados hoje.
         QueryResult result2 = CharacterDatabase.PQuery("SELECT vipdiscounted FROM etmaxxweb.users WHERE id = '%u' and vipdiscounted = '0';", me->GetSession()->GetAccountId());
 
-        if (result1) {
+        if (!result1) {
             handler->SendSysMessage(60000);
             handler->SetSentErrorMessage(true);
             return false;
