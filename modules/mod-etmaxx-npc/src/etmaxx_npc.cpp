@@ -99,7 +99,7 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////	EtMaXx Trocadorius NPC								///////////////
+/////////////	        EtMaXx VIP Desintegradorious		     	///////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
 enum Actions
@@ -471,19 +471,101 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////           NPC de Recompensa de Arena x1               ///////////////
+/////////////               NPC Teste Battle Pass                   ///////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
+class etmaxx_battlepass : public CreatureScript
+{
+public:
+    etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") { }
+
+    bool OnGossipHello(Player* player, Creature* creature)
+    {
+        QueryResult result = CharacterDatabase.PQuery("SELECT guid, bpvip, points FROM battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+
+        if (result) {
+
+            Field* fields = result->Fetch();
+            uint32 guid = fields[0].GetUInt32();
+            uint32 bpvip = fields[1].GetUInt32();
+            uint32 points = fields[2].GetUInt32();
+
+            player->PlayerTalkClass->ClearMenus();
+
+            if (player->HasItemCount(60000, 1, true) || bpvip == 1) {
+                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Ver Meus pontos", GOSSIP_SENDER_MAIN, 2);
+
+                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Vim Entregar uma EtMaXx BattlePass Mark", GOSSIP_SENDER_MAIN, 3);
+            }
+            else {
+                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do EtMaXx BattlePass VIP", GOSSIP_SENDER_MAIN, 1);
+
+                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Ver Meus pontos", GOSSIP_SENDER_MAIN, 2);
+
+                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Vim Entregar uma EtMaXx BattlePass Mark", GOSSIP_SENDER_MAIN, 3);
+            }
+        }
+        else {
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 100);
+            
+        }
+
+        
+        
+    };
 
 
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    {
+        player->PlayerTalkClass->ClearMenus();
+
+        if (action == ACTION_CLOSE)
+        {
+            player->CLOSE_GOSSIP_MENU();
+            return true;
+        }
+
+        QueryResult result = CharacterDatabase.PQuery("SELECT guid, bpvip, points FROM battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+        if (result) {
+
+            Field* fields = result->Fetch();
+            uint32 guid = fields[0].GetUInt32();
+            uint32 bpvip = fields[1].GetUInt32();
+            uint32 points = fields[2].GetUInt32();
+        
+        switch (action) {
+
+        case 1:
+            player->DestroyItemCount(60000, 1, true);
+            ChatHandler(player->GetSession()).PSendSysMessage("Bem vindo ao Battle Pass VIP.");
+            OnGossipHello(player, creature);
+            break;
+
+        case 2: 
+            ChatHandler(player->GetSession()).PSendSysMessage("Pontos atuais: %u.",points);
+            OnGossipHello(player, creature);    
+            break;   
+
+            }
+        }
+        else {
+            CharacterDatabase.PExecute("INSERT INTO battlepass(guid, bpvip, points) VALUES (%u, %u, %u)", player->GetSession()->GetGuidLow(), 0, 0);
+            ChatHandler(player->GetSession()).PSendSysMessage("Você agora está Participando do Battle Pass Free. Fale com o NPC novamente para ver mais opções");
+            OnGossipHello(player, creature);
+        }
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+
+        return true;
+    }
+};
 
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
-///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////;
 
 void AddNpcEtmaxxScripts()
 {
     new etmaxx_npc();
 	new etmaxx_vip();
-	
+    new etmaxx_battlepass();
 }
