@@ -479,11 +479,22 @@ class etmaxx_battlepass : public CreatureScript
 public:
     etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") { }
 
+    uint32 bpvip = 0;
+    uint32 points = 0;
+
     bool OnGossipHello(Player* player, Creature* creature)
     {
         player->PlayerTalkClass->ClearMenus();
-        player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 1);
-        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "-----!!! ATENÇÃO !!!-----", GOSSIP_SENDER_MAIN, 5000);
+        QueryResult result = CharacterDatabase.PQuery("SELECT guid FROM battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+        if (result) {
+
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Mostrar Meu Pontos do Passe", GOSSIP_SENDER_MAIN, 5000);
+
+        }
+        else {
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 5000);
+        }
+        
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
@@ -495,9 +506,6 @@ public:
 
         switch (action)
         {
-        case 1:
-            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag1. Parabéns!");
-            break;
         case 5000:
             OnGossipHello(player, creature);
             break;
