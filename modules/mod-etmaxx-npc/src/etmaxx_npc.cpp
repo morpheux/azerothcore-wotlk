@@ -489,14 +489,16 @@ public:
         uint32 points = fields[2].GetUInt32();
     }*/
 
-    uint32 guid = 0;
-    uint32 bpvip = 0;
-    uint32 points = 0;
+    //uint32 guid = 0;
+    //uint32 bpvip = 0;
+    //uint32 points = 0;
 
     bool OnGossipHello(Player* player, Creature* creature)
         {
             player->PlayerTalkClass->ClearMenus();
-
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 100);
+            player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            return true;
             /*if (player->HasItemCount(60000, 1, true) || bpvip == 1) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Ver Meus pontos", GOSSIP_SENDER_MAIN, 2);
 
@@ -512,9 +514,7 @@ public:
             }
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 100);*/
 
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 100);
-
-            return true;
+            
 
         };
 
