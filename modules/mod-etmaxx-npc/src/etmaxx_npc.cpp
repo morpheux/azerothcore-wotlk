@@ -99,7 +99,7 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////	EtMaXx Trocadorius NPC								///////////////
+/////////////	        EtMaXx VIP Desintegradorious		     	///////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
 enum Actions
@@ -471,19 +471,123 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////           NPC de Recompensa de Arena x1               ///////////////
+/////////////               NPC Teste Battle Pass                   ///////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
+class etmaxx_battlepass : public CreatureScript
+{
+public:
+    etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") { }
 
+    uint32 bpvip = 0;
+    uint32 points = 0;
+    bool queryok = false;
+    
+
+
+    bool OnGossipHello(Player* player, Creature* creature)
+    {
+        player->PlayerTalkClass->ClearMenus();
+        QueryResult result = CharacterDatabase.PQuery("SELECT bpvip FROM battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+        if (result) {
+            Field* fields = result->Fetch();
+            bpvip = fields[0].GetUInt32();
+        }
+
+        if (result && bpvip == 0) {
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero participar do Battle Pass VIP", GOSSIP_SENDER_MAIN, 2);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx Battle Pass Mark", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", GOSSIP_SENDER_MAIN, 5000);
+        }
+        else if(result && bpvip == 1) {
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx Battle Pass Mark", GOSSIP_SENDER_MAIN, 5000);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", GOSSIP_SENDER_MAIN, 3);
+        }
+        else {
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 1);
+        }
+
+        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "-------------", GOSSIP_SENDER_MAIN, 5000);
+        player->ADD_GOSSIP_ITEM(NULL, "Me Mostre o Battle Pass", GOSSIP_SENDER_MAIN, 100);
+
+
+
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+
+        return true;
+    }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    {
+        player->PlayerTalkClass->ClearMenus();
+
+        switch (action)
+        {
+        case 1:
+            CharacterDatabase.PExecute("INSERT INTO battlepass(guid, bpvip, points) VALUES (%u, %u, %u)", player->GetSession()->GetGuidLow(), 0, 0);
+            ChatHandler(player->GetSession()).PSendSysMessage("Parabens, agora você está com Battle Pass Ativo. Fale com o NPC novamente");
+            break;
+
+        case 2:
+            if (player->HasItemCount(60000, 1)) {
+                player->DestroyItemCount(60000, 1, true);
+                CharacterDatabase.PExecute("UPDATE battlepass SET bpvip = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir o EtMaXx VIP Battle Pass");
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de um EtMaXx VIP Battle Pass Mark para participar do Battle Pass VIP. Você pode adquirir essa Mark no site: www.etmaxx.com.br");
+            }
+            break;
+
+        case 100:
+            player->ADD_GOSSIP_ITEM(NULL, "Esta são as recompensas do Battle Pass deste mes:", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "Battle Pass Normal:", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_misc_coin_01:25:25|t5 000 de Gold - 100 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_misc_coin_01:25:25|t10 000 de Gold - 200 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/spell_holy_summonchampion:25:25|t30 Emblem of Triumph - 300 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_misc_frostemblem_01|t30 Emblem of Frost - 400 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t10 000 Honor Points - 500 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_box_03:25:25|tEtMaXx Transmog Mark - 700 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_box_petcarrier_01:25:25|tWorg Pup (PET) - 900 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_shirt_black_01:25:25|tMega Shirt Reset - 1000 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "------------------", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "Se possuir o Battle Pass VIP além das recompensas normais você receberá:", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_misc_coin_01:25:25|t5 000 de Gold - 100 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t20 Emblem of Frost - 200 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t10 000 Honor Points  - 300 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t40 Emblem of Frost - 400 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t200 Arena Points - 500 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t400 Arena Points - 600 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_misc_coin_01:25:25|tEtMaXx Transmog Mark - 700 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t600 Arena Points - 800 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_jewelry_amulet_01:25:25|tEtMaXx Mount Mark - 900 Pontos", GOSSIP_SENDER_MAIN, 34);
+            player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_misc_coin_01:25:25|tVIP Container - 1000 Pontos", GOSSIP_SENDER_MAIN, 34);
+            break;
+
+        case 3:
+            QueryResult result = CharacterDatabase.PQuery("SELECT points FROM battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+            Field* fields = result->Fetch();
+            points = fields[0].GetUInt32();
+            ChatHandler(player->GetSession()).PSendSysMessage("Seus Pontos: %u",points);
+            break;
+        }
+
+
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+
+        return true;
+    }
+
+};
 
 
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
-///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////;
 
 void AddNpcEtmaxxScripts()
 {
     new etmaxx_npc();
 	new etmaxx_vip();
-	
+    new etmaxx_battlepass();
 }
