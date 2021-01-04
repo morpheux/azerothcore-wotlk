@@ -479,87 +479,36 @@ class etmaxx_battlepass : public CreatureScript
 public:
     etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") { }
 
-
-    /*
-    QueryResult result = CharacterDatabase.PQuery("SELECT guid, bpvip, points FROM battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
-    if (result) {
-        Field* fields = result->Fetch();
-        uint32 guid = fields[0].GetUInt32();
-        uint32 bpvip = fields[1].GetUInt32();
-        uint32 points = fields[2].GetUInt32();
-    }*/
-
-    //uint32 guid = 0;
-    //uint32 bpvip = 0;
-    //uint32 points = 0;
-
     bool OnGossipHello(Player* player, Creature* creature)
-        {
-            player->PlayerTalkClass->ClearMenus();
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 100);
-            player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-            return true;
-            /*if (player->HasItemCount(60000, 1, true) || bpvip == 1) {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Ver Meus pontos", GOSSIP_SENDER_MAIN, 2);
+    {
+        player->PlayerTalkClass->ClearMenus();
+        player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 1);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "-----!!! ATENÇÃO !!!-----", GOSSIP_SENDER_MAIN, 5000);
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
-                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Vim Entregar uma EtMaXx BattlePass Mark", GOSSIP_SENDER_MAIN, 3);
-                ChatHandler(player->GetSession()).PSendSysMessage("E nesse aqui");
-            }
-            else {
-                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do EtMaXx BattlePass VIP", GOSSIP_SENDER_MAIN, 1);
-
-                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Ver Meus pontos", GOSSIP_SENDER_MAIN, 2);
-
-                player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Vim Entregar uma EtMaXx BattlePass Mark", GOSSIP_SENDER_MAIN, 3);
-            }
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero Participar do Battle Pass", GOSSIP_SENDER_MAIN, 100);*/
-
-            
-
-        };
+        return true;
+    }
 
     bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
     {
         player->PlayerTalkClass->ClearMenus();
 
-        if (action == ACTION_CLOSE)
+        switch (action)
         {
-            player->CLOSE_GOSSIP_MENU();
-            return true;
-        }
- 
-        //if (result) {
-
-        //    Field* fields = result->Fetch();
-       //     uint32 guid = fields[0].GetUInt32();
-       //     uint32 bpvip = fields[1].GetUInt32();
-       //     uint32 points = fields[2].GetUInt32();
-        
-        switch (action) {
-
-        //case 1:
-        //    player->DestroyItemCount(60000, 1, true);
-        //    ChatHandler(player->GetSession()).PSendSysMessage("Bem vindo ao Battle Pass VIP.");
-        //    OnGossipHello(player, creature);
-        //    break;
-
-        case 100:
+        case 1:
+            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag1. Parabéns!");
+            break;
+        case 5000:
             OnGossipHello(player, creature);
             break;
+        }
 
-        //case 2: 
-        //    ChatHandler(player->GetSession()).PSendSysMessage("Pontos atuais: %u.",points);
-        //    OnGossipHello(player, creature);    
-        //    break;   
+        ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
 
-            }
-        //}
-        //else {
-        //    CharacterDatabase.PExecute("INSERT INTO battlepass(guid, bpvip, points) VALUES (%u, %u, %u)", player->GetSession()->GetGuidLow(), 0, 0);
-        //    ChatHandler(player->GetSession()).PSendSysMessage("Você agora está Participando do Battle Pass Free. Fale com o NPC novamente para ver mais opções");
-        //    OnGossipHello(player, creature);
-        //}
-        //player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        break;
+        }
+
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
     }
