@@ -289,11 +289,13 @@ public:
         Player* me = handler->GetSession()->GetPlayer();
 
         // Verifica se o usuário possui pontos de donate
-        QueryResult result1 = CharacterDatabase.PQuery("SELECT dp FROM etmaxxweb.users WHERE id = '%u' and dp > '0' and vipdiscounted = '0';", me->GetSession()->GetAccountId());
+        QueryResult result1 = CharacterDatabase.PQuery("SELECT dp FROM etmaxxweb.users WHERE id = '%u' AND (dp > '0');", me->GetSession()->GetAccountId());
         // Verifica se o usuário já teve seus pontos descontados hoje.
         QueryResult result2 = CharacterDatabase.PQuery("SELECT vipdiscounted FROM etmaxxweb.users WHERE id = '%u' and vipdiscounted = '0';", me->GetSession()->GetAccountId());
+        // Verifica se estamos habilitados a rodar comandos por 24H
+        QueryResult result3 = CharacterDatabase.PQuery("SELECT vipdiscounted FROM etmaxxweb.users WHERE id = '%u' AND (vipdiscounted = '1');", me->GetSession()->GetAccountId());
 
-        if (!result1) {
+        if (!result1 && !result3) {
             handler->SendSysMessage(60000);
             handler->SetSentErrorMessage(true);
             return false;
