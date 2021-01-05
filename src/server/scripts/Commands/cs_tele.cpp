@@ -402,7 +402,7 @@ public:
 
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET usedate=UNIX_TIMESTAMP(NOW()) WHERE id='%u';", me->GetSession()->GetAccountId());
-            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET expiredate=UNIX_TIMESTAMP(NOW() + INTERVAL 1 DAY) WHERE id='%u';", me->GetSession()->GetAccountId());
+            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET expiredate=UNIX_TIMESTAMP(CONVERT_TZ(NOW(),'+00:00','-03:00') + INTERVAL 1 DAY) WHERE id='%u';", me->GetSession()->GetAccountId());
 
             handler->SendSysMessage(60001);
             handler->SetSentErrorMessage(true);
