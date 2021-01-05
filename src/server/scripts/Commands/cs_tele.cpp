@@ -407,7 +407,7 @@ public:
             handler->SendSysMessage(60001);
             handler->SetSentErrorMessage(true);
 
-            QueryResult resultexpire = CharacterDatabase.PQuery("SELECT expiredate FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetGuidLow());
+            QueryResult resultexpire = CharacterDatabase.PQuery("SELECT expiredate FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetAccountId());
 
             if (resultexpire) {
                 Field* fields = resultexpire->Fetch();
