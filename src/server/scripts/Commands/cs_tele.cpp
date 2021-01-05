@@ -407,10 +407,10 @@ public:
             handler->SendSysMessage(60001);
             handler->SetSentErrorMessage(true);
 
-            QueryResult expiredate = CharacterDatabase.PQuery("SELECT CONVERT_TZ(FROM_UNIXTIME(expiredate), '-03:00', @@session.time_zone) AS expiredate FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetGuidLow());
+            QueryResult resultexpire = CharacterDatabase.PQuery("SELECT FROM_UNIXTIME(expiredate) AS expiredate FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetGuidLow());
 
-            if (expiredate) {
-                Field* fields = expiredate->Fetch();
+            if (resultexpire) {
+                Field* fields = resultexpire->Fetch();
 
             handler->PSendSysMessage("Seus benefícios VIP ficarão ativos até %s", fields[0].GetCString());
             }
