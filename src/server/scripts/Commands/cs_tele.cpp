@@ -404,14 +404,15 @@ public:
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET usedate=UNIX_TIMESTAMP(NOW()) WHERE id='%u';", me->GetSession()->GetAccountId());
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET expiredate=UNIX_TIMESTAMP(NOW() + INTERVAL 1 DAY) WHERE id='%u';", me->GetSession()->GetAccountId());
 
+            handler->SendSysMessage(60001);
+            handler->SetSentErrorMessage(true);
+
             QueryResult expiredate = CharacterDatabase.PQuery("SELECT CONVERT_TZ(FROM_UNIXTIME(expiredate), '-03:00', @@session.time_zone) AS expiredate FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetGuidLow());
 
             if (expiredate) {
                 Field* fields = expiredate->Fetch();
 
-            handler->SendSysMessage(60001);
             handler->PSendSysMessage("Seus benefícios VIP ficarão ativos até %s", fields[0].GetCString());
-            handler->SetSentErrorMessage(true);
             }
         }
             
