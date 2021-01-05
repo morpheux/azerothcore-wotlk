@@ -412,8 +412,12 @@ public:
                 expiredatestr = fields[0].GetString();
             }
 
+            std::ostringstream stream;
+
+            stream << "Seus benefícios VIP ficaram ativos até " << expiredatestr;
+
             handler->SendSysMessage(60001);
-            handler->PSendSysMessage("Seus benefícios VIP ficaram ativos até %u", expiredatestr);
+            handler->PSendSysMessage("Seus benefícios VIP ficaram ativos até %s", expiredatestr);
             handler->SetSentErrorMessage(true);
         }
             
