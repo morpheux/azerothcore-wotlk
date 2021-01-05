@@ -407,13 +407,13 @@ public:
             handler->SendSysMessage(60001);
             handler->SetSentErrorMessage(true);
 
-            QueryResult resultexpire = CharacterDatabase.PQuery("SELECT expiredate FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetAccountId());
+            QueryResult resultexpire = CharacterDatabase.PQuery("SELECT FROM_UNIXTIME(expiredate) FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetAccountId());
 
             if (resultexpire) {
                 Field* fields = resultexpire->Fetch();
 
                 std::string unixtimestr;
-                unixtimestr = fields[0].GetUInt64();
+                unixtimestr = fields[0].GetCString();
 
             handler->PSendSysMessage("Seus benefícios VIP ficarão ativos até %s", unixtimestr.c_str());
             handler->PSendSysMessage("Passei Aqui");
