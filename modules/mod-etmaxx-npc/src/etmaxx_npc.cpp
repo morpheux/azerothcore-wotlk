@@ -497,26 +497,26 @@ public:
         if (result && bpvip == 0) {
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero participar do EtMaXx VIP Battle Pass", GOSSIP_SENDER_MAIN, 2);
 
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80001, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", GOSSIP_SENDER_MAIN, 4);
             }
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80002, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", GOSSIP_SENDER_MAIN, 5);
             }
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80003, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", GOSSIP_SENDER_MAIN, 6);
             }
 
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", GOSSIP_SENDER_MAIN, 3);
         }
         else if(result && bpvip == 1) {
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80001, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", GOSSIP_SENDER_MAIN, 4);
             }
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80002, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", GOSSIP_SENDER_MAIN, 5);
             }
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80003, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", GOSSIP_SENDER_MAIN, 6);
             }
 
@@ -543,7 +543,6 @@ public:
         case 1:
             CharacterDatabase.PExecute("INSERT INTO battlepass(guid, bpvip, points) VALUES (%u, %u, %u)", player->GetSession()->GetGuidLow(), 0, 0);
             ChatHandler(player->GetSession()).PSendSysMessage("Parabens, agora você está com Battle Pass Ativo. Fale com o NPC novamente");
-            OnGossipHello(player, creature);
             break;
 
         case 2:
@@ -551,6 +550,7 @@ public:
                 player->DestroyItemCount(80000, 1, true);
                 CharacterDatabase.PExecute("UPDATE battlepass SET bpvip = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir o EtMaXx VIP Battle Pass");
+                player->PlayerTalkClass->SendCloseGossip();
             }
             else {
                 ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de um EtMaXx VIP Battle Pass Mark para participar do Battle Pass VIP. Você pode adquirir essa Mark no site: www.etmaxx.com.br");
@@ -624,6 +624,43 @@ public:
 
 
 ///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC transmog vendor Chantily          ///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_transmog_vendor : public CreatureScript
+{
+public:
+    etmaxx_transmog_vendor() : CreatureScript("etmaxx_transmog_vendor") { }
+
+    bool OnGossipHello(Player* player, Creature* creature)
+    {
+        player->PlayerTalkClass->ClearMenus();
+        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Teste", GOSSIP_SENDER_MAIN, 1);
+
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+
+        return true;
+    }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    {
+        player->PlayerTalkClass->ClearMenus();
+
+        switch (action)
+        {
+        case 1:
+            ChatHandler(player->GetSession()).PSendSysMessage("teste ok");
+            break;
+        }
+
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+
+        return true;
+    }
+};
+
+
+///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
@@ -632,4 +669,5 @@ void AddNpcEtmaxxScripts()
     new etmaxx_npc();
 	new etmaxx_vip();
     new etmaxx_battlepass();
+    new etmaxx_transmog_vendor();
 }
