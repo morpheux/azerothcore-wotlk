@@ -20,6 +20,7 @@ EndScriptData */
 #include "ScriptMgr.h"
 #include "SpellInfo.h"
 #include "SpellMgr.h"
+#include <time.h>
 
 class tele_commandscript : public CommandScript
 {
@@ -334,24 +335,32 @@ public:
         GameTele const* tele = handler->extractGameTeleFromLink((char*)args);
 
         uint32 zone = sMapMgr->GetZoneId(tele->mapId, tele->position_x, tele->position_y, tele->position_z);
+        uint32 zone2 = sMapMgr->GetZoneId(me->GetMapId(), me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
+
         if (!me->IsGameMaster() && zone && me->GetTeamId())
         {
             switch (me->GetTeamId()) {
             case TEAM_ALLIANCE:
-                if (zone == 1637 || zone == 1638 || zone == 1497 || zone == 3487)
+            {
+                if (zone == 1637 || zone == 1638 || zone == 1497 || zone == 3487 || zone2 == 1637 || zone2 == 1638 || zone2 == 1497 || zone2 == 3487)
                 {
                     handler->SendSysMessage(60003);
                     handler->SetSentErrorMessage(true);
                     return false;
                 }
+            }
+            break;
             case TEAM_HORDE:
-                if (zone == 1519 || zone == 1537 || zone == 1657 || zone == 3557)
+            {
+                if (zone == 1519 || zone == 1537 || zone == 1657 || zone == 3557 || zone2 == 1519 || zone2 == 1537 || zone2 == 1657 || zone2 == 3557)
                 {
                     handler->SendSysMessage(60003);
                     handler->SetSentErrorMessage(true);
                     return false;
                 }
-            case TEAM_NEUTRAL:{}
+            }
+            break;
+            case TEAM_NEUTRAL:{}break;
             }
         }
 
@@ -390,9 +399,21 @@ public:
         me->TeleportTo(tele->mapId, tele->position_x, tele->position_y, tele->position_z, tele->orientation);
 
         if (result2) {
+
+            string expiredatestr;
+
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
-            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET usedate=now() WHERE id='%u';", me->GetSession()->GetAccountId());
+            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET usedate=NOW() WHERE id='%u';", me->GetSession()->GetAccountId());
+            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET expiredate=NOW() + INTERVAL 1 DAY WHERE id='%u';", me->GetSession()->GetAccountId());
+
+            QueryResult expiredate = CharacterDatabase.PQuery("SELECT expiredate FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetGuidLow());
+            if (expiredate) {
+                Field* fields = expiredate->Fetch();
+                expiredatestr = fields[0].GetString();
+            }
+
             handler->SendSysMessage(60001);
+            handler->PSendSysMessage("Seus benefícios VIP ficaram ativos até %u", expiredatestr);
             handler->SetSentErrorMessage(true);
         }
             

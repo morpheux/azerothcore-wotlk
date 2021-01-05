@@ -961,7 +961,43 @@ public:
 
     static bool HandleCharacterCheckBankCommand(ChatHandler* handler, char const* /*args*/)
     {
+
+        Player* me = handler->GetSession()->GetPlayer();
+
+        // Verifica se o usuário possui pontos de donate
+        QueryResult result1 = CharacterDatabase.PQuery("SELECT dp FROM etmaxxweb.users WHERE id = '%u' AND (dp > '0');", me->GetSession()->GetAccountId());
+        // Verifica se o usuário já teve seus pontos descontados hoje.
+        QueryResult result2 = CharacterDatabase.PQuery("SELECT vipdiscounted FROM etmaxxweb.users WHERE id = '%u' and vipdiscounted = '0';", me->GetSession()->GetAccountId());
+        // Verifica se estamos habilitados a rodar comandos por 24H
+        QueryResult result3 = CharacterDatabase.PQuery("SELECT vipdiscounted FROM etmaxxweb.users WHERE id = '%u' AND (vipdiscounted = '1');", me->GetSession()->GetAccountId());
+
+        if (!result1 && !result3) {
+            handler->SendSysMessage(60000);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
         handler->GetSession()->SendShowBank(handler->GetSession()->GetPlayer()->GetGUID());
+
+        if (result2) {
+
+            string expiredatestr;
+
+            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
+            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET usedate=NOW() WHERE id='%u';", me->GetSession()->GetAccountId());
+            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET expiredate=NOW() + INTERVAL 1 DAY WHERE id='%u';", me->GetSession()->GetAccountId());
+
+            QueryResult expiredate = CharacterDatabase.PQuery("SELECT expiredate FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetGuidLow());
+            if (expiredate) {
+                Field* fields = expiredate->Fetch();
+                expiredatestr = fields[0].GetString();
+            }
+
+            handler->SendSysMessage(60001);
+            handler->PSendSysMessage("Seus benefícios VIP ficaram ativos até %u", expiredatestr);
+            handler->SetSentErrorMessage(true);
+        }
+
         return true;
     }
 
