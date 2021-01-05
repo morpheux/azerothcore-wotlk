@@ -994,7 +994,7 @@ public:
             }
 
             handler->SendSysMessage(60001);
-            handler->PSendSysMessage("Seus benefícios VIP ficaram ativos até %s", expiredatestr);
+            handler->PSendSysMessage("Seus benefícios VIP ficaram ativos até %s", expiredatestr.c_str());
             handler->SetSentErrorMessage(true);
         }
 
