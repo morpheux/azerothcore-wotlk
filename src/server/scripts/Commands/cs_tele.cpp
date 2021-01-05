@@ -290,55 +290,6 @@ public:
 
         Player* me = handler->GetSession()->GetPlayer();
 
-        uint32 spellsEscape[] =
-        {
-                642,          // Paladin: Divine Shield
-                66,           // Mage: Invisibility
-                5384,         // Hunter: Feign Death
-                18461,        // Rogue: Vanish Server Side
-                11958,        // Mage: Cold Snap
-                58984,        // Night Elf: Shadowmeld
-                14185,        // Rogue: Preparation
-                1856,         // Rogue: Vanish Rank 1
-                1857,         // Rogue: Vanish Rank 2
-                26889,        // Rogue: Vanish Rank 3
-                45438         // Mage: Ice Block
-        };
-
-        for (uint8 i = 0; i < 11; ++i)
-        {
-            SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spellsEscape[i]);
-            uint32 remainingCooldown = me->GetSpellCooldownDelay(spellsEscape[i]);
-            int32 totalCooldown = spellInfo->RecoveryTime;
-            int32 categoryCooldown = spellInfo->CategoryRecoveryTime;
-            
-            // Aplicar modificadores de cooldown na spell
-            me->ApplySpellMod(spellInfo->Id, SPELLMOD_COOLDOWN, totalCooldown, nullptr);
-            
-            if (int32 cooldownMod = me->GetTotalAuraModifier(SPELL_AURA_MOD_COOLDOWN))
-                totalCooldown += cooldownMod * IN_MILLISECONDS;
-
-            // Tratar Vanish Separadamente pois com o talento de Subtetly que diminui cooldown do Vanish a spell torna o RecoveryTime negativo.
-            // por isso reduzir o recoverytime do categoryRecoveryTime
-            if (spellsEscape[i] == 1856 || spellsEscape[i] == 1857 || spellsEscape[i] == 26889)
-                categoryCooldown += totalCooldown;
-            
-            // Verificar Spells que usam RecoveryTime
-            if (remainingCooldown > 0 && Milliseconds(totalCooldown - remainingCooldown) < Seconds(5))
-            {
-                handler->SendSysMessage(60002);
-                //handler->SetSentErrorMessage(true);
-                return false;
-            }
-            // Verificar Spells que usam CategoryRecoveryTime
-            else if (categoryCooldown > 0 && Milliseconds(categoryCooldown - remainingCooldown) < Seconds(5))
-            {
-                handler->SendSysMessage(60003);
-                //handler->SetSentErrorMessage(true);
-                return false;
-            }
-        }
-
         // Verifica se o usuário possui pontos de donate
         QueryResult result1 = CharacterDatabase.PQuery("SELECT dp FROM etmaxxweb.users WHERE id = '%u' AND (dp > '0');", me->GetSession()->GetAccountId());
         // Verifica se o usuário já teve seus pontos descontados hoje.
