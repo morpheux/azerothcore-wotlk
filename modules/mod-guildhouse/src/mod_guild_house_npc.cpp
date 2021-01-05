@@ -54,6 +54,7 @@ public:
         AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Spawn Secondry Profession Trainers", GOSSIP_SENDER_MAIN, 8);
         AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn Sprirt Healer", GOSSIP_SENDER_MAIN, 6491, "Spawn a Spirit Healer?", GuildHouseSpirit, false);
         AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn EtMaXx Fligh Master", GOSSIP_SENDER_MAIN, 191000, "Spawn a EtMaXx FlightMaster?", GuildHouseSpirit, false);
+        AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn Cromi", GOSSIP_SENDER_MAIN, 300000, "Spawn Cromi?", GuildHouseSpirit, false);
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
