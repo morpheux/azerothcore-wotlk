@@ -333,6 +333,27 @@ public:
         // id, or string, or [name] Shift-click form |color|Htele:id|h[name]|h|r
         GameTele const* tele = handler->extractGameTeleFromLink((char*)args);
 
+        uint32 zone = sMapMgr->GetZoneId(tele->mapId, tele->position_x, tele->position_y, tele->position_z);
+        if (!me->IsGameMaster() && zone && me->GetTeamId())
+        {
+            switch (me->GetTeamId()) {
+            case TEAM_ALLIANCE:
+                if (zone == 1637 || zone == 1638 || zone == 1497 || zone == 3487)
+                {
+                    handler->SendSysMessage(60003);
+                    handler->SetSentErrorMessage(true);
+                    return false;
+                }
+            case TEAM_HORDE:
+                if (zone == 1519 || zone == 1537 || zone == 1657 || zone == 3557)
+                {
+                    handler->SendSysMessage(60003);
+                    handler->SetSentErrorMessage(true);
+                    return false;
+                }
+            }
+        }
+
         if (!tele)
         {
             handler->SendSysMessage(LANG_COMMAND_TELE_NOTFOUND);
