@@ -351,6 +351,7 @@ public:
                     handler->SetSentErrorMessage(true);
                     return false;
                 }
+            case TEAM_NEUTRAL:{}
             }
         }
 
