@@ -414,7 +414,6 @@ public:
             Field* fields = resultexpire->Fetch();
 
             handler->PSendSysMessage("Seus benefícios VIP ficarão ativos até %s", fields[0].GetCString());
-            handler->PSendSysMessage("Passei Aqui");
         }
             
         return true;
