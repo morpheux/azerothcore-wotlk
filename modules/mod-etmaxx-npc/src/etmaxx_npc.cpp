@@ -497,26 +497,26 @@ public:
         if (result && bpvip == 0) {
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero participar do EtMaXx VIP Battle Pass", GOSSIP_SENDER_MAIN, 2);
 
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80001, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", GOSSIP_SENDER_MAIN, 4);
             }
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80002, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", GOSSIP_SENDER_MAIN, 5);
             }
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80003, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", GOSSIP_SENDER_MAIN, 6);
             }
 
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", GOSSIP_SENDER_MAIN, 3);
         }
         else if(result && bpvip == 1) {
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80001, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", GOSSIP_SENDER_MAIN, 4);
             }
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80002, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", GOSSIP_SENDER_MAIN, 5);
             }
-            if (player->HasItemCount(80000, 1, true)) {
+            if (player->HasItemCount(80003, 1, true)) {
                 player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", GOSSIP_SENDER_MAIN, 6);
             }
 
