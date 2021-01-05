@@ -326,15 +326,15 @@ public:
             // Verificar Spells que usam RecoveryTime
             if (remainingCooldown > 0 && Milliseconds(totalCooldown - remainingCooldown) < Seconds(5))
             {
-                //handler->SendSysMessage(LANG_SPELL_DISABLE_TELE);
-                handler->SetSentErrorMessage(true);
+                handler->SendSysMessage(60002);
+                //handler->SetSentErrorMessage(true);
                 return false;
             }
             // Verificar Spells que usam CategoryRecoveryTime
             else if (categoryCooldown > 0 && Milliseconds(categoryCooldown - remainingCooldown) < Seconds(5))
             {
-                //handler->SendSysMessage(LANG_SPELL_DISABLE_TELE);
-                handler->SetSentErrorMessage(true);
+                handler->SendSysMessage(60003);
+                //handler->SetSentErrorMessage(true);
                 return false;
             }
         }
@@ -387,7 +387,7 @@ public:
         else
             me->SaveRecallPosition();
 
-        //me->TeleportTo(tele->mapId, tele->position_x, tele->position_y, tele->position_z, tele->orientation);
+        me->TeleportTo(tele->mapId, tele->position_x, tele->position_y, tele->position_z, tele->orientation);
 
         if (result2) {
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
