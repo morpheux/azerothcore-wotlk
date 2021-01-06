@@ -685,7 +685,7 @@ public:
 
     bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 action)
     {
-        player->PlayerTalkClass->ClearMenus();
+        //player->PlayerTalkClass->ClearMenus();
 
 
         switch (sender) {
