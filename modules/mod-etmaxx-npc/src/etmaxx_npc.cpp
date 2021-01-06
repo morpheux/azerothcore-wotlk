@@ -671,9 +671,10 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tTeste?", GOSSIP_SENDER_MAIN, 1);
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tComo a EtMaXx Transmog Mark Funciona?", GOSSIP_SENDER_MAIN, 3);
 
-        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
     }
