@@ -683,15 +683,17 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        if (sender == 1 && action == 1) {
+
+        switch (sender) {
+        case 1:
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Teste2", 2, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("teste ok");
-        }
+            break;
 
-        if (sender == 2 && action == 1) {
-            ChatHandler(player->GetSession()).PSendSysMessage("teste ok sender 2");
+        case 2:
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Teste1", 1, 1);
-        }
+            ChatHandler(player->GetSession()).PSendSysMessage("teste ok sender 2");
+        }       
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
