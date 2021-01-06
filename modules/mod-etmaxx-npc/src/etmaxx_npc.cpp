@@ -672,14 +672,16 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t1000 Enemy Head + 50.000 Honor", 10, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_bone_humanskull_01:30:30:-18:0|t1000 Enemy Head + 50.000 Honor", 10, 0);
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t200 Emblems of Frost", 20, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t200 Emblems of Frost", 20, 0);
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t1300 de Arena Rating + 200 Arena Points", 30, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:30:30:-18:0|t1300 de Arena Rating + 200 Arena Points", 30, 0);
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "---------------------------------", 100, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------", 100, 0);
 
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tClique Aqui para Comprar as Armas", 50, 0);
+        
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 100, 0);
 
         SendGossipMenuFor(player, 800800, creature->GetGUID());
@@ -703,12 +705,89 @@ public:
                     player->DestroyItemCount(600500, 1000, true);
                     player->ModifyHonorPoints(-50000);
                     player->AddItem(60000, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
                 }
                 else {
-                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
-                    SendGossipMenuFor(player, 800801, creature->GetGUID());
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 1000 enemy Head + 50.000 de Honor", 100, 0);
                 }
             } break;
+
+            case 20:
+            {
+                if (player->HasItemCount(49426, 200, true)) {
+                    player->DestroyItemCount(49426, 20, true);
+                    player->AddItem(80004, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
+                }
+                else {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 200 Emblem of Frost", 100, 0);
+                }
+            } break;
+
+            case 30:
+            {
+                if (player->GetArenaPersonalRating(2) >= 1300 && player->GetArenaPoints() >= 200) {
+                    player->ModifyArenaPoints(-200);
+                    player->AddItem(80004, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
+                }
+                else {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 1300 de Arena Rating + 200 Arena Points", 100, 0);
+                }
+            } break;
+
+            case 50:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tTwo-Hand Axe", 1000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tOne-Hand Axe", 2000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tDagger", 3000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tFirst Weapon", 4000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tOne-Hand Mace", 5000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tTwo-Hand Mace", 6000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tOne-Hand Sword", 7000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tTwo-Hand Sword", 8000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tPolearm", 9000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tStaff", 10000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tBow", 11000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tShield", 12000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+            } break;
+
+            case 1000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_69:30:30:-18:0|tAxe of Shattered Dreams", 34794, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_120:30:30:-18:0|tBryntroll, the Bone Arbiter", 50709, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_40:30:30:-18:0|tCrystalforged War Axe", 31291, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_106:30:30:-18:0|tDual-blade Butcher", 47446, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_67:30:30:-18:0|tEthereum Nexus-Reaver", 30722, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_102:30:30:-18:0|tStormedge", 45458, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+            } break;
+
+            case 2000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_40:30:30:-18:0|tBladespire Broadaxe", 25208, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_62:30:30:-18:0|tBreeching Comet", 34616, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_108:30:30:-18:0|tAxe of the Sen'jin Protector", 45204, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_65:30:30:-18:0|tFirebrand Battleaxe", 27490, 0);
+                //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_67:30:30:-18:0|tEthereum Nexus-Reaver", 28291, 0); ID ERRADO
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+            } break;
+
+            case 34794:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(34794, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                }
+            }
+
+
         }
 
         return true;
