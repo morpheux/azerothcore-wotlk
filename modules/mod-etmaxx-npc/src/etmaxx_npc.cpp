@@ -659,6 +659,48 @@ public:
     }
 };
 
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC transmog Mark Chantily            ///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+class etmaxx_transmog_mark : public CreatureScript
+{
+public:
+    etmaxx_transmog_mark() : CreatureScript("etmaxx_transmog_mark") { }
+
+    bool OnGossipHello(Player* player, Creature* creature)
+    {
+        player->PlayerTalkClass->ClearMenus();
+        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Escolha uma forma de Adquirir sua EtMaXx Transmog Mark",GOSSIP_SENDER_MAIN, 1);
+
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tComo a EtMaXx Transmog Mark Funciona?", GOSSIP_SENDER_MAIN, 2);
+
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+
+        return true;
+    }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    {
+        player->PlayerTalkClass->ClearMenus();
+
+        switch (action)
+        {
+        case 1:
+            ChatHandler(player->GetSession()).PSendSysMessage("teste ok");
+            break;
+
+        case 2:
+            ChatHandler(player->GetSession()).PSendSysMessage("teste ok");
+            break;
+        }
+
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+
+        return true;
+    }
+};
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
@@ -670,4 +712,5 @@ void AddNpcEtmaxxScripts()
 	new etmaxx_vip();
     new etmaxx_battlepass();
     new etmaxx_transmog_vendor();
+    new etmaxx_transmog_mark();
 }
