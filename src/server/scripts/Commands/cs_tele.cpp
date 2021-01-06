@@ -402,22 +402,18 @@ public:
 
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET usedate=UNIX_TIMESTAMP(NOW()) WHERE id='%u';", me->GetSession()->GetAccountId());
-            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET expiredate=UNIX_TIMESTAMP(NOW() + INTERVAL 1 DAY) WHERE id='%u';", me->GetSession()->GetAccountId());
+            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET expiredate=UNIX_TIMESTAMP(CONVERT_TZ(NOW(),'+00:00','-03:00') + INTERVAL 1 DAY) WHERE id='%u';", me->GetSession()->GetAccountId());
 
             handler->SendSysMessage(60001);
             handler->SetSentErrorMessage(true);
+        }
 
-            QueryResult resultexpire = CharacterDatabase.PQuery("SELECT expiredate FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetGuidLow());
+        QueryResult resultexpire = CharacterDatabase.PQuery("SELECT FROM_UNIXTIME(expiredate, '%%d-%%m-%%Y..%%H:%%I:%%s') as expiredate FROM etmaxxweb.users WHERE id = '%u';", me->GetSession()->GetAccountId());
 
-            if (resultexpire) {
-                Field* fields = resultexpire->Fetch();
+        if (resultexpire) {
+            Field* fields = resultexpire->Fetch();
 
-                std::string unixtimestr;
-                unixtimestr = fields[0].GetUInt64();
-
-            handler->PSendSysMessage("Seus benefícios VIP ficarão ativos até %s", unixtimestr.c_str());
-            handler->PSendSysMessage("Passei Aqui");
-            }
+            handler->PSendSysMessage("Seus benefícios VIP ficarão ativos até %s", fields[0].GetCString());
         }
             
         return true;
