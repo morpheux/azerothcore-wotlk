@@ -672,7 +672,11 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Teste1", 1, 1);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tOpcao 1", 1, 0);
+
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tOpcao 2", 2, 0);
+
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 100, 0);
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -686,13 +690,17 @@ public:
 
         switch (sender) {
         case 1:
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Teste2", 2, 1);
-            ChatHandler(player->GetSession()).PSendSysMessage("teste ok");
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tVoltar", 100, 0);
+            ChatHandler(player->GetSession()).PSendSysMessage("Opcao 1");
             break;
 
         case 2:
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Teste1", 1, 1);
-            ChatHandler(player->GetSession()).PSendSysMessage("teste ok sender 2");
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tVoltar", 100, 0);
+            ChatHandler(player->GetSession()).PSendSysMessage("Opcao 2");
+
+        case 100: // Main menu
+            OnGossipHello(player, creature);
+            break;
         }       
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
