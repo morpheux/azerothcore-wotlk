@@ -690,9 +690,10 @@ public:
             ChatHandler(player->GetSession()).PSendSysMessage("Opcao 1");
         }break;
 
-        case 2: {
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tOpção 1", 1, 0);
+        case 2:
+        {            
             ChatHandler(player->GetSession()).PSendSysMessage("Opcao 2");
+            OnGossipHello(player, creature);
         }break;
 
         }       
