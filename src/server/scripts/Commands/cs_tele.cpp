@@ -334,36 +334,6 @@ public:
         // id, or string, or [name] Shift-click form |color|Htele:id|h[name]|h|r
         GameTele const* tele = handler->extractGameTeleFromLink((char*)args);
 
-        uint32 zone = sMapMgr->GetZoneId(tele->mapId, tele->position_x, tele->position_y, tele->position_z);
-        uint32 zone2 = sMapMgr->GetZoneId(me->GetMapId(), me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
-
-        if (!me->IsGameMaster() && zone && me->GetTeamId())
-        {
-            switch (me->GetTeamId()) {
-            case TEAM_ALLIANCE:
-            {
-                if (zone == 1637 || zone == 1638 || zone == 1497 || zone == 3487 || zone2 == 1637 || zone2 == 1638 || zone2 == 1497 || zone2 == 3487)
-                {
-                    handler->SendSysMessage(60003);
-                    handler->SetSentErrorMessage(true);
-                    return false;
-                }
-            }
-            break;
-            case TEAM_HORDE:
-            {
-                if (zone == 1519 || zone == 1537 || zone == 1657 || zone == 3557 || zone2 == 1519 || zone2 == 1537 || zone2 == 1657 || zone2 == 3557)
-                {
-                    handler->SendSysMessage(60003);
-                    handler->SetSentErrorMessage(true);
-                    return false;
-                }
-            }
-            break;
-            case TEAM_NEUTRAL:{}break;
-            }
-        }
-
         if (!tele)
         {
             handler->SendSysMessage(LANG_COMMAND_TELE_NOTFOUND);
@@ -396,13 +366,43 @@ public:
         else
             me->SaveRecallPosition();
 
+        uint32 zone = sMapMgr->GetZoneId(tele->mapId, tele->position_x, tele->position_y, tele->position_z);
+        uint32 zone2 = sMapMgr->GetZoneId(me->GetMapId(), me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
+
+        if (!me->IsGameMaster() && zone && me->GetTeamId())
+        {
+            switch (me->GetTeamId()) {
+            case TEAM_ALLIANCE:
+            {
+                if (zone == 1637 || zone == 1638 || zone == 1497 || zone == 3487 || zone2 == 1637 || zone2 == 1638 || zone2 == 1497 || zone2 == 3487)
+                {
+                    handler->SendSysMessage(60003);
+                    handler->SetSentErrorMessage(true);
+                    return false;
+                }
+            }
+            break;
+            case TEAM_HORDE:
+            {
+                if (zone == 1519 || zone == 1537 || zone == 1657 || zone == 3557 || zone2 == 1519 || zone2 == 1537 || zone2 == 1657 || zone2 == 3557)
+                {
+                    handler->SendSysMessage(60003);
+                    handler->SetSentErrorMessage(true);
+                    return false;
+                }
+            }
+            break;
+            case TEAM_NEUTRAL:{}break;
+            }
+        }
+
         me->TeleportTo(tele->mapId, tele->position_x, tele->position_y, tele->position_z, tele->orientation);
 
         if (result2) {
 
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET dp=dp-1, vipdiscounted=1 WHERE id='%u';", me->GetSession()->GetAccountId());
             CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET usedate=UNIX_TIMESTAMP(NOW()) WHERE id='%u';", me->GetSession()->GetAccountId());
-            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET expiredate=UNIX_TIMESTAMP(CONVERT_TZ(NOW(),'+00:00','-03:00') + INTERVAL 1 DAY) WHERE id='%u';", me->GetSession()->GetAccountId());
+            CharacterDatabase.PQuery("UPDATE etmaxxweb.users SET expiredate=UNIX_TIMESTAMP(NOW() + INTERVAL 1 DAY) WHERE id='%u';", me->GetSession()->GetAccountId());
 
             handler->SendSysMessage(60001);
             handler->SetSentErrorMessage(true);

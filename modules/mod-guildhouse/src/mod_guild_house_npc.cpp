@@ -115,6 +115,7 @@ public:
                     // These two portals work for either Team
             AddGossipItemFor(player, GOSSIP_ICON_TAXI, "Portal: Shattrath", GOSSIP_SENDER_MAIN, 191013, "Add Shattrath Portal?", GuildHousePortal, false);
             AddGossipItemFor(player, GOSSIP_ICON_TAXI, "Portal: Dalaran", GOSSIP_SENDER_MAIN, 195682, "Add Dalaran Portal?", GuildHousePortal, false);
+			AddGossipItemFor(player, GOSSIP_ICON_TAXI, "Training Dummy", GOSSIP_SENDER_MAIN, 31146, "Add Training Dummy?", GuildHousePortal, false);
 
             AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Go Back!", GOSSIP_SENDER_MAIN, 9);
             SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, m_creature->GetGUID());
@@ -247,6 +248,8 @@ public:
         case 50065:
         case 50079:
         case 191000:
+		case 300000:
+		case 31146:
         case 50066:
         case 50067:
         case 50068:
