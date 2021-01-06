@@ -687,7 +687,7 @@ public:
         {
         case 100:
             AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...",100, 0);
-            player->SEND_GOSSIP_MENU(601083, creature->GetGUID());
+            SendGossipMenuFor(player, 601083, creature->GetGUID());
             ChatHandler(player->GetSession()).PSendSysMessage("Item 100 Entregue");
             break;
 
