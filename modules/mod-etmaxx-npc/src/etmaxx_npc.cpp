@@ -671,8 +671,8 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tInicio 1", 100, 1);
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tInicio 2", 200, 3);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tMais informações", 100, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tInicio 2", 200, 0);
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -685,16 +685,9 @@ public:
 
         switch (sender)
         {
-        case 1:
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSubInicio 1", GOSSIP_SENDER_MAIN, 100);
-            break;
-
-        case 3:
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSubInicio 2", GOSSIP_SENDER_MAIN, 200);
-            OnGossipSelect(player, creature, GOSSIP_SENDER_MAIN, 1);
-            break;
-
         case 100:
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tVoltar", GOSSIP_SENDER_MAIN, 100);
+            SendGossipMenuFor(player, 601083, creature->GetGUID());
             ChatHandler(player->GetSession()).PSendSysMessage("Item 100 Entregue");
             break;
 
