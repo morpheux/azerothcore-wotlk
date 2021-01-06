@@ -6,7 +6,7 @@
 #include "ScriptedGossip.h"
 #include "Language.h"
 #include <Chat/Chat.h>
-#include "../../mod-transmog/src/transmog_scripts.cpp"
+
 
 /*
     // Gossip defines
@@ -661,7 +661,7 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////                 NPC transmog Mark Chantily            ///////////////
+/////////////                 NPC Transmog Mark Chantily            ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 class etmaxx_transmog_mark : public CreatureScript
 {
@@ -670,10 +670,9 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
-        player->PlayerTalkClass->ClearMenus();
+        ClearGossipMenuFor(player);
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tMais informações", 100, 0);
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tInicio 2", 200, 0);
+        AddGossipItemFor(player, 0, "Texto teste",0,1);
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -684,17 +683,12 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        switch (sender)
-        {
-        case 100:
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...",100, 0);
-            SendGossipMenuFor(player, sT->GetTransmogNpcText(), creature->GetGUID());
+        switch (action) {
+        case 1:
+            CloseGossipMenuFor(player);
             break;
-
-        case 200:
-            ChatHandler(player->GetSession()).PSendSysMessage("Item 200 Entregue");
-            OnGossipSelect(player, creature, GOSSIP_SENDER_MAIN, 1);
         }
+
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
