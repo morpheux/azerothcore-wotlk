@@ -670,28 +670,37 @@ public:
     bool OnGossipHello(Player* player, Creature* creature)
     {
         player->PlayerTalkClass->ClearMenus();
-        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Escolha uma forma de Adquirir sua EtMaXx Transmog Mark",GOSSIP_SENDER_MAIN, 1);
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tComo a EtMaXx Transmog Mark Funciona?", GOSSIP_SENDER_MAIN, 3);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tInicio 1", 100, 1);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tInicio 2", 200, 3);
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
     }
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 action)
     {
         player->PlayerTalkClass->ClearMenus();
 
-        switch (action)
+        switch (sender)
         {
         case 1:
-            ChatHandler(player->GetSession()).PSendSysMessage("teste ok 1");
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSubInicio 1", GOSSIP_SENDER_MAIN, 100);
             break;
 
         case 3:
-            ChatHandler(player->GetSession()).PSendSysMessage("teste ok 3");
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tSubInicio 2", GOSSIP_SENDER_MAIN, 200);
+            OnGossipSelect(player, creature, GOSSIP_SENDER_MAIN, 1);
             break;
+
+        case 100:
+            ChatHandler(player->GetSession()).PSendSysMessage("Item 100 Entregue");
+            break;
+
+        case 200:
+            ChatHandler(player->GetSession()).PSendSysMessage("Item 200 Entregue");
+            OnGossipSelect(player, creature, GOSSIP_SENDER_MAIN, 1);
         }
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
