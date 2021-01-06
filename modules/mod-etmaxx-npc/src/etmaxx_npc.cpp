@@ -687,7 +687,7 @@ public:
         {
         case 100:
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tVoltar...", GOSSIP_SENDER_MAIN, 100);
-            SendGossipMenuFor(player, 601083, creature->GetGUID());
+            SendGossipMenuFor(player, 601083, 3110570);
             ChatHandler(player->GetSession()).PSendSysMessage("Item 100 Entregue");
             break;
 
