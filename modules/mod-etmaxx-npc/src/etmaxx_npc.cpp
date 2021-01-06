@@ -670,11 +670,11 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
-        ClearGossipMenuFor(player);
+        player->PlayerTalkClass->ClearMenus();
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Texto teste", GOSSIP_SENDER_MAIN, 1);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Olá SEU FILHO DA PUTA !!!!", GOSSIP_SENDER_MAIN, 1);
 
-        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
     }
@@ -685,7 +685,7 @@ public:
 
         switch (action) {
         case 1:
-            CloseGossipMenuFor(player);
+            player->PlayerTalkClass->SendCloseGossip();
             break;
         }
 
