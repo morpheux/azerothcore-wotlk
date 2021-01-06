@@ -672,9 +672,9 @@ public:
     {
         ClearGossipMenuFor(player);
 
-        AddGossipItemFor(player, 0, "Texto teste",0,1);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Texto teste", GOSSIP_SENDER_MAIN, 1);
 
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
     }
