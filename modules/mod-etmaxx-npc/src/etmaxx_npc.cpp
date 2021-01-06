@@ -688,6 +688,11 @@ public:
         player->PlayerTalkClass->ClearMenus();
 
         switch (sender) {
+        case 100:  // Main menu
+        {
+            OnGossipHello(player, creature);
+        } break;
+
         case 1:
             {
             AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
@@ -704,10 +709,7 @@ public:
        
             break;*/
 
-        case 100:  // Main menu
-            {
-            OnGossipHello(player, creature);   
-            } break;
+        
         }
 
         return true;
