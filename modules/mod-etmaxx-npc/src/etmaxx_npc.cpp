@@ -687,14 +687,15 @@ public:
     {
         //player->PlayerTalkClass->ClearMenus();
 
-
         switch (sender) {
         case 1:
+            player->PlayerTalkClass->ClearMenus();
             AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tVoltar", 100, 0);
             ChatHandler(player->GetSession()).PSendSysMessage("Opcao 1");
             break;
 
         case 2:
+            player->PlayerTalkClass->ClearMenus();
             AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tVoltar", 100, 0);
             ChatHandler(player->GetSession()).PSendSysMessage("Opcao 2");
 
