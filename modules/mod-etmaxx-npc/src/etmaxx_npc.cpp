@@ -7,7 +7,6 @@
 #include "Language.h"
 #include <Chat/Chat.h>
 #include "../../mod-transmog/src/transmog_scripts.cpp"
-#include "../../mod-transmog/src/transmog_scripts.cpp"
 
 /*
     // Gossip defines
