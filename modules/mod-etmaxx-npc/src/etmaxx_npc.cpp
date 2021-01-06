@@ -672,39 +672,42 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tOpcao 1", 1, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tOpcao 1", 1, 0);
 
         //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tOpcao 2", 2, 0);
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 1, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 100, 0);
 
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
     }
 
     bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 action)
     {
-        //player->PlayerTalkClass->ClearMenus();
+        player->PlayerTalkClass->ClearMenus();
 
         switch (sender) {
         case 1:
-            player->PlayerTalkClass->ClearMenus();
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tVoltar", 2, 0);
-            player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-            break;
+            {
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+            SendGossipMenuFor(player, 1, creature->GetGUID());
+            
+            } break;
+            
 
-        case 2:
+        /*case 2:
             player->PlayerTalkClass->ClearMenus();
-            //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tVoltar", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tVoltar", 100, 0);
             OnGossipHello(player, creature);
-            //player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
        
-            break;
+            break;*/
 
-        case 100: // Main menu
-            OnGossipHello(player, creature);
-            break;
+        case 100:  // Main menu
+            {
+            OnGossipHello(player, creature);   
+            } break;
         }
 
         return true;
