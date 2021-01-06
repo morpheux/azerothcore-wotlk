@@ -691,15 +691,12 @@ public:
         }break;
 
         case 2:
-        {            
+        {
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tOpção 1", 1, 0);
             ChatHandler(player->GetSession()).PSendSysMessage("Opcao 2");
-            OnGossipHello(player, creature);
         }break;
 
-        }       
-
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-
+        }
         return true;
     }
 };
