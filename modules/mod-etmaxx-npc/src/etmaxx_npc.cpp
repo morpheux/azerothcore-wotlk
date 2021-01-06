@@ -672,11 +672,17 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tOpcao 1", 1, 0); 
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t1000 Enemy Head + 50.000 Honor", 1, 1);
+
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t200 Emblems of Frost", 1, 2);
+
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|t1300 de Arena Rating + 200 Arena Points", 1, 3);
+
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "---------------------------------", 1, 0);
 
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 100, 0);
 
-        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        SendGossipMenuFor(player, 800800, creature->GetGUID());
 
         return true;
     }
@@ -698,6 +704,22 @@ public:
             } break;           
 
         
+        }
+
+        switch (action) {
+        case 1:
+        {
+            if (player->HasItemCount(600500, 1000, true) && (player->GetHonorPoints() >= 50000)) {
+                player->DestroyItemCount(600500, 1000, true);
+                player->ModifyHonorPoints(-50000);
+                player->AddItem(60000, 1);
+            }
+            else {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                SendGossipMenuFor(player, 800801, creature->GetGUID());
+            }
+        }
+
         }
 
         return true;
