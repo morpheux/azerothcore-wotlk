@@ -672,23 +672,26 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Olá SEU FILHO DA PUTA !!!!", GOSSIP_SENDER_MAIN, 1);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Teste1", 1, 1);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Teste2", 2, 1);
+        
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
     }
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 action)
     {
         player->PlayerTalkClass->ClearMenus();
 
-        switch (action) {
-        case 1:
-            player->PlayerTalkClass->SendCloseGossip();
-            break;
+        if (sender == 1 && action == 1) {
+            ChatHandler(player->GetSession()).PSendSysMessage("teste ok");
         }
 
+        if (sender == 2 && action == 1) {
+            ChatHandler(player->GetSession()).PSendSysMessage("teste ok sender 2");
+        }
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
