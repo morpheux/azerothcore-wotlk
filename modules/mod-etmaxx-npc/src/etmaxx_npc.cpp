@@ -1392,7 +1392,6 @@ public:
     bool OnGossipHello(Player* player, Creature* creature)
     {
         player->PlayerTalkClass->ClearMenus();
-        player->AddItem(37836, 1);
 
         if (!player->HasItemCount(37836, 1, true)) {
 
@@ -1428,6 +1427,7 @@ public:
             player->AddAura(30567, player);
             player->AddAura(30557, player);
             player->AddAura(30562, player);
+            player->AddItem(37836, 1);
             switch (player->getClass()) {
                 case CLASS_WARRIOR:
                 {
