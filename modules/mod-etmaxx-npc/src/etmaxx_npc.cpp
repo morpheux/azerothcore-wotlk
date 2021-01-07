@@ -893,6 +893,7 @@ public:
                     player->DestroyItemCount(80004, 1, true);
                     player->AddItem(34794, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                    CloseGossipMenuFor(player);
                 }
                 else {
                     ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
