@@ -709,6 +709,7 @@ public:
                     player->ModifyArenaPoints(-200);
                     player->AddItem(80004, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
+                    CloseGossipMenuFor(player);
                 }
                 else {
                     AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 1300 de Arena Rating + 200 Arena Points", 100, 0);
