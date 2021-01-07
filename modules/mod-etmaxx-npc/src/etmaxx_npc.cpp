@@ -1657,6 +1657,15 @@ public:
                     SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
             }
+
+            default:
+            {
+                if (!sender && !action)
+                {
+                    OnGossipHello(player, creature);
+                    return true;
+                }
+            } break;
         }
         return true;
     }
