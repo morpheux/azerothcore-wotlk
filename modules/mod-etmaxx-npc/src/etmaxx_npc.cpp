@@ -643,8 +643,10 @@ public:
 
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tClique Aqui para Comprar as Armas", 50, 0);
-        
+        if (player->HasItemCount(80004, 1, true)) {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tComprar uma Arma", 50, 0);
+        }
+              
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 100, 0);
 
         SendGossipMenuFor(player, 800800, creature->GetGUID());
@@ -889,17 +891,10 @@ public:
             //Entregando Axe 2Hand
             case 34794:
             {
-                if (player->HasItemCount(80004, 1)) {
-                    player->DestroyItemCount(80004, 1, true);
-                    player->AddItem(34794, 1);
-                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
-                    CloseGossipMenuFor(player);
-                }
-                else {
-                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
-                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
-                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-                }
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(34794, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
             }
 
             case 50709:
