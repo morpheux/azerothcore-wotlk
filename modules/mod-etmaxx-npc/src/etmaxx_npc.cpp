@@ -1656,16 +1656,13 @@ public:
                     AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
                     SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
-            }
+            }break;
 
-            default:
-            {
-                if (!sender && !action)
+            case 100000:
+                if (action == 1) // Isso nunca deveria acontecer
                 {
-                    OnGossipHello(player, creature);
-                    return true;
+                    ChatHandler(player->GetSession()).PSendSysMessage("Error");
                 }
-            } break;
         }
         return true;
     }
