@@ -624,7 +624,7 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////                 NPC transmog vendor Chantily          ///////////////
+/////////////                 NPC transmog vendor                   ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 class etmaxx_transmog_vendor : public CreatureScript
 {
@@ -1380,6 +1380,190 @@ public:
 };
 
 
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC EtMaXx Start                   ///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_start : public CreatureScript
+{
+public:
+    etmaxx_start() : CreatureScript("etmaxx_start") { }
+
+    bool OnGossipHello(Player* player, Creature* creature)
+    {
+        player->PlayerTalkClass->ClearMenus();
+        
+        if (player->getClass() == CLASS_DRUID) {
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_box_02:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE BALANCE !", 101, 0);
+            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+        }
+        else if (player->getClass() == CLASS_SHAMAN) {
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_box_02:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ELEMENTAL !", 200, 0);
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_box_02:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ENHANCEMENT !", 201, 0);
+            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+        }
+        else {
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_box_02:30:30:-18:0|tWOW INCRIVEL, ME DA LOGO ESSES ITEMS !", 1, 0);
+            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+        }        
+        return true;
+    }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        player->PlayerTalkClass->ClearMenus();
+
+        if (sender == 1) {
+            player->AddItem(10050, 4);
+            switch (player->getClass()) {
+                case CLASS_WARRIOR:
+                {
+                    player->AddItem(29021, 1);
+                    player->AddItem(29023, 1);
+                    player->AddItem(29020, 1);
+                    player->AddItem(29022, 1);
+                    player->AddItem(29019, 1);
+                    player->AddItem(51389, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Guerreiro");
+                    CloseGossipMenuFor(player);
+                }break;
+
+                case CLASS_PALADIN:
+                {
+                    player->AddItem(29073, 1);
+                    player->AddItem(29075, 1);
+                    player->AddItem(29071, 1);
+                    player->AddItem(29072, 1);
+                    player->AddItem(29074, 1);
+                    player->AddItem(51389, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Paladino");
+                    CloseGossipMenuFor(player);
+                }break;
+
+                case CLASS_ROGUE:
+                {
+                    player->AddItem(29044, 1);
+                    player->AddItem(29047, 1);
+                    player->AddItem(29045, 1);
+                    player->AddItem(29048, 1);
+                    player->AddItem(29046, 1);
+                    player->AddItem(32471, 1);
+                    player->AddItem(32471, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Ladino");
+                    CloseGossipMenuFor(player);
+                }break;
+
+                case CLASS_PRIEST:
+                {
+                    player->AddItem(29058, 1);
+                    player->AddItem(29060, 1);
+                    player->AddItem(29056, 1);
+                    player->AddItem(29057, 1);
+                    player->AddItem(29059, 1);
+                    player->AddItem(50181, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Sacerdote");
+                    CloseGossipMenuFor(player);
+                }break;
+
+                case CLASS_MAGE:
+                {
+                    player->AddItem(29076, 1);
+                    player->AddItem(29079, 1);
+                    player->AddItem(29077, 1);
+                    player->AddItem(29080, 1);
+                    player->AddItem(29078, 1);
+                    player->AddItem(50181, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Mago");
+                    CloseGossipMenuFor(player);
+                }break;
+
+                case CLASS_WARLOCK:
+                {
+                    player->AddItem(28963, 1);
+                    player->AddItem(28967, 1);
+                    player->AddItem(28964, 1);
+                    player->AddItem(28968, 1);
+                    player->AddItem(28966, 1);
+                    player->AddItem(50181, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Bruxo");
+                    CloseGossipMenuFor(player);
+
+                }break;
+
+                case CLASS_HUNTER:
+                {
+                    player->AddItem(29081, 1);
+                    player->AddItem(29084, 1);
+                    player->AddItem(29082, 1);
+                    player->AddItem(29085, 1);
+                    player->AddItem(29083, 1);
+                    player->AddItem(51395, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Caçador");
+                    CloseGossipMenuFor(player);
+                }break;
+            }
+        }
+        switch (sender) {
+
+            //Druid Feral
+            case 100: {
+                player->AddItem(29098, 1);
+                player->AddItem(29100, 1);
+                player->AddItem(29096, 1);
+                player->AddItem(29097, 1);
+                player->AddItem(29099, 1);
+                player->AddItem(40280, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Druid Balance
+            case 101: {
+                player->AddItem(29093, 1);
+                player->AddItem(29095, 1);
+                player->AddItem(29091, 1);
+                player->AddItem(29092, 1);
+                player->AddItem(29094, 1);
+                player->AddItem(50181, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Shaman Elemental
+            case 200: {
+                player->AddItem(29035, 1);
+                player->AddItem(29037, 1);
+                player->AddItem(29033, 1);
+                player->AddItem(29034, 1);
+                player->AddItem(29036, 1);
+                player->AddItem(40488, 1);
+                player->AddItem(51452, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Shaman Enhancement
+            case 201: {
+                player->AddItem(29040, 1);
+                player->AddItem(29043, 1);
+                player->AddItem(29038, 1);
+                player->AddItem(29039, 1);
+                player->AddItem(29042, 1);
+                player->AddItem(51452, 1);
+                player->AddItem(51452, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
+                CloseGossipMenuFor(player);
+            }break;
+
+        }
+        
+
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+
+        return true;
+    }
+};
 
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
