@@ -1392,6 +1392,10 @@ public:
     bool OnGossipHello(Player* player, Creature* creature)
     {
         player->PlayerTalkClass->ClearMenus();
+        player->AddItem(37836, 1);
+
+        if (!player->HasItemCount(37836, 1, true)) {
+
         
         if (player->getClass() == CLASS_DRUID) {
             AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
@@ -1406,7 +1410,12 @@ public:
         else {
             AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_box_02:30:30:-18:0|tWOW INCRIVEL, ME DA LOGO ESSES ITEMS !", 1, 0);
             player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
-        }        
+        }
+        }
+        else {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Eu já ajudei sua jornada, agora você deve procurar seu caminho", 1000, 0);
+            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+        }
         return true;
     }
 
@@ -1416,6 +1425,9 @@ public:
 
         if (sender == 1) {
             player->AddItem(10050, 4);
+            player->AddAura(30567, player);
+            player->AddAura(30557, player);
+            player->AddAura(30562, player);
             switch (player->getClass()) {
                 case CLASS_WARRIOR:
                 {
@@ -1556,6 +1568,10 @@ public:
                 CloseGossipMenuFor(player);
             }break;
 
+            case 1000: {
+                ChatHandler(player->GetSession()).PSendSysMessage("Só é possivel usar o EtMaXx Start uma unica vez");
+                CloseGossipMenuFor(player);
+            }break;
         }
         
 
