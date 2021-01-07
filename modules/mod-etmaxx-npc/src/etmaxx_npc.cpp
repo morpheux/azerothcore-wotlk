@@ -623,50 +623,13 @@ public:
 
 };
 
-
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////                 NPC transmog vendor Chantily          ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
-
 class etmaxx_transmog_vendor : public CreatureScript
 {
 public:
     etmaxx_transmog_vendor() : CreatureScript("etmaxx_transmog_vendor") { }
-
-    bool OnGossipHello(Player* player, Creature* creature)
-    {
-        player->PlayerTalkClass->ClearMenus();
-        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Teste", GOSSIP_SENDER_MAIN, 1);
-
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-
-        return true;
-    }
-
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
-    {
-        player->PlayerTalkClass->ClearMenus();
-
-        switch (action)
-        {
-        case 1:
-            ChatHandler(player->GetSession()).PSendSysMessage("teste ok");
-            break;
-        }
-
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-
-        return true;
-    }
-};
-
-///////////////////////////////////////////////////////////////////////////////////
-/////////////                 NPC Transmog Mark Chantily            ///////////////
-///////////////////////////////////////////////////////////////////////////////////;
-class etmaxx_transmog_mark : public CreatureScript
-{
-public:
-    etmaxx_transmog_mark() : CreatureScript("etmaxx_transmog_mark") { }
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
@@ -709,6 +672,7 @@ public:
                 }
                 else {
                     AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 1000 enemy Head + 50.000 de Honor", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
             } break;
 
@@ -721,6 +685,7 @@ public:
                 }
                 else {
                     AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 200 Emblem of Frost", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
             } break;
 
@@ -733,6 +698,7 @@ public:
                 }
                 else {
                     AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 1300 de Arena Rating + 200 Arena Points", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
             } break;
             // Menu de Armas
@@ -775,7 +741,6 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_62:30:30:-18:0|tBreeching Comet", 34616, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_108:30:30:-18:0|tAxe of the Sen'jin Protector", 45204, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_65:30:30:-18:0|tFirebrand Battleaxe", 27490, 0);
-                //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_67:30:30:-18:0|tEthereum Nexus-Reaver", 28291, 0); ID ERRADO
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -800,7 +765,6 @@ public:
             {
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_hand_09:30:30:-18:0|tArm Blade of Augelmir", 51846, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_hand_01:30:30:-18:0|tNexus-Claw", 29371, 0);
-                //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_06:30:30:-18:0|tHoned Fang of the Mystics", 37748, 0); ITEM ERRADO
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_hand_20:30:30:-18:0|tCalamity's Grasp", 40383, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
@@ -852,7 +816,6 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_76:30:30:-18:0|tBlinkstrike", 31332, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_11:30:30:-18:0|tContinuum Blade", 29185, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_119:30:30:-18:0|tGhoulslicer", 49827, 0);
-                //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_31:30:30:-18:0|tFang of Venoxis", 47745, 0); ITEM ERRADO
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_73:30:30:-18:0|tFang of the Leviathan", 30095, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
@@ -878,7 +841,6 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_draenei_a_03:30:30:-18:0|tExodar Life-Staff", 30732, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_12:30:30:-18:0|tMonster - Staff, Dalaran Red", 43619, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_83:30:30:-18:0|tStaff of Draconic Combat", 37360, 0);
-                //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_29:30:30:-18:0|tFang of Korialstrasz", 37716, 0); ITEM ERRADO
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_61:30:30:-18:0|tStaff of Immaculate Recovery", 32344, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_100:30:30:-18:0|tParagon's Breadth", 48710, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
@@ -892,7 +854,6 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_55:30:30:-18:0|tNjorndar Bone Bow", 51927, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_51:30:30:-18:0|tGolemheart Longbow", 46342, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_31:30:30:-18:0|tFurious Gladiator's Longbow", 42491, 0);
-                //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_29:30:30:-18:0|tFang of Korialstrasz", 33472, 0); ITEM ERRADO
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -927,9 +888,776 @@ public:
                 }
             }
 
+            case 50709:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(50709, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
 
+            case 31291:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(31291, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 47446:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(47446, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 30722:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(30722, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 45458:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(45458, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 25208:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(25208, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 45204:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(45204, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 27490:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(27490, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 28291:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(28291, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 51846:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(51846, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 28524:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(28524, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 49494:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(49494, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 21523:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(21523, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 19903:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(19903, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 35573:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(35573, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 29371:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(29371, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            } 
+
+            case 40383:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(40383, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 33283:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(33283, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 34199:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(34199, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 28210:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(28210, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 44747:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(44747, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 39423:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(39423, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 28299:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(28299, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 39245:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(39245, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 28800:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(28800, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 44948:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(44948, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 41257:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(41257, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 50603:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(50603, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 22691:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(22691, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 45868:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(45868, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 22995:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(22995, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 28400:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(28400, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 29153:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(29153, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 31332:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(31332, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 29185:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(29185, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 49827:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(49827, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 24044:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(24044, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 47979:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(47979, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 11809:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(11809, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 19874:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(19874, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 47491:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(47491, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 30732:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(30732, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 43619:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(43619, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 37360:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(37360, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 37716:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(37716, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 32344:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(32344, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 48710:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(48710, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 51927:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(51927, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 42491:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(42491, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 33472:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(33472, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 43085:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(43085, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 44313:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(44313, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 45587:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(45587, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 32255:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(32255, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
+
+            case 35094:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(35094, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de uma EtMaXx Transmog Mark para pegar este item");
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            }
         }
-
         return true;
     }
 };
@@ -946,5 +1674,4 @@ void AddNpcEtmaxxScripts()
 	new etmaxx_vip();
     new etmaxx_battlepass();
     new etmaxx_transmog_vendor();
-    new etmaxx_transmog_mark();
 }
