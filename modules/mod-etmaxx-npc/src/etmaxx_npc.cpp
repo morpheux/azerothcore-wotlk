@@ -664,7 +664,11 @@ public:
 
             case 10:
             {
-                if (player->HasItemCount(600500, 1000, true) && (player->GetHonorPoints() >= 50000)) {
+                if (player->HasItemCount(80004, 1)) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+                else if (player->HasItemCount(600500, 1000, true) && (player->GetHonorPoints() >= 50000)) {
                     player->DestroyItemCount(600500, 1000, true);
                     player->ModifyHonorPoints(-50000);
                     player->AddItem(80004, 1);
@@ -678,7 +682,11 @@ public:
 
             case 20:
             {
-                if (player->HasItemCount(49426, 200, true)) {
+                if (player->HasItemCount(80004, 1)) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+                else if (player->HasItemCount(49426, 200, true)) {
                     player->DestroyItemCount(49426, 200, true);
                     player->AddItem(80004, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
@@ -691,7 +699,11 @@ public:
 
             case 30:
             {
-                if (player->GetArenaPersonalRating(2) >= 1300 && player->GetArenaPoints() >= 200) {
+                if (player->HasItemCount(80004, 1)) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+                else if (player->GetArenaPersonalRating(2) >= 1300 && player->GetArenaPoints() >= 200) {
                     player->ModifyArenaPoints(-200);
                     player->AddItem(80004, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
