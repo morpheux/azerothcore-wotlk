@@ -679,7 +679,7 @@ public:
             case 20:
             {
                 if (player->HasItemCount(49426, 200, true)) {
-                    player->DestroyItemCount(49426, 20, true);
+                    player->DestroyItemCount(49426, 200, true);
                     player->AddItem(80004, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
                 }
