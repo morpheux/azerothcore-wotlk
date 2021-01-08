@@ -47,7 +47,7 @@ public:
         AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn Vendor", GOSSIP_SENDER_MAIN, 3);
         AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn EtMaxX Recipes", GOSSIP_SENDER_MAIN, 5);
         AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn EtMaxX Reagents", GOSSIP_SENDER_MAIN, 10);
-        AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn City Portals / Objects", GOSSIP_SENDER_MAIN, 4);
+        AddGossipItemFor(player, GOSSIP_ICON_TALK, "Spawn City Portals / Objects / NPC's", GOSSIP_SENDER_MAIN, 4);
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Spawn Bank", GOSSIP_SENDER_MAIN, 30605, "Spawn a banker?", GuildHouseBank, false);
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Spawn Auctioneer", GOSSIP_SENDER_MAIN, 6, "Spawn an auctioneer", GuildHouseAuctioneer, false);
         AddGossipItemFor(player, GOSSIP_ICON_TRAINER, "Spawn Primary Profession Trainers", GOSSIP_SENDER_MAIN, 7);

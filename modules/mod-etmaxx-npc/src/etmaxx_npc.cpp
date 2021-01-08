@@ -7,6 +7,7 @@
 #include "Language.h"
 #include <Chat/Chat.h>
 
+
 /*
     // Gossip defines
     GOSSIP_ACTION_TRADE                 = 1, BAGZINHA
@@ -622,11 +623,9 @@ public:
 
 };
 
-
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////                 NPC transmog vendor Chantily          ///////////////
+/////////////                 NPC transmog vendor                   ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
-
 class etmaxx_transmog_vendor : public CreatureScript
 {
 public:
@@ -635,72 +634,952 @@ public:
     bool OnGossipHello(Player* player, Creature* creature)
     {
         player->PlayerTalkClass->ClearMenus();
-        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Teste", GOSSIP_SENDER_MAIN, 1);
 
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_bone_humanskull_01:30:30:-18:0|t1000 Enemy Head + 50.000 Honor", 10, 0);
+
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t200 Emblems of Frost", 20, 0);
+
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:30:30:-18:0|t1300 de Arena Rating + 200 Arena Points", 30, 0);
+
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+
+        if (player->HasItemCount(80004, 1, true)) {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tComprar uma Arma", 50, 0);
+        }
+              
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 100, 0);
+
+        SendGossipMenuFor(player, 800800, creature->GetGUID());
 
         return true;
     }
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 action)
     {
         player->PlayerTalkClass->ClearMenus();
 
-        switch (action)
-        {
-        case 1:
-            ChatHandler(player->GetSession()).PSendSysMessage("teste ok");
-            break;
+        switch (sender) {
+            case 100:  // Main menu
+            {
+                OnGossipHello(player, creature);
+            } break;
+
+            case 10:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+                else if (player->HasItemCount(600500, 1000, true) && (player->GetHonorPoints() >= 50000)) {
+                    player->DestroyItemCount(600500, 1000, true);
+                    player->ModifyHonorPoints(-50000);
+                    player->AddItem(80004, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
+                    CloseGossipMenuFor(player);
+                }
+                else {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 1000 enemy Head + 50.000 de Honor", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            } break;
+
+            case 20:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+                else if (player->HasItemCount(49426, 200, true)) {
+                    player->DestroyItemCount(49426, 200, true);
+                    player->AddItem(80004, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
+                    CloseGossipMenuFor(player);
+                }
+                else {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 200 Emblem of Frost", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            } break;
+
+            case 30:
+            {
+                if (player->HasItemCount(80004, 1)) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+                else if (player->GetArenaPersonalRating(0) >= 1300 && player->GetArenaPoints() >= 200) {
+                    player->ModifyArenaPoints(-200);
+                    player->AddItem(80004, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
+                    CloseGossipMenuFor(player);
+                }
+                else {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 1300 de Arena Rating + 200 Arena Points", 100, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                }
+            } break;
+            // Menu de Armas
+            case 50:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tTwo-Hand Axe", 1000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_03:30:30:-18:0|tOne-Hand Axe", 2000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_05:30:30:-18:0|tDagger", 3000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_gauntlets_31:30:30:-18:0|tFirst Weapon", 4000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_07:30:30:-18:0|tOne-Hand Mace", 5000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_17:30:30:-18:0|tTwo-Hand Mace", 6000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_10:30:30:-18:0|tOne-Hand Sword", 7000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_70:30:30:-18:0|tTwo-Hand Sword", 8000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_spear_05:30:30:-18:0|tPolearm", 9000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_94:30:30:-18:0|tStaff", 10000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_05:30:30:-18:0|tBow", 11000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_53:30:30:-18:0|tShield", 12000, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+            // Machados 2Hand
+            case 1000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_69:30:30:-18:0|tAxe of Shattered Dreams", 34794, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_120:30:30:-18:0|tBryntroll, the Bone Arbiter", 50709, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_40:30:30:-18:0|tCrystalforged War Axe", 31291, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_106:30:30:-18:0|tDual-blade Butcher", 47446, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_67:30:30:-18:0|tEthereum Nexus-Reaver", 30722, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_102:30:30:-18:0|tStormedge", 45458, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_95:30:30:-18:0|tTitansteel Defender", 44948, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+            //Machados 1Hand
+            case 2000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_40:30:30:-18:0|tBladespire Broadaxe", 25208, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_62:30:30:-18:0|tBreeching Comet", 34616, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_108:30:30:-18:0|tAxe of the Sen'jin Protector", 45204, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_65:30:30:-18:0|tFirebrand Battleaxe", 27490, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //Adagas
+            case 3000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_102:30:30:-18:0|tBloodsipper", 51846, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_38:30:30:-18:0|tEmerald Ripper", 28524, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_06:30:30:-18:0|tHoned Fang of the Mystics", 49494, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_29:30:30:-18:0|tFang of Korialstrasz", 21523, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_31:30:30:-18:0|tFang of Venoxis", 19903, 0);
+                
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //Armas de Punho
+            case 4000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_hand_09:30:30:-18:0|tArm Blade of Augelmir", 35573, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_hand_01:30:30:-18:0|tNexus-Claw", 29371, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_hand_20:30:30:-18:0|tCalamity's Grasp", 40383, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //Maças 1Hand
+            case 5000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_32:30:30:-18:0|tAmani Punisher", 33283, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_71:30:30:-18:0|tArchon's Gavel", 34199, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_44:30:30:-18:0|tBloodskull Destroyer", 28210, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_27:30:30:-18:0|tHammer of the Astral Plane", 39423, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_59:30:30:-18:0|tHammer of Wrenching Change", 44747, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //Maças 2Hand
+            case 6000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_52:30:30:-18:0|tGladiator's Bonegrinder", 28299, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_25:30:30:-18:0|tDemise", 39245, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_28:30:30:-18:0|tHammer of the Naaru", 28800, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_84:30:30:-18:0|tTitansteel Destroyer", 41257, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_116:30:30:-18:0|tCryptmaker", 50603, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //Espada 2Hand
+            case 8000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_2h_ashbringercorrupt:30:30:-18:0|tCorrupted Ashbringer", 22691, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_136:30:30:-18:0|tAesir's Edge", 45868, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_116:30:30:-18:0|tApolyon, the Soul-Render", 34247, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_59:30:30:-18:0|tSin'dorei Warblade", 22995, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_51:30:30:-18:0|tWarp-Storm Warblade", 28400, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //Espada 1Hand
+            case 7000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_102:30:30:-18:0|tBlade of the Archmage", 29153, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_76:30:30:-18:0|tBlinkstrike", 31332, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_11:30:30:-18:0|tContinuum Blade", 29185, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_119:30:30:-18:0|tGhoulslicer", 49827, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_73:30:30:-18:0|tFang of the Leviathan", 30095, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //polearm
+            case 9000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_halberd13:30:30:-18:0|tHellreaver", 24044, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_101:30:30:-18:0|tFordragon Blades", 47979, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_spear_01:30:30:-18:0|tFlame Wrath", 11809, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_halberd_12:30:30:-18:0|tHalberd of Smiting", 19874, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_halberd_31:30:30:-18:0|tHellion Glaive", 47491, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //Staff
+            case 10000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_draenei_a_03:30:30:-18:0|tExodar Life-Staff", 30732, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_12:30:30:-18:0|tMonster - Staff, Dalaran Red", 43619, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_83:30:30:-18:0|tStaff of Draconic Combat", 37360, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_61:30:30:-18:0|tStaff of Immaculate Recovery", 32344, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_100:30:30:-18:0|tParagon's Breadth", 48710, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //Bow
+            case 11000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_55:30:30:-18:0|tNjorndar Bone Bow", 51927, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_51:30:30:-18:0|tGolemheart Longbow", 46342, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_31:30:30:-18:0|tFurious Gladiator's Longbow", 42491, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //Shield
+            case 12000:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_58:30:30:-18:0|tRoyal Crest of Lordaeron", 43085, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_34:30:30:-18:0|tZom's Crackling Bulwark", 44313, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_67:30:30:-18:0|tBulwark of Algalon", 45587, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tBulwark of Azzinoth", 32375, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_38:30:30:-18:0|tFelstone Bulwark", 32255, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_53:30:30:-18:0|tBrutal Gladiator's Shield Wall", 35094, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            //Entregando Axe 2Hand
+            case 34794:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(34794, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 50709:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(50709, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 31291:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(31291, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 47446:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(47446, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 30722:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(30722, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 45458:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(45458, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 44948:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(44948, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entregando Axe 1Hand
+            case 25208:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(25208, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 34616:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(34616, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 45204:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(45204, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 27490:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(27490, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entregando Daggers
+            case 51846:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(51846, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 28524:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(28524, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 49494:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(49494, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 21523:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(21523, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 19903:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(19903, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entregando Armas de Punho
+            case 35573:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(35573, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 29371:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(29371, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 40383:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(40383, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entregando Mace 1Hand
+            case 33283:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(33283, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 34199:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(34199, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 28210:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(28210, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 39423:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(39423, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 44747:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(44747, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entregando Mace 2Hand
+            case 28299:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(28299, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 39245:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(39245, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 28800:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(28800, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break; 
+
+            case 41257:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(41257, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 50603:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(50603, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entregando Espada 2Hand
+            case 22691:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(22691, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 45868:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(45868, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 34247:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(34247, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 22995:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(22995, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 28400:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(28400, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entrega de Espada 1Hand
+            case 29153:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(29153, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 31332:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(31332, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 29185:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(29185, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 49827:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(49827, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 30095:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(30095, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entrega de Polearm
+            case 24044:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(24044, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 47979:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(47979, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 11809:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(11809, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 19874:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(19874, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 47491:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(47491, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entrega de Staff
+            case 30732:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(30732, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 43619:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(43619, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 37360:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(37360, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 32344:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(32344, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 48710:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(48710, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entrega de Bow
+            case 51927:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(51927, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 46342:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(46342, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 42491:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(42491, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Entrega de Shield
+            case 43085:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(43085, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 44313:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(44313, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 45587:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(45587, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 32375:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(32375, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 32255:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(32255, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 35094:
+            {
+                player->DestroyItemCount(80004, 1, true);
+                player->AddItem(35094, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 100000:
+            {
+                if (action == 1) // Isso nunca deveria acontecer
+                {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Error");
+                }
+            }break;
         }
-
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-
         return true;
     }
 };
 
+
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////                 NPC transmog Mark Chantily            ///////////////
+/////////////                 NPC EtMaXx Start                   ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
-class etmaxx_transmog_mark : public CreatureScript
+
+class etmaxx_start : public CreatureScript
 {
 public:
-    etmaxx_transmog_mark() : CreatureScript("etmaxx_transmog_mark") { }
+    etmaxx_start() : CreatureScript("etmaxx_start") { }
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
         player->PlayerTalkClass->ClearMenus();
-        player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Escolha uma forma de Adquirir sua EtMaXx Transmog Mark",GOSSIP_SENDER_MAIN, 1);
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|tComo a EtMaXx Transmog Mark Funciona?", GOSSIP_SENDER_MAIN, 3);
+        if (!player->HasItemCount(37836, 1, true)) {
 
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-
+        
+        if (player->getClass() == CLASS_DRUID) {
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_forceofnature:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE BALANCE !", 101, 0);
+            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+        }
+        else if (player->getClass() == CLASS_SHAMAN) {
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shaman_lavaburst:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ELEMENTAL !", 200, 0);
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_shaman_stormstrike:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ENHANCEMENT !", 201, 0);
+            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+        }
+        else {
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_box_02:30:30:-18:0|tWOW INCRIVEL, ME DA LOGO ESSES ITEMS !", 1, 0);
+            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+        }
+        }
+        else {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Eu já ajudei sua jornada, agora você deve procurar seu caminho", 1000, 0);
+            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+        }
         return true;
     }
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
     {
         player->PlayerTalkClass->ClearMenus();
 
-        switch (action)
-        {
-        case 1:
-            ChatHandler(player->GetSession()).PSendSysMessage("teste ok 1");
-            break;
+        if (sender == 1) {
+            player->AddItem(10050, 4);
+            player->AddAura(30567, player);
+            player->AddAura(30557, player);
+            player->AddAura(30562, player);
+            player->AddItem(37836, 1);
+            switch (player->getClass()) {
+                case CLASS_WARRIOR:
+                {
+                    player->AddItem(29021, 1);
+                    player->AddItem(29023, 1);
+                    player->AddItem(29020, 1);
+                    player->AddItem(29022, 1);
+                    player->AddItem(29019, 1);
+                    player->AddItem(51389, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Guerreiro");
+                    CloseGossipMenuFor(player);
+                }break;
 
-        case 3:
-            ChatHandler(player->GetSession()).PSendSysMessage("teste ok 3");
-            break;
+                case CLASS_PALADIN:
+                {
+                    player->AddItem(29073, 1);
+                    player->AddItem(29075, 1);
+                    player->AddItem(29071, 1);
+                    player->AddItem(29072, 1);
+                    player->AddItem(29074, 1);
+                    player->AddItem(51389, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Paladino");
+                    CloseGossipMenuFor(player);
+                }break;
+
+                case CLASS_ROGUE:
+                {
+                    player->AddItem(29044, 1);
+                    player->AddItem(29047, 1);
+                    player->AddItem(29045, 1);
+                    player->AddItem(29048, 1);
+                    player->AddItem(29046, 1);
+                    player->AddItem(32471, 1);
+                    player->AddItem(32471, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Ladino");
+                    CloseGossipMenuFor(player);
+                }break;
+
+                case CLASS_PRIEST:
+                {
+                    player->AddItem(29058, 1);
+                    player->AddItem(29060, 1);
+                    player->AddItem(29056, 1);
+                    player->AddItem(29057, 1);
+                    player->AddItem(29059, 1);
+                    player->AddItem(50181, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Sacerdote");
+                    CloseGossipMenuFor(player);
+                }break;
+
+                case CLASS_MAGE:
+                {
+                    player->AddItem(29076, 1);
+                    player->AddItem(29079, 1);
+                    player->AddItem(29077, 1);
+                    player->AddItem(29080, 1);
+                    player->AddItem(29078, 1);
+                    player->AddItem(50181, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Mago");
+                    CloseGossipMenuFor(player);
+                }break;
+
+                case CLASS_WARLOCK:
+                {
+                    player->AddItem(28963, 1);
+                    player->AddItem(28967, 1);
+                    player->AddItem(28964, 1);
+                    player->AddItem(28968, 1);
+                    player->AddItem(28966, 1);
+                    player->AddItem(50181, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Bruxo");
+                    CloseGossipMenuFor(player);
+
+                }break;
+
+                case CLASS_HUNTER:
+                {
+                    player->AddItem(29081, 1);
+                    player->AddItem(29084, 1);
+                    player->AddItem(29082, 1);
+                    player->AddItem(29085, 1);
+                    player->AddItem(29083, 1);
+                    player->AddItem(51395, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Caçador");
+                    CloseGossipMenuFor(player);
+                }break;
+            }
         }
+        switch (sender) {
+
+            //Druid Feral
+            case 100: {
+                player->AddItem(29098, 1);
+                player->AddItem(29100, 1);
+                player->AddItem(29096, 1);
+                player->AddItem(29097, 1);
+                player->AddItem(29099, 1);
+                player->AddItem(40280, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Druid Balance
+            case 101: {
+                player->AddItem(29093, 1);
+                player->AddItem(29095, 1);
+                player->AddItem(29091, 1);
+                player->AddItem(29092, 1);
+                player->AddItem(29094, 1);
+                player->AddItem(50181, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Shaman Elemental
+            case 200: {
+                player->AddItem(29035, 1);
+                player->AddItem(29037, 1);
+                player->AddItem(29033, 1);
+                player->AddItem(29034, 1);
+                player->AddItem(29036, 1);
+                player->AddItem(40488, 1);
+                player->AddItem(51452, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
+                CloseGossipMenuFor(player);
+            }break;
+
+            //Shaman Enhancement
+            case 201: {
+                player->AddItem(29040, 1);
+                player->AddItem(29043, 1);
+                player->AddItem(29038, 1);
+                player->AddItem(29039, 1);
+                player->AddItem(29042, 1);
+                player->AddItem(51452, 1);
+                player->AddItem(51452, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 1000: {
+                ChatHandler(player->GetSession()).PSendSysMessage("Só é possivel usar o EtMaXx Start uma unica vez");
+                CloseGossipMenuFor(player);
+            }break;
+        }
+        
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
         return true;
     }
 };
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
@@ -712,5 +1591,5 @@ void AddNpcEtmaxxScripts()
 	new etmaxx_vip();
     new etmaxx_battlepass();
     new etmaxx_transmog_vendor();
-    new etmaxx_transmog_mark();
+    new etmaxx_start();
 }
