@@ -1773,6 +1773,9 @@ public:
                 case CLASS_WARRIOR:
                 {
                     player->EquipNewItem(19, 10050, true);
+                    player->EquipNewItem(20, 10050, true);
+                    player->EquipNewItem(21, 10050, true);
+                    player->EquipNewItem(22, 10050, true);
                     player->AddItem(29021, 1);
                     player->AddItem(29023, 1);
                     player->AddItem(29020, 1);
@@ -1789,6 +1792,10 @@ public:
 
                 case CLASS_PALADIN:
                 {
+                    player->EquipNewItem(19, 10050, true);
+                    player->EquipNewItem(20, 10050, true);
+                    player->EquipNewItem(21, 10050, true);
+                    player->EquipNewItem(22, 10050, true);
                     player->AddItem(29073, 1);
                     player->AddItem(29075, 1);
                     player->AddItem(29071, 1);
@@ -1805,6 +1812,10 @@ public:
 
                 case CLASS_ROGUE:
                 {
+                    player->EquipNewItem(19, 10050, true);
+                    player->EquipNewItem(20, 10050, true);
+                    player->EquipNewItem(21, 10050, true);
+                    player->EquipNewItem(22, 10050, true);
                     player->AddItem(29044, 1);
                     player->AddItem(29047, 1);
                     player->AddItem(29045, 1);
@@ -1822,6 +1833,10 @@ public:
 
                 case CLASS_PRIEST:
                 {
+                    player->EquipNewItem(19, 10050, true);
+                    player->EquipNewItem(20, 10050, true);
+                    player->EquipNewItem(21, 10050, true);
+                    player->EquipNewItem(22, 10050, true);
                     player->AddItem(29058, 1);
                     player->AddItem(29060, 1);
                     player->AddItem(29056, 1);
@@ -1838,6 +1853,10 @@ public:
 
                 case CLASS_MAGE:
                 {
+                    player->EquipNewItem(19, 10050, true);
+                    player->EquipNewItem(20, 10050, true);
+                    player->EquipNewItem(21, 10050, true);
+                    player->EquipNewItem(22, 10050, true);
                     player->AddItem(29076, 1);
                     player->AddItem(29079, 1);
                     player->AddItem(29077, 1);
@@ -1854,6 +1873,10 @@ public:
 
                 case CLASS_WARLOCK:
                 {
+                    player->EquipNewItem(19, 10050, true);
+                    player->EquipNewItem(20, 10050, true);
+                    player->EquipNewItem(21, 10050, true);
+                    player->EquipNewItem(22, 10050, true);
                     player->AddItem(28963, 1);
                     player->AddItem(28967, 1);
                     player->AddItem(28964, 1);
@@ -1871,7 +1894,10 @@ public:
 
                 case CLASS_HUNTER:
                 {
-
+                    player->EquipNewItem(19, 10050, true);
+                    player->EquipNewItem(20, 10050, true);
+                    player->EquipNewItem(21, 10050, true);
+                    player->EquipNewItem(22, 10050, true);
                     player->AddItem(29081, 1);
                     player->AddItem(29084, 1);
                     player->AddItem(29082, 1);
@@ -1901,6 +1927,10 @@ public:
 
             //Druid Feral
             case 100: {
+                player->EquipNewItem(19, 10050, true);
+                player->EquipNewItem(20, 10050, true);
+                player->EquipNewItem(21, 10050, true);
+                player->EquipNewItem(22, 10050, true);
                 player->AddAura(30567, player);
                 player->AddAura(30557, player);
                 player->AddAura(30562, player);
@@ -1917,6 +1947,10 @@ public:
 
             //Druid Balance
             case 101: {
+                player->EquipNewItem(19, 10050, true);
+                player->EquipNewItem(20, 10050, true);
+                player->EquipNewItem(21, 10050, true);
+                player->EquipNewItem(22, 10050, true);
                 player->AddAura(30567, player);
                 player->AddAura(30557, player);
                 player->AddAura(30562, player);
@@ -1933,6 +1967,10 @@ public:
 
             //Shaman Elemental
             case 200: {
+                player->EquipNewItem(19, 10050, true);
+                player->EquipNewItem(20, 10050, true);
+                player->EquipNewItem(21, 10050, true);
+                player->EquipNewItem(22, 10050, true);
                 player->AddAura(30567, player);
                 player->AddAura(30557, player);
                 player->AddAura(30562, player);
@@ -1950,6 +1988,10 @@ public:
 
             //Shaman Enhancement
             case 201: {
+                player->EquipNewItem(19, 10050, true);
+                player->EquipNewItem(20, 10050, true);
+                player->EquipNewItem(21, 10050, true);
+                player->EquipNewItem(22, 10050, true);
                 player->AddAura(30567, player);
                 player->AddAura(30557, player);
                 player->AddAura(30562, player);
