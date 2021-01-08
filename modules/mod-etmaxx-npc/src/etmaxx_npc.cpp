@@ -1381,7 +1381,7 @@ public:
 
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////                 NPC EtMaXx Start                   ///////////////
+/////////////                 NPC EtMaXx Start                      ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
 class etmaxx_start : public CreatureScript
@@ -1412,10 +1412,18 @@ public:
         }
         }
         else {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Eu já ajudei sua jornada, agora você deve procurar seu caminho", 1000, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Eu já lhe ajudei em sua jornada, agora você deve procurar seu caminho", 1000, 0);
             player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
         }
         return true;
+    }
+
+    void BagBuffCoin(Player* player) {
+        player->AddItem(10050, 4);
+        player->AddAura(30567, player);
+        player->AddAura(30557, player);
+        player->AddAura(30562, player);
+        player->AddItem(37836, 1);
     }
 
     bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
@@ -1423,11 +1431,7 @@ public:
         player->PlayerTalkClass->ClearMenus();
 
         if (sender == 1) {
-            player->AddItem(10050, 4);
-            player->AddAura(30567, player);
-            player->AddAura(30557, player);
-            player->AddAura(30562, player);
-            player->AddItem(37836, 1);
+            BagBuffCoin(player);
             switch (player->getClass()) {
                 case CLASS_WARRIOR:
                 {
@@ -1514,6 +1518,12 @@ public:
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Caçador");
                     CloseGossipMenuFor(player);
                 }break;
+
+                case CLASS_DEATH_KNIGHT:
+                {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você já está bem avançado em sua jornada, não precisa da minha ajuda. Receba apenas minha benção");
+                    CloseGossipMenuFor(player);
+                }break;
             }
         }
         switch (sender) {
@@ -1526,6 +1536,7 @@ public:
                 player->AddItem(29097, 1);
                 player->AddItem(29099, 1);
                 player->AddItem(40280, 1);
+                player->AddItem(37836, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
                 CloseGossipMenuFor(player);
             }break;
@@ -1538,6 +1549,7 @@ public:
                 player->AddItem(29092, 1);
                 player->AddItem(29094, 1);
                 player->AddItem(50181, 1);
+                player->AddItem(37836, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
                 CloseGossipMenuFor(player);
             }break;
@@ -1551,6 +1563,7 @@ public:
                 player->AddItem(29036, 1);
                 player->AddItem(40488, 1);
                 player->AddItem(51452, 1);
+                player->AddItem(37836, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
                 CloseGossipMenuFor(player);
             }break;
@@ -1562,8 +1575,9 @@ public:
                 player->AddItem(29038, 1);
                 player->AddItem(29039, 1);
                 player->AddItem(29042, 1);
-                player->AddItem(51452, 1);
-                player->AddItem(51452, 1);
+                player->AddItem(50760, 1);
+                player->AddItem(50760, 1);
+                player->AddItem(37836, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
                 CloseGossipMenuFor(player);
             }break;
