@@ -643,9 +643,7 @@ public:
 
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
 
-        if (player->HasItemCount(80004, 1, true)) {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tComprar uma Arma", 50, 0);
-        }
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tEscolha seu Transmog de Arma", 50, 0);
               
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 100, 0);
 
@@ -894,477 +892,825 @@ public:
             //Entregando Axe 2Hand
             case 34794:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(34794, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 50709:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(50709, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 31291:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(31291, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 47446:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(47446, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 30722:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(30722, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 45458:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(45458, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 44948:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(44948, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entregando Axe 1Hand
             case 25208:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(25208, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 34616:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(34616, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 45204:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(45204, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 27490:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(27490, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entregando Daggers
             case 51846:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(51846, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 28524:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(28524, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 49494:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(49494, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 21523:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(21523, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 19903:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(19903, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entregando Armas de Punho
             case 35573:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(35573, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 29371:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(29371, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 40383:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(40383, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entregando Mace 1Hand
             case 33283:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(33283, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 34199:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(34199, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 28210:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(28210, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 39423:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(39423, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 44747:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(44747, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entregando Mace 2Hand
             case 28299:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(28299, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 39245:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(39245, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 28800:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(28800, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break; 
 
             case 41257:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(41257, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 50603:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(50603, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entregando Espada 2Hand
             case 22691:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(22691, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 45868:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(45868, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 34247:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(34247, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 22995:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(22995, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 28400:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(28400, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entrega de Espada 1Hand
             case 29153:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(29153, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 31332:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(31332, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 29185:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(29185, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 49827:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(49827, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 30095:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(30095, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entrega de Polearm
             case 24044:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(24044, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 47979:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(47979, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 11809:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(11809, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 19874:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(19874, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 47491:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(47491, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entrega de Staff
             case 30732:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(30732, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 43619:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(43619, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 37360:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(37360, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 32344:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(32344, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 48710:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(48710, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entrega de Bow
             case 51927:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(51927, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 46342:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(46342, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 42491:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(42491, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             //Entrega de Shield
             case 43085:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(43085, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 44313:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(44313, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 45587:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(45587, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 32375:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(32375, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 32255:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(32255, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 35094:
             {
+                if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
                 player->AddItem(35094, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
             }break;
 
             case 100000:
@@ -1418,29 +1764,25 @@ public:
         return true;
     }
 
-    void BagBuffCoin(Player* player) {
-        player->AddItem(10050, 4);
-        player->AddAura(30567, player);
-        player->AddAura(30557, player);
-        player->AddAura(30562, player);
-        player->AddItem(37836, 1);
-    }
-
     bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
     {
         player->PlayerTalkClass->ClearMenus();
 
         if (sender == 1) {
-            BagBuffCoin(player);
             switch (player->getClass()) {
                 case CLASS_WARRIOR:
                 {
+                    player->EquipNewItem(19, 10050, true);
                     player->AddItem(29021, 1);
                     player->AddItem(29023, 1);
                     player->AddItem(29020, 1);
                     player->AddItem(29022, 1);
                     player->AddItem(29019, 1);
                     player->AddItem(51389, 1);
+                    player->AddAura(30567, player);
+                    player->AddAura(30557, player);
+                    player->AddAura(30562, player);
+                    player->AddItem(37836, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Guerreiro");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1453,6 +1795,10 @@ public:
                     player->AddItem(29072, 1);
                     player->AddItem(29074, 1);
                     player->AddItem(51389, 1);
+                    player->AddAura(30567, player);
+                    player->AddAura(30557, player);
+                    player->AddAura(30562, player);
+                    player->AddItem(37836, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Paladino");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1466,6 +1812,10 @@ public:
                     player->AddItem(29046, 1);
                     player->AddItem(32471, 1);
                     player->AddItem(32471, 1);
+                    player->AddAura(30567, player);
+                    player->AddAura(30557, player);
+                    player->AddAura(30562, player);
+                    player->AddItem(37836, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Ladino");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1478,6 +1828,10 @@ public:
                     player->AddItem(29057, 1);
                     player->AddItem(29059, 1);
                     player->AddItem(50181, 1);
+                    player->AddAura(30567, player);
+                    player->AddAura(30557, player);
+                    player->AddAura(30562, player);
+                    player->AddItem(37836, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Sacerdote");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1490,6 +1844,10 @@ public:
                     player->AddItem(29080, 1);
                     player->AddItem(29078, 1);
                     player->AddItem(50181, 1);
+                    player->AddAura(30567, player);
+                    player->AddAura(30557, player);
+                    player->AddAura(30562, player);
+                    player->AddItem(37836, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Mago");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1502,6 +1860,10 @@ public:
                     player->AddItem(28968, 1);
                     player->AddItem(28966, 1);
                     player->AddItem(50181, 1);
+                    player->AddAura(30567, player);
+                    player->AddAura(30557, player);
+                    player->AddAura(30562, player);
+                    player->AddItem(37836, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Bruxo");
                     CloseGossipMenuFor(player);
 
@@ -1509,18 +1871,27 @@ public:
 
                 case CLASS_HUNTER:
                 {
+
                     player->AddItem(29081, 1);
                     player->AddItem(29084, 1);
                     player->AddItem(29082, 1);
                     player->AddItem(29085, 1);
                     player->AddItem(29083, 1);
                     player->AddItem(51395, 1);
+                    player->AddAura(30567, player);
+                    player->AddAura(30557, player);
+                    player->AddAura(30562, player);
+                    player->AddItem(37836, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Caçador");
                     CloseGossipMenuFor(player);
                 }break;
 
                 case CLASS_DEATH_KNIGHT:
                 {
+                    player->AddAura(30567, player);
+                    player->AddAura(30557, player);
+                    player->AddAura(30562, player);
+                    player->AddItem(37836, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Você já está bem avançado em sua jornada, não precisa da minha ajuda. Receba apenas minha benção");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1530,6 +1901,9 @@ public:
 
             //Druid Feral
             case 100: {
+                player->AddAura(30567, player);
+                player->AddAura(30557, player);
+                player->AddAura(30562, player);
                 player->AddItem(29098, 1);
                 player->AddItem(29100, 1);
                 player->AddItem(29096, 1);
@@ -1543,6 +1917,9 @@ public:
 
             //Druid Balance
             case 101: {
+                player->AddAura(30567, player);
+                player->AddAura(30557, player);
+                player->AddAura(30562, player);
                 player->AddItem(29093, 1);
                 player->AddItem(29095, 1);
                 player->AddItem(29091, 1);
@@ -1556,6 +1933,9 @@ public:
 
             //Shaman Elemental
             case 200: {
+                player->AddAura(30567, player);
+                player->AddAura(30557, player);
+                player->AddAura(30562, player);
                 player->AddItem(29035, 1);
                 player->AddItem(29037, 1);
                 player->AddItem(29033, 1);
@@ -1570,6 +1950,9 @@ public:
 
             //Shaman Enhancement
             case 201: {
+                player->AddAura(30567, player);
+                player->AddAura(30557, player);
+                player->AddAura(30562, player);
                 player->AddItem(29040, 1);
                 player->AddItem(29043, 1);
                 player->AddItem(29038, 1);
