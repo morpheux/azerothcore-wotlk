@@ -1801,7 +1801,7 @@ public:
                     player->AddItem(29071, 1);
                     player->AddItem(29072, 1);
                     player->AddItem(29074, 1);
-                    player->AddItem(51389, 1);
+                    player->AddItem(19854, 1);
                     player->AddAura(30567, player);
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
