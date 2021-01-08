@@ -1739,7 +1739,7 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        if (!player->HasItemCount(37836, 1, true)) {
+        if (!player->HasItemCount(37836, 1, true) && player->getLevel() <= 10) {
 
         
         if (player->getClass() == CLASS_DRUID) {
@@ -1758,7 +1758,7 @@ public:
         }
         }
         else {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Eu já lhe ajudei em sua jornada, agora você deve procurar seu caminho", 1000, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Não posso mais lhe ajudar aventureiro, siga seu caminho...", 1000, 0);
             player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
         }
         return true;
