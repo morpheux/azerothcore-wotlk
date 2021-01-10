@@ -2020,6 +2020,266 @@ public:
     }
 };
 
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC de Troca de Tabard                ///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_tabard : public CreatureScript
+{
+public:
+    etmaxx_tabard() : CreatureScript("etmaxx_tabard") { }
+
+    bool OnGossipHello(Player* player, Creature* creature)
+    {
+        // 25 tabards
+        uint32 tabardHorda[] =
+        {
+                60044,          //Tabard of Orgrimmar
+                60045,          //Tabard of Orgrimmar
+                60046,          //Tabard of Orgrimmar
+                60047,          //Tabard of Orgrimmar
+                60048,          //Tabard of Orgrimmar
+                60049,          //Tabard of Thunder Bluff
+                60050,          //Tabard of Thunder Bluff
+                60051,          //Tabard of Thunder Bluff
+                60052,          //Tabard of Thunder Bluff
+                60053,          //Tabard of Thunder Bluff
+                60054,          //Tabard of Sen'jin
+                60055,          //Tabard of Sen'jin
+                60056,          //Tabard of Sen'jin
+                60057,          //Tabard of Sen'jin
+                60058,          //Tabard of Sen'jin
+                60059,          //Tabard of Silvermoon
+                60060,          //Tabard of Silvermoon
+                60061,          //Tabard of Silvermoon
+                60062,          //Tabard of Silvermoon
+                60063,          //Tabard of Silvermoon
+                60064,          //Tabard of Undercity
+                60065,          //Tabard of Undercity
+                60066,          //Tabard of Undercity
+                60067,          //Tabard of Undercity
+                60068           //Tabard of Undercity
+        };
+
+        // 24 Tabards
+        uint32 tabardAlly[] =
+        {
+                60020,          //Tabard of Stormwind
+                60021,          //Tabard of Stormwind
+                60022,          //Tabard of Stormwind
+                60023,          //Tabard of Stormwind
+                60024,          //Tabard of Stormwind
+                60025,          //Tabard of Darnassus
+                60026,          //Tabard of Darnassus
+                60027,          //Tabard of Darnassus
+                60028,          //Tabard of Darnassus
+                60029,          //Tabard of Darnassus
+                60030,          //Tabard of Ironforge
+                60031,          //Tabard of Ironforge
+                60032,          //Tabard of Ironforge
+                60033,          //Tabard of Ironforge
+                60034,          //Tabard of Ironforge
+                60035,          //Tabard of Exodar
+                60036,          //Tabard of Exodar
+                60037,          //Tabard of Exodar
+                60038,          //Tabard of Exodar
+                60039,          //Tabard of Exodar
+                60040,          //Tabard of Gnomeregan
+                60041,          //Tabard of Gnomeregan
+                60042,          //Tabard of Gnomeregan
+                60043           //Tabard of Gnomeregan
+        };
+
+        bool acheitabardfaccaooposta = false;
+
+        // Se o player for alliance, verificar se ele tem tabard horda na bag
+        if (player->GetTeamId() == TEAM_ALLIANCE) {
+            for (uint8 i = 0; i < 25; ++i) {
+                if (player->HasItemCount(tabardHorda[i], 1, true));
+                    acheitabardfaccaooposta = true;
+            }
+
+        }
+
+        // Se o player for hprda, verificar se ele tem tabard alliancce na bag
+        if (player->GetTeamId() == TEAM_HORDE) {
+            for (uint8 i = 0; i < 24; ++i) {
+                if (player->HasItemCount(tabardAlly[i], 1, true));
+                acheitabardfaccaooposta = true;
+            }
+
+        }
+
+        if (acheitabardfaccaooposta == true)
+        {
+            // Construir gossips baseados nas racas
+
+            switch (player->getRaceMask()) {
+            case RACEMASK_HORDE:
+            {
+                if (player->getRace() == RACE_BLOODELF) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+
+                }else if(player->getRace() == RACE_ORC) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+
+                }
+                else if (player->getRace() == RACE_TROLL) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                }
+                else if (player->getRace() == RACE_UNDEAD_PLAYER) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+
+                }
+                else if (player->getRace() == RACE_TAUREN) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                }
+            }break;
+
+            case RACEMASK_ALLIANCE:
+            {
+                if (player->getRace() == RACE_HUMAN) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+
+                }
+                else if (player->getRace() == RACE_DWARF) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+
+                }
+                else if (player->getRace() == RACE_GNOME) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                }
+                else if (player->getRace() == RACE_DRAENEI) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+
+                }
+                else if (player->getRace() == RACE_NIGHTELF) {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                }
+
+            }break;
+
+        }
+
+        }
+    }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32, uint32 action)
+    {
+        player->PlayerTalkClass->ClearMenus();
+
+        switch (action)
+        {
+        case 60044:          //Tabard of Orgrimmar
+        case 60045:          //Tabard of Orgrimmar
+        case 60046:          //Tabard of Orgrimmar
+        case 60047:          //Tabard of Orgrimmar
+        case 60048:          //Tabard of Orgrimmar
+        case 60049:          //Tabard of Thunder Bluff
+        case 60050:          //Tabard of Thunder Bluff
+        case 60051:          //Tabard of Thunder Bluff
+        case 60052:          //Tabard of Thunder Bluff
+        case 60053:          //Tabard of Thunder Bluff
+        case 60054:          //Tabard of Sen'jin
+        case 60055:          //Tabard of Sen'jin
+        case 60056:          //Tabard of Sen'jin
+        case 60057:          //Tabard of Sen'jin
+        case 60058:          //Tabard of Sen'jin
+        case 60059:          //Tabard of Silvermoon
+        case 60060:          //Tabard of Silvermoon
+        case 60061:          //Tabard of Silvermoon
+        case 60062:          //Tabard of Silvermoon
+        case 60063:          //Tabard of Silvermoon
+        case 60064:          //Tabard of Undercity
+        case 60065:          //Tabard of Undercity
+        case 60066:          //Tabard of Undercity
+        case 60067:          //Tabard of Undercity
+        case 60068:           //Tabard of Undercity
+        case 60020:          //Tabard of Stormwind
+        case 60021:          //Tabard of Stormwind
+        case 60022:          //Tabard of Stormwind
+        case 60023:          //Tabard of Stormwind
+        case 60024:          //Tabard of Stormwind
+        case 60025:          //Tabard of Darnassus
+        case 60026:          //Tabard of Darnassus
+        case 60027:          //Tabard of Darnassus
+        case 60028:          //Tabard of Darnassus
+        case 60029:          //Tabard of Darnassus
+        case 60030:          //Tabard of Ironforge
+        case 60031:          //Tabard of Ironforge
+        case 60032:          //Tabard of Ironforge
+        case 60033:          //Tabard of Ironforge
+        case 60034:          //Tabard of Ironforge
+        case 60035:          //Tabard of Exodar
+        case 60036:          //Tabard of Exodar
+        case 60037:          //Tabard of Exodar
+        case 60038:          //Tabard of Exodar
+        case 60039:          //Tabard of Exodar
+        case 60040:          //Tabard of Gnomeregan
+        case 60041:          //Tabard of Gnomeregan
+        case 60042:          //Tabard of Gnomeregan
+        case 60043:          //Tabard of Gnomeregan
+            addTabard(action, player);
+            destroyTabard(player);
+            break;
+        }
+        return true;
+    }
+
+
+
+    void addTabard(uint32 itemid, Player* player)
+    {
+        player->AddItem(itemid, 1);
+    }
+
+    void destroyTabard(Player* player)
+    {
+        
+    }
+
+};
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -2033,4 +2293,8 @@ void AddNpcEtmaxxScripts()
     new etmaxx_battlepass();
     new etmaxx_transmog_vendor();
     new etmaxx_start();
+}
+
+void etmaxx_tabard::addTabard(uint32 itemid, Player* player)
+{
 }
