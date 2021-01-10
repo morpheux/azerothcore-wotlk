@@ -2020,46 +2020,7 @@ public:
     }
 };
 
-///////////////////////////////////////////////////////////////////////////////////
-/////////////                 NPC de Troca de Tabard                ///////////////
-///////////////////////////////////////////////////////////////////////////////////;
 
-
-class etmaxx_tabard : public CreatureScript
-{
-public:
-    etmaxx_tabard() : CreatureScript("etmaxx_tabard") { }
-
-    bool OnGossipHello(Player* player, Creature* creature)
-    {
-        player->PlayerTalkClass->ClearMenus();
-        if (player->unReadMails == 1) {
-            AddGossipItemFor(player, 10, "Eu tenho um mail", 1, 0);
-            player->SEND_GOSSIP_MENU(800803, creature->GetGUID());
-        }
-        else {
-            AddGossipItemFor(player, 10, "Eu NAO tenho um mail", 2, 0);
-            player->SEND_GOSSIP_MENU(800803, creature->GetGUID());
-        }
-        return true;
-    }
-
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
-    {
-        player->PlayerTalkClass->ClearMenus();
-        switch (sender) {
-        case 1: {
-            ChatHandler(player->GetSession()).PSendSysMessage("Realmente TENHO mails");
-            CloseGossipMenuFor;
-        }break;
-        case 2: {
-            ChatHandler(player->GetSession()).PSendSysMessage("Realmente NAO tenho mails");
-            CloseGossipMenuFor;
-        }
-        }
-        return true;
-    }
-};
 
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
@@ -2072,5 +2033,4 @@ void AddNpcEtmaxxScripts()
     new etmaxx_battlepass();
     new etmaxx_transmog_vendor();
     new etmaxx_start();
-    new etmaxx_tabard();
 }
