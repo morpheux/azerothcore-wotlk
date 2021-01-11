@@ -2124,7 +2124,7 @@ public:
 
         };
 
-        if (acheitabardfaccaooposta == true)
+        if (acheitabardfaccaooposta)
         {
             // Construir gossips baseados nas racas
 
@@ -2141,16 +2141,25 @@ public:
                     {
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60059, 0);
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|STRENGTH DPS", 60061, 0);
+                        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                     }
 
-                    if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST || player->getClass() == CLASS_MAGE || player->getClass() == CLASS_WARLOCK)
+                    if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST || player->getClass() == CLASS_MAGE || player->getClass() == CLASS_WARLOCK) {
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60060, 0);
+                        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                    }             
 
-                    if (player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_HUNTER)
+                    if (player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_HUNTER) {
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60062, 0);
+                        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                    }
+                        
 
-                    if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST)
+                    if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST) {
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60063, 0);
+                        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                    }
+                        
 
                 }else if(player->getRace() == RACE_ORC) {
                     if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
