@@ -2110,8 +2110,8 @@ public:
         if (player->GetTeamId() == TEAM_ALLIANCE) {
             for (uint8 i = 0; i < 25; ++i) {
                 if (player->HasItemCount(tabardHorda[i], 1, true));
-                    acheitabardfaccaooposta = true;
-            }
+                acheitabardfaccaooposta = true;
+            };
 
         }
 
@@ -2120,7 +2120,7 @@ public:
             for (uint8 i = 0; i < 24; ++i) {
                 if (player->HasItemCount(tabardAlly[i], 1, true));
                 acheitabardfaccaooposta = true;
-            }
+            };
 
         }
 
@@ -2162,7 +2162,7 @@ public:
                     if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60046, 0);
 
-                    if (player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_HUNTER || CLASS_SHAMAN)
+                    if (player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_HUNTER || player->getClass() == CLASS_SHAMAN)
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60047, 0);
 
                     if (player->getClass() == CLASS_SHAMAN)
@@ -2179,7 +2179,7 @@ public:
                     if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60056, 0);
 
-                    if (player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_HUNTER || CLASS_SHAMAN)
+                    if (player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_HUNTER || player->getClass() == CLASS_SHAMAN)
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60057, 0);
 
                     if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_PRIEST)
@@ -2218,6 +2218,7 @@ public:
                     if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_DRUID)
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60053, 0);
                 }
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             }break;
 
             case RACEMASK_ALLIANCE:
@@ -2306,12 +2307,13 @@ public:
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60028, 0);
                 }
 
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             }break;
 
         }
 
         player->PlayerTalkClass->SendCloseGossip();
-
+        return true;
         }
     }
 
@@ -2370,7 +2372,7 @@ public:
         case 60041:          //Tabard of Gnomeregan
         case 60042:          //Tabard of Gnomeregan
         case 60043:          //Tabard of Gnomeregan
-            if (destroyTabard)
+            if (destroyTabard(player))
             {
                 addTabard(action, player);
             }
