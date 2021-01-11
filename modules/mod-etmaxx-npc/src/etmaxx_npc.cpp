@@ -2313,8 +2313,8 @@ public:
         }
 
         player->PlayerTalkClass->SendCloseGossip();
-        return true;
         }
+        return true;
     }
 
     bool OnGossipSelect(Player* player, Creature* creature, uint32, uint32 action)
