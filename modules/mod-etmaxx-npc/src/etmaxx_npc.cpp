@@ -2394,7 +2394,7 @@ public:
         // Se o player for alliance, verificar se ele tem tabard horda na bag
         if (player->GetTeamId() == TEAM_ALLIANCE) {
             for (uint8 i = 0; i < 25; ++i) {
-                if (player->HasItemCount(tabardHorda[i], 1, true));
+                if (player->HasItemCount(tabardHorda[i], 1, true))
                 {
                     player->DestroyItemCount(tabardHorda[i], 1, true);
                     return true;
@@ -2402,19 +2402,19 @@ public:
 
             }
 
-        }
+        };
 
         // Se o player for hprda, verificar se ele tem tabard alliancce na bag
         if (player->GetTeamId() == TEAM_HORDE) {
             for (uint8 i = 0; i < 24; ++i) {
-                if (player->HasItemCount(tabardAlly[i], 1, true));
+                if (player->HasItemCount(tabardAlly[i], 1, true))
                 {
                     player->DestroyItemCount(tabardAlly[i], 1, true);
                     return true;
                 }
             }
 
-        }
+        };
 
         return false;
     }
