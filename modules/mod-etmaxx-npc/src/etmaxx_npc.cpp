@@ -300,11 +300,10 @@ public:
         {
 
         case 2:
-            //player->DestroyItemCount(40402, 1, true);
-            //player->AddItem(60007, 1);
-            player->GetSession()->SendListInventory(creature->GetGUID(), 80503);
+            player->DestroyItemCount(40402, 1, true);
+            player->AddItem(60007, 1);            
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
-            //OnGossipHello(player, creature);
+            OnGossipHello(player, creature);
             break;
 
         case 3:
@@ -794,7 +793,7 @@ public:
             // Machados 2Hand
             case 1000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_69:30:30:-18:0|tAxe of Shattered Dreams", 34794, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_69:30:30:-18:0|tAxe of Shattered Dreams", 34794, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_120:30:30:-18:0|tBryntroll, the Bone Arbiter", 50709, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_40:30:30:-18:0|tCrystalforged War Axe", 31291, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_106:30:30:-18:0|tDual-blade Butcher", 47446, 0);
@@ -802,8 +801,9 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_102:30:30:-18:0|tStormedge", 45458, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_95:30:30:-18:0|tTitansteel Defender", 44948, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90500);
+                //SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             } break;
             //Machados 1Hand
             case 2000:
