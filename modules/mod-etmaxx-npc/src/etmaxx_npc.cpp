@@ -2126,6 +2126,9 @@ public:
 
         };
 
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTEST", 60059, 0);
+
+        /*
         if (acheitabardfaccaooposta)
         {
             // Construir gossips baseados nas racas
@@ -2422,7 +2425,7 @@ public:
             }break;
 
         }
-        }
+        }*/
         return true;
     }
 
