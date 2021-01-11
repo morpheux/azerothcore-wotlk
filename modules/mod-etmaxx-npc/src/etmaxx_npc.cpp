@@ -182,7 +182,7 @@ public:
 
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "--------------------------", GOSSIP_SENDER_MAIN, 5000);
 
-            if (player->HasItemCount(40402, 1))
+            //if (player->HasItemCount(40402, 1))
                 player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_61:25:25|tVIP Tank Axe", GOSSIP_SENDER_MAIN, 2);
 
             if (player->HasItemCount(47898, 1))
@@ -300,8 +300,9 @@ public:
         {
 
         case 2:
-            player->DestroyItemCount(40402, 1, true);
-            player->AddItem(60007, 1);
+            //player->DestroyItemCount(40402, 1, true);
+            //player->AddItem(60007, 1);
+            player->GetSession()->SendListInventory(50050);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
             OnGossipHello(player, creature);
             break;
@@ -2134,7 +2135,6 @@ public:
             // 72417 = DPS Spell
             // 72413 = DPS Meele / Ranged
             // 72419 = Healer
-
                 if (player->getRace() == RACE_BLOODELF) {
                     if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_DEATH_KNIGHT)
                     {
@@ -2318,7 +2318,7 @@ public:
                     if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT || player->getClass() == CLASS_PALADIN)
                     {
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60030, 0);
-                        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_140:30:30:-18:0|tSTRENGTH DPS", 60032, 0);
+                        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tSTRENGTH DPS", 60032, 0);
 
                     }
 
