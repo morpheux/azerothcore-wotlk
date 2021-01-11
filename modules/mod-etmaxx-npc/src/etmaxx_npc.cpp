@@ -2135,9 +2135,6 @@ public:
             // 72413 = DPS Meele / Ranged
             // 72419 = Healer
 
-            switch (player->getRaceMask()) {
-            case RACEMASK_HORDE:
-            {
                 if (player->getRace() == RACE_BLOODELF) {
                     if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_DEATH_KNIGHT)
                     {
@@ -2290,10 +2287,6 @@ public:
                     }
                 }
 
-            }break;
-
-            case RACEMASK_ALLIANCE:
-            {
                 if (player->getRace() == RACE_HUMAN) {
                     if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT || player->getClass() == CLASS_PALADIN)
                     {
@@ -2418,10 +2411,7 @@ public:
 
                     }
 
-                }
-            }break;
-
-            }
+                }           
         }
         SendGossipMenuFor(player, 800804, creature->GetGUID());
 
