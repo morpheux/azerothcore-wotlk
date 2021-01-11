@@ -304,7 +304,7 @@ public:
             //player->AddItem(60007, 1);
             player->GetSession()->SendListInventory(creature->GetGUID(), 80503);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Upgrade Mark Adicionado em sua Bag.");
-            OnGossipHello(player, creature);
+            //OnGossipHello(player, creature);
             break;
 
         case 3:
