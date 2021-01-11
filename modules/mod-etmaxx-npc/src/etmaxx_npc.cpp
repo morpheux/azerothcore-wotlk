@@ -2127,6 +2127,7 @@ public:
         };
 
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTEST", 60059, 0);
+        SendGossipMenuFor(player, 800804, creature->GetGUID());
 
         /*
         if (acheitabardfaccaooposta)
