@@ -2111,7 +2111,7 @@ public:
             for (uint8 i = 0; i < 25; ++i) {
                 if (player->HasItemCount(tabardHorda[i], 1, true));
                 acheitabardfaccaooposta = true;
-            };
+            }
 
         }
 
@@ -2120,7 +2120,7 @@ public:
             for (uint8 i = 0; i < 24; ++i) {
                 if (player->HasItemCount(tabardAlly[i], 1, true));
                 acheitabardfaccaooposta = true;
-            };
+            }
 
         }
 
@@ -2378,6 +2378,7 @@ public:
             }
             break;
         }
+        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
 
@@ -2434,8 +2435,4 @@ void AddNpcEtmaxxScripts()
     new etmaxx_transmog_vendor();
     new etmaxx_start();
 	new etmaxx_tabard();
-}
-
-void etmaxx_tabard::addTabard(uint32 itemid, Player* player)
-{
 }
