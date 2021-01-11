@@ -2104,6 +2104,8 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
+
+        ClearGossipMenuFor(player);
         bool acheitabardfaccaooposta = false;
 
         // Se o player for alliance, verificar se ele tem tabard horda na bag
@@ -2227,7 +2229,6 @@ public:
                     if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_DRUID)
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60053, 0);
                 }
-                SendGossipMenuFor(player, 800804, creature->GetGUID());
             }break;
 
             case RACEMASK_ALLIANCE:
