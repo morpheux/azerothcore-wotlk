@@ -2115,7 +2115,7 @@ public:
 
         };
 
-        // Se o player for hprda, verificar se ele tem tabard alliancce na bag
+        // Se o player for horda, verificar se ele tem tabard alliancce na bag
         if (player->GetTeamId() == TEAM_HORDE) {
             for (uint8 i = 0; i < 24; ++i) {
                 if (player->HasItemCount(tabardAlly[i], 1, true))
@@ -2218,7 +2218,7 @@ public:
                     if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_DRUID)
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60053, 0);
                 }
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, 800804, creature->GetGUID());
             }break;
 
             case RACEMASK_ALLIANCE:
@@ -2307,7 +2307,7 @@ public:
                         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60028, 0);
                 }
 
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, 800804, creature->GetGUID());
             }break;
 
         }
