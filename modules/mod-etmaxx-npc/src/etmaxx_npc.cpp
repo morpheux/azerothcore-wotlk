@@ -859,6 +859,7 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_83:30:30:-18:0|tStaff of Draconic Combat", 37360, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_61:30:30:-18:0|tStaff of Immaculate Recovery", 32344, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_100:30:30:-18:0|tParagon's Breadth", 48710, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_53:30:30:-18:0|tGladiator's War Staff", 24557, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -1578,6 +1579,20 @@ public:
                 player->AddItem(48710, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
+                }
+                else {
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
+                    CloseGossipMenuFor(player);
+                }
+            }break;
+
+            case 24557:
+            {
+                if (player->HasItemCount(80004, 1, true)) {
+                    player->DestroyItemCount(80004, 1, true);
+                    player->AddItem(24557, 1);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por usar sua EtMaXx Transmog Mark");
+                    CloseGossipMenuFor(player);
                 }
                 else {
                     ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
