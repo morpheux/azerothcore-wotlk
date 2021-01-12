@@ -808,109 +808,116 @@ public:
             //Machados 1Hand
             case 2000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_40:30:30:-18:0|tBladespire Broadaxe", 25208, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_40:30:30:-18:0|tBladespire Broadaxe", 25208, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_62:30:30:-18:0|tBreeching Comet", 34616, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_108:30:30:-18:0|tAxe of the Sen'jin Protector", 45204, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_65:30:30:-18:0|tFirebrand Battleaxe", 27490, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90501);
             } break;
 
             //Adagas
             case 3000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_102:30:30:-18:0|tBloodsipper", 51846, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_102:30:30:-18:0|tBloodsipper", 51846, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_38:30:30:-18:0|tEmerald Ripper", 28524, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_06:30:30:-18:0|tHoned Fang of the Mystics", 49494, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_29:30:30:-18:0|tFang of Korialstrasz", 21523, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_31:30:30:-18:0|tFang of Venoxis", 19903, 0);
-                
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90502);
             } break;
 
             //Armas de Punho
             case 4000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_hand_09:30:30:-18:0|tArm Blade of Augelmir", 35573, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_hand_09:30:30:-18:0|tArm Blade of Augelmir", 35573, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_hand_01:30:30:-18:0|tNexus-Claw", 29371, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_hand_20:30:30:-18:0|tCalamity's Grasp", 40383, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90503);
             } break;
 
             //Maças 1Hand
             case 5000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_32:30:30:-18:0|tAmani Punisher", 33283, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_32:30:30:-18:0|tAmani Punisher", 33283, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_71:30:30:-18:0|tArchon's Gavel", 34199, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_44:30:30:-18:0|tBloodskull Destroyer", 28210, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_27:30:30:-18:0|tHammer of the Astral Plane", 39423, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_59:30:30:-18:0|tHammer of Wrenching Change", 44747, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90504);
             } break;
 
             //Maças 2Hand
             case 6000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_52:30:30:-18:0|tGladiator's Bonegrinder", 28299, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_52:30:30:-18:0|tGladiator's Bonegrinder", 28299, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_25:30:30:-18:0|tDemise", 39245, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_28:30:30:-18:0|tHammer of the Naaru", 28800, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_84:30:30:-18:0|tTitansteel Destroyer", 41257, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_mace_116:30:30:-18:0|tCryptmaker", 50603, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90505);
             } break;
 
             //Espada 2Hand
             case 8000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_2h_ashbringercorrupt:30:30:-18:0|tCorrupted Ashbringer", 22691, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_2h_ashbringercorrupt:30:30:-18:0|tCorrupted Ashbringer", 22691, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_136:30:30:-18:0|tAesir's Edge", 45868, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_116:30:30:-18:0|tApolyon, the Soul-Render", 34247, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_59:30:30:-18:0|tSin'dorei Warblade", 22995, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_51:30:30:-18:0|tWarp-Storm Warblade", 28400, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90506);
             } break;
 
             //Espada 1Hand
             case 7000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_102:30:30:-18:0|tBlade of the Archmage", 29153, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_shortblade_102:30:30:-18:0|tBlade of the Archmage", 29153, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_76:30:30:-18:0|tBlinkstrike", 31332, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_11:30:30:-18:0|tContinuum Blade", 29185, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_119:30:30:-18:0|tGhoulslicer", 49827, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_73:30:30:-18:0|tFang of the Leviathan", 30095, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90507);
             } break;
 
             //polearm
             case 9000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_halberd13:30:30:-18:0|tHellreaver", 24044, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_halberd13:30:30:-18:0|tHellreaver", 24044, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_101:30:30:-18:0|tFordragon Blades", 47979, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_spear_01:30:30:-18:0|tFlame Wrath", 11809, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_halberd_12:30:30:-18:0|tHalberd of Smiting", 19874, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_halberd_31:30:30:-18:0|tHellion Glaive", 47491, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90508);
             } break;
 
             //Staff
             case 10000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_draenei_a_03:30:30:-18:0|tExodar Life-Staff", 30732, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_draenei_a_03:30:30:-18:0|tExodar Life-Staff", 30732, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_12:30:30:-18:0|tMonster - Staff, Dalaran Red", 43619, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_83:30:30:-18:0|tStaff of Draconic Combat", 37360, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_61:30:30:-18:0|tStaff of Immaculate Recovery", 32344, 0);
@@ -918,24 +925,26 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_53:30:30:-18:0|tGladiator's War Staff", 24557, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90509);
             } break;
 
             //Bow
             case 11000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_55:30:30:-18:0|tNjorndar Bone Bow", 51927, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_55:30:30:-18:0|tNjorndar Bone Bow", 51927, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_51:30:30:-18:0|tGolemheart Longbow", 46342, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_31:30:30:-18:0|tFurious Gladiator's Longbow", 42491, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90510);
             } break;
 
             //Shield
             case 12000:
             {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_58:30:30:-18:0|tRoyal Crest of Lordaeron", 43085, 0);
+                /*AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_58:30:30:-18:0|tRoyal Crest of Lordaeron", 43085, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_34:30:30:-18:0|tZom's Crackling Bulwark", 44313, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_67:30:30:-18:0|tBulwark of Algalon", 45587, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tBulwark of Azzinoth", 32375, 0);
@@ -943,11 +952,12 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_53:30:30:-18:0|tBrutal Gladiator's Shield Wall", 35094, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 50, 0);
-                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());*/
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90511);
             } break;
 
             //Entregando Axe 2Hand
-            case 34794:
+            /*case 34794:
             {
                 if (player->HasItemCount(80004, 1, true)) {
                 player->DestroyItemCount(80004, 1, true);
@@ -1782,7 +1792,7 @@ public:
                     ChatHandler(player->GetSession()).PSendSysMessage("Você Precisa de uma EtMaXx Transmog Mark.");
                     CloseGossipMenuFor(player);
                 }
-            }break;
+            }break;*/
 
             case 100000:
             {
