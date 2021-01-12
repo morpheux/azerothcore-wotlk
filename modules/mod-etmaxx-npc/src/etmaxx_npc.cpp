@@ -176,8 +176,11 @@ public:
     {
             player->PlayerTalkClass->ClearMenus();
 
-            if (player->HasItemCount(40402, 1))
+            if (player->HasItemCount(40402, 1)) {
                 AddGossipItemFor(player, NULL, "|TInterface/Icons/inv_axe_61:25:25|tVIP Tank Axe", GOSSIP_SENDER_MAIN, 2, "Tem Certeza? isso irá DESTRUIR seu item VIP", 0, false);
+                player->SEND_GOSSIP_MENU(800805, creature->GetGUID());
+            }
+                
 
             if (player->HasItemCount(47898, 1))
                 player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_104:25:25|tVIP One Hand Axe", GOSSIP_SENDER_MAIN, 3);
@@ -275,7 +278,7 @@ public:
             if (player->HasItemCount(47528, 1))
                 player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_mace_101:25:25|tVIP One-Hand Mace Tank", GOSSIP_SENDER_MAIN, 34);
             
-			player->SEND_GOSSIP_MENU(800805, creature->GetGUID());
+			
 
         return true;
     }
