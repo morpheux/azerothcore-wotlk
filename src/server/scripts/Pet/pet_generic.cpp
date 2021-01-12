@@ -149,6 +149,7 @@ public:
     }
 };
 
+
 enum eArgentPony
 {
     ARGENT_PONY_STATE_NONE          = 0,

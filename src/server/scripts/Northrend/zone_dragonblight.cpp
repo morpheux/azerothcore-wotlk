@@ -261,6 +261,7 @@ public:
     }
 };
 
+
 enum hourglass
 {
     NPC_FUTURE_HOURGLASS            = 27840,
@@ -336,6 +337,7 @@ public:
 
         Player* getSummoner() { return ObjectAccessor::GetPlayer(*me, summonerGUID); }
         Creature* getFuture() { return ObjectAccessor::GetCreature(*me, futureGUID); }
+
 
         uint32 randEntry()
         {
@@ -1008,6 +1010,7 @@ public:
                                     }
                                     c->ToCreature()->DespawnOrUnsummon(1);
                                 }
+
                     }
                     break;
                 case 18: // summon vegard
@@ -1243,6 +1246,7 @@ public:
                 me->CastSpell(me, SPELL_SAC_EMERGE, true);
             }
         }
+
     };
 };
 
@@ -1379,6 +1383,8 @@ public:
         }
     };
 };
+
+
 
 // Theirs
 

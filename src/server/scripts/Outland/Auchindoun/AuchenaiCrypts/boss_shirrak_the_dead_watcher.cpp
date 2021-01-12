@@ -10,6 +10,7 @@
 
 enum eShirrak
 {
+
     SPELL_INHIBIT_MAGIC                 = 32264,
     SPELL_ATTRACT_MAGIC                 = 32265,
     SPELL_CARNIVOROUS_BITE_N            = 36383,
@@ -126,6 +127,7 @@ public:
 
             if (!UpdateVictim())
                 return;
+
 
             switch (eventId)
             {

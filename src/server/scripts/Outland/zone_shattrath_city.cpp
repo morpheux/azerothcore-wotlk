@@ -119,6 +119,7 @@ enum Salsalabim
 
     // Spells
     SPELL_MAGNETIC_PULL            = 31705
+
 };
 
 class npc_salsalabim : public CreatureScript

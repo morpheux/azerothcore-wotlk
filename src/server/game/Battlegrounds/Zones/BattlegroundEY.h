@@ -396,3 +396,4 @@ private:
     uint32 _flagCapturedObject;
 };
 #endif
+

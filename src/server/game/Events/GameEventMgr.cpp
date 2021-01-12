@@ -273,6 +273,7 @@ void GameEventMgr::LoadFromDB()
 
                 SetHolidayEventTime(pGameEvent);
             }
+
         } while (result->NextRow());
 
         sLog->outString(">> Loaded %u game events in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
@@ -1006,6 +1007,7 @@ void GameEventMgr::LoadHolidayDates()
         }
 
         ++count;
+
     } while (result->NextRow());
 
     sLog->outString(">> Loaded %u holiday dates in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
@@ -1817,6 +1819,7 @@ void GameEventMgr::SetHolidayEventTime(GameEventData& event)
             // date is due and not a singleDate event, try with next DBC date (modified by holiday_dates)
             // if none is found we don't modify start date and use the one in game_event
         }
+
     }
 }
 

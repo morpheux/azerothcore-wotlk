@@ -134,6 +134,7 @@ struct SymbolDetail
 class WheatyExceptionReport
 {
 public:
+
     WheatyExceptionReport();
     ~WheatyExceptionReport();
 
@@ -195,6 +196,7 @@ private:
     static void PushSymbolDetail();
     static void PopSymbolDetail();
     static void PrintSymbolDetail();
+
 };
 
 extern WheatyExceptionReport g_WheatyExceptionReport;       //  global instance of class

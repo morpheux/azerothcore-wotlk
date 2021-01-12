@@ -72,6 +72,8 @@ enum MiscIds
 
     INSTANCE_POSITIONS_COUNT        = 3,
     THRALL_POSITIONS_COUNT          = 5
+
 };
 
 #endif
+

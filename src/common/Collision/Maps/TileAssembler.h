@@ -63,6 +63,7 @@ namespace VMAP
         std::vector<G3D::Vector3> vertexArray;
         class WmoLiquid* liquid;
 
+
         GroupModel_Raw() : liquid(nullptr) { }
 
         ~GroupModel_Raw();

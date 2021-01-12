@@ -428,6 +428,7 @@ void TransportMgr::SpawnContinentTransports()
                     if (!tInfo->inInstance)
                         if (CreateTransport(entry, guid))
                             ++count;
+
             } while (result->NextRow());
         }
 
@@ -455,6 +456,7 @@ void TransportMgr::SpawnContinentTransports()
                             map->LoadGrid(x, y);
                             ++count;
                         }
+
                 } while (result->NextRow());
             }
 

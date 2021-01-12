@@ -1033,6 +1033,7 @@ public:
     }
 };
 
+
 // Theirs
 // 50462 - Anti-Magic Shell (on raid member)
 class spell_dk_anti_magic_shell_raid : public SpellScriptLoader
@@ -1760,6 +1761,7 @@ public:
         {
             OnEffectHitTarget += SpellEffectFn(spell_dk_death_strike_SpellScript::HandleDummy, EFFECT_2, SPELL_EFFECT_DUMMY);
         }
+
     };
 
     SpellScript* GetSpellScript() const override

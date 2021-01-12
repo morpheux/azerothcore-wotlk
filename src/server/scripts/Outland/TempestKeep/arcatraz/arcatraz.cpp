@@ -6,6 +6,7 @@
 #include "ScriptedCreature.h"
 #include "arcatraz.h"
 
+
 enum MillhouseSays
 {
     SAY_INTRO_1                 = 0,
@@ -171,6 +172,7 @@ public:
                             AttackStart(target);
                     events2.ScheduleEvent(EVENT_SEARCH_FIGHT, 1000);
                     break;
+
             }
 
             if (!UpdateVictim())
@@ -223,6 +225,7 @@ public:
                             break;
                     }
                     break;
+
             }
 
             DoMeleeAttackIfReady();
@@ -358,6 +361,7 @@ public:
             me->CastSpell((Unit*)NULL, SPELL_TARGET_OMEGA, false);
             instance->HandleGameObject(instance->GetData64(DATA_WARDENS_SHIELD), true);
             instance->SetBossState(DATA_WARDEN_MELLICHAR, NOT_STARTED);
+
         }
 
         void DamageTaken(Unit* attacker, uint32& damage, DamageEffectType, SpellSchoolMask) override

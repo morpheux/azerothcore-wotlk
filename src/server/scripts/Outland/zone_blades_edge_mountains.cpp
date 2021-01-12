@@ -811,6 +811,7 @@ public:
                 playableSequence.push_back(*i);
         }
 
+
         // Remove any existant glowing auras over clusters and set clusters ready for interating with them.
         void PrepareClusters(bool clustersOnly = false)
         {

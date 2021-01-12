@@ -107,15 +107,7 @@ public:
             }
         }
 
-        if (creature->GetEntry() == NPC_SYLVANAS_PART1)
-        {
-            SendGossipMenuFor(player, 15215, creature->GetGUID());
-        }
-        else if (creature->GetEntry() == NPC_JAINA_PART1)
-        {
-            SendGossipMenuFor(player, 15339, creature->GetGUID());
-        }
-
+        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
 
@@ -889,6 +881,7 @@ public:
                 me->ToTempSummon()->DespawnOrUnsummon(1);
         }
     };
+
 };
 
 class npc_shadowy_mercenary : public CreatureScript

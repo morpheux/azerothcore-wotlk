@@ -51,6 +51,7 @@ public:
                     if (Creature* hadronox = instance->GetCreature(_hadronoxGUID))
                         hadronox->AI()->JustSummoned(creature);
                     break;
+
             }
         }
 

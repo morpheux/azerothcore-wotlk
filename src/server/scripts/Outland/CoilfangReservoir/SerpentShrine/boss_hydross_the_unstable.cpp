@@ -264,6 +264,7 @@ public:
                         me->CastSpell(target, SPELL_VILE_SLUDGE, false);
                     events.ScheduleEvent(EVENT_SPELL_VILE_SLUDGE, 15000, GROUP_ABILITIES);
                     break;
+
             }
 
             DoMeleeAttackIfReady();

@@ -325,6 +325,7 @@ public:
             {
                 switch (passSpell)
                 {
+
                     case SPELL_PASS_TURKEY:
                         return SPELL_VISUAL_BOUNCE_TURKEY;
                     case SPELL_PASS_STUFFING:
@@ -341,6 +342,7 @@ public:
             {
                 switch (passSpell)
                 {
+
                     case SPELL_PASS_TURKEY:
                         return SPELL_VISUAL_THROW_TURKEY;
                     case SPELL_PASS_STUFFING:

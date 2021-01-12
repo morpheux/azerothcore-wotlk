@@ -135,6 +135,7 @@ enum Spells
     SPELL_ARTHAS_CRUSADER_STRIKE            = 50773,
 };
 
+
 #define GOSSIP_ITEM_ARTHAS_1 "Yes, my Prince. We're ready."
 #define GOSSIP_ITEM_ARTHAS_2 "We're only doing what is best for Loarderon your Highness."
 #define GOSSIP_ITEM_ARTHAS_3 "Lead the way Prince Arthas."
@@ -647,6 +648,7 @@ public:
                     SetEscortPaused(true);
                     eventInRun = true;
                     break;
+
             }
         }
 
@@ -1426,6 +1428,7 @@ public:
                         arthas->AI()->Reset();
                 }
                 player->NearTeleportTo(LeaderIntroPos2.GetPositionX(), LeaderIntroPos2.GetPositionY(), LeaderIntroPos2.GetPositionZ(), LeaderIntroPos2.GetOrientation());
+
             }
         }
 

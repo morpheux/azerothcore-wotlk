@@ -188,6 +188,7 @@ public:
                 case DATA_YMIRON_ACHIEVEMENT:
                     ymironAchievement = (bool)data;
                     return;
+
             }
             OUT_SAVE_INST_DATA;
 
@@ -228,6 +229,7 @@ public:
                 for (uint8 i = 0; i < MAX_ENCOUNTERS; ++i)
                     if (Encounters[i] == IN_PROGRESS)
                         Encounters[i] = NOT_STARTED;
+
             }
             else OUT_LOAD_INST_DATA_FAIL;
 

@@ -59,6 +59,7 @@ namespace Movement
     class MoveSplineInit
     {
     public:
+
         explicit MoveSplineInit(Unit* m);
 
         /*  Final pass of initialization that launches spline movement.
@@ -146,6 +147,7 @@ namespace Movement
         */
         void DisableTransportPathTransformations();
     protected:
+
         MoveSplineInitArgs args;
         Unit*  unit;
     };

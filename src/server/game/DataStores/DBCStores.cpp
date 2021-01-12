@@ -464,6 +464,8 @@ void LoadDBCStores(const std::string& dataPath)
         if (TaxiPathEntry const* entry = sTaxiPathStore.LookupEntry(i))
             sTaxiPathSetBySource[entry->from][entry->to] = TaxiPathBySourceAndDestination(entry->ID, entry->price);
 
+
+
     // Calculate path nodes count
     uint32 pathCount = sTaxiPathStore.GetNumRows();
     std::vector<uint32> pathLength;

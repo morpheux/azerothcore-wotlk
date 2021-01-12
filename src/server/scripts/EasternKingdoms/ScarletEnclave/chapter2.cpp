@@ -138,6 +138,7 @@ public:
 
                     ++speechCounter;
                     DoCastAOE(SPELL_THREAT_PULSE, true);
+
                 }
                 else
                     speechTimer -= diff;
@@ -148,6 +149,7 @@ public:
             CombatAI::UpdateAI(diff);
         }
     };
+
 };
 
 /*######
@@ -388,6 +390,7 @@ public:
             }
         }
     };
+
 };
 
 //Scarlet courier
@@ -476,6 +479,7 @@ public:
             DoMeleeAttackIfReady();
         }
     };
+
 };
 
 //Koltira & Valroth- Breakout
@@ -564,6 +568,7 @@ public:
             killer->CastSpell(me, SPELL_SUMMON_VALROTH_REMAINS, true);
         }
     };
+
 };
 
 /*######

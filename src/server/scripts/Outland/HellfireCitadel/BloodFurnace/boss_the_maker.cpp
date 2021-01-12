@@ -26,6 +26,7 @@ enum eEnums
 class boss_the_maker : public CreatureScript
 {
 public:
+
     boss_the_maker() : CreatureScript("boss_the_maker")
     {
     }
@@ -81,6 +82,7 @@ public:
             instance->SetData(DATA_THE_MAKER, DONE);
             instance->HandleGameObject(instance->GetData64(DATA_DOOR2), true);
             instance->HandleGameObject(instance->GetData64(DATA_DOOR3), true);
+
         }
 
         void UpdateAI(uint32 diff) override
@@ -128,3 +130,4 @@ void AddSC_boss_the_maker()
 {
     new boss_the_maker();
 }
+

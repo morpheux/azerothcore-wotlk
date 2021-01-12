@@ -467,6 +467,7 @@ public:
                             minrange = summon->GetExactDist(p);
                         }
 
+
                 summon->ToTempSummon()->DespawnOrUnsummon(30000);
             }
             else

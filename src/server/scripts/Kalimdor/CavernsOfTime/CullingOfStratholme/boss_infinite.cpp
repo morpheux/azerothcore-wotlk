@@ -145,6 +145,7 @@ public:
             DoMeleeAttackIfReady();
         }
     };
+
 };
 
 void AddSC_boss_infinite_corruptor()

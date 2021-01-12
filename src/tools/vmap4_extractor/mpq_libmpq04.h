@@ -19,6 +19,7 @@ using namespace std;
 
 class MPQArchive
 {
+
 public:
     mpq_archive_s* mpq_a;
 

@@ -180,6 +180,7 @@ public:
             return saveStream.str();
         }
 
+
         void Load(const char* in) override
         {
             if (!in)
@@ -209,6 +210,7 @@ public:
                         m_auiEncounter[i] = NOT_STARTED;
 
                 OUT_LOAD_INST_DATA_COMPLETE;
+
             }
             else
                 OUT_LOAD_INST_DATA_FAIL;

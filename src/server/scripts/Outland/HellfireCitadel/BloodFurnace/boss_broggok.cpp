@@ -25,6 +25,7 @@ enum eEnums
 class boss_broggok : public CreatureScript
 {
 public:
+
     boss_broggok() : CreatureScript("boss_broggok")
     {
     }
@@ -89,6 +90,7 @@ public:
                     me->CastSpell(me, SPELL_POISON_CLOUD, false);
                     events.RepeatEvent(20000);
                     break;
+
             }
 
             DoMeleeAttackIfReady();
@@ -122,6 +124,7 @@ public:
                     break;
             }
         }
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override

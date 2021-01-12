@@ -63,6 +63,7 @@ public:
             BossAI::MoveInLineOfSight(who);
         }
 
+
         void EnterCombat(Unit* /*who*/) override
         {
             _EnterCombat();

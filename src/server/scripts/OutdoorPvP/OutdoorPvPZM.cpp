@@ -444,6 +444,7 @@ void OutdoorPvPZM::SendRemoveWorldStates(Player* player)
 class OutdoorPvP_zangarmarsh : public OutdoorPvPScript
 {
 public:
+
     OutdoorPvP_zangarmarsh()
         : OutdoorPvPScript("outdoorpvp_zm")
     {

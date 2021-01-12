@@ -11,7 +11,6 @@
 #ifndef __WORLD_H
 #define __WORLD_H
 
-#include "IWorld.h"
 #include "Common.h"
 #include "Timer.h"
 #include "SharedDefines.h"
@@ -25,10 +24,22 @@
 
 class Object;
 class WorldPacket;
+class WorldSession;
+class Player;
 class WorldSocket;
 class SystemMgr;
 
 extern uint32 realmID;
+
+// ServerMessages.dbc
+enum ServerMessageType
+{
+    SERVER_MSG_SHUTDOWN_TIME      = 1,
+    SERVER_MSG_RESTART_TIME       = 2,
+    SERVER_MSG_STRING             = 3,
+    SERVER_MSG_SHUTDOWN_CANCELLED = 4,
+    SERVER_MSG_RESTART_CANCELLED  = 5
+};
 
 enum ShutdownMask
 {
@@ -556,7 +567,48 @@ enum WorldStates
     WS_DAILY_CALENDAR_DELETION_OLD_EVENTS_TIME = 20008                      // Next daily calendar deletions of old events time
 };
 
+/// Storage class for commands issued for delayed execution
+struct CliCommandHolder
+{
+    typedef void Print(void*, const char*);
+    typedef void CommandFinished(void*, bool success);
+
+    void* m_callbackArg;
+    char* m_command;
+    Print* m_print;
+
+    CommandFinished* m_commandFinished;
+
+    CliCommandHolder(void* callbackArg, const char* command, Print* zprint, CommandFinished* commandFinished)
+        : m_callbackArg(callbackArg), m_print(zprint), m_commandFinished(commandFinished)
+    {
+        size_t len = strlen(command) + 1;
+        m_command = new char[len];
+        memcpy(m_command, command, len);
+    }
+
+    ~CliCommandHolder() { delete[] m_command; }
+};
+
+typedef std::unordered_map<uint32, WorldSession*> SessionMap;
+
 #define WORLD_SLEEP_CONST 10
+
+// xinef: global storage
+struct GlobalPlayerData
+{
+    uint32 guidLow;
+    uint32 accountId;
+    std::string name;
+    uint8 race;
+    uint8 playerClass;
+    uint8 gender;
+    uint8 level;
+    uint16 mailCount;
+    uint32 guildId;
+    uint32 groupId;
+    std::map<uint8, uint32> arenaTeamId;
+};
 
 enum GlobalPlayerUpdateMask
 {
@@ -576,7 +628,7 @@ struct PetitionData
 };
 
 /// The World
-class World: public IWorld
+class World
 {
 public:
     World();
@@ -915,8 +967,6 @@ private:
     ACE_Future_Set<PreparedQueryResult> m_realmCharCallbacks;
 };
 
-std::unique_ptr<IWorld>& getWorldInstance();
-#define sWorld getWorldInstance()
-
+#define sWorld World::instance()
 #endif
 /// @}

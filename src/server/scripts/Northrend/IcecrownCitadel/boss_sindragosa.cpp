@@ -1230,6 +1230,7 @@ public:
             unitList = targetList;
         }
 
+
         void Register() override
         {
             OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_sindragosa_ice_tomb_SpellScript::FilterTargets, EFFECT_1, TARGET_UNIT_DEST_AREA_ENEMY);
@@ -1375,6 +1376,8 @@ public:
         return target->GetAI()->GetData(DATA_MYSTIC_BUFFET_STACK) <= 5;
     }
 };
+
+
 
 class npc_spinestalker : public CreatureScript
 {

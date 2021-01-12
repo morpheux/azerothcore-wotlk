@@ -619,6 +619,7 @@ public:
                     me->CastSpell(me, SPELL_ARMAGEDDON_PERIODIC, true);
                     events.ScheduleEvent(EVENT_SPELL_ARMAGEDDON, phase == PHASE_SACRIFICE ? 20000 : 40000);
                     break;
+
             }
 
             DoMeleeAttackIfReady();

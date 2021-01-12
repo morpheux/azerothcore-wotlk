@@ -89,6 +89,7 @@ enum Spells
     SPELL_NETHER_BEAM                   = 35869,
     SPELL_NETHER_BEAM_DAMAGE            = 35873,
 
+
     SPELL_REMOTE_TOY_STUN               = 37029
 };
 
@@ -703,6 +704,7 @@ public:
         {
             return me->GetHomePosition().GetExactDist2d(me) > 165.0f || !SelectTargetFromPlayerList(165.0f);
         }
+
     };
     CreatureAI* GetAI(Creature* creature) const override
     {

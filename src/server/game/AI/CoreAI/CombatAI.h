@@ -61,6 +61,7 @@ public:
     void AttackStart(Unit* who) override;
     void UpdateAI(uint32 diff) override;
 
+
     static int Permissible(Creature const* /*creature*/) { return PERMIT_BASE_NO; }
 
 protected:

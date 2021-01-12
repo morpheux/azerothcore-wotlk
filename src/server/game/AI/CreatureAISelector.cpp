@@ -116,6 +116,7 @@ namespace FactorySelector
         }*/
 
         return (mv_factory == NULL ? NULL : mv_factory->Create(creature));
+
     }
 
     GameObjectAI* SelectGameObjectAI(GameObject* go)
@@ -138,3 +139,4 @@ namespace FactorySelector
         return (ai_factory == NULL ? new NullGameObjectAI(go) : ai_factory->Create(go));
     }
 }
+

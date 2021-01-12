@@ -27,6 +27,8 @@ enum DataTypes
     DATA_ALIVE_KEEPERS                      = 22,
     DATA_BRIDGE_ACTIVATED                   = 23,
     DATA_ACTIVATE_SHIELD                    = 24,
+
+
 };
 
 enum SSNPCs
@@ -66,3 +68,4 @@ enum SSSpells
 };
 
 #endif
+

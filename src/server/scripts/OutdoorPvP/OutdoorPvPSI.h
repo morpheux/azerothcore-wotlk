@@ -43,6 +43,7 @@ enum SI_WorldStates
 class OutdoorPvPSI : public OutdoorPvP
 {
 public:
+
     OutdoorPvPSI();
 
     bool SetupOutdoorPvP() override;
@@ -65,6 +66,7 @@ public:
     void UpdateWorldState();
 
 private:
+
     uint32 m_Gathered_A;
     uint32 m_Gathered_H;
 

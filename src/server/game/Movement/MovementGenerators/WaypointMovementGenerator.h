@@ -60,6 +60,7 @@ public:
     void LoadPath(Creature*);
 
 private:
+
     void Stop(int32 time) { i_nextMoveTime.Reset(time);}
 
     bool Stopped() { return !i_nextMoveTime.Passed();}

@@ -166,3 +166,4 @@ inline void Cell::VisitCircle(TypeContainerVisitor<T, CONTAINER>& visitor, Map& 
     }
 }
 #endif
+

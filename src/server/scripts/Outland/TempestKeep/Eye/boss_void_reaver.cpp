@@ -27,6 +27,7 @@ enum voidReaver
 class boss_void_reaver : public CreatureScript
 {
 public:
+
     boss_void_reaver() : CreatureScript("boss_void_reaver") { }
 
     struct boss_void_reaverAI : public BossAI
@@ -121,3 +122,4 @@ void AddSC_boss_void_reaver()
 {
     new boss_void_reaver();
 }
+

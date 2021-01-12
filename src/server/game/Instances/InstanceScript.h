@@ -121,6 +121,7 @@ typedef std::map<uint32 /*entry*/, MinionInfo> MinionInfoMap;
 class InstanceScript : public ZoneScript
 {
 public:
+
     explicit InstanceScript(Map* map) : instance(map), completedEncounters(0) {}
 
     ~InstanceScript() override {}

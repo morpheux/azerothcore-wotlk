@@ -53,6 +53,7 @@ enum WeatherState
 class Weather
 {
 public:
+
     Weather(uint32 zone, WeatherData const* weatherChances);
     ~Weather() = default;;
 
@@ -68,6 +69,7 @@ public:
     [[nodiscard]] uint32 GetScriptId() const { return m_weatherChances->ScriptId; }
 
 private:
+
     [[nodiscard]] WeatherState GetWeatherState() const;
     uint32 m_zone;
     WeatherType m_type;

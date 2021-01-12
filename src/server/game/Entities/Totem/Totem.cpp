@@ -70,6 +70,7 @@ void Totem::InitStats(uint32 duration)
         if (totemSpell->CalcCastTime())   // If spell has cast time -> its an active totem
             m_type = TOTEM_ACTIVE;
 
+
     m_duration = duration;
 }
 

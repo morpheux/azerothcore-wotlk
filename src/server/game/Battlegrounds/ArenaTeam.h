@@ -175,6 +175,7 @@ public:
     void FinishGame(int32 mod, const Map* bgMap);
 
 protected:
+
     uint32      TeamId;
     uint8       Type;
     std::string TeamName;
@@ -190,3 +191,4 @@ protected:
     ArenaTeamStats Stats;
 };
 #endif
+

@@ -92,6 +92,7 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
+
             if (!SummonedRend && HealthBelowPct(25))
             {
                 DoCast(me, SPELL_SUMMON_REND);

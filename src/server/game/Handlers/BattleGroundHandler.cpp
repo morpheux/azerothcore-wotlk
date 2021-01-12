@@ -182,6 +182,7 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
         SendPacket(&data);
 
         sScriptMgr->OnPlayerJoinBG(_player);
+
     }
     // check if group can queue:
     else
@@ -713,6 +714,7 @@ void WorldSession::HandleBattlemasterJoinArena(WorldPacket& recvData)
                             bgQueue.RemovePlayer(member->GetGUID(), false, i);
                             member->RemoveBattlegroundQueueId(mqtid);
                         }
+
 
         uint32 ateamId = 0;
         uint32 arenaRating = 0;

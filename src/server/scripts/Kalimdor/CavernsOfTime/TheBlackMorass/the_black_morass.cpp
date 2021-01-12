@@ -246,6 +246,9 @@ public:
                         cr->AI()->Talk(SAY_ORCS_ANSWER);
                     }
                     break;
+
+
+
             }
         }
 
@@ -263,6 +266,7 @@ public:
         }
     };
 };
+
 
 enum timeRift
 {

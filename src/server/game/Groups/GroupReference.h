@@ -28,3 +28,4 @@ public:
     void setSubGroup(uint8 pSubGroup) { iSubGroup = pSubGroup; }
 };
 #endif
+

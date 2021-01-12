@@ -166,6 +166,7 @@ public:
                     else if (Creature* arthas = instance->GetCreature(_arthasGUID))
                         Reposition(arthas);
                     return;
+
             }
 
             if (type == DATA_ARTHAS_EVENT)
@@ -255,6 +256,7 @@ public:
                     if (instance->IsHeroic() && _infiniteGUID)
                         if (Creature* cr = instance->GetCreature(_infiniteGUID))
                             cr->AI()->DoAction(ACTION_RUN_OUT_OF_TIME);
+
                 }
                 else if (div > divAfter)
                 {

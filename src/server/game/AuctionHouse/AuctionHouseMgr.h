@@ -79,6 +79,7 @@ struct AuctionEntry
     bool LoadFromFieldList(Field* fields);
     [[nodiscard]] std::string BuildAuctionMailSubject(MailAuctionAnswers response) const;
     static std::string BuildAuctionMailBody(uint32 lowGuid, uint32 bid, uint32 buyout, uint32 deposit, uint32 cut);
+
 };
 
 //this class is used as auctionhouse instance
@@ -133,6 +134,7 @@ private:
     ~AuctionHouseMgr();
 
 public:
+
     typedef std::unordered_map<uint32, Item*> ItemMap;
 
     static AuctionHouseMgr* instance();
@@ -161,6 +163,7 @@ public:
     static AuctionHouseEntry const* GetAuctionHouseEntry(uint32 factionTemplateId);
 
 public:
+
     //load first auction items, because of check if item exists, when loading
     void LoadAuctionItems();
     void LoadAuctions();
@@ -171,6 +174,7 @@ public:
     void Update();
 
 private:
+
     AuctionHouseObject mHordeAuctions;
     AuctionHouseObject mAllianceAuctions;
     AuctionHouseObject mNeutralAuctions;

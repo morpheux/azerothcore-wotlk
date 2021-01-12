@@ -29,6 +29,7 @@ BattlegroundBE::BattlegroundBE()
 
 BattlegroundBE::~BattlegroundBE()
 {
+
 }
 
 void BattlegroundBE::StartingEventCloseDoors()

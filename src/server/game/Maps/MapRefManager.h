@@ -30,3 +30,4 @@ public:
     [[nodiscard]] const_iterator end() const  { return const_iterator(nullptr); }
 };
 #endif
+

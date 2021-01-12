@@ -84,6 +84,7 @@ enum Models
     MODEL_GHOST                     = 21300
 };
 
+
 class boss_black_knight : public CreatureScript
 {
 public:
@@ -145,6 +146,7 @@ public:
                 me->SetFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH);
                 me->SetFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_DEAD);
                 me->AddUnitState(UNIT_STATE_DIED);
+
             }
         }
 
@@ -237,7 +239,7 @@ public:
                     if( pInstance && !summons.empty() )
                         if( Creature* ghoul = pInstance->instance->GetCreature(*summons.begin()) )
                             ghoul->MonsterYell("[Zombie] .... . Brains ....", LANG_UNIVERSAL, 0);
-
+                    
                     break;
                 case EVENT_SPELL_PLAGUE_STRIKE:
                     if( me->GetVictim() )
@@ -361,6 +363,7 @@ public:
         {
             npc_escortAI::UpdateAI(uiDiff);
         }
+
     };
 
     CreatureAI* GetAI(Creature* pCreature) const override
@@ -446,7 +449,7 @@ public:
                         if (me->GetDistance(target) > 5.0f && me->GetDistance(target) < 30.0f)
                         {
                             me->CastSpell(target, SPELL_LEAP, false);
-
+                            
                             break;
                         }
                     events.RepeatEvent(1000);

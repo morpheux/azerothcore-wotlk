@@ -757,6 +757,7 @@ void OutdoorPvPEP::SendRemoveWorldStates(Player* player)
 class OutdoorPvP_eastern_plaguelands : public OutdoorPvPScript
 {
 public:
+
     OutdoorPvP_eastern_plaguelands()
         : OutdoorPvPScript("outdoorpvp_ep")
     {

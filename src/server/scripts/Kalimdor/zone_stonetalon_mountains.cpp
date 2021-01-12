@@ -44,6 +44,7 @@ public:
         {
             CloseGossipMenuFor(player);
             creature->CastSpell(player, 6766, false);
+
         }
         if (action == GOSSIP_ACTION_INFO_DEF + 2)
         {
@@ -73,6 +74,7 @@ public:
 
         return true;
     }
+
 };
 
 /*######
@@ -151,6 +153,7 @@ public:
     {
         return new npc_kaya_flathoofAI(creature);
     }
+
 };
 
 /*######

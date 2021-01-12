@@ -496,6 +496,7 @@ public:
     }
 };
 
+
 // Theirs
 // Incanter's Absorbtion
 class spell_mage_incanters_absorbtion_base_AuraScript : public AuraScript
@@ -1084,6 +1085,7 @@ public:
                 caster->CastSpell(caster, SPELL_MAGE_SUMMON_WATER_ELEMENTAL_PERMANENT, true);
             else
                 caster->CastSpell(caster, SPELL_MAGE_SUMMON_WATER_ELEMENTAL_TEMPORARY, true);
+
 
             if (Creature* pet = ObjectAccessor::GetCreature(*caster, caster->GetPetGUID()))
                 if (pet->GetCharmInfo() && caster->ToPlayer())

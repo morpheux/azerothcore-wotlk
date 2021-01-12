@@ -127,4 +127,5 @@ public:
     virtual bool GetSQLDriverQueryLogging() const = 0;
 };
 
+
 #endif //AZEROTHCORE_ILOG_H

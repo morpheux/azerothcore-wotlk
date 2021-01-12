@@ -577,6 +577,7 @@ public:
             LoginDatabase.Execute(stmt);
         }
 
+
         handler->PSendSysMessage(LANG_YOU_CHANGE_SECURITY, targetAccountName.c_str(), gm);
         return true;
     }

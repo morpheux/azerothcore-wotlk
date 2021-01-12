@@ -717,6 +717,7 @@ bool ConditionMgr::IsObjectMeetToConditionList(ConditionSourceInfo& sourceInfo, 
                     sLog->outDebug(LOG_FILTER_CONDITIONSYS, "IsPlayerMeetToConditionList: Reference template -%u not found", (*i)->ReferenceId);
 #endif
                 }
+
             }
             else //handle normal condition
             {
@@ -918,6 +919,7 @@ void ConditionMgr::LoadConditions(bool isReload)
 
     do
     {
+
         Field* fields = result->Fetch();
 
         Condition* cond = new Condition();

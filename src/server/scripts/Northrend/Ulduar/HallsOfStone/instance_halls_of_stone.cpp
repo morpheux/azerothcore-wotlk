@@ -119,6 +119,7 @@ public:
             }
         }
 
+
         void OnCreatureCreate(Creature* creature) override
         {
             switch(creature->GetEntry())

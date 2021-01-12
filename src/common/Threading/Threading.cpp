@@ -117,6 +117,7 @@ void Thread::setPriority(Priority priority)
             break;
     }
 
+
     // remove this ASSERT in case you don't want to know is thread priority change was successful or not
     ASSERT(_ok);
 }

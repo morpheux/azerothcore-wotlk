@@ -45,6 +45,7 @@ enum Misc
     EVENT_SPELL_VOID_BOLT               = 9
 };
 
+
 #define INNER_PORTAL_RADIUS         14.0f
 #define OUTER_PORTAL_RADIUS         28.0f
 #define CENTER_X                    432.909f
@@ -53,9 +54,11 @@ enum Misc
 #define CENTER_O                    1.06421f
 #define PORTAL_Z                    17.005f
 
+
 class boss_high_astromancer_solarian : public CreatureScript
 {
 public:
+
     boss_high_astromancer_solarian() : CreatureScript("boss_high_astromancer_solarian") { }
 
     struct boss_high_astromancer_solarianAI : public BossAI
@@ -211,6 +214,7 @@ public:
                     me->CastSpell(me, SPELL_PSYCHIC_SCREAM, false);
                     events.ScheduleEvent(EVENT_SPELL_PSYCHIC_SCREAM, 12000);
                     break;
+
             }
 
             DoMeleeAttackIfReady();
@@ -297,3 +301,4 @@ void AddSC_boss_high_astromancer_solarian()
     new spell_astromancer_wrath_of_the_astromancer();
     new spell_astromancer_solarian_transform();
 }
+

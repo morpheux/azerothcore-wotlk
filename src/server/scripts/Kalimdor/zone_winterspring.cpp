@@ -210,6 +210,7 @@ public:
     };
 };
 
+
 // Theirs
 /*######
 ## npc_rivern_frostwind
@@ -735,6 +736,7 @@ public:
                 default:
                     return nullptr;
             }
+
         }
 
         void UpdateEscortAI(uint32 diff) override

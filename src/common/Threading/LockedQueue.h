@@ -28,9 +28,10 @@ namespace ACE_Based
         volatile bool _canceled{false};
 
     public:
+
         //! Create a LockedQueue.
         LockedQueue()
-
+             
         {
         }
 

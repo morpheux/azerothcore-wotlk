@@ -314,6 +314,7 @@ public:
     }
 };
 
+
 // Theirs
 /*######
 ## npc_unkor_the_ruthless

@@ -140,6 +140,7 @@ public:
 
         return true;
     }
+
 };
 
 /*####
@@ -383,6 +384,7 @@ static WaveData WavesInfo[5] =
     {12, 38, 15414, 0, 0, 24000, 0},    // Qiraji Wasps
     { 6, 50, 15422, 0, 0, 24000, 0},    // Qiraji Tanks
     {15, 15, 15423, 0, 0, 24000, 0}     // Kaldorei Soldier
+
 };
 
 struct SpawnSpells
@@ -721,6 +723,7 @@ public:
                 EnterEvadeMode();
         }
     };
+
 };
 
 /*######
@@ -837,6 +840,7 @@ public:
             DoMeleeAttackIfReady();
         }
     };
+
 };
 
 /*#####
@@ -985,6 +989,7 @@ public:
                 EnterEvadeMode();
         };
     };
+
 };
 
 void npc_qiraj_war_spawn::npc_qiraj_war_spawnAI::JustDied(Unit* /*slayer*/)
@@ -997,6 +1002,7 @@ void npc_qiraj_war_spawn::npc_qiraj_war_spawnAI::JustDied(Unit* /*slayer*/)
     if (Creature* mob = ObjectAccessor::GetCreature(*me, MobGUID))
         if (npc_anachronos_quest_trigger::npc_anachronos_quest_triggerAI* triggerAI = CAST_AI(npc_anachronos_quest_trigger::npc_anachronos_quest_triggerAI, mob->AI()))
             triggerAI->LiveCounter();
+
 };
 
 /*#####
@@ -1061,6 +1067,7 @@ public:
         }
         return true;
     }
+
 };
 
 /*###

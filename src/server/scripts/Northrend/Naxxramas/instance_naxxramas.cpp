@@ -109,6 +109,7 @@ public:
             sapphironAchievement = true;
             heiganAchievement = true;
             immortalAchievement = 1;
+
         }
 
         std::set<GameObject*> HeiganEruption[4];
@@ -619,6 +620,7 @@ public:
                     _horsemanTimer = 0;
             }
 
+
             if (!InstanceScript::SetBossState(bossId, state))
                 return false;
 
@@ -820,7 +822,7 @@ public:
                     if (Creature* kelthuzad = instance->GetCreature(_kelthuzadGUID))
                         kelthuzad->AI()->Talk(_currentWingTaunt);
                     ++_currentWingTaunt;
-
+                    
                     break;
             }
         }
@@ -908,6 +910,7 @@ public:
             else
                 OUT_LOAD_INST_DATA_FAIL;
         }
+
     };
 };
 class boss_naxxramas_misc : public CreatureScript

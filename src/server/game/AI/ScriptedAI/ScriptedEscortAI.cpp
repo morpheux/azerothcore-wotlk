@@ -104,6 +104,7 @@ void npc_escortAI::MoveInLineOfSight(Unit* who)
         }
         AttackStart(who);
     }
+
 }
 
 void npc_escortAI::JustDied(Unit* /*killer*/)

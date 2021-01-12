@@ -450,6 +450,7 @@ void SmartAI::UpdatePath(const uint32 diff)
     }
 }
 
+
 void SmartAI::CheckConditions(const uint32 diff)
 {
     Vehicle* vehicle = me->GetVehicleKit();
@@ -1172,6 +1173,7 @@ void SmartGameObjectAI::SpellHit(Unit* unit, const SpellInfo* spellInfo)
 class SmartTrigger : public AreaTriggerScript
 {
 public:
+
     SmartTrigger() : AreaTriggerScript("SmartTrigger") {}
 
     bool OnTrigger(Player* player, AreaTrigger const* trigger) override

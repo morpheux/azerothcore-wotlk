@@ -173,3 +173,4 @@ void AddSC_boss_omor_the_unscarred()
 {
     new boss_omor_the_unscarred();
 }
+

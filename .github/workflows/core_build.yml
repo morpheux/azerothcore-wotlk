@@ -51,11 +51,9 @@ jobs:
             ccache:${{ matrix.os }}:${{ matrix.compiler }}:${{ matrix.modules }}-modules:${{ github.ref }}
             ccache:${{ matrix.os }}:${{ matrix.compiler }}:${{ matrix.modules }}-modules
       - name: Configure OS
-        run: source ./acore.sh install-deps
+        run: source ./apps/ci/ci-install.sh
         env:
           CONTINUOUS_INTEGRATION: true
-      - name: Create conf/config.sh
-        run: source ./apps/ci/ci-conf.sh
       - name: Import db
         run: source ./apps/ci/ci-import-db.sh
       - name: Build
@@ -76,8 +74,7 @@ jobs:
           - macos-11.0
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }}
-    needs: [build]
-    if: github.repository == 'azerothcore/azerothcore-wotlk' && success()
+    if: github.repository == 'azerothcore/azerothcore-wotlk'
     steps:
       - uses: actions/checkout@v2
       - name: Cache

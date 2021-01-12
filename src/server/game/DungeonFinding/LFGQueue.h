@@ -64,6 +64,7 @@ namespace lfg
     class LFGQueue
     {
     public:
+
         // Add/Remove from queue
         void AddToQueue(uint64 guid, bool failedProposal = false);
         void RemoveFromQueue(uint64 guid, bool partial = false); // xinef: partial remove, dont delete data from list!

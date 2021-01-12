@@ -156,6 +156,7 @@ public:
                 events2.ScheduleEvent(EVENT_INTRO_2, 3000);
         }
 
+
         void KilledUnit(Unit* victim) override
         {
             if (victim->GetTypeId() == TYPEID_PLAYER && roll_chance_i(50))
@@ -324,7 +325,7 @@ public:
                     me->GetMotionMaster()->MovePoint(POINT_AIR, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ() + 15.0f, false, true);
                     break;
                 case EVENT_FLIGHT_VAPOR:
-                    me->CastCustomSpell(SPELL_SUMMON_DEMONIC_VAPOR, SPELLVALUE_MAX_TARGETS, 1, me, true);
+                    me->CastSpell(me, SPELL_SUMMON_DEMONIC_VAPOR, true);
                     break;
                 case EVENT_FLIGHT_BREATH1:
                     {
@@ -364,6 +365,7 @@ public:
                 case EVENT_LAND_FIGHT:
                     me->GetMotionMaster()->MovePoint(POINT_GROUND, 1500.0f, 552.8f, 26.52f, false, true);
                     break;
+
             }
 
             if (!me->HasUnitMovementFlag(MOVEMENTFLAG_DISABLE_GRAVITY))

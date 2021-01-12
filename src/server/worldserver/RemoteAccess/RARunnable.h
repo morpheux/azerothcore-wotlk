@@ -24,6 +24,7 @@ public:
 
 private:
     ACE_Reactor* m_Reactor;
+
 };
 
 #endif /* _ACORE_RARUNNABLE_H_ */

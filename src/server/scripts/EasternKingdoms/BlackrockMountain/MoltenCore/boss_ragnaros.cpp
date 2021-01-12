@@ -61,6 +61,7 @@ enum Events
     EVENT_INTRO_5               = 12
 };
 
+
 class boss_ragnaros : public CreatureScript
 {
 public:
@@ -254,6 +255,7 @@ public:
                                         _hasSubmergedOnce = true;
                                         _isBanished = true;
                                         _emergeTimer = 90000;
+
                                     }
                                     else
                                     {

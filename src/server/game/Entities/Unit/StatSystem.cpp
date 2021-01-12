@@ -1101,6 +1101,8 @@ void Creature::CalculateMinMaxDamage(WeaponAttackType attType, bool normalized, 
 ########                         ########
 #######################################*/
 
+
+
 bool Guardian::UpdateStats(Stats stat)
 {
     if (stat >= MAX_STATS)

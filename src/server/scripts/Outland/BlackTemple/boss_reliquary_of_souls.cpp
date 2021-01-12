@@ -193,6 +193,7 @@ public:
 
         void AttackStart(Unit*) override { }
 
+
         void JustDied(Unit* killer) override
         {
             summons.clear();
@@ -560,6 +561,7 @@ public:
                     }
                     events.ScheduleEvent(EVENT_ANGER_SEETHE, 1000);
                     break;
+
             }
 
             DoMeleeAttackIfReady();

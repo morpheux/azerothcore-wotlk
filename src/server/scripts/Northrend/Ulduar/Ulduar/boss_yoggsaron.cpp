@@ -285,6 +285,7 @@ enum Misc
     ACTION_ILLUSION_ICECROWN            = 2,
     ACTION_ILLUSION_STORMWIND           = 3,
 
+
     EVENT_PHASE_ONE                     = 1,
     EVENT_PHASE_TWO                     = 2,
     EVENT_PHASE_THREE                   = 3,
@@ -317,6 +318,7 @@ static LocationsXY yoggPortalLoc[] =
 };
 
 const Position Middle = {1980.28f, -25.5868f, 329.397f, M_PI * 1.5f};
+
 
 class boss_yoggsaron_sara : public CreatureScript
 {
@@ -1973,6 +1975,7 @@ public:
     };
 };
 
+
 class boss_yoggsaron_llane : public CreatureScript
 {
 public:
@@ -2531,6 +2534,7 @@ public:
     {
         PrepareAuraScript(spell_yogg_saron_protective_gaze_AuraScript);
 
+
         void CalculateAmount(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
         {
             // Set absorbtion amount to unlimited
@@ -2962,6 +2966,7 @@ public:
 private:
     uint8 const _requiredIllusion;
 };
+
 
 class achievement_yogg_saron_kiss_and_make_up : public AchievementCriteriaScript
 {

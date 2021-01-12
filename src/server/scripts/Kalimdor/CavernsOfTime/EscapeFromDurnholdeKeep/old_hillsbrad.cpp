@@ -174,6 +174,7 @@ enum Events
     EVENT_THRALL_TALK_6         = 90,
     EVENT_THRALL_RUN_AWAY       = 91,
     EVENT_TARETHA_TALK_2        = 92
+
 };
 
 class npc_thrall_old_hillsbrad : public CreatureScript
@@ -897,6 +898,7 @@ public:
         void AttackStart(Unit*) override { }
         void MoveInLineOfSight(Unit*) override { }
     };
+
 };
 
 void AddSC_old_hillsbrad()

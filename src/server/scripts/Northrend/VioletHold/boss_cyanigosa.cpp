@@ -94,6 +94,7 @@ public:
             }
         }
 
+
         void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
@@ -118,7 +119,7 @@ public:
                     break;
                 case EVENT_UNROOT:
                     me->SetControlled(false, UNIT_STATE_ROOT);
-
+                    
                     break;
                 case EVENT_SPELL_BLIZZARD:
                     if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 45.0f, true))

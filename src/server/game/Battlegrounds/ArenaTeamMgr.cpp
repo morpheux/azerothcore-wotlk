@@ -58,6 +58,7 @@ ArenaTeam* ArenaTeamMgr::GetArenaTeamByName(const std::string& arenaTeamName) co
     return nullptr;
 }
 
+
 ArenaTeam* ArenaTeamMgr::GetArenaTeamByName(std::string const& arenaTeamName, const uint32 type) const
 {
     std::string search = arenaTeamName;
@@ -89,6 +90,7 @@ ArenaTeam* ArenaTeamMgr::GetArenaTeamByCaptain(uint64 guid) const
     }
     return nullptr;
 }
+
 
 ArenaTeam* ArenaTeamMgr::GetArenaTeamByCaptain(uint64 guid, const uint32 type) const
 {

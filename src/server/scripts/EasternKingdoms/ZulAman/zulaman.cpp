@@ -117,6 +117,7 @@ enum ForestFrog
 class npc_forest_frog : public CreatureScript
 {
 public:
+
     npc_forest_frog() : CreatureScript("npc_forest_frog") { }
 
     struct npc_forest_frogAI : public ScriptedAI
@@ -583,6 +584,7 @@ enum Weapons
 class npc_harrison_jones : public CreatureScript
 {
 public:
+
     npc_harrison_jones() : CreatureScript("npc_harrison_jones")
     {
     }

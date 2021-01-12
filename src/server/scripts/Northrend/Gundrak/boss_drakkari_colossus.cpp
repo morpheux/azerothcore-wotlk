@@ -301,6 +301,7 @@ public:
                     break;
             }
 
+
             DoMeleeAttackIfReady();
         }
     };

@@ -64,6 +64,7 @@ Log::~Log()
     miscLogFile = NULL;
 }
 
+
 std::unique_ptr<ILog>& getLogInstance()
 {
     static std::unique_ptr<ILog> instance = std::make_unique<Log>();

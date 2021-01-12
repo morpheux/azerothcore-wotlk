@@ -508,6 +508,7 @@ public:
 class AreaTrigger_at_sunwell_madrigosa : public AreaTriggerScript
 {
 public:
+
     AreaTrigger_at_sunwell_madrigosa() : AreaTriggerScript("at_sunwell_madrigosa") {}
 
     bool OnTrigger(Player* player, AreaTrigger const* /*trigger*/) override

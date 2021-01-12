@@ -392,6 +392,7 @@ public:
 
             return 0;
         }
+
     };
 
     InstanceScript* GetInstanceScript(InstanceMap* map) const override
@@ -404,3 +405,4 @@ void AddSC_instance_zulaman()
 {
     new instance_zulaman();
 }
+

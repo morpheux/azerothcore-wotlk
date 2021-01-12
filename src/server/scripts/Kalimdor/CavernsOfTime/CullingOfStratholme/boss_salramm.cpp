@@ -145,6 +145,7 @@ public:
             DoMeleeAttackIfReady();
         }
     };
+
 };
 
 class spell_boss_salramm_steal_flesh : public SpellScriptLoader

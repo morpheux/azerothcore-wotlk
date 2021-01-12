@@ -314,6 +314,7 @@ public:
                         events.RepeatEvent(15000);
                         break;
                     }
+
             }
 
             DoMeleeAttackIfReady();

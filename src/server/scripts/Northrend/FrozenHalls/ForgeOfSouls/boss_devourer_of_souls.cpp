@@ -294,6 +294,7 @@ public:
     }
 };
 
+
 class spell_wailing_souls_periodic : public SpellScriptLoader
 {
 public:
@@ -357,6 +358,7 @@ public:
         return new spell_wailing_souls_periodic_AuraScript();
     }
 };
+
 
 void AddSC_boss_devourer_of_souls()
 {

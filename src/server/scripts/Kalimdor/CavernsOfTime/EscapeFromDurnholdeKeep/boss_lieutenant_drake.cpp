@@ -150,6 +150,7 @@ public:
         EventMap events;
         Movement::PointsArray pathPoints;
     };
+
 };
 
 void AddSC_boss_lieutenant_drake()

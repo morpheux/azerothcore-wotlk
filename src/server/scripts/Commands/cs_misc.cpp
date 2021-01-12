@@ -1217,6 +1217,7 @@ public:
 
         //Not a supported argument
         return false;
+
     }
 
     static bool HandleLinkGraveCommand(ChatHandler* handler, char const* args)
@@ -1651,6 +1652,7 @@ public:
         return true;
     }
 
+
     static bool HandleMaxSkillCommand(ChatHandler* handler, char const* /*args*/)
     {
         Player* SelectedPlayer = handler->getSelectedPlayer();
@@ -2074,6 +2076,7 @@ public:
                 classStr = "Druid";
                 break;
         }
+
 
         handler->PSendSysMessage(LANG_PINFO_CHR_RACE, (gender == 0 ? handler->GetAcoreString(LANG_CHARACTER_GENDER_MALE) : handler->GetAcoreString(LANG_CHARACTER_GENDER_FEMALE)), raceStr.c_str(), classStr.c_str());
 

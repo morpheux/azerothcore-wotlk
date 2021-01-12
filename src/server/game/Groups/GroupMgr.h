@@ -30,6 +30,7 @@ public:
     void AddGroup(Group* group);
     void RemoveGroup(Group* group);
 
+
 protected:
     typedef std::vector<bool> GroupIds;
     GroupIds         _groupIds;

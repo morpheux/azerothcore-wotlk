@@ -68,6 +68,7 @@ public:
             AggroReset = false;
             Enraged = false;
             EnragedHard = false;
+
         }
 
         void EnterCombat(Unit* /*who*/) override
@@ -174,6 +175,7 @@ public:
             }
         }
     };
+
 };
 
 class npc_sartura_royal_guard : public CreatureScript
@@ -294,6 +296,7 @@ public:
             DoMeleeAttackIfReady();
         }
     };
+
 };
 
 void AddSC_boss_sartura()

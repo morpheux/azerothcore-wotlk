@@ -151,6 +151,7 @@ void acore::WorldObjectSearcher<Check>::Visit(DynamicObjectMapType& m)
     }
 }
 
+
 template<class Check>
 void acore::WorldObjectLastSearcher<Check>::Visit(GameObjectMapType& m)
 {

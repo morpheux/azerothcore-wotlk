@@ -133,6 +133,7 @@ public:
 
         InstanceScript* instance;
 
+
         uint32 AggroTimer;
 
         uint32 WaterBoltTimer;
@@ -141,6 +142,7 @@ public:
 
         bool SummonedTito;
         bool TitoDied;
+
 
         void Reset() override
         {
@@ -795,7 +797,10 @@ enum RedRidingHood
     CREATURE_BIG_BAD_WOLF           = 17521,
 };
 
+
 #define GOSSIP_GRANDMA          "What phat lewtz you have grandmother?"
+
+
 
 class npc_grandmother : public CreatureScript
 {
@@ -991,6 +996,7 @@ enum JulianneRomulo
     ROMULO_X                        = -10900,
     ROMULO_Y                        = -1758,
 };
+
 
 enum RAJPhase
 {

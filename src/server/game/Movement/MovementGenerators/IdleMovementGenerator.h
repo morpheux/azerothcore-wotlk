@@ -12,6 +12,7 @@
 class IdleMovementGenerator : public MovementGenerator
 {
 public:
+
     void Initialize(Unit*) override;
     void Finalize(Unit*) override {  }
     void Reset(Unit*) override;

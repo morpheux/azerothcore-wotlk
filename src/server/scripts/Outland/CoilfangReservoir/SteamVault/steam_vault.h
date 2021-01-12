@@ -26,3 +26,4 @@ enum steamVaultNPCGO
 };
 
 #endif
+

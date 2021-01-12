@@ -168,3 +168,4 @@ void AddSC_boss_hakkar()
 {
     new boss_hakkar();
 }
+

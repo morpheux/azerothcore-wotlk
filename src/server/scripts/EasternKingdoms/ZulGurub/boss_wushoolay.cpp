@@ -94,3 +94,4 @@ void AddSC_boss_wushoolay()
 {
     new boss_wushoolay();
 }
+

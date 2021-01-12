@@ -14,6 +14,7 @@ public:
 
     std::vector<ChatCommand> GetCommands() const override
     {
+
         static std::vector<ChatCommand> cheatCommandTable =
         {
             { "god",            SEC_GAMEMASTER,     false, &HandleGodModeCheatCommand,         "" },
@@ -24,11 +25,13 @@ public:
             { "status",         SEC_GAMEMASTER,     false, &HandleCheatStatusCommand,          "" },
             { "taxi",           SEC_GAMEMASTER,     false, &HandleTaxiCheatCommand,            "" },
             { "explore",        SEC_GAMEMASTER,     false, &HandleExploreCheatCommand,         "" },
+
         };
 
         static std::vector<ChatCommand> commandTable =
         {
             { "cheat",          SEC_GAMEMASTER,     false, nullptr,                  "", cheatCommandTable },
+
         };
         return commandTable;
     }
@@ -181,6 +184,7 @@ public:
 
         return true;
     }
+
 
     static bool HandleTaxiCheatCommand(ChatHandler* handler, char const* args)
     {

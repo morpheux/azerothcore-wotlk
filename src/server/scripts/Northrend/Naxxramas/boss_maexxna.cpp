@@ -93,6 +93,7 @@ public:
                 if (GameObject* go = me->GetMap()->GetGameObject(pInstance->GetData64(DATA_MAEXXNA_GATE)))
                     go->SetGoState(GO_STATE_ACTIVE);
             }
+
         }
 
         void EnterCombat(Unit* who) override
@@ -168,7 +169,7 @@ public:
                     if (me->GetHealthPct() < 30)
                     {
                         me->CastSpell(me, RAID_MODE(SPELL_FRENZY_10, SPELL_FRENZY_25), true);
-
+                        
                         break;
                     }
 
@@ -196,6 +197,7 @@ public:
         }
     };
 };
+
 
 class boss_maexxna_webwrap : public CreatureScript
 {
@@ -234,3 +236,4 @@ void AddSC_boss_maexxna()
     new boss_maexxna();
     new boss_maexxna_webwrap();
 }
+

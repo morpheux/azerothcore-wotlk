@@ -114,6 +114,7 @@ enum Spells
     // Koragg
     SPELL_COLD_STARE                = 43593,
     SPELL_MIGHTY_BLOW               = 43592
+
 };
 
 #define ORIENT                  1.5696f
@@ -236,6 +237,7 @@ struct boss_hexlord_addAI : public ScriptedAI
 class boss_hexlord_malacrass : public CreatureScript
 {
 public:
+
     boss_hexlord_malacrass()
         : CreatureScript("boss_hexlord_malacrass")
     {
@@ -505,6 +507,7 @@ public:
 class boss_thurg : public CreatureScript
 {
 public:
+
     boss_thurg()
         : CreatureScript("boss_thurg")
     {
@@ -512,6 +515,7 @@ public:
 
     struct boss_thurgAI : public boss_hexlord_addAI
     {
+
         boss_thurgAI(Creature* creature) : boss_hexlord_addAI(creature) { }
 
         uint32 bloodlust_timer;
@@ -562,6 +566,7 @@ public:
 class boss_alyson_antille : public CreatureScript
 {
 public:
+
     boss_alyson_antille()
         : CreatureScript("boss_alyson_antille")
     {
@@ -702,6 +707,7 @@ struct boss_gazakrothAI : public boss_hexlord_addAI
 class boss_lord_raadan : public CreatureScript
 {
 public:
+
     boss_lord_raadan()
         : CreatureScript("boss_lord_raadan")
     {
@@ -720,6 +726,7 @@ public:
             thunderclap_timer = 13000;
 
             boss_hexlord_addAI::Reset();
+
         }
         void UpdateAI(uint32 diff) override
         {
@@ -753,6 +760,7 @@ public:
 class boss_darkheart : public CreatureScript
 {
 public:
+
     boss_darkheart()
         : CreatureScript("boss_darkheart")
     {
@@ -791,9 +799,11 @@ public:
     }
 };
 
+
 class boss_slither : public CreatureScript
 {
 public:
+
     boss_slither()
         : CreatureScript("boss_slither")
     {
@@ -852,6 +862,7 @@ public:
 class boss_fenstalker : public CreatureScript
 {
 public:
+
     boss_fenstalker()
         : CreatureScript("boss_fenstalker")
     {
@@ -867,6 +878,7 @@ public:
         {
             volatileinf_timer = 15000;
             boss_hexlord_addAI::Reset();
+
         }
         void UpdateAI(uint32 diff) override
         {
@@ -894,6 +906,7 @@ public:
 class boss_koragg : public CreatureScript
 {
 public:
+
     boss_koragg()
         : CreatureScript("boss_koragg")
     {
@@ -911,6 +924,7 @@ public:
             coldstare_timer = 15000;
             mightyblow_timer = 10000;
             boss_hexlord_addAI::Reset();
+
         }
         void UpdateAI(uint32 diff) override
         {
@@ -986,3 +1000,4 @@ void AddSC_boss_hex_lord_malacrass()
     new boss_alyson_antille();
     new spell_hexlord_unstable_affliction();
 }
+

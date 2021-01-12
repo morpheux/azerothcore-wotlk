@@ -66,6 +66,7 @@ enum AssemblySpells
 #define SPELL_LIGHTNING_WHIRL       RAID_MODE(SPELL_LIGHTNING_WHIRL_10, SPELL_LIGHTNING_WHIRL_25)
 #define SPELL_LIGHTNING_TENDRILS    RAID_MODE(SPELL_LIGHTNING_TENDRILS_10, SPELL_LIGHTNING_TENDRILS_25)
 
+
 enum eEnums
 {
     // Steelbreaker
@@ -175,6 +176,7 @@ void RestoreAssemblyHealth(uint64 guid1, uint64 guid2, Creature* me)
     if(Creature* cr2 = ObjectAccessor::GetCreature(*me, guid2))
         if(cr2->IsAlive())
             cr2->SetHealth(cr2->GetMaxHealth());
+
 }
 
 class boss_steelbreaker : public CreatureScript
@@ -828,6 +830,7 @@ public:
         }
     };
 };
+
 
 class spell_shield_of_runes : public SpellScriptLoader
 {

@@ -218,6 +218,7 @@ public:
         int8 phase;
         uint64 playerGUID;
         uint64 orphanGUID;
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override
@@ -403,6 +404,7 @@ public:
         uint8 phase;
         uint64 playerGUID;
         uint64 orphanGUID;
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override
@@ -490,6 +492,7 @@ public:
         int8 phase;
         uint64 playerGUID;
         uint64 orphanGUID;
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override
@@ -576,6 +579,7 @@ public:
         int8 phase;
         uint64 playerGUID;
         uint64 orphanGUID;
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override
@@ -671,6 +675,7 @@ public:
         int8 phase;
         uint64 playerGUID;
         uint64 orphanGUID;
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override
@@ -830,6 +835,7 @@ public:
         uint32 timer;
         uint64 playerGUID;
         uint64 orphanGUID;
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override

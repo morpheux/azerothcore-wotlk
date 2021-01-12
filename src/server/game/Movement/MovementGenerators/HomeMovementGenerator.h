@@ -18,6 +18,7 @@ template <>
 class HomeMovementGenerator<Creature> : public MovementGeneratorMedium< Creature, HomeMovementGenerator<Creature> >
 {
 public:
+
     HomeMovementGenerator() : arrived(false), i_recalculateTravel(false) {}
     ~HomeMovementGenerator() {}
 

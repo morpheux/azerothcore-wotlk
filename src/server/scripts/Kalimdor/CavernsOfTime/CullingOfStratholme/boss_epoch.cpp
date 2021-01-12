@@ -139,6 +139,7 @@ public:
             Talk(SAY_SLAY);
         }
     };
+
 };
 
 void AddSC_boss_epoch()

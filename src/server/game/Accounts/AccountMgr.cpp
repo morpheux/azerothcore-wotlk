@@ -121,6 +121,7 @@ namespace AccountMgr
         return AOR_OK;
     }
 
+
     AccountOpResult ChangeUsername(uint32 accountId, std::string newUsername, std::string newPassword)
     {
         // Check if accounts exists

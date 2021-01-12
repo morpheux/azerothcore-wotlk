@@ -141,6 +141,7 @@ bool Group::Create(Player* leader)
 
         CharacterDatabase.Execute(stmt);
 
+
         ASSERT(AddMember(leader)); // If the leader can't be added to a new group because it appears full, something is clearly wrong.
     }
     else if (!AddMember(leader))

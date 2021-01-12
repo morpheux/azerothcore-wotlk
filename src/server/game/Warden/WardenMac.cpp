@@ -128,6 +128,7 @@ struct keyData
 
 void WardenMac::HandleHashResult(ByteBuffer& buff)
 {
+
     // test
     int keyIn[4];
 
@@ -166,7 +167,7 @@ void WardenMac::HandleHashResult(ByteBuffer& buff)
 #if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
         sLog->outDebug(LOG_FILTER_WARDEN, "Request hash reply: failed");
 #endif
-        ApplyPenalty(0, "Request hash reply: failed");
+        Penalty();
         return;
     }
 
@@ -188,9 +189,11 @@ void WardenMac::HandleHashResult(ByteBuffer& buff)
     _outputCrypto.Init(_outputKey);
 
     _initialized = true;
+
+    _previousTimestamp = World::GetGameTimeMS();
 }
 
-void WardenMac::RequestChecks()
+void WardenMac::RequestData()
 {
 #if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
     sLog->outDebug(LOG_FILTER_WARDEN, "Request data");

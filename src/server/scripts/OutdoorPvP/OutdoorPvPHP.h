@@ -77,6 +77,7 @@ const go_type HPTowerFlags[HP_TOWER_NUM] =
 class OPvPCapturePointHP : public OPvPCapturePoint
 {
 public:
+
     OPvPCapturePointHP(OutdoorPvP* pvp, OutdoorPvPHPTowerType type);
 
     void ChangeState() override;
@@ -90,12 +91,14 @@ public:
     void HandlePlayerLeave(Player* player) override;
 
 private:
+
     OutdoorPvPHPTowerType m_TowerType;
 };
 
 class OutdoorPvPHP : public OutdoorPvP
 {
 public:
+
     OutdoorPvPHP();
 
     bool SetupOutdoorPvP() override;
@@ -118,6 +121,7 @@ public:
     void SetHordeTowersControlled(uint32 count);
 
 private:
+
     // how many towers are controlled
     uint32 m_AllianceTowersControlled;
     uint32 m_HordeTowersControlled;

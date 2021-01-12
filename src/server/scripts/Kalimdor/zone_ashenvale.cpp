@@ -293,6 +293,7 @@ public:
         uint8  waveId;
     public:
         bool   _isBrazierExtinguished;
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override

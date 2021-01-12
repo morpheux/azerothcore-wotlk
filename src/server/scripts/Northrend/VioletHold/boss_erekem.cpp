@@ -34,6 +34,7 @@ enum Yells
     SAY_BOTH_ADDS_KILLED                        = 5
 };
 
+
 enum eEvents
 {
     EVENT_SPELL_BLOODLUST = 1,
@@ -218,6 +219,7 @@ enum eGuardEvents
     EVENT_SPELL_HOWLING_SCREECH,
     EVENT_SPELL_STRIKE
 };
+
 
 class npc_erekem_guard : public CreatureScript
 {

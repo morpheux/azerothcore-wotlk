@@ -195,3 +195,4 @@ private:
     //std::list<uint64> CreatureList;
 };
 #endif
+

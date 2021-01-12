@@ -260,6 +260,7 @@ public:
     }
 };
 
+
 /******
 quest Still At It (12644)
 ******/
@@ -538,6 +539,7 @@ public:
         return false;
     }
 };
+
 
 // Theirs
 /*######

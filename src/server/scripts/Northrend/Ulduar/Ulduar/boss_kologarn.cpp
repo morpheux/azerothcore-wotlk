@@ -638,6 +638,7 @@ public:
     };
 };
 
+
 // predicate function to select non main tank target
 class StoneGripTargetSelector : public acore::unary_function<Unit*, bool>
 {

@@ -16,6 +16,7 @@ class Totem;
 class TotemAI : public CreatureAI
 {
 public:
+
     explicit TotemAI(Creature* c);
 
     void MoveInLineOfSight(Unit* who) override;
@@ -46,3 +47,4 @@ protected:
 };
 
 #endif
+

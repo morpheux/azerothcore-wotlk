@@ -36,3 +36,4 @@ void WorldSession::HandleSetActiveVoiceChannel(WorldPacket& recvData)
     recvData.read_skip<uint32>();
     recvData.read_skip<char*>();
 }
+

@@ -438,6 +438,7 @@ public:
                 }
                 else
                     Talk(2);
+
             }
         }
 
@@ -682,6 +683,7 @@ public:
         return new spell_q13007_iron_colossus_SpellScript();
     };
 };
+
 
 // Theirs
 /*######
@@ -1028,6 +1030,7 @@ public:
 
     private:
         uint8 _counter;
+
     };
 
     AuraScript* GetAuraScript() const override

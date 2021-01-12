@@ -113,6 +113,7 @@ enum TFTowerStates
 class OPvPCapturePointTF : public OPvPCapturePoint
 {
 public:
+
     OPvPCapturePointTF(OutdoorPvP* pvp, OutdoorPvPTF_TowerType type);
 
     bool Update(uint32 diff) override;
@@ -130,6 +131,7 @@ public:
     void UpdateTowerState();
 
 protected:
+
     OutdoorPvPTF_TowerType m_TowerType;
 
     uint32 m_TowerState;
@@ -138,6 +140,7 @@ protected:
 class OutdoorPvPTF : public OutdoorPvP
 {
 public:
+
     OutdoorPvPTF();
 
     bool SetupOutdoorPvP() override;
@@ -160,6 +163,7 @@ public:
     bool IsLocked() const;
 
 private:
+
     bool m_IsLocked;
     uint32 m_LockTimer;
     uint32 m_LockTimerUpdate;

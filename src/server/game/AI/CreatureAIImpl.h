@@ -55,3 +55,4 @@ struct AISpellInfoType
 AISpellInfoType* GetAISpellInfo(uint32 i);
 
 #endif
+
