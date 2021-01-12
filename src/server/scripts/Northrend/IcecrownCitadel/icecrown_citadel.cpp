@@ -1772,7 +1772,6 @@ public:
                 c->getThreatManager().resetAllAggro();
                 for (ThreatContainer::StorageType::const_iterator iter = me_tl.begin(); iter != me_tl.end(); ++iter)
                     c->getThreatManager().addThreat((*iter)->getTarget(), (*iter)->getThreat());
-
             }
         }
 
@@ -2382,7 +2381,6 @@ public:
         return true;
     }
 };
-
 
 // pussywizard below:
 
@@ -3028,7 +3026,6 @@ public:
                 else
                     break;
             }
-
         }
 
         bool CanAIAttack(Unit const* target) const override
@@ -3498,7 +3495,6 @@ public:
             for (uint8 i = 0; i < 30; ++i)
                 events.ScheduleEvent(EVENT_SUMMON_BROODLING, 10000 + i * 350);
         }
-
 
         void SummonBroodling()
         {

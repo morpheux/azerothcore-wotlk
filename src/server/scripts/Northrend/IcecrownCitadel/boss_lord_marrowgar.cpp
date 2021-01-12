@@ -46,7 +46,6 @@ enum Spells
 	SPELL_TWILIGHT_PRECISION    = 78243,
 };
 
-
 enum Events
 {
     EVENT_ENABLE_BONE_SLICE = 1,

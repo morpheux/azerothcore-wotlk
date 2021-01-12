@@ -13,7 +13,6 @@
 #include "ruby_sanctum.h"
 #include "Player.h"
 
-
 enum Texts
 {
     // Shared
@@ -1470,7 +1469,6 @@ public:
         return GetInstanceAI<npc_living_infernoAI>(creature);
     }
 };
-
 
 void AddSC_boss_halion()
 {

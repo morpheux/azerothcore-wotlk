@@ -860,7 +860,6 @@ public:
     }
 };
 
-
 class npc_precious_icc : public CreatureScript
 {
 public:
