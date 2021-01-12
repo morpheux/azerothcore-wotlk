@@ -555,9 +555,9 @@ void WardenWin::HandleData(ByteBuffer& buff)
                 }
 
                 buff.rpos(buff.rpos() + rd->Length);
-
-                sLog->outMisc("RESULT MEM_CHECK passed CheckId %u account Id %u", checkId, _session->GetAccountId());
-
+#if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
+                sLog->outDebug(LOG_FILTER_WARDEN, "RESULT MEM_CHECK passed CheckId %u account Id %u", checkId, _session->GetAccountId());
+#endif
                 break;
             }
             case PAGE_CHECK_A:
@@ -585,14 +585,14 @@ void WardenWin::HandleData(ByteBuffer& buff)
 
                     buff.rpos(buff.rpos() + 1);
 
-
+#if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
                     if (type == PAGE_CHECK_A || type == PAGE_CHECK_B)
-                        sLog->outMisc("RESULT PAGE_CHECK passed CheckId %u account Id %u", checkId, _session->GetAccountId());
+                        sLog->outDebug(LOG_FILTER_WARDEN, "RESULT PAGE_CHECK passed CheckId %u account Id %u", checkId, _session->GetAccountId());
                     else if (type == MODULE_CHECK)
-                        sLog->outMisc("RESULT MODULE_CHECK passed CheckId %u account Id %u", checkId, _session->GetAccountId());
+                        sLog->outDebug(LOG_FILTER_WARDEN, "RESULT MODULE_CHECK passed CheckId %u account Id %u", checkId, _session->GetAccountId());
                     else if (type == DRIVER_CHECK)
-                        sLog->outMisc("RESULT DRIVER_CHECK passed CheckId %u account Id %u", checkId, _session->GetAccountId());
-
+                        sLog->outDebug(LOG_FILTER_WARDEN, "RESULT DRIVER_CHECK passed CheckId %u account Id %u", checkId, _session->GetAccountId());
+#endif
                 break;
             }
             case LUA_EVAL_CHECK:
@@ -635,9 +635,9 @@ void WardenWin::HandleData(ByteBuffer& buff)
                     }
 
                     buff.rpos(buff.rpos() + SHA_DIGEST_LENGTH);                // 20 bytes SHA1
-
-                    sLog->outMisc("RESULT MPQ_CHECK passed, CheckId %u account Id %u", checkId, _session->GetAccountId());
-
+#if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
+                    sLog->outDebug(LOG_FILTER_WARDEN, "RESULT MPQ_CHECK passed, CheckId %u account Id %u", checkId, _session->GetAccountId());
+#endif
                     break;
                 }
         }
