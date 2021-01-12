@@ -177,7 +177,7 @@ public:
             player->PlayerTalkClass->ClearMenus();
 
             if (player->HasItemCount(40402, 1))
-                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_61:25:25|tVIP Tank Axe", GOSSIP_SENDER_MAIN, 2,"Você tem Certeza? Quer DESTRUIR seu item VIP?",0);
+                AddGossipItemFor(player, NULL, "|TInterface/Icons/inv_axe_61:25:25|tVIP Tank Axe", GOSSIP_SENDER_MAIN, 2, "Tem Certeza? isso irá DESTRUIR seu item VIP", 0, false);
 
             if (player->HasItemCount(47898, 1))
                 player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/inv_axe_104:25:25|tVIP One Hand Axe", GOSSIP_SENDER_MAIN, 3);
