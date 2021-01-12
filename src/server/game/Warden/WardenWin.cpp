@@ -519,12 +519,14 @@ void WardenWin::HandleData(ByteBuffer& buff)
 #endif
     }
 
+    uint8 type;
     uint16 checkFailed = 0;
 
     for (uint16 const checkId : _CurrentChecks)
     {
         WardenCheck const* rd = sWardenCheckMgr->GetWardenDataById(checkId);
-        switch (rd->Type)
+        type = rd->Type;
+        switch (type)
         {
             case MEM_CHECK:
             {
