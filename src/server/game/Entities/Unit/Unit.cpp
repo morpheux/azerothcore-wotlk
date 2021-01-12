@@ -3969,7 +3969,7 @@ void Unit::_ApplyAura(AuraApplication* aurApp, uint8 effMask)
         else if (caster)
         {
             ConflagrateAuraStateDelayEvent* pEvent = new ConflagrateAuraStateDelayEvent(GetGUID(), caster->GetGUID());
-            m_Events.AddEvent(pEvent, m_Events.CalculateTime(700)); // intended 700ms delay before allowing to cast conflagrate
+            m_Events.AddEvent(pEvent, m_Events.CalculateTime(0)); // intended 700ms delay before allowing to cast conflagrate
         }
     }
 
