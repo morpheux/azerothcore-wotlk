@@ -273,7 +273,7 @@ void Warden::ApplyPenalty(uint16 checkId, std::string const& reason)
         }
     }
 
-	if(checkId == 788)
+	if(checkId == 790)
 	{
     char msg[1000];
     Player const* plr = 0;
