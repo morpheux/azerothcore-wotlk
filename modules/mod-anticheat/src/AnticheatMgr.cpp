@@ -262,8 +262,8 @@ void AnticheatMgr::SpeedHackDetection(Player* player, MovementInfo movementInfo)
 	// we did the (uint32) cast to accept a margin of tolerance
 	if (clientSpeedRate > speedRate)
 	{
-		if (sConfigMgr->GetBoolDefault("Anticheat.WriteLog", false))
-			sLog->outString("AnticheatMgr:: Speed-Hack detected player %s (%u)", player->GetName().c_str(), player->GetGUIDLow());
+		//if (sConfigMgr->GetBoolDefault("Anticheat.WriteLog", false))
+			//sLog->outString("AnticheatMgr:: Speed-Hack detected player %s (%u)", player->GetName().c_str(), player->GetGUIDLow());
 
 		BuildReport(player, SPEED_HACK_REPORT);
 	}
