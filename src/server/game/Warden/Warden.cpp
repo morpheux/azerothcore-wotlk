@@ -273,6 +273,14 @@ void Warden::ApplyPenalty(uint16 checkId, std::string const& reason)
         }
     }
 
+	if(checkId == 788)
+	{
+	std::string reportMsgGeral;
+	std::string const reportFormatGeral = "Jogador %s falhou no anti-hacker está usando PQR. Ação: Kikado do Servidor - Desliga isso rapaz, você tem dedos para fazer a rotação!!";
+	reportMsg = acore::StringFormat(reportFormatGeral, plr->GetName().c_str(),)
+	sWorld->SendGlobalText(reportMsg, NULL);
+	}
+
     reportMsg = "Warden: " + reportMsg;
     sLog->outString(reportMsg.c_str());
 	sLog->outMisc(reportMsg.c_str());
