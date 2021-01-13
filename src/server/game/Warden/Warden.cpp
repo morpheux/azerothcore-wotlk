@@ -274,18 +274,19 @@ void Warden::ApplyPenalty(uint16 checkId, std::string const& reason)
         }
     }
 
-	if(checkId == 790)
-	{
+	//if(checkId == 790)
+	//{
     //char msg[1000];
     Player const* plr = 0;
     //std::string name = plr->GetName().c_str();
     //sprintf(msg, "Jogador %s Kickado por usar PQR", name.c_str());
-    ChatHandler(plr->GetSession()).SendSysMessage("This server is running the |cff4CFF00Arena 1v1 |rmodule.");
-	}
+    //
+	//}
 
     reportMsg = "Warden: " + reportMsg;
     sLog->outString(reportMsg.c_str());
 	sLog->outMisc(reportMsg.c_str());
+    ChatHandler(plr->GetSession()).SendSysMessage(reportMsg.c_str());
 }
 
 bool Warden::ProcessLuaCheckResponse(std::string const& msg)
