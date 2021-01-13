@@ -603,9 +603,9 @@ void WardenWin::HandleData(ByteBuffer& buff)
                     buff.read_skip(buff.read<uint8>()); // discard attached string
                 }
 
-
-                sLog->outMisc("LUA_EVAL_CHECK CheckId %u account Id %u got in-warden dummy response", checkId, _session->GetAccountId()/* , result */);
-
+#if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
+                sLog->outDebug(LOG_FILTER_WARDEN, "LUA_EVAL_CHECK CheckId %u account Id %u got in-warden dummy response", checkId, _session->GetAccountId()/* , result */);
+#endif
                     break;
                 }
             case MPQ_CHECK:
