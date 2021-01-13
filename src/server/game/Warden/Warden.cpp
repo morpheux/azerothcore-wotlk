@@ -276,8 +276,9 @@ void Warden::ApplyPenalty(uint16 checkId, std::string const& reason)
 	if(checkId == 790)
 	{
     char msg[1000];
-    Player const* plr = 0;
-    sprintf(msg, "|cffFF0000[Sistema Anti-Cheat]|r %s Kickado por usar PQR", plr->GetName().c_str());
+    Player const* plr;
+    std::string name = plr->GetName().c_str();
+    sprintf(msg, "Jogador %s Kickado por usar PQR", name);
 	}
 
     reportMsg = "Warden: " + reportMsg;
