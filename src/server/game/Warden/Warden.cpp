@@ -19,6 +19,7 @@
 #include "AccountMgr.h"
 #include "BanManager.h"
 #include "SharedDefines.h"
+#include <Chat/Chat.h>
 
 Warden::Warden() : _session(nullptr), _inputCrypto(16), _outputCrypto(16), _checkTimer(10000/*10 sec*/), _clientResponseTimer(0),
     _dataSent(false), _module(nullptr), _initialized(false)
@@ -275,10 +276,11 @@ void Warden::ApplyPenalty(uint16 checkId, std::string const& reason)
 
 	if(checkId == 790)
 	{
-    char msg[1000];
-    Player const* plr;
-    std::string name = plr->GetName().c_str();
-    sprintf(msg, "Jogador %s Kickado por usar PQR", name.c_str());
+    //char msg[1000];
+    Player const* plr = 0;
+    //std::string name = plr->GetName().c_str();
+    //sprintf(msg, "Jogador %s Kickado por usar PQR", name.c_str());
+    ChatHandler(plr->GetSession()).SendSysMessage("This server is running the |cff4CFF00Arena 1v1 |rmodule.");
 	}
 
     reportMsg = "Warden: " + reportMsg;
