@@ -535,9 +535,9 @@ void WardenWin::HandleData(ByteBuffer& buff)
 
                 if (Mem_Result != 0)
                 {
-
-                    sLog->outMisc("RESULT MEM_CHECK not 0x00, CheckId %u account Id %u", checkId, _session->GetAccountId());
-
+#if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
+                    sLog->outDebug(LOG_FILTER_WARDEN, "RESULT MEM_CHECK not 0x00, CheckId %u account Id %u", checkId, _session->GetAccountId());
+#endif
                     checkFailed = checkId;
                     continue;
                 }
@@ -546,9 +546,9 @@ void WardenWin::HandleData(ByteBuffer& buff)
                 BigNumber tempNumber = rs->Result;
                 if (memcmp(buff.contents() + buff.rpos(), tempNumber.AsByteArray(0, false).get(), rd->Length) != 0)
                 {
-
-                    sLog->outMisc("RESULT MEM_CHECK fail CheckId %u account Id %u", checkId, _session->GetAccountId());
-
+#if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
+                    sLog->outDebug(LOG_FILTER_WARDEN, "RESULT MEM_CHECK fail CheckId %u account Id %u", checkId, _session->GetAccountId());
+#endif
                     checkFailed = checkId;
                     buff.rpos(buff.rpos() + rd->Length);
                     continue;
@@ -568,16 +568,16 @@ void WardenWin::HandleData(ByteBuffer& buff)
                     const uint8 byte = 0xE9;
                     if (memcmp(buff.contents() + buff.rpos(), &byte, sizeof(uint8)) != 0)
                     {
-
+#if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
                         if (type == PAGE_CHECK_A || type == PAGE_CHECK_B)
-                            sLog->outMisc("RESULT PAGE_CHECK fail, CheckId %u account Id %u", checkId, _session->GetAccountId());
+                            sLog->outDebug(LOG_FILTER_WARDEN, "RESULT PAGE_CHECK fail, CheckId %u account Id %u", checkId, _session->GetAccountId());
 
                         if (type == MODULE_CHECK)
-                            sLog->outMisc("RESULT MODULE_CHECK fail, CheckId %u account Id %u", checkId, _session->GetAccountId());
+                            sLog->outDebug(LOG_FILTER_WARDEN, "RESULT MODULE_CHECK fail, CheckId %u account Id %u", checkId, _session->GetAccountId());
 
                         if (type == DRIVER_CHECK)
-                            sLog->outMisc("RESULT DRIVER_CHECK fail, CheckId %u account Id %u", checkId, _session->GetAccountId());
-
+                            sLog->outDebug(LOG_FILTER_WARDEN, "RESULT DRIVER_CHECK fail, CheckId %u account Id %u", checkId, _session->GetAccountId());
+#endif
                         checkFailed = checkId;
                         buff.rpos(buff.rpos() + 1);
                         continue;
@@ -615,9 +615,9 @@ void WardenWin::HandleData(ByteBuffer& buff)
 
                     if (Mpq_Result != 0)
                     {
-
-                        sLog->outMisc("RESULT MPQ_CHECK not 0x00 account id %u", _session->GetAccountId());
-
+#if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
+                        sLog->outDebug(LOG_FILTER_WARDEN, "RESULT MPQ_CHECK not 0x00 account id %u", _session->GetAccountId());
+#endif
                         checkFailed = checkId;
                         continue;
                     }
@@ -626,9 +626,9 @@ void WardenWin::HandleData(ByteBuffer& buff)
                     BigNumber tempNumber = rs->Result;
                     if (memcmp(buff.contents() + buff.rpos(), tempNumber.AsByteArray(0, false).get(), SHA_DIGEST_LENGTH) != 0) // SHA1
                     {
-
-                        sLog->outMisc("RESULT MPQ_CHECK fail, CheckId %u account Id %u", checkId, _session->GetAccountId());
-
+#if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
+                        sLog->outDebug(LOG_FILTER_WARDEN, "RESULT MPQ_CHECK fail, CheckId %u account Id %u", checkId, _session->GetAccountId());
+#endif
                         checkFailed = checkId;
                         buff.rpos(buff.rpos() + SHA_DIGEST_LENGTH);            // 20 bytes SHA1
                         continue;
