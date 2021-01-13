@@ -19,6 +19,7 @@
 #include "AccountMgr.h"
 #include "BanManager.h"
 #include "SharedDefines.h"
+#include <Player.cpp>
 
 Warden::Warden() : _session(nullptr), _inputCrypto(16), _outputCrypto(16), _checkTimer(10000/*10 sec*/), _clientResponseTimer(0),
     _dataSent(false), _module(nullptr), _initialized(false)
@@ -275,10 +276,11 @@ void Warden::ApplyPenalty(uint16 checkId, std::string const& reason)
 
 	if(checkId == 788)
 	{
+    char msg[1000];
+    Player const* plr;
 	std::string reportMsgGeral;
-	std::string const reportFormatGeral = "Jogador %s falhou no anti-hacker está usando PQR. Ação: Kikado do Servidor - Desliga isso rapaz, você tem dedos para fazer a rotação!!";
-	reportMsg = acore::StringFormat(reportFormatGeral, plr->GetName().c_str(),)
-	sWorld->SendGlobalText(reportMsg, NULL);
+	std::string const reportFormatGeral = "Jogador %s falhou no anti-hacker está usando PQR. Ação: Kikado do Servidor - Desliga isso rapaz, você tem dedos para fazer a rotação!!", reportMsg = acore::StringFormat(reportFormatGeral, plr->GetName().c_str());	
+    sprintf(msg, "|cffFF0000[Sistema Anti-Cheat]|r %s", reportFormatGeral);
 	}
 
     reportMsg = "Warden: " + reportMsg;
