@@ -277,9 +277,7 @@ void Warden::ApplyPenalty(uint16 checkId, std::string const& reason)
 	{
     char msg[1000];
     Player const* plr = 0;
-	std::string reportMsgGeral;
-	std::string const reportFormatGeral = "Jogador %s falhou no anti-hacker está usando PQR. Ação: Kikado do Servidor - Desliga isso rapaz, você tem dedos para fazer a rotação!!", reportMsg = acore::StringFormat(reportFormatGeral, plr->GetName().c_str());
-    sprintf(msg, "|cffFF0000[Sistema Anti-Cheat]|r %s", reportFormatGeral.c_str());
+    sprintf(msg, "|cffFF0000[Sistema Anti-Cheat]|r %s Kickado por usar PQR", plr->GetName().c_str());
 	}
 
     reportMsg = "Warden: " + reportMsg;
