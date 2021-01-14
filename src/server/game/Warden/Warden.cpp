@@ -274,19 +274,18 @@ void Warden::ApplyPenalty(uint16 checkId, std::string const& reason)
         }
     }
 
-	//if(checkId == 790)
-	//{
+	if(checkId == 790)
+	{
     char msg[1000];
     Player const* plr = _session->GetPlayer();
-    std::string name = plr->GetName().c_str();
-    sprintf(msg, "%s Kickado por usar PQR",name.c_str());
-    //
-	//}
+    sprintf(msg, "%s Kickado por usar PQR", plr->GetName().c_str());
+    sWorld->SendGlobalText(msg, NULL);
+	}
 
     reportMsg = "Warden: " + reportMsg;
     sLog->outString(reportMsg.c_str());
 	sLog->outMisc(reportMsg.c_str());
-    sWorld->SendGlobalText(msg, NULL);
+    
 
 }
 
