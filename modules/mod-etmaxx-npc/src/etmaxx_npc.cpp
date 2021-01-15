@@ -541,7 +541,7 @@ public:
     bool OnGossipHello(Player* player, Creature* creature)
     {
         player->PlayerTalkClass->ClearMenus();
-        QueryResult result = CharacterDatabase.PQuery("SELECT bpvip,points FROM battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+        QueryResult result = CharacterDatabase.PQuery("SELECT bpvip,points FROM character_battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
         if (result) {
             Field* fields = result->Fetch();
             bpvip = fields[0].GetUInt32();
