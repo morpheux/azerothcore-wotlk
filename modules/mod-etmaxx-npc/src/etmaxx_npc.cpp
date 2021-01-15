@@ -637,6 +637,8 @@ public:
                 player->DestroyItemCount(80003, 1, true);
                 points = points + 280;
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET pointis = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
+                ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
+                CloseGossipMenuFor(player);
             }
         }break;
            
@@ -666,6 +668,7 @@ public:
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|tVIP Container - 1000 Pontos", 0, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 0, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 5000, 0);
+            SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         }break;
 
         case 3: {
@@ -673,6 +676,7 @@ public:
             Field* fields = result->Fetch();
             points = fields[0].GetUInt32();
             ChatHandler(player->GetSession()).PSendSysMessage("Você tem um total de %u Battle Points", points);
+            CloseGossipMenuFor(player);
         }break;
 
         case 5000:  // Main menu
