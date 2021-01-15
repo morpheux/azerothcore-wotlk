@@ -274,11 +274,11 @@ void Warden::ApplyPenalty(uint16 checkId, std::string const& reason)
         }
     }
 
-	if(checkId == 790)
+	if(checkId == 789 || checkId == 790)
 	{
     char msg[1000];
     Player const* plr = _session->GetPlayer();
-    sprintf(msg, "%s Kickado por usar PQR", plr->GetName().c_str());
+    sprintf(msg, "|cffFF0000[Sistema Anti-Cheat]|r %s Kickado por usar PQR", plr->GetName().c_str());
     sWorld->SendGlobalText(msg, NULL);
 	}
 
