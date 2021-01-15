@@ -550,32 +550,41 @@ public:
 
         if (result && bpvip == 0) {
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero participar do EtMaXx VIP Battle Pass", 2, 0);
-
+            SendGossipMenuFor(player, 800806, creature->GetGUID());
             if (player->HasItemCount(80001, 1, true)) {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", 4, 0);
+                SendGossipMenuFor(player, 800806, creature->GetGUID());
             }
             if (player->HasItemCount(80002, 1, true)) {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", 5, 0);
+                SendGossipMenuFor(player, 800806, creature->GetGUID());
             }
             if (player->HasItemCount(80003, 1, true)) {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", 6, 0);
+                SendGossipMenuFor(player, 800806, creature->GetGUID());
             }
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", 3, 0);         
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", 3, 0);
+            SendGossipMenuFor(player, 800806, creature->GetGUID());
         }
         else if(result && bpvip == 1) {
             if (player->HasItemCount(80001, 1, true)) {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", 4, 0);
+                SendGossipMenuFor(player, 800806, creature->GetGUID());
             }
             if (player->HasItemCount(80002, 1, true)) {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", 5, 0);
+                SendGossipMenuFor(player, 800806, creature->GetGUID());
             }
             if (player->HasItemCount(80003, 1, true)) {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", 6, 0);
+                SendGossipMenuFor(player, 800806, creature->GetGUID());
             }
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", 3, 0);
+            SendGossipMenuFor(player, 800806, creature->GetGUID());
         }
         else {
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero Participar do EtMaXx Battle Pass", 1, 0);
+            SendGossipMenuFor(player, 800806, creature->GetGUID());
         }
 
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 5000, 0);
