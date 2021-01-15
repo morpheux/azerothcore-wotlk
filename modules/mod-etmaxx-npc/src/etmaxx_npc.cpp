@@ -583,7 +583,7 @@ public:
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero Participar do EtMaXx Battle Pass", 1, 0);
         }
 
-        SendGossipMenuFor(player, 800800, creature->GetGUID());
+        SendGossipMenuFor(player, 800806, creature->GetGUID());
         //player->PlayerTalkClass->SendGossipMenu(800806, creature->GetGUID());
         return true;
     }
