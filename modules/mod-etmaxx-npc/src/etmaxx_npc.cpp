@@ -824,6 +824,13 @@ public:
             ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 1 Resgatada (5000 de Gold)");
             CloseGossipMenuFor(player);
         }
+
+        case 2200: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET tier2 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->ModifyMoney(50000000);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 2 Resgatada (10000 de Gold)");
+            CloseGossipMenuFor(player);
+        }
             
         }
         return true;
