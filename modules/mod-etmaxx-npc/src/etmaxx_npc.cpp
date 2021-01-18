@@ -639,7 +639,7 @@ public:
             if (player->HasItemCount(80001, 1)) {
                 player->DestroyItemCount(80001, 1, true);
                 points = points + 8;
-                CharacterDatabase.PExecute("UPDATE character_battlepass pointis = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
+                CharacterDatabase.PExecute("UPDATE character_battlepass points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
                 CloseGossipMenuFor(player);
             }
@@ -650,7 +650,7 @@ public:
             if (player->HasItemCount(80002, 1)) {
                 player->DestroyItemCount(80002, 1, true);
                 points = points + 40;
-                CharacterDatabase.PExecute("UPDATE character_battlepass SET pointis = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
+                CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
                 CloseGossipMenuFor(player);
             }
@@ -661,7 +661,7 @@ public:
             if (player->HasItemCount(80003, 1)) {
                 player->DestroyItemCount(80003, 1, true);
                 points = points + 280;
-                CharacterDatabase.PExecute("UPDATE character_battlepass SET pointis = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
+                CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
                 CloseGossipMenuFor(player);
             }
@@ -715,26 +715,26 @@ public:
             Field* fields = result->Fetch();
             bpvip = fields[0].GetUInt32();
             points = fields[1].GetUInt32();
-            tier1 = fields[1].GetUInt32();
-            tier2 = fields[1].GetUInt32();
-            tier3 = fields[1].GetUInt32();
-            tier4 = fields[1].GetUInt32();
-            tier5 = fields[1].GetUInt32();
-            tier6 = fields[1].GetUInt32();
-            tier7 = fields[1].GetUInt32();
-            tier8 = fields[1].GetUInt32();
-            tier9 = fields[1].GetUInt32();
-            tier10 = fields[1].GetUInt32();
-            viptier1 = fields[1].GetUInt32();
-            viptier2 = fields[1].GetUInt32();
-            viptier3 = fields[1].GetUInt32();
-            viptier4 = fields[1].GetUInt32();
-            viptier5 = fields[1].GetUInt32();
-            viptier6 = fields[1].GetUInt32();
-            viptier7 = fields[1].GetUInt32();
-            viptier8 = fields[1].GetUInt32();
-            viptier9 = fields[1].GetUInt32();
-            viptier10 = fields[1].GetUInt32();
+            tier1 = fields[2].GetUInt32();
+            tier2 = fields[3].GetUInt32();
+            tier3 = fields[4].GetUInt32();
+            tier4 = fields[5].GetUInt32();
+            tier5 = fields[6].GetUInt32();
+            tier6 = fields[7].GetUInt32();
+            tier7 = fields[8].GetUInt32();
+            tier8 = fields[9].GetUInt32();
+            tier9 = fields[10].GetUInt32();
+            tier10 = fields[11].GetUInt32();
+            viptier1 = fields[12].GetUInt32();
+            viptier2 = fields[13].GetUInt32();
+            viptier3 = fields[14].GetUInt32();
+            viptier4 = fields[15].GetUInt32();
+            viptier5 = fields[16].GetUInt32();
+            viptier6 = fields[17].GetUInt32();
+            viptier7 = fields[18].GetUInt32();
+            viptier8 = fields[19].GetUInt32();
+            viptier9 = fields[20].GetUInt32();
+            viptier10 = fields[21].GetUInt32();
             if (bpvip == 1) {
                 if (points < 100) {
                     ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de no minimo 100 Battle Points para resgater uma recompensa.");
@@ -817,6 +817,13 @@ public:
             }
             
         } break;
+
+        case 2100: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET tier1 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->ModifyMoney(50000000);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 1 Resgatada (5000 de Gold)");
+            CloseGossipMenuFor(player);
+        }
             
         }
         return true;
