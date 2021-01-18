@@ -794,6 +794,7 @@ public:
                 }
                 if (points >= 200 && tier2 == 0) {
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t10 000 de Gold - 200 Pontos", 2200, 0);
+                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
                 if (points >= 300 && tier3 == 0) {
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_summonchampion:25:25|t30 Emblem of Triumph - 300 Pontos", 2300, 0);
@@ -827,7 +828,7 @@ public:
 
         case 2200: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier2 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->ModifyMoney(50000000);
+            player->ModifyMoney(100000000);
             ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 2 Resgatada (10000 de Gold)");
             CloseGossipMenuFor(player);
         }
