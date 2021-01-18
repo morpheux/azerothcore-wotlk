@@ -691,9 +691,13 @@ public:
 
         case 2000:  // Resgate de Recompensas
         {
+            QueryResult result = CharacterDatabase.PQuery("SELECT bpvip,points FROM character_battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+            Field* fields = result->Fetch();
+            bpvip = fields[0].GetUInt32();
+            points = fields[1].GetUInt32();
             if (bpvip == 1) {
                 if (points < 100) {
-                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de no minimo 100 Battle Points para resgater uma recompensa.", points);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de no minimo 100 Battle Points para resgater uma recompensa.");
                     CloseGossipMenuFor(player);
                 }
                 if (points >= 100) {
@@ -741,7 +745,7 @@ public:
 
             if (bpvip == 0) {
                 if (points < 100) {
-                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de no minimo 100 Battle Points para resgater uma recompensa.", points);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de no minimo 100 Battle Points para resgater uma recompensa.");
                     CloseGossipMenuFor(player);
                 }
                 if (points >= 100) {
