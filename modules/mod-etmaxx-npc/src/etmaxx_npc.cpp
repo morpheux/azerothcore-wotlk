@@ -776,7 +776,7 @@ public:
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_petcarrier_01:25:25|tWorg Pup (PET) - 900 Pontos", 2900, 0);
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t5 000 de Gold - 100 Pontos", 2100, 0);
                 }
-                if (points >= 10000 && viptier10 == 0) {
+                if (points >= 1000 && viptier10 == 0) {
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_shirt_black_01:25:25|tMega Shirt Reset - 1000 Pontos", 21000, 0);
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t5 000 de Gold - 100 Pontos", 2100, 0);
                 }
@@ -810,7 +810,7 @@ public:
                 if (points >= 900 && tier9 == 0) {
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_petcarrier_01:25:25|tWorg Pup (PET) - 900 Pontos", 2900, 0);
                 }
-                if (points >= 10000 && tier10 == 0) {
+                if (points >= 1000 && tier10 == 0) {
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_shirt_black_01:25:25|tMega Shirt Reset - 1000 Pontos", 21000, 0);
                 }
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -829,6 +829,56 @@ public:
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier2 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
             player->ModifyMoney(100000000);
             ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 2 Resgatada (10000 de Gold)");
+            CloseGossipMenuFor(player);
+        } break;
+
+        case 2300: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET tier3 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(47241, 30);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 3 Resgatada (30 Emblem of Triumph)");
+            CloseGossipMenuFor(player);
+        } break;
+
+        case 2400: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET tier4 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(49426, 40);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 4 Resgatada (40 Emblem of Frost)");
+            CloseGossipMenuFor(player);
+        } break;
+
+        case 2500: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET tier5 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->ModifyHonorPoints(10000);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 5 Resgatada (10 000 Honor Points)");
+            CloseGossipMenuFor(player);
+        } break;   
+
+        case 2700: {
+            if (player->HasItemCount(80004, 1, true)) {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você já tem uma EtMaXx Transmog Mark, gaste a sua para pegar outra");
+                CloseGossipMenuFor(player);
+            }
+            else {
+                CharacterDatabase.PExecute("UPDATE character_battlepass SET tier7 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+                player->AddItem(80004, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 7 Resgatada (EtMaXx Transmog Mark)");
+                CloseGossipMenuFor(player);
+            }
+            
+        } break;
+
+        case 2900: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET tier9 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(12264, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 9 Resgatada (Worg Pup (PET))");
+            CloseGossipMenuFor(player);
+        } break;
+
+        case 21000: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET tier10 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(60000, 2000);
+            player->AddItem(60004, 15);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 10 Resgatada (Mega Shirt Reset)");
             CloseGossipMenuFor(player);
         } break;
             
