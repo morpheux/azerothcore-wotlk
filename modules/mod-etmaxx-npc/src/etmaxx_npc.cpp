@@ -794,7 +794,6 @@ public:
                 }
                 if (points >= 200 && tier2 == 0) {
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t10 000 de Gold - 200 Pontos", 2200, 0);
-                    SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
                 if (points >= 300 && tier3 == 0) {
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_summonchampion:25:25|t30 Emblem of Triumph - 300 Pontos", 2300, 0);
