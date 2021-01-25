@@ -1818,13 +1818,13 @@ public:
     int skillid[8] = { 164, 755, 197, 333, 171, 773, 202, 165 };
     int craft = 0;
 
-    bool MarkCheck(Player* player) {
-        if (player->HasItemCount(600600, 1, true)) {
-            player->DestroyItemCount(600600, 1, true);
+    bool MarkCheck(Player* player, int count) {
+        if (player->HasItemCount(600600, count, true)) {
+            player->DestroyItemCount(600600, count, true);
             return true;
         }
         else {
-            ChatHandler(player->GetSession()).PSendSysMessage("Você não tem uma EtMaXx Event Mark");
+            ChatHandler(player->GetSession()).PSendSysMessage("Você não tem EtMaXx Event Mark suficientes.");
             return false;
         }
     }
@@ -1847,13 +1847,15 @@ public:
         switch (sender)
         {
         case 100: {
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "1 Profissão Full", 1000, 0);
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "10.000 de Honor", 2000, 0);
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "200 Arena Points", 3000, 0);
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "20 Emblem of Frost", 4000, 0);
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "1 Transmog Token", 5000, 0);
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "1 Tabard", 6000, 0);
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "1 EtMaXx Mount Mark", 7000, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "1 Profissão Full - 3 Event Mark", 1000, 0);                                                                   // 03 Event Mark
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t10 000 Honor Points - 2 Event Mark", 2000, 0);              // 02 Event Mark
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t200 Arena Points - 2 Event Mark", 3000, 0); // 02 Event Mark
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01|t20 Emblem of Frost - 2 Event Mark", 4000, 0);                      // 02 Event Mark
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_coin_01:25:25|tEtMaXx Transmog Mark - 4 Event Mark", 5000, 0);                     // 04 Event Mark
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shirt_guildtabard_01:25:25|tEtMaXx Tabard Mark - 5 Event Mark", 6000, 0);               // 05 Event Mark 
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_jewelry_amulet_01:25:25|tEtMaXx Mount Mark - 7 Event Mark", 7000, 0);                   // 07 Event Mark
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_gem_pearl_04:25:25|tEtMaXx Sanctified Mark - 8 Event Mark", 8000, 0);              // 08 Event Mark 
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "1 MEGA ARMA VIP - 999 Event Mark", 8000, 0);                                                                  // 999 Event Mark
             SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         }break;
 
@@ -1870,22 +1872,79 @@ public:
                 CloseGossipMenuFor(player);
             }
             else {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Blacksmith", 10000, 0);
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Jewelcrafting", 20000, 0);
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Tailoring", 30000, 0);
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Encanting", 40000, 0);
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Alchemy", 50000, 0);
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Inscription", 60000, 0);
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Engineering", 70000, 0);
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Leatherworking", 80000, 0); 
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_blacksmithing:25:25|tBlacksmithing", 10000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_gem_02:25:25|tJewelcrafting", 20000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_tailoring:25:25|tTailoring", 30000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_engraving:25:25|tEncanting", 40000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:25:25|tAlchemy", 50000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_inscription_tradeskill01:25:25|tInscription", 60000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_engineering:25:25|tEngineering", 70000, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_armorkit_17:25:25|tLeatherworking", 80000, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             }
-            SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            
         }break;
+
+        case 2000: {
+            if (MarkCheck(player, 2)) {
+                player->ModifyHonorPoints(10000);
+                ChatHandler(player->GetSession()).PSendSysMessage("10.000 pontos de honra recebidos");
+            }
+        }
+
+        case 3000: {
+            if (MarkCheck(player,2)) {
+                player->ModifyArenaPoints(200);
+                ChatHandler(player->GetSession()).PSendSysMessage("200 pontos de Arena recebidos");
+            }
+        }
+
+        case 4000: {
+            if (MarkCheck(player, 2)) {
+                player->AddItem(49426, 20);
+                ChatHandler(player->GetSession()).PSendSysMessage("20 Emblem of Frost recebidos");
+            }
+        }
+
+        case 5000: {
+            if (MarkCheck(player, 4)) {
+                player->AddItem(80004, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Transmog Mark");
+            }
+        }
+
+        case 6000: {
+            if (MarkCheck(player, 5)) {
+                player->AddItem(80005, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Tabard Mark recebida");
+            }
+        }
+
+        case 7000: {
+            if (MarkCheck(player, 7)) {
+                player->AddItem(47395, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Mount Mark recebida");
+            }
+        }
+
+        case 8000: {
+            if (MarkCheck(player, 8)) {
+                player->AddItem(80006, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Sanctified Mark recebida");
+            }
+        }
+
+        case 9000: {
+            if (MarkCheck(player, 999)) {
+                player->AddItem(60002, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("MEGA ARMA VIP RECEBIDA !");
+            }
+        }
 
         //BS
         case 10000:
         {
-            if (MarkCheck(player)) {
+            if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
                 player->SetSkill(164, player->GetSkillStep(164), 450, 450);
             }
@@ -1894,7 +1953,7 @@ public:
         //Jewel
         case 20000:
         {
-            if (MarkCheck(player)) {
+            if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 755);
                 player->SetSkill(755, player->GetSkillStep(755), 450, 450);
             }
@@ -1903,7 +1962,7 @@ public:
         //Tailor
         case 30000:
         {
-            if (MarkCheck(player)) {
+            if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 197);
                 player->SetSkill(197, player->GetSkillStep(197), 450, 450);
             }
@@ -1912,7 +1971,7 @@ public:
         //Enchanting
         case 40000:
         {
-            if (MarkCheck(player)) {
+            if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 333);
                 player->SetSkill(333, player->GetSkillStep(333), 450, 450);
             }
@@ -1921,7 +1980,7 @@ public:
         //Alchemy
         case 50000:
         {
-            if (MarkCheck(player)) {
+            if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 171);
                 player->SetSkill(171, player->GetSkillStep(171), 450, 450);
             }
@@ -1930,7 +1989,7 @@ public:
         //Inscription
         case 60000:
         {
-            if (MarkCheck(player)) {
+            if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 773);
                 player->SetSkill(773, player->GetSkillStep(773), 450, 450);
             }
@@ -1939,7 +1998,7 @@ public:
         //Engineering
         case 70000:
         {
-            if (MarkCheck(player)) {
+            if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
                 player->SetSkill(202, player->GetSkillStep(202), 450, 450);
             }
@@ -1948,7 +2007,7 @@ public:
         //leatherworking
         case 80000:
         {
-            if (MarkCheck(player)) {
+            if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 165);
                 player->SetSkill(165, player->GetSkillStep(165), 450, 450);
             }
