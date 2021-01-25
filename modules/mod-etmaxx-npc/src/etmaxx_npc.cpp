@@ -1836,6 +1836,7 @@ public:
         player->PlayerTalkClass->ClearMenus();
 
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Escolha sua recompensa", 100, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 9999, 0);
 
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -1848,6 +1849,12 @@ public:
 
         switch (sender)
         {
+
+        case 9999:  // Main menu
+        {
+            OnGossipHello(player, creature);
+        }break;
+
         case 100: {
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_book_11:25:25|tProfissão Full - 3 Event Mark", 1000, 0);                           // 03 Event Mark                                        // 03 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t10 000 Honor Points - 2 Event Mark", 2000, 0);              // 02 Event Mark
@@ -1857,8 +1864,23 @@ public:
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_shirt_guildtabard_01:25:25|tEtMaXx Tabard Mark - 5 Event Mark", 6000, 0);               // 05 Event Mark 
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_amulet_01:25:25|tEtMaXx Mount Mark - 7 Event Mark", 7000, 0);                   // 07 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_pearl_04:25:25|tEtMaXx Sanctified Mark - 8 Event Mark", 8000, 0);              // 08 Event Mark 
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_09:25:25|tMEGA ARMA VIP - 999 Event Mark", 8000, 0);                          // 999                                        // 999 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_09:25:25|tMEGA ARMA VIP - 999 Event Mark", 8000, 0);                          // 999
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Comprar Tabard", 1, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Comprar Sanctified Token Normal", 2, 0);                                                                                                                                                                      
             SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        }break;
+
+        case 1: {
+            if (player->GetTeamId() == TEAM_HORDE) {
+                player->GetSession()->SendListInventory(creature->GetGUID(), 91500);
+            }
+            else {
+                player->GetSession()->SendListInventory(creature->GetGUID(), 92500);
+            }
+        }break;
+
+        case 2: {
+            player->GetSession()->SendListInventory(creature->GetGUID(), 93500);
         }break;
             
         case 1000: {
@@ -1885,6 +1907,7 @@ public:
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_mining:25:25|tMining", 90000, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_pelt_wolf_01:25:25|tSkinning", 100000, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_herbalism:25:25|tHerbalism", 110000, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 9999, 0);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             }
             
@@ -1895,56 +1918,56 @@ public:
                 player->ModifyHonorPoints(10000);
                 ChatHandler(player->GetSession()).PSendSysMessage("10.000 pontos de honra recebidos");
             }
-        }
+        }break;
 
         case 3000: {
             if (MarkCheck(player,2)) {
                 player->ModifyArenaPoints(200);
                 ChatHandler(player->GetSession()).PSendSysMessage("200 pontos de Arena recebidos");
             }
-        }
+        }break;
 
         case 4000: {
             if (MarkCheck(player, 2)) {
                 player->AddItem(49426, 20);
                 ChatHandler(player->GetSession()).PSendSysMessage("20 Emblem of Frost recebidos");
             }
-        }
+        }break;
 
         case 5000: {
             if (MarkCheck(player, 4)) {
                 player->AddItem(80004, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Transmog Mark");
             }
-        }
+        }break;
 
         case 6000: {
             if (MarkCheck(player, 5)) {
                 player->AddItem(80005, 1);
-                ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Tabard Mark recebida");
+                ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Tabard Mark recebida");               
             }
-        }
+        }break;
 
         case 7000: {
             if (MarkCheck(player, 7)) {
                 player->AddItem(47395, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Mount Mark recebida");
             }
-        }
+        }break;
 
         case 8000: {
             if (MarkCheck(player, 8)) {
                 player->AddItem(80006, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Sanctified Mark recebida");
             }
-        }
+        }break;
 
         case 9000: {
             if (MarkCheck(player, 999)) {
                 player->AddItem(60002, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("MEGA ARMA VIP RECEBIDA !");
             }
-        }
+        }break;
 
         //BS
         case 10000:
