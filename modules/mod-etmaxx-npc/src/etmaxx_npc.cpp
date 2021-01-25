@@ -1815,7 +1815,9 @@ class etmaxx_event : public CreatureScript
 public:
     etmaxx_event() : CreatureScript("etmaxx_event") { }
 
-    int skillid[8] = { 164, 755, 197, 333, 171, 773, 202, 165 };
+    //secondary prof = 129, 185, 356
+
+    int skillid[11] = {164, 755, 197, 333, 171, 773, 202, 165, 186, 182, 393};
     int craft = 0;
 
     bool MarkCheck(Player* player, int count) {
@@ -1847,22 +1849,22 @@ public:
         switch (sender)
         {
         case 100: {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "1 Profissão Full - 3 Event Mark", 1000, 0);                                                                   // 03 Event Mark
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t10 000 Honor Points - 2 Event Mark", 2000, 0);              // 02 Event Mark
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t200 Arena Points - 2 Event Mark", 3000, 0); // 02 Event Mark
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01|t20 Emblem of Frost - 2 Event Mark", 4000, 0);                      // 02 Event Mark
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_coin_01:25:25|tEtMaXx Transmog Mark - 4 Event Mark", 5000, 0);                     // 04 Event Mark
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shirt_guildtabard_01:25:25|tEtMaXx Tabard Mark - 5 Event Mark", 6000, 0);               // 05 Event Mark 
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_jewelry_amulet_01:25:25|tEtMaXx Mount Mark - 7 Event Mark", 7000, 0);                   // 07 Event Mark
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_gem_pearl_04:25:25|tEtMaXx Sanctified Mark - 8 Event Mark", 8000, 0);              // 08 Event Mark 
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "1 MEGA ARMA VIP - 999 Event Mark", 8000, 0);                                                                  // 999 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_book_11:25:25|tProfissão Full - 3 Event Mark", 1000, 0);                           // 03 Event Mark                                        // 03 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t10 000 Honor Points - 2 Event Mark", 2000, 0);              // 02 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t200 Arena Points - 2 Event Mark", 3000, 0); // 02 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t20 Emblem of Frost - 2 Event Mark", 4000, 0);                // 02 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|tEtMaXx Transmog Mark - 4 Event Mark", 5000, 0);            // 04 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_shirt_guildtabard_01:25:25|tEtMaXx Tabard Mark - 5 Event Mark", 6000, 0);               // 05 Event Mark 
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_amulet_01:25:25|tEtMaXx Mount Mark - 7 Event Mark", 7000, 0);                   // 07 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_pearl_04:25:25|tEtMaXx Sanctified Mark - 8 Event Mark", 8000, 0);              // 08 Event Mark 
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_09:25:25|tMEGA ARMA VIP - 999 Event Mark", 8000, 0);                          // 999                                        // 999 Event Mark
             SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         }break;
-
+            
         case 1000: {
 
             craft = 0;
-            for (int i = 0; i <= 7; i++) {
+            for (int i = 0; i <= 10; i++) {
                 if (player->HasSkill(skillid[i])) {
                     craft = craft + 1;
                 }
@@ -1872,7 +1874,7 @@ public:
                 CloseGossipMenuFor(player);
             }
             else {
-                AddGossipItemFor(player, NULL, "|TInterface/Icons/trade_blacksmithing:25:25|tBlacksmithing", 10000, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_blacksmithing:25:25|tBlacksmithing", 10000, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_02:25:25|tJewelcrafting", 20000, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_tailoring:25:25|tTailoring", 30000, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engraving:25:25|tEncanting", 40000, 0);
@@ -1880,6 +1882,9 @@ public:
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_inscription_tradeskill01:25:25|tInscription", 60000, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engineering:25:25|tEngineering", 70000, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_armorkit_17:25:25|tLeatherworking", 80000, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_mining:25:25|tMining", 90000, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_pelt_wolf_01:25:25|tSkinning", 100000, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_herbalism:25:25|tHerbalism", 110000, 0);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             }
             
@@ -2010,6 +2015,33 @@ public:
             if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 165);
                 player->SetSkill(165, player->GetSkillStep(165), 450, 450);
+            }
+        }break;
+
+        //Mining
+        case 90000:
+        {
+            if (MarkCheck(player, 3)) {
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 186);
+                player->SetSkill(186, player->GetSkillStep(186), 450, 450);
+            }
+        }break;
+
+        //Skinning
+        case 100000:
+        {
+            if (MarkCheck(player, 3)) {
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 393);
+                player->SetSkill(393, player->GetSkillStep(393), 450, 450);
+            }
+        }break;
+
+        //Herbalism
+        case 110000:
+        {
+            if (MarkCheck(player, 3)) {
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 182);
+                player->SetSkill(182, player->GetSkillStep(182), 450, 450);
             }
         }break;
 
