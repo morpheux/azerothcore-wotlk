@@ -1879,13 +1879,9 @@ public:
                 player->learnSpell(9785);
                 player->learnSpell(29844);
                 player->learnSpell(51300);
-                player->UpdateSkillsToMaxSkillsForLevel();
+                player->SetSkill(164, sWorld->getIntConfig(CONFIG_SKILL_GAIN_CRAFTING), 450, 450);
             }
-        }
-
-        ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
-
-        break;
+        }break;
         }
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
