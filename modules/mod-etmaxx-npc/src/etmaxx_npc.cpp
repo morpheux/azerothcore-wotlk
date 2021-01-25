@@ -1857,8 +1857,7 @@ public:
         case 1000: {
             if (player->HasAchieved(734)) {
                 ChatHandler(player->GetSession()).PSendSysMessage("Você só pode ter 2 Profissões, escolha outra recompensa");
-                CloseGossipMenuFor(player);
-                break;
+                CloseGossipMenuFor(player); 
             }
             else {
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Blacksmith", 10000, 0);
