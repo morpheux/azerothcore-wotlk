@@ -6,6 +6,7 @@
 #include "ScriptedGossip.h"
 #include "Language.h"
 #include <Chat/Chat.h>
+#include <Commands/cs_learn.cpp>
 
 // 25 tabards
 uint32 tabardHorda[] =
@@ -1879,7 +1880,8 @@ public:
                 player->learnSpell(9785);
                 player->learnSpell(29844);
                 player->learnSpell(51300);
-                player->SetSkill(164, sWorld->getIntConfig(CONFIG_SKILL_GAIN_CRAFTING), 450, 450);
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
+                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
             }
         }break;
         }
