@@ -1815,6 +1815,9 @@ class etmaxx_event : public CreatureScript
 public:
     etmaxx_event() : CreatureScript("etmaxx_event") { }
 
+    int skillid[8] = { 164, 755, 197, 333, 171, 773, 202, 165 };
+    int craft = 0;
+
     bool MarkCheck(Player* player) {
         if (player->HasItemCount(600600, 1, true)) {
             player->DestroyItemCount(600600, 1, true);
@@ -1855,9 +1858,16 @@ public:
         }break;
 
         case 1000: {
-            if (player->HasAchieved(734)) {
+
+            craft = 0;
+            for (int i = 0; i <= 7; i++) {
+                if (player->HasSkill(skillid[i])) {
+                    craft = craft + 1;
+                }
+            }
+            if (craft >= 2) {
                 ChatHandler(player->GetSession()).PSendSysMessage("Você só pode ter 2 Profissões, escolha outra recompensa");
-                CloseGossipMenuFor(player); 
+                CloseGossipMenuFor(player);
             }
             else {
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "Blacksmith", 10000, 0);
@@ -1876,11 +1886,6 @@ public:
         case 10000:
         {
             if (MarkCheck(player)) {
-                player->learnSpell(2018);
-                player->learnSpell(3100);
-                player->learnSpell(9785);
-                player->learnSpell(29844);
-                player->learnSpell(51300);
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
                 player->SetSkill(164, player->GetSkillStep(164), 450, 450);
             }
@@ -1890,91 +1895,62 @@ public:
         case 20000:
         {
             if (MarkCheck(player)) {
-                //player->learnSpell(2018);
-                //player->learnSpell(3100);
-                //player->learnSpell(9785);
-                //player->learnSpell(29844);
-                //player->learnSpell(51300);
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 755);
                 player->SetSkill(755, player->GetSkillStep(755), 450, 450);
             }
         }break;
 
+        //Tailor
         case 30000:
         {
             if (MarkCheck(player)) {
-                player->learnSpell(2018);
-                player->learnSpell(3100);
-                player->learnSpell(9785);
-                player->learnSpell(29844);
-                player->learnSpell(51300);
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
-                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 197);
+                player->SetSkill(197, player->GetSkillStep(197), 450, 450);
             }
         }break;
 
+        //Enchanting
         case 40000:
         {
             if (MarkCheck(player)) {
-                player->learnSpell(2018);
-                player->learnSpell(3100);
-                player->learnSpell(9785);
-                player->learnSpell(29844);
-                player->learnSpell(51300);
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
-                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 333);
+                player->SetSkill(333, player->GetSkillStep(333), 450, 450);
             }
         }break;
 
+        //Alchemy
         case 50000:
         {
             if (MarkCheck(player)) {
-                player->learnSpell(2018);
-                player->learnSpell(3100);
-                player->learnSpell(9785);
-                player->learnSpell(29844);
-                player->learnSpell(51300);
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
-                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 171);
+                player->SetSkill(171, player->GetSkillStep(171), 450, 450);
             }
         }break;
 
+        //Inscription
         case 60000:
         {
             if (MarkCheck(player)) {
-                player->learnSpell(2018);
-                player->learnSpell(3100);
-                player->learnSpell(9785);
-                player->learnSpell(29844);
-                player->learnSpell(51300);
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
-                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 773);
+                player->SetSkill(773, player->GetSkillStep(773), 450, 450);
             }
         }break;
 
+        //Engineering
         case 70000:
         {
             if (MarkCheck(player)) {
-                player->learnSpell(2018);
-                player->learnSpell(3100);
-                player->learnSpell(9785);
-                player->learnSpell(29844);
-                player->learnSpell(51300);
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
-                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
+                player->SetSkill(202, player->GetSkillStep(202), 450, 450);
             }
         }break;
 
+        //leatherworking
         case 80000:
         {
             if (MarkCheck(player)) {
-                player->learnSpell(2018);
-                player->learnSpell(3100);
-                player->learnSpell(9785);
-                player->learnSpell(29844);
-                player->learnSpell(51300);
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
-                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 165);
+                player->SetSkill(165, player->GetSkillStep(165), 450, 450);
             }
         }break;
 
