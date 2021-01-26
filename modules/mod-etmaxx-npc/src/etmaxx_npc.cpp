@@ -1838,8 +1838,6 @@ public:
             return true;
         }
         else {
-            ChatHandler(player->GetSession()).PSendSysMessage("Você não tem EtMaXx Profession Mark suficientes.");
-            CloseGossipMenuFor(player);
             return false;
         }
     }
