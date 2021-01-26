@@ -23381,6 +23381,8 @@ void Player::SendInitialPacketsAfterAddToMap()
 
     CastSpell(this, 836, true);                             // LOGINEFFECT
     removeSpell(7381, 0, false);
+    removeSpell(7381, 1, false);
+    removeSpell(7381, 2, false);
 
     // set some aura effects that send packet to player client after add player to map
     // SendMessageToSet not send it to player not it map, only for aura that not changed anything at re-apply
