@@ -1865,6 +1865,7 @@ public:
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_amulet_01:25:25|tEtMaXx Mount Mark - 7 Event Mark", 7000, 0);                   // 07 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_pearl_04:25:25|tEtMaXx Sanctified Mark - 8 Event Mark", 8000, 0);              // 08 Event Mark 
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_09:25:25|tMEGA ARMA VIP - 999 Event Mark", 8000, 0);                          // 999
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 100, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Comprar Tabard", 1, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Comprar Sanctified Token Normal", 2, 0);                                                                                                                                                                      
             SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
