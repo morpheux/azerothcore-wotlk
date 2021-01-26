@@ -1835,8 +1835,8 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/Spellschoolicon7:15:15:-18:0|tUpdate menu", 100, 0);
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:15:15:-18:0|tUpdate menu", 9999, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/Spellschoolicon7:30:30:-18:0|tResgate sua Recompensa", 100, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 9999, 0);
 
         SendGossipMenuFor(player, 800805, creature->GetGUID());
 
@@ -1864,7 +1864,7 @@ public:
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_shirt_guildtabard_01:25:25|tEtMaXx Tabard Mark - 5 Event Mark", 6000, 0);               // 05 Event Mark 
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_amulet_01:25:25|tEtMaXx Mount Mark - 7 Event Mark", 7000, 0);                   // 07 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_pearl_04:25:25|tEtMaXx Sanctified Mark - 8 Event Mark", 8000, 0);              // 08 Event Mark 
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_09:25:25|tMEGA ARMA VIP - 999 Event Mark", 8000, 0);                          // 999
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_09:25:25|tMEGA ARMA VIP - 999 Event Mark", 9000, 0);                          // 999
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 100, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Comprar Tabard", 1, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Comprar Sanctified Token Normal", 2, 0);                                                                                                                                                                      
