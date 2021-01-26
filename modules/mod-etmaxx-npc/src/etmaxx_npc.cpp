@@ -1835,8 +1835,8 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/Spellschoolicon7:35:35:-20:0|tResgate sua Recompensa", 100, 0);
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-20:0|tUpdate menu", 9999, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/Spellschoolicon7:35:35:-30:0|tResgate sua Recompensa", 100, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-30:0|tUpdate menu", 9999, 0);
 
         SendGossipMenuFor(player, 800805, creature->GetGUID());
 
