@@ -1832,6 +1832,18 @@ public:
         }
     }
 
+    bool ProfTokenCheck(Player* player, int count) {
+        if (player->HasItemCount(80009, count, true)) {
+            player->DestroyItemCount(80009, count, true);
+            return true;
+        }
+        else {
+            ChatHandler(player->GetSession()).PSendSysMessage("Você não tem EtMaXx Profession Mark suficientes.");
+            CloseGossipMenuFor(player);
+            return false;
+        }
+    }
+
     bool OnGossipHello(Player* player, Creature* creature)
     {
         player->PlayerTalkClass->ClearMenus();
@@ -1984,7 +1996,11 @@ public:
         //BS
         case 10000:
         {
-            if (MarkCheck(player,3)) {
+            if (ProfTokenCheck(player,1)) {
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
+                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
+                CloseGossipMenuFor(player);
+            }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
                 player->SetSkill(164, player->GetSkillStep(164), 450, 450);
                 CloseGossipMenuFor(player);
@@ -1994,7 +2010,11 @@ public:
         //Jewel
         case 20000:
         {
-            if (MarkCheck(player,3)) {
+            if (ProfTokenCheck(player, 1)) {
+                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
+                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
+                CloseGossipMenuFor(player);
+            }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 755);
                 player->SetSkill(755, player->GetSkillStep(755), 450, 450);
                 CloseGossipMenuFor(player);
