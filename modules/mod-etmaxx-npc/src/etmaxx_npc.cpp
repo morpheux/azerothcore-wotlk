@@ -1827,6 +1827,7 @@ public:
         }
         else {
             ChatHandler(player->GetSession()).PSendSysMessage("Você não tem EtMaXx Event Mark suficientes.");
+            CloseGossipMenuFor(player);
             return false;
         }
     }
@@ -1920,6 +1921,7 @@ public:
             if (MarkCheck(player, 2)) {
                 player->ModifyHonorPoints(10000);
                 ChatHandler(player->GetSession()).PSendSysMessage("10.000 pontos de honra recebidos");
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -1927,6 +1929,7 @@ public:
             if (MarkCheck(player,2)) {
                 player->ModifyArenaPoints(200);
                 ChatHandler(player->GetSession()).PSendSysMessage("200 pontos de Arena recebidos");
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -1934,6 +1937,7 @@ public:
             if (MarkCheck(player, 2)) {
                 player->AddItem(49426, 20);
                 ChatHandler(player->GetSession()).PSendSysMessage("20 Emblem of Frost recebidos");
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -1941,13 +1945,15 @@ public:
             if (MarkCheck(player, 4)) {
                 player->AddItem(80004, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Transmog Mark");
+                CloseGossipMenuFor(player);
             }
         }break;
 
         case 6000: {
             if (MarkCheck(player, 5)) {
                 player->AddItem(80005, 1);
-                ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Tabard Mark recebida");               
+                ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Tabard Mark recebida");
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -1955,6 +1961,7 @@ public:
             if (MarkCheck(player, 7)) {
                 player->AddItem(47395, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Mount Mark recebida");
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -1962,6 +1969,7 @@ public:
             if (MarkCheck(player, 8)) {
                 player->AddItem(80006, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Sanctified Mark recebida");
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -1969,6 +1977,7 @@ public:
             if (MarkCheck(player, 999)) {
                 player->AddItem(60002, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("MEGA ARMA VIP RECEBIDA !");
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -1978,6 +1987,7 @@ public:
             if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
                 player->SetSkill(164, player->GetSkillStep(164), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -1987,6 +1997,7 @@ public:
             if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 755);
                 player->SetSkill(755, player->GetSkillStep(755), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -1996,6 +2007,7 @@ public:
             if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 197);
                 player->SetSkill(197, player->GetSkillStep(197), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -2005,6 +2017,7 @@ public:
             if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 333);
                 player->SetSkill(333, player->GetSkillStep(333), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -2014,6 +2027,7 @@ public:
             if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 171);
                 player->SetSkill(171, player->GetSkillStep(171), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -2023,6 +2037,7 @@ public:
             if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 773);
                 player->SetSkill(773, player->GetSkillStep(773), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -2032,6 +2047,7 @@ public:
             if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
                 player->SetSkill(202, player->GetSkillStep(202), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -2041,6 +2057,7 @@ public:
             if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 165);
                 player->SetSkill(165, player->GetSkillStep(165), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -2050,6 +2067,7 @@ public:
             if (MarkCheck(player, 3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 186);
                 player->SetSkill(186, player->GetSkillStep(186), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -2059,6 +2077,7 @@ public:
             if (MarkCheck(player, 3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 393);
                 player->SetSkill(393, player->GetSkillStep(393), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
@@ -2068,6 +2087,7 @@ public:
             if (MarkCheck(player, 3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 182);
                 player->SetSkill(182, player->GetSkillStep(182), 450, 450);
+                CloseGossipMenuFor(player);
             }
         }break;
 
