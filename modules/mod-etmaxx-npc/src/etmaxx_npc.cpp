@@ -1857,7 +1857,7 @@ public:
         }break;
 
         case 100: {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_book_11:25:25:-30:0|tProfissão Full - 3 Event Mark", 1000, 0);                           // 03 Event Mark                                        // 03 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_book_11:25:25:-25:0|tProfissão Full - 3 Event Mark", 1000, 0);                           // 03 Event Mark                                        // 03 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t10 000 Honor Points - 2 Event Mark", 2000, 0);              // 02 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t200 Arena Points - 2 Event Mark", 3000, 0); // 02 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t20 Emblem of Frost - 2 Event Mark", 4000, 0);                // 02 Event Mark
