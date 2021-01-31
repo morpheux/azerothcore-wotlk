@@ -2189,6 +2189,7 @@ public:
             player->AddItem(50161, 20);
             player->AddItem(50162, 20);
             ChatHandler(player->GetSession()).PSendSysMessage("Você destrancou o Baú do Guardião e foi recompensado");
+            CloseGossipMenuFor(player);
         }break;
 
         case 9999:  // Main menu
