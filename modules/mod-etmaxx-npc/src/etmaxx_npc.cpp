@@ -2152,6 +2152,58 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Event Chest                       ///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_chest : public CreatureScript
+{
+public:
+    etmaxx_chest() : CreatureScript("etmaxx_chest") { }
+
+    bool OnGossipHello(Player* player, Creature* creature)
+    {
+        player->PlayerTalkClass->ClearMenus();
+
+        if (player->HasItemCount(80010, 1, true)) {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_key_04:35:35:-25:0|tDestrancar o Baú do Guardião", 100, 0, "TENHA CERTEZA QUE HÁ 41 SLOTS LIVRES EM SUAS BAGS", 0, false);
+        }
+        else {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tVolte quando tiver uma chave do Baú do Guardião", 9999, 0);
+        }
+
+        SendGossipMenuFor(player, 800806, creature->GetGUID());
+
+        return true;
+    }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        player->PlayerTalkClass->ClearMenus();
+
+        switch (sender)
+        {
+
+        case 100: {
+            player->DestroyItemCount(80010, 1, true);
+            player->AddItem(600600, 10);
+            player->AddItem(50161, 20);
+            player->AddItem(50162, 20);
+            ChatHandler(player->GetSession()).PSendSysMessage("Você destrancou o Baú do Guardião e foi recompensado");
+        }break;
+
+        case 9999:  // Main menu
+        {
+            //OnGossipHello(player, creature);
+            CloseGossipMenuFor(player);
+        }break;
+
+        }
+
+        return true;
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
@@ -2164,4 +2216,5 @@ void AddNpcEtmaxxScripts()
     new etmaxx_start();
 	new etmaxx_tabard();
     new etmaxx_event();
+    new etmaxx_chest();
 }
