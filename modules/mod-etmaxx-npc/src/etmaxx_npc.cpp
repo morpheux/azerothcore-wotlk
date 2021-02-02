@@ -675,7 +675,7 @@ public:
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t5 000 de Gold - 100 Pontos", 0, 0);
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t10 000 de Gold - 200 Pontos", 0, 0);
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_summonchampion:25:25|t30 Emblem of Triumph - 300 Pontos", 0, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01|t30 Emblem of Frost - 400 Pontos", 0, 0);
+            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t30 Emblem of Frost - 400 Pontos", 0, 0);
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t10 000 Honor Points - 500 Pontos", 0, 0);
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_03:25:25|tEtMaXx Transmog Mark - 700 Pontos", 0, 0);
             player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_petcarrier_01:25:25|tWorg Pup (PET) - 900 Pontos", 0, 0);
@@ -762,13 +762,14 @@ public:
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t200 Arena Points - 500 Pontos", 3500, 0);
                 }
                 if (points >= 600 && viptier6 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t400 Arena Points - 500 Pontos", 3600, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 600 Pontos", 3600, 0);
                 }
                 if (points >= 700 && viptier7 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|tEtMaXx Transmog Mark - 700 Pontos", 2700, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|tEtMaXx Transmog Mark - 700 Pontos", 3700, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|tEtMaXx Transmog Mark - 700 Pontos", 2700, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|tEtMaXx Transmog Mark - 700 Pontos", 3700, 0);
                 }
                 if (points >= 800 && viptier8 == 0) {
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_10:25:25|tEtMaXx Level-Up x20 - 700 Pontos", 2800, 0);
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t600 Arena Points - 800 Pontos", 3800, 0);
                 }
                 if (points >= 900 && viptier9 == 0) {
@@ -777,7 +778,7 @@ public:
                 }
                 if (points >= 1000 && viptier10 == 0) {
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_shirt_black_01:25:25|tMega Shirt Reset - 1000 Pontos", 21000, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|tVIP Container - 1000 Pontos", 31000, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|tVIP Container + EtMaXx Upgrade Mark - 1000 Pontos", 31000, 0);
                 }
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -804,7 +805,10 @@ public:
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t10 000 Honor Points - 500 Pontos", 2500, 0);
                 }
                 if (points >= 700 && tier7 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_03:25:25|tEtMaXx Transmog Mark - 700 Pontos", 2700, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|tEtMaXx Transmog Mark - 700 Pontos", 2700, 0);
+                }
+                if (points >= 800 && tier8 == 0) {
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_10:25:25|tEtMaXx Level-Up x20 - 700 Pontos", 2800, 0);
                 }
                 if (points >= 900 && tier9 == 0) {
                     AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_petcarrier_01:25:25|tWorg Pup (PET) - 900 Pontos", 2900, 0);
@@ -866,6 +870,13 @@ public:
             
         } break;
 
+        case 2800: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET tier8 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(60019, 20);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 8 Resgatada (20 EtMaXx Level-Up Token)");
+            CloseGossipMenuFor(player);
+        }
+
         case 2900: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier9 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
             player->AddItem(12264, 1);
@@ -880,7 +891,84 @@ public:
             ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 10 Resgatada (Mega Shirt Reset)");
             CloseGossipMenuFor(player);
         } break;
-            
+
+        case 3100: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier1 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->ModifyMoney(50000000);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 1 Resgatada (5 000 de Gold)");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 3200: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier2 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(49426, 20);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 2 Resgatada (20 Emblem of Frost)");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 3300: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier3 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->ModifyHonorPoints(10000);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 3 Resgatada (10 000 Honor Points)");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 3400: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier4 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(49426, 40);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 4 Resgatada (40 Emblem of Frost)");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 3500: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier5 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->ModifyArenaPoints(200);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 5 Resgatada (200 Arena Points)");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 3600: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier6 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(600600, 4);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 6 Resgatada (4 EtMaXx Event Mark)");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 3700: {
+            if (player->HasItemCount(80004, 1, true)) {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você já tem uma EtMaXx Transmog Mark, gaste a sua para pegar outra");
+                CloseGossipMenuFor(player);
+            }
+            else {
+                CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier7 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+                player->AddItem(80004, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 7 Resgatada (EtMaXx Transmog Mark)");
+                CloseGossipMenuFor(player);
+            }
+        }break;
+
+        case 3800: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier8 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->ModifyArenaPoints(600);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 8 Resgatada (600 Arena Points)");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 3900: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier9 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(47395, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 9 Resgatada (1 EtMaXx Mount Mark)");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 31000: {
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier10 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(60007, 1);
+            player->AddItem(34845, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 10 Resgatada (BAG VIP + EtMaXx Upgrade Mark)");
+            CloseGossipMenuFor(player);
+        }break;
+
         }
         return true;
     }
