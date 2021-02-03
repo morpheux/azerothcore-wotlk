@@ -160,7 +160,7 @@ public:
 
         case 4: {
             player->GetSession()->SendListInventory(creature->GetGUID(), 65000);
-        }
+        }break;
 
 		}
 		
