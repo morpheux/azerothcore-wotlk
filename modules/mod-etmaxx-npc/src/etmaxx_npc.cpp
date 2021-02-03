@@ -94,62 +94,74 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) 
     {
-            player->PlayerTalkClass->ClearMenus();
+        ClearGossipMenuFor(player);
 
-            if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 62500 && !player->HasSpell(75614))
-                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tCelestial Steed", GOSSIP_SENDER_MAIN, 1);
+        if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 37500)
+        {
+            if (player->GetTeamId(true) == TEAM_ALLIANCE && !player->HasSpell(16081))
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitetiger:50:50|tResgate seu Reins of the Ancient Frostsaber", 3, 0);
 
-            if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 50000 && !player->HasSpell(43688))
-                player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/Ability_druid_challangingroar:50:50|tAmani War Bear", GOSSIP_SENDER_MAIN, 2);
+            if (player->GetTeamId(true) == TEAM_HORDE && !player->HasSpell(16081))
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitedirewolf:50:50|tResgate seu Horn of the Arctic Wolf", 3, 0);
+        }
 
-            if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 37500)
-			{
-				if (player->GetTeamId(true) == TEAM_ALLIANCE && !player->HasSpell(16081))
-				player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/Ability_mount_whitetiger:50:50|tReins of the Ancient Frostsaber", GOSSIP_SENDER_MAIN, 3);
-			
-				if (player->GetTeamId(true) == TEAM_HORDE && !player->HasSpell(16081))
-				player->ADD_GOSSIP_ITEM(NULL, "|TInterface/Icons/Ability_mount_whitedirewolf:50:50|tHorn of the Arctic Wolf", GOSSIP_SENDER_MAIN, 3);
-			}
+        if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 50000 && !player->HasSpell(43688)) {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_druid_challangingroar:50:50|tResgate seu Amani War Bear", 2, 0);
+        }
 
-			player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 62500 && !player->HasSpell(75614)) {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tResgate Seu Celestial Steed",1,0);
+        }
 
+        AddGossipItemFor(player, GOSSIP_ACTION_TRADE, "Quero dar uma olhada", 4, 0);
+
+        SendGossipMenuFor(player, 800807, creature->GetGUID());
         return true;
     }
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
     {
         player->PlayerTalkClass->ClearMenus();
 
-        switch (action)
+        switch (sender)
         {
-        case 1:
+        case 1: {
             player->DestroyItemCount(54811, 1, true);
             player->AddItem(54811, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
-            break;
-        case 2:
+            CloseGossipMenuFor(player);
+        }break;
+            
+        case 2: {
             player->DestroyItemCount(33809, 1, true);
             player->AddItem(33809, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
-            break;
+            CloseGossipMenuFor(player);
+        }break;
+            
         case 3:
 		{
             if (player->GetTeamId(true) == TEAM_ALLIANCE)
 			{
                 player->DestroyItemCount(12302, 1, true);
                 player->AddItem(12302, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
+                CloseGossipMenuFor(player);
 			}
 				
 			if (player->GetTeamId(true) == TEAM_HORDE)
 			{
                 player->DestroyItemCount(12351, 1, true);
                 player->AddItem(12351, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
+                CloseGossipMenuFor(player);
 			}
-        }
-        
-        ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
+        }break;
 
-            break;
+        case 4: {
+            player->GetSession()->SendListInventory(creature->GetGUID(), 65000);
+        }
+
 		}
 		
 		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
