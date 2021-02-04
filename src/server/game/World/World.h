@@ -150,26 +150,6 @@ enum GlobalPlayerUpdateMask
     PLAYER_UPDATE_DATA_NAME             = 0x10,
 };
 
-enum HonorKillPvPRank
-{
-    HKRANK00,
-    HKRANK01,
-    HKRANK02,
-    HKRANK03,
-    HKRANK04,
-    HKRANK05,
-    HKRANK06,
-    HKRANK07,
-    HKRANK08,
-    HKRANK09,
-    HKRANK10,
-    HKRANK11,
-    HKRANK12,
-    HKRANK13,
-    HKRANK14,
-    HKRANKMAX
-};
-
 typedef std::map<uint32, GlobalPlayerData> GlobalPlayerDataMap;
 typedef std::map<std::string, uint32> GlobalPlayerNameMap;
 
