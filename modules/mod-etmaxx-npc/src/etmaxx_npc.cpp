@@ -1007,6 +1007,8 @@ public:
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
 
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tEscolha seu Transmog de Arma", 50, 0);
+
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tPegue um item invisivel (Para Transmog)", 60, 0);
               
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 100, 0);
 
@@ -1098,6 +1100,77 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             } break;
+
+            case 60:
+            { 
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shoulder_24:30:30:-18:0|tOmbreira", 600, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_chest_plate04:30:30:-18:0|tPeitoral", 601, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shirt_white_01:30:30:-18:0|tCamisa", 602, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shirt_guildtabard_01:30:30:-18:0|tTabard", 603, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_bracer_03:30:30:-18:0|tBracelete", 604, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_gauntlets_16:30:30:-18:0|tLuva", 605, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_belt_03:30:30:-18:0|tCinto", 606, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_pants_01:30:30:-18:0|tCalça", 607, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_boots_09:30:30:-18:0|tBota", 608, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            case 600:
+            {
+                player->AddItem(100100, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
+            case 601:
+            {
+                player->AddItem(100103, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
+            case 602:
+            {
+                player->AddItem(100110, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
+            case 603:
+            {
+                player->AddItem(100101, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
+            case 604:
+            {
+                player->AddItem(100108, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
+            case 605:
+            {
+                player->AddItem(100105, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
+            case 606:
+            {
+                player->AddItem(100109, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
+            case 607:
+            {
+                player->AddItem(100104, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
+            case 608:
+            {
+                player->AddItem(100106, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
             // Machados 2Hand
             case 1000:
             {
@@ -1979,6 +2052,7 @@ public:
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 100, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tComprar Tabard", 1, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tComprar Token Sanctified Normal", 2, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tTrocar Marks de Natal", 3, 0);
             SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         }break;
 
@@ -1993,6 +2067,10 @@ public:
 
         case 2: {
             player->GetSession()->SendListInventory(creature->GetGUID(), 93500);
+        }break;
+
+        case 3: {
+            player->GetSession()->SendListInventory(creature->GetGUID(), 65001);
         }break;
             
         case 1000: {
