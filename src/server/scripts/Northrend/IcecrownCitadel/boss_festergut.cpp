@@ -328,9 +328,7 @@ public:
 
         bool Validate(SpellInfo const* /*spell*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_INOCULATED))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_INOCULATED });
         }
 
         void ExtraEffect(AuraEffect const* aurEff, AuraEffectHandleModes /*mode*/)
@@ -375,9 +373,7 @@ public:
 
         bool Validate(SpellInfo const* /*spell*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_GASTRIC_EXPLOSION))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_GASTRIC_EXPLOSION });
         }
 
         void HandleScript(SpellEffIndex /*effIndex*/)

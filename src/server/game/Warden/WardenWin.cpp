@@ -451,7 +451,7 @@ void WardenWin::RequestChecks()
 #if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
     std::stringstream stream;
     stream << "Sent check id's: ";
-    for (uint16 checkId : _CurrentChecks)
+    for (uint16 checkId : _currentChecks)
     {
         stream << checkId << " ";
     }
@@ -519,13 +519,12 @@ void WardenWin::HandleData(ByteBuffer& buff)
 #endif
     }
 
-    uint8 type;
     uint16 checkFailed = 0;
 
     for (uint16 const checkId : _CurrentChecks)
     {
         WardenCheck const* rd = sWardenCheckMgr->GetWardenDataById(checkId);
-        type = rd->Type;
+        uint8 const type = rd->Type;
         switch (type)
         {
             case MEM_CHECK:

@@ -245,9 +245,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_BURNOUT_TRIGGER))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_MAGE_BURNOUT_TRIGGER });
         }
 
         bool CheckProc(ProcEventInfo& eventInfo)
@@ -504,11 +502,7 @@ class spell_mage_incanters_absorbtion_base_AuraScript : public AuraScript
 public:
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
-        if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_INCANTERS_ABSORBTION_TRIGGERED))
-            return false;
-        if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_INCANTERS_ABSORBTION_R1))
-            return false;
-        return true;
+        return ValidateSpellInfo({ SPELL_MAGE_INCANTERS_ABSORBTION_TRIGGERED, SPELL_MAGE_INCANTERS_ABSORBTION_R1 });
     }
 
     void Trigger(AuraEffect* aurEff, DamageInfo& /*dmgInfo*/, uint32& absorbAmount)
@@ -542,9 +536,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_GLYPH_OF_BLAST_WAVE))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_MAGE_GLYPH_OF_BLAST_WAVE });
         }
 
         void HandleKnockBack(SpellEffIndex effIndex)
@@ -625,11 +617,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_FROST_WARDING_TRIGGERED))
-                return false;
-            if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_FROST_WARDING_R1))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_MAGE_FROST_WARDING_TRIGGERED, SPELL_MAGE_FROST_WARDING_R1 });
         }
 
         void CalculateAmount(AuraEffect const* /*aurEff*/, int32& amount, bool& canBeRecalculated)
@@ -699,9 +687,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_FOCUS_MAGIC_PROC))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_MAGE_FOCUS_MAGIC_PROC });
         }
 
         bool Load() override
@@ -828,9 +814,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_IGNITE))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_MAGE_IGNITE });
         }
 
         bool CheckProc(ProcEventInfo& eventInfo)
@@ -962,9 +946,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_MASTER_OF_ELEMENTS_ENERGIZE))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_MAGE_MASTER_OF_ELEMENTS_ENERGIZE });
         }
 
         bool CheckProc(ProcEventInfo& eventInfo)
@@ -1063,13 +1045,12 @@ public:
         PrepareSpellScript(spell_mage_summon_water_elemental_SpellScript)
         bool Validate(SpellInfo const* /*spellEntry*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_GLYPH_OF_ETERNAL_WATER))
-                return false;
-            if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_SUMMON_WATER_ELEMENTAL_TEMPORARY))
-                return false;
-            if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_SUMMON_WATER_ELEMENTAL_PERMANENT))
-                return false;
-            return true;
+            return ValidateSpellInfo(
+                {
+                    SPELL_MAGE_GLYPH_OF_ETERNAL_WATER,
+                    SPELL_MAGE_SUMMON_WATER_ELEMENTAL_TEMPORARY,
+                    SPELL_MAGE_SUMMON_WATER_ELEMENTAL_PERMANENT
+                });
         }
 
         void HandleDummy(SpellEffIndex /*effIndex*/)

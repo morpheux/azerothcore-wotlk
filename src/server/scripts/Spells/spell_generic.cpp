@@ -1556,13 +1556,14 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_GEN_ADAPTIVE_WARDING_FIRE) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_GEN_ADAPTIVE_WARDING_NATURE) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_GEN_ADAPTIVE_WARDING_FROST) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_GEN_ADAPTIVE_WARDING_SHADOW) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_GEN_ADAPTIVE_WARDING_ARCANE))
-                return false;
-            return true;
+            return ValidateSpellInfo(
+                {
+                    SPELL_GEN_ADAPTIVE_WARDING_FIRE,
+                    SPELL_GEN_ADAPTIVE_WARDING_NATURE,
+                    SPELL_GEN_ADAPTIVE_WARDING_FROST,
+                    SPELL_GEN_ADAPTIVE_WARDING_SHADOW,
+                    SPELL_GEN_ADAPTIVE_WARDING_ARCANE
+                });
         }
 
         bool CheckProc(ProcEventInfo& eventInfo)
@@ -1713,9 +1714,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_CANNIBALIZE_TRIGGERED))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_CANNIBALIZE_TRIGGERED });
         }
 
         SpellCastResult CheckIfCorpseNear()
@@ -1768,10 +1767,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_CREATE_LANCE_ALLIANCE) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_CREATE_LANCE_HORDE))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_CREATE_LANCE_ALLIANCE, SPELL_CREATE_LANCE_HORDE });
         }
 
         void HandleScript(SpellEffIndex effIndex)
@@ -1817,9 +1813,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_FALL_DOWN))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_FALL_DOWN });
         }
 
         void HandleProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
@@ -1915,9 +1909,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_NIGHTMARE_POLLEN))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_NIGHTMARE_POLLEN });
         }
 
         void HandleScript(SpellEffIndex effIndex)
@@ -1966,14 +1958,15 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_GEN_OBSIDIAN_ARMOR_HOLY) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_GEN_OBSIDIAN_ARMOR_FIRE) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_GEN_OBSIDIAN_ARMOR_NATURE) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_GEN_OBSIDIAN_ARMOR_FROST) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_GEN_OBSIDIAN_ARMOR_SHADOW) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_GEN_OBSIDIAN_ARMOR_ARCANE))
-                return false;
-            return true;
+            return ValidateSpellInfo(
+                {
+                    SPELL_GEN_OBSIDIAN_ARMOR_HOLY,
+                    SPELL_GEN_OBSIDIAN_ARMOR_FIRE,
+                    SPELL_GEN_OBSIDIAN_ARMOR_NATURE,
+                    SPELL_GEN_OBSIDIAN_ARMOR_FROST,
+                    SPELL_GEN_OBSIDIAN_ARMOR_SHADOW,
+                    SPELL_GEN_OBSIDIAN_ARMOR_ARCANE
+                });
         }
 
         bool CheckProc(ProcEventInfo& eventInfo)
@@ -2049,10 +2042,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_PARACHUTE) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_PARACHUTE_BUFF))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_PARACHUTE, SPELL_PARACHUTE_BUFF });
         }
 
         void HandleEffectPeriodic(AuraEffect const* /*aurEff*/)
@@ -2163,13 +2153,14 @@ public:
         PrepareSpellScript(spell_gen_elune_candle_SpellScript);
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_ELUNE_CANDLE_OMEN_HEAD) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_ELUNE_CANDLE_OMEN_CHEST) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_ELUNE_CANDLE_OMEN_HAND_R) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_ELUNE_CANDLE_OMEN_HAND_L) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_ELUNE_CANDLE_NORMAL))
-                return false;
-            return true;
+            return ValidateSpellInfo(
+                {
+                    SPELL_ELUNE_CANDLE_OMEN_HEAD,
+                    SPELL_ELUNE_CANDLE_OMEN_CHEST,
+                    SPELL_ELUNE_CANDLE_OMEN_HAND_R,
+                    SPELL_ELUNE_CANDLE_OMEN_HAND_L,
+                    SPELL_ELUNE_CANDLE_NORMAL
+                });
         }
 
         void HandleScript(SpellEffIndex /*effIndex*/)
@@ -2278,9 +2269,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellEntry*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER) || !sSpellMgr->GetSpellInfo(SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER_WOTF))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER, SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER_WOTF });
         }
 
         void HandleScript()
@@ -2349,9 +2338,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_SPAWN_BLOOD_POOL))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_SPAWN_BLOOD_POOL });
         }
 
         void OnApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
@@ -2405,9 +2392,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_DIVINE_STORM))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_DIVINE_STORM });
         }
 
         void HandleScript(SpellEffIndex /*effIndex*/)
@@ -2557,14 +2542,15 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_COPY_WEAPON_AURA) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_COPY_WEAPON_2_AURA) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_COPY_WEAPON_3_AURA) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_COPY_OFFHAND_AURA) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_COPY_OFFHAND_2_AURA) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_COPY_RANGED_AURA))
-                return false;
-            return true;
+            return ValidateSpellInfo(
+                {
+                    SPELL_COPY_WEAPON_AURA,
+                    SPELL_COPY_WEAPON_2_AURA,
+                    SPELL_COPY_WEAPON_3_AURA,
+                    SPELL_COPY_OFFHAND_AURA,
+                    SPELL_COPY_OFFHAND_2_AURA,
+                    SPELL_COPY_RANGED_AURA
+                });
         }
 
         bool Load() override
@@ -2684,9 +2670,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_PLANT_CHARGES_CREDIT_ACHIEVEMENT))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_PLANT_CHARGES_CREDIT_ACHIEVEMENT });
         }
 
         bool Load() override
@@ -3039,9 +3023,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_DAMAGE_REDUCTION_AURA))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_DAMAGE_REDUCTION_AURA });
         }
 
         void OnApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
@@ -3093,10 +3075,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_PERSISTANT_SHIELD_TRIGGERED) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_PERSISTANT_SHIELD))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_PERSISTANT_SHIELD_TRIGGERED, SPELL_PERSISTANT_SHIELD });
         }
 
         void HandleDummy(SpellEffIndex /* effIndex */)
@@ -3176,11 +3155,12 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_TRANSPORTER_MALFUNCTION_POLYMORPH) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_TRANSPORTER_EVIL_TWIN) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_TRANSPORTER_MALFUNCTION_MISS))
-                return false;
-            return true;
+            return ValidateSpellInfo(
+                {
+                    SPELL_TRANSPORTER_MALFUNCTION_POLYMORPH,
+                    SPELL_TRANSPORTER_EVIL_TWIN,
+                    SPELL_TRANSPORTER_MALFUNCTION_MISS
+                });
         }
 
         void HandleDummy(SpellEffIndex /* effIndex */)
@@ -3224,10 +3204,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_TRANSPORTER_SUCCESS) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_TRANSPORTER_FAILURE))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_TRANSPORTER_SUCCESS, SPELL_TRANSPORTER_FAILURE });
         }
 
         void HandleDummy(SpellEffIndex /* effIndex */)
@@ -3272,17 +3249,21 @@ public:
             switch (spellInfo->Id)
             {
                 case SPELL_SUNREAVER_DISGUISE_TRIGGER:
-                    if (!sSpellMgr->GetSpellInfo(SPELL_SUNREAVER_DISGUISE_FEMALE) ||
-                            !sSpellMgr->GetSpellInfo(SPELL_SUNREAVER_DISGUISE_MALE))
-                        return false;
-                    break;
+                    return ValidateSpellInfo(
+                        {
+                            SPELL_SUNREAVER_DISGUISE_FEMALE,
+                            SPELL_SUNREAVER_DISGUISE_MALE
+                        });
                 case SPELL_SILVER_COVENANT_DISGUISE_TRIGGER:
-                    if (!sSpellMgr->GetSpellInfo(SPELL_SILVER_COVENANT_DISGUISE_FEMALE) ||
-                            !sSpellMgr->GetSpellInfo(SPELL_SILVER_COVENANT_DISGUISE_MALE))
-                        return false;
+                    return ValidateSpellInfo(
+                        {
+                            SPELL_SILVER_COVENANT_DISGUISE_FEMALE,
+                            SPELL_SILVER_COVENANT_DISGUISE_MALE
+                        });
+                default:
                     break;
             }
-            return true;
+            return false;
         }
 
         void HandleScript(SpellEffIndex /*effIndex*/)
@@ -3611,13 +3592,12 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_VISUAL_SHIELD_1))
-                return false;
-            if (!sSpellMgr->GetSpellInfo(SPELL_VISUAL_SHIELD_2))
-                return false;
-            if (!sSpellMgr->GetSpellInfo(SPELL_VISUAL_SHIELD_3))
-                return false;
-            return true;
+            return ValidateSpellInfo(
+                {
+                    SPELL_VISUAL_SHIELD_1,
+                    SPELL_VISUAL_SHIELD_2,
+                    SPELL_VISUAL_SHIELD_3
+                });
         }
 
         void RefreshVisualShields(AuraEffect const* aurEff, AuraEffectHandleModes /*mode*/)
@@ -3724,10 +3704,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_ON_TOURNAMENT_MOUNT) ||
-                    !sSpellMgr->GetSpellInfo(SPELL_MOUNTED_DUEL))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_ON_TOURNAMENT_MOUNT, SPELL_MOUNTED_DUEL });
         }
 
         void HandleScriptEffect(SpellEffIndex /*effIndex*/)
@@ -3775,9 +3752,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_LANCE_EQUIPPED))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_LANCE_EQUIPPED });
         }
 
         SpellCastResult CheckIfLanceEquiped()
@@ -4215,9 +4190,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_RECENTLY_BANDAGED))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_RECENTLY_BANDAGED });
         }
 
         SpellCastResult CheckCast()
@@ -4249,6 +4222,48 @@ public:
     }
 };
 
+enum ParalyticPoison
+{
+    SPELL_PARALYSIS = 35202
+};
+
+// 35201 - Paralytic Poison
+class spell_gen_paralytic_poison : public SpellScriptLoader
+{
+public:
+    spell_gen_paralytic_poison() : SpellScriptLoader("spell_gen_paralytic_poison") { }
+
+    class spell_gen_paralytic_poison_AuraScript : public AuraScript
+    {
+        PrepareAuraScript(spell_gen_paralytic_poison_AuraScript);
+
+        bool Validate(SpellInfo const* /*spellInfo*/) override
+        {
+            return (sSpellMgr->GetSpellInfo(SPELL_PARALYSIS));
+        }
+
+        void HandleStun(AuraEffect const* aurEff, AuraEffectHandleModes /*mode*/)
+        {
+            if (GetTargetApplication()->GetRemoveMode() != AURA_REMOVE_BY_EXPIRE)
+            {
+                return;
+            }
+
+            GetTarget()->CastSpell((Unit*)nullptr, SPELL_PARALYSIS, true, nullptr, aurEff);
+        }
+
+        void Register() override
+        {
+            AfterEffectRemove += AuraEffectRemoveFn(spell_gen_paralytic_poison_AuraScript::HandleStun, EFFECT_0, SPELL_AURA_PERIODIC_DAMAGE, AURA_EFFECT_HANDLE_REAL);
+        }
+    };
+
+    AuraScript* GetAuraScript() const override
+    {
+        return new spell_gen_paralytic_poison_AuraScript();
+    }
+};
+
 // Blade Warding - 64440
 enum BladeWarding
 {
@@ -4266,9 +4281,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_GEN_BLADE_WARDING_TRIGGERED))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_GEN_BLADE_WARDING_TRIGGERED });
         }
 
         void HandleProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
@@ -4322,9 +4335,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(_spellId))
-                return false;
-            return true;
+            return ValidateSpellInfo({ _spellId });
         }
 
         void AfterRemove(AuraEffect const* aurEff, AuraEffectHandleModes /*mode*/)
@@ -4375,9 +4386,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(_spellId))
-                return false;
-            return true;
+            return ValidateSpellInfo({ _spellId });
         }
 
         void AfterApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
@@ -4915,9 +4924,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_YOGG_SARON_WHISPER_DUMMY))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_YOGG_SARON_WHISPER_DUMMY });
         }
 
         void HandleEffectPeriodic(AuraEffect const* /*aurEff*/)
@@ -5005,6 +5012,39 @@ public:
     SpellScript* GetSpellScript() const override
     {
         return new spell_gen_eject_passenger_SpellScript();
+    }
+};
+
+// Used for some spells cast by vehicles or charmed creatures that do not send a cooldown event on their own
+class spell_gen_charmed_unit_spell_cooldown : public SpellScriptLoader
+{
+public:
+    spell_gen_charmed_unit_spell_cooldown() : SpellScriptLoader("spell_gen_charmed_unit_spell_cooldown") { }
+
+    class spell_gen_charmed_unit_spell_cooldown_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_gen_charmed_unit_spell_cooldown_SpellScript);
+
+        void HandleCast()
+        {
+            Unit* caster = GetCaster();
+            if (Player* owner = caster->GetCharmerOrOwnerPlayerOrPlayerItself())
+            {
+                WorldPacket data;
+                caster->BuildCooldownPacket(data, SPELL_COOLDOWN_FLAG_NONE, GetSpellInfo()->Id, GetSpellInfo()->RecoveryTime);
+                owner->SendDirectMessage(&data);
+            }
+        }
+
+        void Register() override
+        {
+            OnCast += SpellCastFn(spell_gen_charmed_unit_spell_cooldown_SpellScript::HandleCast);
+        }
+    };
+
+    SpellScript* GetSpellScript() const override
+    {
+        return new spell_gen_charmed_unit_spell_cooldown_SpellScript();
     }
 };
 
@@ -5110,6 +5150,7 @@ void AddSC_generic_spell_scripts()
     new spell_gen_count_pct_from_max_hp("spell_gen_100pct_count_pct_from_max_hp", 100);
     new spell_gen_despawn_self();
     new spell_gen_bandage();
+    new spell_gen_paralytic_poison();
     new spell_gen_blade_warding();
     new spell_gen_lifebloom("spell_hexlord_lifebloom", SPELL_HEXLORD_MALACRASS_LIFEBLOOM_FINAL_HEAL);
     new spell_gen_lifebloom("spell_tur_ragepaw_lifebloom", SPELL_TUR_RAGEPAW_LIFEBLOOM_FINAL_HEAL);
@@ -5135,4 +5176,5 @@ void AddSC_generic_spell_scripts()
     new spell_gen_whisper_gulch_yogg_saron_whisper();
     new spell_gen_eject_all_passengers();
     new spell_gen_eject_passenger();
+    new spell_gen_charmed_unit_spell_cooldown();
 }

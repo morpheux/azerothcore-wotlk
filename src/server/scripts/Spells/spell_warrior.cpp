@@ -234,9 +234,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_LAST_STAND_TRIGGERED))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_WARRIOR_LAST_STAND_TRIGGERED });
         }
 
         void HandleDummy(SpellEffIndex /*effIndex*/)
@@ -270,9 +268,12 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_1) || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_2) || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_3))
-                return false;
-            return true;
+            return ValidateSpellInfo(
+                {
+                    SPELL_WARRIOR_DEEP_WOUNDS_RANK_1,
+                    SPELL_WARRIOR_DEEP_WOUNDS_RANK_2,
+                    SPELL_WARRIOR_DEEP_WOUNDS_RANK_3
+                });
         }
 
         void HandleDummy(SpellEffIndex /*effIndex*/)
@@ -315,9 +316,12 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_JUGGERNAUT_CRIT_BONUS_TALENT) || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_JUGGERNAUT_CRIT_BONUS_BUFF) || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_CHARGE))
-                return false;
-            return true;
+            return ValidateSpellInfo(
+                {
+                    SPELL_WARRIOR_JUGGERNAUT_CRIT_BONUS_TALENT,
+                    SPELL_WARRIOR_JUGGERNAUT_CRIT_BONUS_BUFF,
+                    SPELL_WARRIOR_CHARGE
+                });
         }
 
         void HandleDummy(SpellEffIndex /*effIndex*/)
@@ -355,9 +359,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_SLAM))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_WARRIOR_SLAM });
         }
 
         void HandleDummy(SpellEffIndex /*effIndex*/)
@@ -390,9 +392,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DAMAGE_SHIELD_DAMAGE))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_WARRIOR_DAMAGE_SHIELD_DAMAGE });
         }
 
         void OnProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
@@ -428,9 +428,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_EXECUTE) || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_GLYPH_OF_EXECUTION))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_WARRIOR_EXECUTE, SPELL_WARRIOR_GLYPH_OF_EXECUTION });
         }
 
         void HandleEffect(SpellEffIndex effIndex)
@@ -724,9 +722,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_SWEEPING_STRIKES_EXTRA_ATTACK))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_WARRIOR_SWEEPING_STRIKES_EXTRA_ATTACK });
         }
 
         bool Load() override
@@ -776,15 +772,13 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_GLYPH_OF_VIGILANCE))
-                return false;
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_VIGILANCE_PROC))
-                return false;
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_VIGILANCE_REDIRECT_THREAT))
-                return false;
-            if (!sSpellMgr->GetSpellInfo(SPELL_GEN_DAMAGE_REDUCTION_AURA))
-                return false;
-            return true;
+            return ValidateSpellInfo(
+                {
+                    SPELL_WARRIOR_GLYPH_OF_VIGILANCE,
+                    SPELL_WARRIOR_VIGILANCE_PROC,
+                    SPELL_WARRIOR_VIGILANCE_REDIRECT_THREAT,
+                    SPELL_GEN_DAMAGE_REDUCTION_AURA
+                });
         }
 
         bool Load() override
@@ -937,9 +931,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_RETALIATION_DAMAGE))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_WARRIOR_RETALIATION_DAMAGE });
         }
 
         bool CheckProc(ProcEventInfo& eventInfo)

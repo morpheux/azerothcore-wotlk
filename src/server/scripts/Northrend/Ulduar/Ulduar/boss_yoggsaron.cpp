@@ -2891,9 +2891,7 @@ public:
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
-            if (!sSpellMgr->GetSpellInfo(SPELL_GRIM_REPRISAL_DAMAGE))
-                return false;
-            return true;
+            return ValidateSpellInfo({ SPELL_GRIM_REPRISAL_DAMAGE });
         }
 
         void HandleProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
