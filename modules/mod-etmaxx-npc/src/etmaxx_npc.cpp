@@ -99,18 +99,18 @@ public:
         if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 37500)
         {
             if (player->GetTeamId(true) == TEAM_ALLIANCE && !player->HasSpell(16081))
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitetiger:50:50|tResgate seu Reins of the Ancient Frostsaber", 3, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitetiger:35:35:-25:0|tResgate seu Reins of the Ancient Frostsaber", 3, 0);
 
             if (player->GetTeamId(true) == TEAM_HORDE && !player->HasSpell(16081))
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitedirewolf:50:50|tResgate seu Horn of the Arctic Wolf", 3, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitedirewolf:35:35:-25:0|tResgate seu Horn of the Arctic Wolf", 3, 0);
         }
 
         if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 50000 && !player->HasSpell(43688)) {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_druid_challangingroar:50:50|tResgate seu Amani War Bear", 2, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_druid_challangingroar:35:35:-25:0|tResgate seu Amani War Bear", 2, 0);
         }
 
         if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 62500 && !player->HasSpell(75614)) {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_celestialhorse:50:50|tResgate Seu Celestial Steed",1,0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_celestialhorse:35:35:-25:0|tResgate Seu Celestial Steed",1,0);
         }
 
         AddGossipItemFor(player, GOSSIP_ACTION_TRADE, "Quero dar uma olhada", 4, 0);
