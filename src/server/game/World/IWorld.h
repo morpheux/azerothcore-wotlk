@@ -485,6 +485,8 @@ enum HonorKillPvPRank
     HKRANKMAX
 };
 
+uint32 pvp_ranks[HKRANKMAX];
+
 // xinef: global storage
 struct GlobalPlayerData
 {
