@@ -291,6 +291,8 @@ public:
     bool SendZoneMessage(uint32 zone, WorldPacket* packet, WorldSession* self = nullptr, TeamId teamId = TEAM_NEUTRAL);
     void SendZoneText(uint32 zone, const char* text, WorldSession* self = nullptr, TeamId teamId = TEAM_NEUTRAL);
     void SendServerMessage(ServerMessageType type, const char* text = "", Player* player = nullptr);
+	
+    uint32 pvp_ranks[HKRANKMAX];
 
     /// Are we in the middle of a shutdown?
     bool IsShuttingDown() const { return m_ShutdownTimer > 0; }
