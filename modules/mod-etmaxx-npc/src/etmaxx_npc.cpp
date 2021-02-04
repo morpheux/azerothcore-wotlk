@@ -164,8 +164,6 @@ public:
 
 		}
 		
-		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-		
 		return true;
 	}
 };
