@@ -609,6 +609,7 @@ public:
     virtual time_t GetNextTimeWithMonthAndHour(int8 month, int8 hour) = 0;
     virtual std::string const& GetRealmName() const = 0;
     virtual void SetRealmName(std::string name) = 0;
+    uint32 pvp_ranks[HKRANKMAX];
 };
 
 #endif //AZEROTHCORE_IWORLD_H
