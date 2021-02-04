@@ -98,7 +98,7 @@ public:
 
         if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 37500)
         {
-            if (player->GetTeamId(true) == TEAM_ALLIANCE && !player->HasSpell(16081))
+            if (player->GetTeamId(true) == TEAM_ALLIANCE && !player->HasSpell(16056))
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitetiger:35:35:-25:0|tResgate seu Reins of the Ancient Frostsaber", 3, 0);
 
             if (player->GetTeamId(true) == TEAM_HORDE && !player->HasSpell(16081))
