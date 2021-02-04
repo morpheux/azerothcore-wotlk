@@ -7562,10 +7562,10 @@ void Player::UpdateKnownTitles()
     RemoveFlag64(PLAYER__FIELD_KNOWN_TITLES,PLAYER_TITLE_MASK_ALL_PVP);
     if (honor_kills < 0)
         return;
-    bool max_rank = ((honor_kills >= sWorld->pvp_ranks[HKRANKMAX-1]) ? true : false);
+    bool max_rank = ((honor_kills >= pvp_ranks[HKRANKMAX-1]) ? true : false);
     for (int i = HKRANK01; i != HKRANKMAX; ++i)
     {
-        if (honor_kills < sWorld->pvp_ranks[i] || (max_rank))
+        if (honor_kills < pvp_ranks[i] || (max_rank))
         {
             new_title = ((max_rank) ? (HKRANKMAX-1) : (i-1));
             if (new_title > 0)

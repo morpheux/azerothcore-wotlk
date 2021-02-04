@@ -113,7 +113,9 @@ public:
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_celestialhorse:35:35:-25:0|tResgate Seu Celestial Steed",1,0);
         }
 
-        AddGossipItemFor(player, GOSSIP_ACTION_TRADE, "Quero dar uma olhada", 4, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tQuero dar uma olhada", 4, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------------------------", 999, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 999, 0);
 
         SendGossipMenuFor(player, 800807, creature->GetGUID());
         return true;
@@ -125,6 +127,9 @@ public:
 
         switch (sender)
         {
+        case 999: {
+            OnGossipHello(player, creature);
+        }
         case 1: {
             player->DestroyItemCount(54811, 1, true);
             player->AddItem(54811, 1);
