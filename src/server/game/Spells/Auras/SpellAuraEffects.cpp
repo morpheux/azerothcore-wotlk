@@ -6210,7 +6210,16 @@ void AuraEffect::HandlePeriodicDamageAurasTick(Unit* target, Unit* caster) const
     if ((crit = roll_chance_f(GetCritChance())))
         damage = Unit::SpellCriticalDamageBonus(caster, m_spellInfo, damage, target);
 
-    int32 dmg = damage;
+    int32 dmg;
+
+    if (caster->getClass() == CLASS_PRIEST || caster->getClass() == CLASS_WARLOCK)
+    {
+        dmg = damage * 0.50;
+    }
+    else {
+        dmg = damage;
+    }
+
     if (CanApplyResilience())
         Unit::ApplyResilience(target, NULL, &dmg, crit, CR_CRIT_TAKEN_SPELL);
     damage = dmg;
