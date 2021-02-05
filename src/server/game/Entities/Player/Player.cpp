@@ -2746,9 +2746,9 @@ void Player::Regenerate(Powers power)
                 if (getClass() == CLASS_PRIEST && GetActiveSpec() == TALENT_TREE_PRIEST_SHADOW)
                 {
                     if (recentCast) // Trinity Updates Mana in intervals of 2s, which is correct
-                        addvalue += GetFloatValue(UNIT_FIELD_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER) * ManaIncreaseRate * 0.001f * m_regenTimer * 0.50;
+                        addvalue += GetFloatValue(UNIT_FIELD_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER) * ManaIncreaseRate * 0.001f * m_regenTimer * 0.50f;
                     else
-                        addvalue += GetFloatValue(UNIT_FIELD_POWER_REGEN_FLAT_MODIFIER) * ManaIncreaseRate * 0.001f * m_regenTimer * 0.50;
+                        addvalue += GetFloatValue(UNIT_FIELD_POWER_REGEN_FLAT_MODIFIER) * ManaIncreaseRate * 0.001f * m_regenTimer * 0.50f;
                 }
                 else {
                     if (recentCast) // Trinity Updates Mana in intervals of 2s, which is correct
