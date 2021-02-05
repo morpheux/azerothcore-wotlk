@@ -129,7 +129,8 @@ public:
         {
         case 999: {
             OnGossipHello(player, creature);
-        }
+        }break;
+
         case 1: {
             player->DestroyItemCount(54811, 1, true);
             player->AddItem(54811, 1);
