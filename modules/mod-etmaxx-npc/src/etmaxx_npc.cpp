@@ -656,7 +656,7 @@ public:
             if (player->HasItemCount(80001, 1)) {
                 player->DestroyItemCount(80001, 1, true);
                 points = points + 8;
-                CharacterDatabase.PExecute("UPDATE character_battlepass points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
+                CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
                 CloseGossipMenuFor(player);
             }
