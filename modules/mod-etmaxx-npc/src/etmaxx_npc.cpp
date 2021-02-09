@@ -897,7 +897,7 @@ public:
         case 2900: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier9 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
             player->AddItem(12264, 1);
-            player->Additem(600600, 1);
+            player->AddItem(600600, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 9 Resgatada (Worg Pup (PET))");
             CloseGossipMenuFor(player);
         } break;
