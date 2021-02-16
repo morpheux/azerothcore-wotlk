@@ -6796,6 +6796,12 @@ void SpellMgr::LoadDbcDataCorrections()
         spellInfo->EffectBasePoints[0] = 1; // corrects seat id (points - 1 = seatId)
     });
 
+    // Arena- Dampening
+    ApplySpellFix({ 74410 }, [](SpellEntry* spellInfo)
+        {
+            spellInfo->EffectBasePoints[0] = -26; // Reducecs Healing on Arena by 25%
+        });
+
     // Jormungar Strike
     ApplySpellFix({ 56513 }, [](SpellEntry* spellInfo)
     {
