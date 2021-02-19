@@ -990,6 +990,9 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
                     player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_WIN_RATED_ARENA, rating ? rating : 1);
                     player->UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_WIN_ARENA, GetMapId());
 
+                    // Adicionar 3 Pontos de Arena por Vitória
+                    player->ModifyArenaPoints(2)
+
                     winnerArenaTeam->MemberWon(player, loserMatchmakerRating, winnerMatchmakerChange);
                 }
             }
