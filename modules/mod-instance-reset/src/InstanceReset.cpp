@@ -13,10 +13,27 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        if (!sConfigMgr->GetBoolDefault("instanceReset.Enable", true))
-            return true;
+        uint32 resets;
+
+        QueryResult result = CharacterDatabase.PQuery("SELECT resets FROM character_cromi WHERE guid = %u", player->GetSession()->GetGuidLow());
+
+        if (result) {
+            Field* fields = result->Fetch();
+            resets = fields[0].GetUInt32();
+        }else{
+            CharacterDatabase.PExecute("INSERT INTO character_cromi(guid, resets) VALUES (%u, %u)", player->GetSession()->GetGuidLow(), 3);
+            CloseGossipMenuFor(player);
+        }
+
         ClearGossipMenuFor(player);
-        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias normais.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        
+        if (resets == 0){
+            ChatHandler(player->GetSession()).PSendSysMessage("Cromi: Você não possuí pontos suficientes para resetar as instâncias.");
+            CloseGossipMenuFor(player);
+        }else{
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias normais ao custo de 1 ponto de reset.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        }
+        
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
@@ -24,12 +41,16 @@ public:
     bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action) override
     {
         ClearGossipMenuFor(player);
-        uint32 diff = 2;
+        uint32 diff = 1;
+
         if (action == GOSSIP_ACTION_INFO_DEF + 1)
         {
-            if (!sConfigMgr->GetBoolDefault("instanceReset.NormalModeOnly", true))
-                diff = MAX_DIFFICULTY;
-            for (uint8 i = 0; i < diff; ++i)
+            //RAID_DIFFICULTY_10MAN_NORMAL = 0,
+            //RAID_DIFFICULTY_25MAN_NORMAL = 1,
+            //RAID_DIFFICULTY_10MAN_HEROIC = 2,
+            //RAID_DIFFICULTY_25MAN_HEROIC = 3,
+
+            for (uint8 i = 0; i <= diff; ++i)
             {
                 BoundInstancesMap const& m_boundInstances = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
                 for (BoundInstancesMap::const_iterator itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
@@ -46,6 +67,7 @@ public:
                         ++itr;
                 }
             }
+            CharacterDatabase.PExecute("UPDATE character_cromi SET resets=resets-1 WHERE guid=%u", player->GetSession()->GetGuidLow());
             creature->MonsterWhisper("Seus cooldowns foram resetados" , player);
             CloseGossipMenuFor(player);
         }
