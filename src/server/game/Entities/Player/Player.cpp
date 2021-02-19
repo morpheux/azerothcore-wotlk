@@ -7330,6 +7330,29 @@ void Player::RewardExtraBonusTalentPoints(uint32 bonusTalentPoints)
     }
 }
 
+void Player::RewardReputationPvP()
+{
+    if(GetTeamId() == TEAM_ALLIANCE)
+    {
+        // Reputação em Vitórias
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(69), 2); // Darnassus
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(930), 2); // Exodar
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(54), 2); // Gnomeregan
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(47), 2); // Ironforge
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(72), 2); // Stormwind
+    }
+    
+    if(GetTeamId() == TEAM_ALLIANCE)
+    {
+        // Reputação em Vitórias
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(530), 2); // Troll
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(76), 2); // Orgrimmar
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(911), 2); // Silvermoon
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(81), 2); // Thunder Bluff
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(68), 2); // Undercity
+    }
+}
+
 void Player::UpdateHonorFields()
 {
     /// called when rewarding honor and at each save
