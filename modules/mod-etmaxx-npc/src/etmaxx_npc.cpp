@@ -1322,6 +1322,7 @@ public:
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
                     player->AddItem(37836, 1);
+                    player->AddItem(60019, 50);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Guerreiro");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1342,6 +1343,7 @@ public:
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
                     player->AddItem(37836, 1);
+                    player->AddItem(60019, 50);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Paladino");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1363,6 +1365,7 @@ public:
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
                     player->AddItem(37836, 1);
+                    player->AddItem(60019, 50);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Ladino");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1383,6 +1386,7 @@ public:
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
                     player->AddItem(37836, 1);
+                    player->AddItem(60019, 50);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Sacerdote");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1403,6 +1407,7 @@ public:
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
                     player->AddItem(37836, 1);
+                    player->AddItem(60019, 50);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Mago");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1423,6 +1428,7 @@ public:
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
                     player->AddItem(37836, 1);
+                    player->AddItem(60019, 50);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Bruxo");
                     CloseGossipMenuFor(player);
 
@@ -1444,6 +1450,7 @@ public:
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
                     player->AddItem(37836, 1);
+                    player->AddItem(60019, 50);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Caçador");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1454,6 +1461,7 @@ public:
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
                     player->AddItem(37836, 1);
+                    player->AddItem(60019, 20);
                     ChatHandler(player->GetSession()).PSendSysMessage("Você já está bem avançado em sua jornada, não precisa da minha ajuda. Receba apenas minha benção");
                     CloseGossipMenuFor(player);
                 }break;
@@ -1477,6 +1485,7 @@ public:
                 player->AddItem(29099, 1);
                 player->AddItem(40280, 1);
                 player->AddItem(37836, 1);
+                player->AddItem(60019, 50);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
                 CloseGossipMenuFor(player);
             }break;
@@ -1497,6 +1506,7 @@ public:
                 player->AddItem(29094, 1);
                 player->AddItem(50181, 1);
                 player->AddItem(37836, 1);
+                player->AddItem(60019, 50);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
                 CloseGossipMenuFor(player);
             }break;
@@ -1518,6 +1528,7 @@ public:
                 player->AddItem(40488, 1);
                 player->AddItem(51452, 1);
                 player->AddItem(37836, 1);
+                player->AddItem(60019, 50);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
                 CloseGossipMenuFor(player);
             }break;
@@ -1539,6 +1550,7 @@ public:
                 player->AddItem(50760, 1);
                 player->AddItem(50760, 1);
                 player->AddItem(37836, 1);
+                player->AddItem(60019, 50);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
                 CloseGossipMenuFor(player);
             }break;
