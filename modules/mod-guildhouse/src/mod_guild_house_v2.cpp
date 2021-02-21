@@ -642,6 +642,12 @@ public:
             return false;
         }
 
+        if (player->HasAura(26680)) {
+            handler->SendSysMessage("Você não pode se teleportar para a guild house nesse momento");
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
         GuildData* guildData = player->CustomData.GetDefault<GuildData>("phase");
         QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `guild`, `phase`, `map`,`positionX`, `positionY`, `positionZ` FROM guild_house WHERE `guild` = %u", player->GetGuildId());
 
@@ -664,6 +670,7 @@ public:
             guildData->posZ = fields[6].GetFloat();
 
             player->TeleportTo(map, guildData->posX, guildData->posY, guildData->posZ, player->GetOrientation());
+            player->CastSpell(player, 26680, true);
 
         } while (result->NextRow());
 
