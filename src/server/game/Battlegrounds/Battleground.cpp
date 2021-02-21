@@ -978,6 +978,9 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
             player->getHostileRefManager().deleteReferences();
         }
 
+        // Reputacao por PvP
+        player->RewardReputationPvP();
+
         // per player calculation
         if (isArena() && isRated() && winnerArenaTeam && loserArenaTeam && winnerArenaTeam != loserArenaTeam)
         {
@@ -992,9 +995,6 @@ void Battleground::EndBattleground(TeamId winnerTeamId)
 
                     // Adicionar 3 Pontos de Arena por Vitória
                     player->ModifyArenaPoints(2);
-
-                    // Reputacao por PvP
-                    player->RewardReputationPvP();
 
                     winnerArenaTeam->MemberWon(player, loserMatchmakerRating, winnerMatchmakerChange);
                 }
