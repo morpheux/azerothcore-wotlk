@@ -2206,6 +2206,7 @@ public:
     /***                  PVP SYSTEM                       ***/
     /*********************************************************/
     void UpdateHonorFields();
+    void RewardReputationPvP();
     bool RewardHonor(Unit* victim, uint32 groupsize, int32 honor = -1, bool awardXP = true);
     [[nodiscard]] uint32 GetHonorPoints() const { return GetUInt32Value(PLAYER_FIELD_HONOR_CURRENCY); }
     [[nodiscard]] uint32 GetArenaPoints() const { return GetUInt32Value(PLAYER_FIELD_ARENA_CURRENCY); }

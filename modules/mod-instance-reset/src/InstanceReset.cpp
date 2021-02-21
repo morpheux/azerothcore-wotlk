@@ -5,6 +5,7 @@
 #include "GossipDef.h"
 #include "ScriptedGossip.h"
 #include "Language.h"
+#include <Chat/Chat.h>
 
 class instanceReset : public CreatureScript
 {
@@ -13,7 +14,7 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        uint32 resets;
+        uint32 resets = 0;
 
         QueryResult result = CharacterDatabase.PQuery("SELECT resets FROM character_cromi WHERE guid = %u", player->GetSession()->GetGuidLow());
 
@@ -23,9 +24,7 @@ public:
         }else{
             CharacterDatabase.PExecute("INSERT INTO character_cromi(guid, resets) VALUES (%u, %u)", player->GetSession()->GetGuidLow(), 3);
             CloseGossipMenuFor(player);
-        }
-
-        ClearGossipMenuFor(player);
+        }       
         
         if (resets == 0){
             ChatHandler(player->GetSession()).PSendSysMessage("Cromi: Você não possuí pontos suficientes para resetar as instâncias.");
