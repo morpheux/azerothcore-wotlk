@@ -22,7 +22,7 @@ public:
             Field* fields = result->Fetch();
             resets = fields[0].GetUInt32();
         }else{
-            CharacterDatabase.PExecute("INSERT INTO character_cromi(guid, resets) VALUES (%u, %u)", player->GetSession()->GetGuidLow(), 3);
+            CharacterDatabase.PExecute("INSERT INTO character_cromi(guid, resets) VALUES (%u, %u)", player->GetSession()->GetGuidLow(), 10);
             CloseGossipMenuFor(player);
         }       
         
