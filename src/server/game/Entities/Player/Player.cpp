@@ -7335,21 +7335,21 @@ void Player::RewardReputationPvP()
     if(GetTeamId() == TEAM_ALLIANCE)
     {
         // Reputação em Vitórias
-        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(69), 2); // Darnassus
-        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(930), 2); // Exodar
-        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(54), 2); // Gnomeregan
-        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(47), 2); // Ironforge
-        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(72), 2); // Stormwind
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(69), 1); // Darnassus
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(930), 1); // Exodar
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(54), 1); // Gnomeregan
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(47), 1); // Ironforge
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(72), 1); // Stormwind
     }
     
     if(GetTeamId() == TEAM_ALLIANCE)
     {
         // Reputação em Vitórias
-        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(530), 2); // Troll
-        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(76), 2); // Orgrimmar
-        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(911), 2); // Silvermoon
-        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(81), 2); // Thunder Bluff
-        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(68), 2); // Undercity
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(530), 1); // Troll
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(76), 1); // Orgrimmar
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(911), 1); // Silvermoon
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(81), 1); // Thunder Bluff
+        GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(68), 1); // Undercity
     }
 }
 
