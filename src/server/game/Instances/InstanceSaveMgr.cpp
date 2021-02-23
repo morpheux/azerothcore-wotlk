@@ -547,7 +547,7 @@ void InstanceSaveManager::_ResetOrWarnAll(uint32 mapid, Difficulty difficulty, b
         }
     }
 
-    CharacterDatabase.PExecute("UPDATE character_cromi SET resets=8");
+    CharacterDatabase.PExecute("UPDATE character_cromi SET resets=5");
 
     // now loop all existing maps to warn / reset
     Map const* map = sMapMgr->CreateBaseMap(mapid);
