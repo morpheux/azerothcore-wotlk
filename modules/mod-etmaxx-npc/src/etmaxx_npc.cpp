@@ -176,6 +176,7 @@ public:
             player->DestroyItemCount(60018, 15, true);
             player->AddItem(47395, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("Parabéns, você é um vitorioso!");
+            CloseGossipMenuFor(player);
         }break;
 
 		}
