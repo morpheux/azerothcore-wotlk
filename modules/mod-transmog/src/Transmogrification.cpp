@@ -543,7 +543,7 @@ bool Transmogrification::SuitableForTransmogrification(Player* player, ItemTempl
 
 uint32 Transmogrification::GetSpecialPrice(ItemTemplate const* proto) const
 {
-    uint32 cost = proto->SellPrice < 10000 ? 10000 : proto->SellPrice;
+    uint32 cost = 0;
     return cost;
 }
 bool Transmogrification::IsRangedWeapon(uint32 Class, uint32 SubClass) const
