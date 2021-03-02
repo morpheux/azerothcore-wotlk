@@ -1333,7 +1333,7 @@ public:
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
                     player->AddItem(37836, 1);
-                    player->AddItem(60019, 50);
+                    player->AddItem(60119, 50);
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Guerreiro");
                     CloseGossipMenuFor(player);
                 }break;
