@@ -1328,7 +1328,7 @@ public:
                     player->AddItem(29020, 1);
                     player->AddItem(29022, 1);
                     player->AddItem(29019, 1);
-                    player->AddItem(51389, 1);
+                    player->AddItem(33478, 1);
                     player->AddAura(30567, player);
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
@@ -1349,7 +1349,7 @@ public:
                     player->AddItem(29071, 1);
                     player->AddItem(29072, 1);
                     player->AddItem(29074, 1);
-                    player->AddItem(19854, 1);
+                    player->AddItem(50052, 1);
                     player->AddAura(30567, player);
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
@@ -1392,7 +1392,7 @@ public:
                     player->AddItem(29056, 1);
                     player->AddItem(29057, 1);
                     player->AddItem(29059, 1);
-                    player->AddItem(50181, 1);
+                    player->AddItem(50731, 1);
                     player->AddAura(30567, player);
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
@@ -1413,7 +1413,7 @@ public:
                     player->AddItem(29077, 1);
                     player->AddItem(29080, 1);
                     player->AddItem(29078, 1);
-                    player->AddItem(50181, 1);
+                    player->AddItem(50731, 1);
                     player->AddAura(30567, player);
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
@@ -1434,7 +1434,7 @@ public:
                     player->AddItem(28964, 1);
                     player->AddItem(28968, 1);
                     player->AddItem(28966, 1);
-                    player->AddItem(50181, 1);
+                    player->AddItem(50731, 1);
                     player->AddAura(30567, player);
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
@@ -1456,7 +1456,7 @@ public:
                     player->AddItem(29082, 1);
                     player->AddItem(29085, 1);
                     player->AddItem(29083, 1);
-                    player->AddItem(51395, 1);
+                    player->AddItem(30906, 1);
                     player->AddAura(30567, player);
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
@@ -1494,7 +1494,7 @@ public:
                 player->AddItem(29096, 1);
                 player->AddItem(29097, 1);
                 player->AddItem(29099, 1);
-                player->AddItem(40280, 1);
+                player->AddItem(45695, 1);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
@@ -1515,7 +1515,7 @@ public:
                 player->AddItem(29091, 1);
                 player->AddItem(29092, 1);
                 player->AddItem(29094, 1);
-                player->AddItem(50181, 1);
+                player->AddItem(50731, 1);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
@@ -1536,8 +1536,8 @@ public:
                 player->AddItem(29033, 1);
                 player->AddItem(29034, 1);
                 player->AddItem(29036, 1);
-                player->AddItem(40488, 1);
-                player->AddItem(51452, 1);
+                player->AddItem(51798, 1);
+                player->AddItem(45887, 1);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
@@ -1558,8 +1558,8 @@ public:
                 player->AddItem(29038, 1);
                 player->AddItem(29039, 1);
                 player->AddItem(29042, 1);
-                player->AddItem(50760, 1);
-                player->AddItem(50760, 1);
+                player->AddItem(50303, 1);
+                player->AddItem(50303, 1);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
