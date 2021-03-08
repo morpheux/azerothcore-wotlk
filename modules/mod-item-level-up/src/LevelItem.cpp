@@ -9,17 +9,12 @@
 #include "GossipDef.h"
 
 // Configuration
-class mod_levelitem_Conf : public WorldScript
-{
-public:
-    mod_levelitem_Conf() : WorldScript("mod_levelitem_Conf") { }
-
 class LevelItem : public ItemScript
 {
 public:
     LevelItem() : ItemScript("LevelItem") { }
 
-    bool OnUse(Player* p, Item* i, const SpellCastTargets &) override
+    bool OnUse(Player* p, Item* i, const SpellCastTargets&) override
     {
         if (p->IsInCombat() || p->IsInFlight() || p->GetMap()->IsBattlegroundOrArena())
         {
@@ -42,8 +37,6 @@ public:
         return true;
     }
 };
-
-
 
 void AddLevelItemScripts()
 {
