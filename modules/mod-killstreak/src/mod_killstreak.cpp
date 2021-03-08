@@ -40,8 +40,8 @@ public:
 
     MODKillStreak() : PlayerScript("MODKillStreak") { }
 
-    int32 conf_minAmmount = 5;
-    int32 conf_PVPToken = 29434;
+    uint32 conf_minAmmount = 5;
+    uint32 conf_PVPToken = 29434;
     bool conf_AnnounceType = true;
 
     void SendKillStreakMessage(Player* pKiller, char* msg) {
