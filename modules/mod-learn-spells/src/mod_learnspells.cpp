@@ -14,36 +14,19 @@ class LearnSpellsOnLevelUp : public PlayerScript
     {
     }
 
-    void OnLogin(Player* player) override
-    {
-        if (sConfigMgr->GetBoolDefault("LearnSpells.Enable", true))
-        {
-            if (sConfigMgr->GetBoolDefault("LearnSpells.Announce", true))
-            {
-                ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00LearnAllSpells |rmodule.");
-            }
-        }
-    }
-
     void OnFirstLogin(Player* player) override
     {
-        if (sConfigMgr->GetBoolDefault("LearnSpells.LearnAllOnFirstLogin", false))
-        {
-            LearnSpellsForNewLevel(player, 1);
-        }
-    }
+        LearnSpellsForNewLevel(player, 1);
+    };
 
     void OnLevelChanged(Player* player, uint8 oldLevel) override
     {
-        if (sConfigMgr->GetBoolDefault("LearnSpells.Enable", true))
+        if (player->getLevel() <= MaxLevel)
         {
-            if (player->getLevel() <= MaxLevel)
-            {
-                if (oldLevel < player->getLevel())
-                    LearnSpellsForNewLevel(player, oldLevel);
-            }
+            if (oldLevel < player->getLevel())
+                LearnSpellsForNewLevel(player, oldLevel);
         }
-    }
+    };
 
   private:
     std::unordered_set<uint32> m_ignoreSpells = {
@@ -319,34 +302,7 @@ class LearnSpellsOnLevelUp : public PlayerScript
     }
 };
 
-class LearnAllSpellsWorld : public WorldScript
-{
-  public:
-    LearnAllSpellsWorld() : WorldScript("LearnAllSpellsWorld")
-    {
-    }
-
-    void OnBeforeConfigLoad(bool reload) override
-    {
-        if (!reload)
-        {
-            std::string conf_path = _CONF_DIR;
-            std::string cfg_file = conf_path + "/mod_learnspells.conf";
-#ifdef WIN32
-            cfg_file = "mod_learnspells.conf";
-#endif
-            std::string cfg_def_file = cfg_file + ".dist";
-            sConfigMgr->LoadMore(cfg_def_file.c_str());
-
-            sConfigMgr->LoadMore(cfg_file.c_str());
-
-            MaxLevel = sConfigMgr->GetIntDefault("MaxLevel", 80);
-        }
-    }
-};
-
 void AddLearnAllSpellsScripts()
 {
-    new LearnAllSpellsWorld();
     new LearnSpellsOnLevelUp();
 }
