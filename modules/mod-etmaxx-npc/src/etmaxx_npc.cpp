@@ -1286,25 +1286,25 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        if (!player->HasItemCount(37836, 1, true) && player->getLevel() <= 10) {
+        if (!player->HasItemCount(37836, 1, true) && player->getLevel() <= 60) {
 
-        
-        if (player->getClass() == CLASS_DRUID) {
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_forceofnature:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE BALANCE !", 101, 0);
-            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
-        }
-        else if (player->getClass() == CLASS_SHAMAN) {
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shaman_lavaburst:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ELEMENTAL !", 200, 0);
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_shaman_stormstrike:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ENHANCEMENT !", 201, 0);
-            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
-        }
-        else {
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_box_02:30:30:-18:0|tWOW INCRIVEL, ME DA LOGO ESSES ITEMS !", 1, 0);
-            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
-        }
-        }
-        else {
+            if (player->getClass() == CLASS_DRUID) {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_forceofnature:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE BALANCE !", 101, 0);
+                player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+            }
+            else if (player->getClass() == CLASS_SHAMAN) {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shaman_lavaburst:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ELEMENTAL !", 200, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_shaman_stormstrike:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ENHANCEMENT !", 201, 0);
+                player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+            }else if (player->getClass() == CLASS_DEATH_KNIGHT){
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_deathknight_unholypresence:30:30:-18:0|tWOW INCRIVEL, QUERO FAZER TODAS AS QUESTS DE DK !", 300, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_deathknight_frostpresence:30:30:-18:0|tWOW INCRIVEL, JÁ CONHECO A LORE QUERO PULAR AS QUESTS DE DK !", 301, 0);
+            } else {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_box_02:30:30:-18:0|tWOW INCRIVEL, ME DA LOGO ESSES ITEMS !", 1, 0);
+                player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+            }
+        } else {
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Não posso mais lhe ajudar aventureiro, siga seu caminho...", 1000, 0);
             player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
         }
@@ -1465,17 +1465,6 @@ public:
                     ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Caçador");
                     CloseGossipMenuFor(player);
                 }break;
-
-                case CLASS_DEATH_KNIGHT:
-                {
-                    player->AddAura(30567, player);
-                    player->AddAura(30557, player);
-                    player->AddAura(30562, player);
-                    player->AddItem(37836, 1);
-                    player->AddItem(60119, 20);
-                    ChatHandler(player->GetSession()).PSendSysMessage("Você já está bem avançado em sua jornada, não precisa da minha ajuda. Receba apenas minha benção");
-                    CloseGossipMenuFor(player);
-                }break;
             }
         }
         switch (sender) {
@@ -1564,6 +1553,93 @@ public:
                 player->AddItem(60119, 50);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
                 CloseGossipMenuFor(player);
+            }break;
+
+            case 300:
+            {
+                player->AddAura(30567, player);
+                player->AddAura(30557, player);
+                player->AddAura(30562, player);
+                player->AddItem(37836, 1);
+                player->AddItem(60119, 20);
+                ChatHandler(player->GetSession()).PSendSysMessage("Você já está bem avançado em sua jornada, não precisa da minha ajuda. Receba apenas minha benção");
+                CloseGossipMenuFor(player);
+            }break;
+
+            case 301:
+            {
+
+                int DKL = 58;
+
+                if (player->GetAreaId() == 4342)
+                {
+                    player->SetLevel(DKL);
+                    player->learnSpell(53428);//runeforging
+                    player->learnSpell(53441);//runeforging
+                    player->learnSpell(53344);//runeforging
+                    player->learnSpell(62158);//runeforging
+                    player->learnSpell(33391);//journeyman riding
+                    player->learnSpell(54586);//runeforging credit
+                    player->learnSpell(48778);//acherus deathcharger
+                    player->learnSkillRewardedSpells(776, 375);//Runeforging
+                    player->learnSkillRewardedSpells(960, 375);//Runeforging
+                    player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 38661, true);//Greathelm of the Scourge Champion
+                    player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 38666, true);//Plated Saronite Bracers
+                    player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 38668, true);//The Plaguebringer's Girdle
+                    player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 38667, true);//Bloodbane's Gauntlets of Command
+                    player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 38665, true);//Saronite War Plate
+                    player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 38669, true);//Engraved Saronite Legplates
+                    player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 38663, true);// Blood-Soaked Saronite Plated Spaulders
+                    player->EquipNewItem(EQUIPMENT_SLOT_FEET, 38670, true);//Greaves of the Slaughter
+                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 38675, true);//Signet of the Dark Brotherhood
+                    player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 38674, true);//Soul Harvester's Charm
+                    player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 38671, true);//Valanar's Signet Ring
+                    player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 38672, true);// Keleseth's Signet Ring
+                    player->EquipNewItem(19, 10050, true);
+                    player->EquipNewItem(20, 10050, true);
+                    player->EquipNewItem(21, 10050, true);
+                    player->EquipNewItem(22, 10050, true);
+                    player->AddItem(39320, true);//Sky Darkener's Shroud of Blood
+                    player->AddItem(38664, true);//Sky Darkener's Shroud of the Unholy
+                    player->AddItem(39322, true);//Shroud of the North Wind
+                    player->AddItem(38632, true);//Greatsword of the Ebon Blade
+                    player->AddItem(6948, true);//Hearthstone
+                    player->AddItem(38707, true);//Runed Soulblade
+                    player->AddItem(40483, true);//Insignia of the Scourge
+
+                    // Quests
+                    if (player->GetQuestStatus(12657) == QUEST_STATUS_NONE)//The Might Of The Scourge
+                    {
+                        player->AddQuest(sObjectMgr->GetQuestTemplate(12657), nullptr);
+                        player->RewardQuest(sObjectMgr->GetQuestTemplate(12657), false, player);
+                    }
+                    if (player->GetQuestStatus(12801) == QUEST_STATUS_NONE)//The Light of Dawn
+                    {
+                        player->AddQuest(sObjectMgr->GetQuestTemplate(12801), nullptr);
+                        player->RewardQuest(sObjectMgr->GetQuestTemplate(12801), false, player);
+                    }
+                    if (player->GetTeamId() == TEAM_ALLIANCE && player->GetQuestStatus(13188) == QUEST_STATUS_NONE)//Where Kings Walk
+                        player->AddQuest(sObjectMgr->GetQuestTemplate(13188), nullptr);
+                    else if (player->GetTeamId() == TEAM_HORDE && player->GetQuestStatus(13189) == QUEST_STATUS_NONE)//Saurfang's Blessing
+                        player->AddQuest(sObjectMgr->GetQuestTemplate(13189), nullptr);
+
+
+                    player->AddAura(30567, player);
+                    player->AddAura(30557, player);
+                    player->AddAura(30562, player);
+                    player->AddItem(37836, 1);
+                    player->AddItem(60119, 20);
+
+                    ChatHandler(player->GetSession()).PSendSysMessage("Você já está bem avançado em sua jornada, não precisa da minha ajuda. Receba apenas minha benção");
+
+                    // Teleport
+                    if (player->GetTeamId() == TEAM_ALLIANCE)
+                        player->TeleportTo(0, -8833.37f, 628.62f, 94.00f, 1.06f);//Stormwind
+                    else
+                        player->TeleportTo(1, 1569.59f, -4397.63f, 16.06f, 0.54f);//Orgrimmar
+
+                    ObjectAccessor::SaveAllPlayers();//Save
+                }
             }break;
 
             case 1000: {
