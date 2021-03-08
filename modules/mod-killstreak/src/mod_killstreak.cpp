@@ -45,11 +45,11 @@ public:
     bool conf_AnnounceType = true;
 
     void SendKillStreakMessage(Player* pKiller, char* msg) {
-
-        if (conf_AnnounceType)
+        if(conf_AnnounceType)
             sWorld->SendGlobalText(msg, NULL);
-
-    };
+        else
+            sWorld->SendZoneText(pKiller->GetZoneId(), msg, NULL, TEAM_NEUTRAL);
+    }
 
     void OnPVPKill(Player *pKiller, Player *pVictim)
     {
