@@ -84,7 +84,7 @@ public:
         }
     }
 
-    void ArenaRewardItem(Player* player, TeamId bgTeamId, TeamId winnerTeamId, std::string Type, uint32 RewardCount)
+    void ArenaRewardItem(Player* player, TeamId bgTeamId, TeamId winnerTeamId, std::string /*Type*/, uint32 RewardCount)
     {
         if (bgTeamId == winnerTeamId)
             player->AddItem(29434, RewardCount);
