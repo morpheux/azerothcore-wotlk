@@ -257,6 +257,16 @@ void Battleground::Update(uint32 diff)
         case STATUS_IN_PROGRESS:
             if (isArena())
             {
+                if (GetStartTime() >= 11 * MINUTE * IN_MILLISECONDS) // pussywizard: 1min startup + 10min allowed duration
+                {
+                    for (BattlegroundPlayerMap::iterator itr = m_Players.begin(); itr != m_Players.end(); ++itr)
+                    {
+                        Player* player = itr->second;
+                        if (!player->HasAura(74410))
+                            player->AddAura(74410, player);
+                    }
+                }
+
                 if (GetStartTime() >= 46 * MINUTE * IN_MILLISECONDS) // pussywizard: 1min startup + 45min allowed duration
                 {
                     UpdateArenaWorldState();
