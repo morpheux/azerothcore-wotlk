@@ -67,7 +67,7 @@ public:
         if(KillingStreak[killerGUID].LastKillTime == 0){
             KillingStreak[killerGUID].LastKillTime = sWorld->GetGameTime();
         }
-        else if  (sWorld->GetGameTime() - KillingStreak[killerGUID].LastKillTime >= 5 * 60) { // hold the kill streak only for 5 minutes
+        else if  (sWorld->GetGameTime() - KillingStreak[killerGUID].LastKillTime >= 10 * 60) { // hold the kill streak only for 5 minutes
             KillingStreak[killerGUID].KillStreak = 0;
             KillingStreak[killerGUID].LastKillTime = sWorld->GetGameTime();
             KillingStreak[killerGUID].LastGUIDKill = 0;
