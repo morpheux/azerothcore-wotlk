@@ -66,14 +66,14 @@ class DuelResetScript : public PlayerScript
             if (winner->getPowerType() == POWER_MANA || winner->getClass() == CLASS_DRUID)
             {
                 winner->SaveManaBeforeDuel();
-                winner->SetPower(POWER_MANA, player1->GetMaxPower(POWER_MANA));
+                winner->SetPower(POWER_MANA, winner->GetMaxPower(POWER_MANA));
             }
 
             // check if player2 class uses mana
             if (loser->getPowerType() == POWER_MANA || loser->getClass() == CLASS_DRUID)
             {
                 loser->SaveManaBeforeDuel();
-                loser->SetPower(POWER_MANA, player2->GetMaxPower(POWER_MANA));
+                loser->SetPower(POWER_MANA, loser->GetMaxPower(POWER_MANA));
             }
         }
 };
