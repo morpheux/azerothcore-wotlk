@@ -35,36 +35,21 @@ struct SystemInfo
 
 static std::unordered_map<uint32, SystemInfo> KillingStreak;
 
-class MODKillStreak_Config : public WorldScript
-{
-public: MODKillStreak_Config() : WorldScript("MODKillStreak_Config") { };
-    void OnBeforeConfigLoad(bool reload) override
-    {
-        if (!reload) {
-            std::string conf_path = _CONF_DIR;
-            std::string cfg_file = conf_path + "/mod_killstreak.conf";
-            std::string cfg_file_2 = cfg_file + ".dist";
-
-            sConfigMgr->LoadMore(cfg_file_2.c_str());
-            sConfigMgr->LoadMore(cfg_file.c_str());
-            conf_minAmmount = sConfigMgr->GetIntDefault("KillStreak.MinAmount", 10);
-            conf_PVPToken = sConfigMgr->GetIntDefault("KillStreak.PVPToken", 29434);
-            conf_AnnounceType = sConfigMgr->GetBoolDefault("KillStreak.AnnounceGlobal", true);
-        }
-    }
-};
-
 class MODKillStreak : public PlayerScript{
 public:
 
     MODKillStreak() : PlayerScript("MODKillStreak") { }
 
+    int32 conf_minAmmount = 5;
+    int32 conf_PVPToken = 29434;
+    bool conf_AnnounceType = true;
+
     void SendKillStreakMessage(Player* pKiller, char* msg) {
-        if(conf_AnnounceType)
+
+        if (conf_AnnounceType)
             sWorld->SendGlobalText(msg, NULL);
-        else
-            sWorld->SendZoneText(pKiller->GetZoneId(), msg, NULL, TEAM_NEUTRAL);
-    }
+
+    };
 
     void OnPVPKill(Player *pKiller, Player *pVictim)
     {
@@ -133,6 +118,5 @@ public:
 };
 
 void AddKillStreakScripts() {
-    new MODKillStreak_Config();
     new MODKillStreak();
 }
