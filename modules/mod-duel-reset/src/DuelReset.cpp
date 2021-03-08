@@ -54,7 +54,7 @@ class DuelResetScript : public PlayerScript
         }
 
         // Called when a duel ends
-        void OnDuelEnd(Player* winner, Player* loser, DuelCompleteType type) override
+        void OnDuelEnd(Player* winner, Player* loser, DuelCompleteType /*type*/) override
         {
             // Temporary basic cooldown reset
             winner->SetHealth(winner->GetMaxHealth());
