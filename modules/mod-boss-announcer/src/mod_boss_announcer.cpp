@@ -42,7 +42,10 @@ public:
                     Map::PlayerList const & playerlist = map->GetPlayers();
                     
                     // Get Leader name
-                    p_name = player->GetGroup()->GetLeaderName();
+                    if (!player->GetGroup())
+                        p_name = player->GetName();
+                    else
+                        p_name = player->GetGroup()->GetLeaderName();
 
                     // 25 or 10 Men
                     if (player->GetMap()->Is25ManRaid())
