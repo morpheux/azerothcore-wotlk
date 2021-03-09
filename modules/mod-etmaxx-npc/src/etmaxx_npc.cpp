@@ -1129,6 +1129,8 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_belt_03:30:30:-18:0|tCinto", 606, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_pants_01:30:30:-18:0|tCalça", 607, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_boots_09:30:30:-18:0|tBota", 608, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_04:30:30:-18:0|tShield", 609, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_orb_01:30:30:-18:0|tOff-hand", 610, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -1185,6 +1187,18 @@ public:
             case 608:
             {
                 player->AddItem(100106, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
+            case 609:
+            {
+                player->AddItem(100111, 1);
+                CloseGossipMenuFor(player);
+            } break;
+
+            case 610:
+            {
+                player->AddItem(100112, 1);
                 CloseGossipMenuFor(player);
             } break;
 
