@@ -541,7 +541,7 @@ bool Transmogrification::SuitableForTransmogrification(Player* player, ItemTempl
     return true;
 }
 
-uint32 Transmogrification::GetSpecialPrice(ItemTemplate const* proto) const
+uint32 Transmogrification::GetSpecialPrice(ItemTemplate const* /*proto*/) const
 {
     uint32 cost = 0;
     return cost;
