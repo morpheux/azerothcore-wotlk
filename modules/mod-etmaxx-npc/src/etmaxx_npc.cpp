@@ -1292,18 +1292,19 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_forceofnature:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE BALANCE !", 101, 0);
                 player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
-            }
-            else if (player->getClass() == CLASS_SHAMAN) {
+            } else if (player->getClass() == CLASS_SHAMAN) {
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shaman_lavaburst:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ELEMENTAL !", 200, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_shaman_stormstrike:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ENHANCEMENT !", 201, 0);
                 player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
-            }else if (player->getClass() == CLASS_DEATH_KNIGHT){
+            } else if (player->getClass() == CLASS_DEATH_KNIGHT) {
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_deathknight_unholypresence:30:30:-18:0|tWOW INCRIVEL, QUERO FAZER TODAS AS QUESTS DE DK !", 300, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_deathknight_frostpresence:30:30:-18:0|tWOW INCRIVEL, JÁ CONHECO A LORE QUERO PULAR AS QUESTS DE DK !", 301, 0);
+				player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
             } else {
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_box_02:30:30:-18:0|tWOW INCRIVEL, ME DA LOGO ESSES ITEMS !", 1, 0);
                 player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
             }
+			
         } else {
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Não posso mais lhe ajudar aventureiro, siga seu caminho...", 1000, 0);
             player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
