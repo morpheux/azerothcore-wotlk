@@ -1629,7 +1629,7 @@ public:
                     player->AddAura(30557, player);
                     player->AddAura(30562, player);
                     player->AddItem(37836, 1);
-                    player->AddItem(60119, 20);
+                    player->AddItem(60119, 10);
 
                     ChatHandler(player->GetSession()).PSendSysMessage("Você já está bem avançado em sua jornada, não precisa da minha ajuda. Receba apenas minha benção");
 
