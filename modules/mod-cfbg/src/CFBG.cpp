@@ -17,7 +17,7 @@
 
 #include "CFBG.h"
 #include "Log.h"
-#include "GameConfig.h"
+#include "ScriptMgr.h"
 #include "GroupMgr.h"
 #include "BattlegroundMgr.h"
 #include "Opcodes.h"

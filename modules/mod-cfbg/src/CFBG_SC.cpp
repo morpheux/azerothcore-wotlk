@@ -18,7 +18,6 @@
 #include "CFBG.h"
 #include "Log.h"
 #include "ScriptMgr.h"
-#include "GameConfig.h"
 #include "Chat.h"
 #include "Player.h"
 #include "GroupMgr.h"
