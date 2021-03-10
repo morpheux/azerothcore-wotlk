@@ -454,10 +454,7 @@ void WorldSession::HandleGuildBankDepositMoney(WorldPacket& recvData)
             if (Guild* guild = GetPlayer()->GetGuild())
                 guild->HandleMemberDepositMoney(this, money);
 
-    if (_player->GetSession()->GetSecurity() > SEC_PLAYER)
-    {
         sLog->outCommand(_player->GetSession()->GetAccountId(),"GM %s (Account: %u) deposit money (Amount: %u) to guild bank (Guild ID %u)", _player->GetName().c_str(), _player->GetSession()->GetAccountId(), money, GetPlayer()->GetGuild()->GetName().c_str());
-    }
 }
 
 void WorldSession::HandleGuildBankWithdrawMoney(WorldPacket& recvData)
