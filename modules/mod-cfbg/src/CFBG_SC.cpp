@@ -1,21 +1,34 @@
 /*
- *  Copyright (С) since 2019 Andrei Guluaev (Winfidonarleyan/Kargatum) https://github.com/Winfidonarleyan
- *  Copyright (С) since 2019+ AzerothCore <www.azerothcore.org>
-*/
+ * This file is part of the WarheadCore Project. See AUTHORS file for Copyright information
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include "CFBG.h"
-#include "ScriptMgr.h"
 #include "Log.h"
+#include "ScriptMgr.h"
+#include "GameConfig.h"
+#include "Chat.h"
+#include "Player.h"
 #include "GroupMgr.h"
 #include "BattlegroundMgr.h"
 #include "Opcodes.h"
-#include "Chat.h"
 
-// CFBG custom script
 class CFBG_BG : public BGScript
 {
 public:
-    CFBG_BG() : BGScript("CFBG_BG") {}
+    CFBG_BG() : BGScript("CFBG_BG") { }
 
     void OnBattlegroundBeforeAddPlayer(Battleground* bg, Player* player) override
     {
@@ -30,9 +43,7 @@ public:
         uint32 PlayerCountInBG = sCFBG->GetAllPlayersCountInBG(bg);
 
         if (PlayerCountInBG)
-        {
-            teamid = sCFBG->GetLowerTeamIdInBG(bg, player);
-        }
+            teamid = sCFBG->GetLowerTeamIdInBG(bg);
 
         if (!group)
             sCFBG->ValidatePlayerForBG(bg, player, teamid);
@@ -104,7 +115,7 @@ public:
     }
 
     bool CanFillPlayersToBGWithSpecific(BattlegroundQueue* queue, Battleground* bg, const int32 aliFree, const int32 hordeFree,
-        BattlegroundBracketId thisBracketId, BattlegroundQueue* specificQueue, BattlegroundBracketId specificBracketId) override
+                                        BattlegroundBracketId thisBracketId, BattlegroundQueue* specificQueue, BattlegroundBracketId specificBracketId) override
     {
         if (!sCFBG->IsEnableSystem())
             return true;
@@ -146,7 +157,7 @@ public:
             sCFBG->FitPlayerInTeam(player, player->GetBattleground() && !player->GetBattleground()->isArena() ? true : false, player->GetBattleground());
     }
 
-    bool CanJoinInBattlegroundQueue(Player* player, uint64 /*BattlemasterGuid*/ , BattlegroundTypeId /*BGTypeID*/, uint8 joinAsGroup, GroupJoinBattlegroundResult& err) override
+    bool CanJoinInBattlegroundQueue(Player* player, uint64 /*BattlemasterGuid*/, BattlegroundTypeId /*BGTypeID*/, uint8 joinAsGroup, GroupJoinBattlegroundResult& err) override
     {
         if (!sCFBG->IsEnableSystem())
             return true;
@@ -177,7 +188,7 @@ public:
             timeCheck -= diff;
     }
 
-    void OnBeforeSendChatMessage(Player* player, uint32& type, uint32& lang, std::string& /*msg*/) override
+    void OnBeforeSendChatMessage(Player* player, uint32& type, uint32& lang, std::string& msg) override
     {
         if (!player || !sCFBG->IsEnableSystem())
             return;
@@ -208,12 +219,13 @@ class CFBG_World : public WorldScript
 public:
     CFBG_World() : WorldScript("CFBG_World") { }
 
-    void OnAfterConfigLoad(bool /*Reload*/) override
+    void OnAfterConfigLoad(bool /*reload*/) override
     {
         sCFBG->LoadConfig();
     }
 };
 
+// Group all custom scripts
 void AddSC_CFBG()
 {
     new CFBG_BG();
