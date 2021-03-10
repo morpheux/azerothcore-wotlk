@@ -187,7 +187,7 @@ public:
             timeCheck -= diff;
     }
 
-    void OnBeforeSendChatMessage(Player* player, uint32& type, uint32& lang, std::string& msg) override
+    void OnBeforeSendChatMessage(Player* player, uint32& type, uint32& lang, std::string& /*msg*/) override
     {
         if (!player || !sCFBG->IsEnableSystem())
             return;
