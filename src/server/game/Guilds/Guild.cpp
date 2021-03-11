@@ -1745,10 +1745,6 @@ void Guild::HandleMemberDepositMoney(WorldSession* session, uint32 amount)
     std::string aux = ByteArrayToHexStr(reinterpret_cast<uint8*>(&m_bankMoney), 8, true);
     _BroadcastEvent(GE_BANK_MONEY_SET, 0, aux.c_str());
 
-    sLog->outCommand(session->GetAccountId(), "GM %s (Account: %u) deposit money (Amount: %u) to guild bank (Guild ID %u)", player->GetName().c_str(), session->GetAccountId(), amount, player->GetGuild()->GetName().c_str());
-    sLog->outString("GM %s (Account: %u) deposit money (Amount: %u) to guild bank (Guild ID %u)", player->GetName().c_str(), session->GetAccountId(), amount, player->GetGuild()->GetName().c_str());
-
-
     if (amount > 10 * GOLD)
         CharacterDatabase.PExecute("INSERT INTO log_money VALUES(%u, %u, \"%s\", \"%s\", %u, \"%s\", %u, \"<GB DEPOSIT> %s (guild id: %u, members: %u, new amount: %u, leader guid low: %u, char level: %u)\", NOW())", session->GetAccountId(), player->GetGUIDLow(), player->GetName().c_str(), session->GetRemoteAddress().c_str(), 0, "", amount, GetName().c_str(), GetId(), GetMemberCount(), GetTotalBankMoney(), (uint32)(GetLeaderGUID() & 0xFFFFFFFF), player->getLevel());
 }
