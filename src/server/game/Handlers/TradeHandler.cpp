@@ -144,12 +144,9 @@ void WorldSession::moveItems(Item* myItems[], Item* hisItems[])
             {
 
             if (_player->GetSession()->GetSecurity() > SEC_PLAYER)
-                {
-                    sLog->outCommand(_player->GetSession()->GetAccountId(), "GM %s (Account: %u) trade: %s (Entry: %d Count: %u) to player: %s (Account: %u)",
-                        _player->GetName().c_str(), _player->GetSession()->GetAccountId(),
-                        myItems[i]->GetTemplate()->Name1.c_str(), myItems[i]->GetEntry(), myItems[i]->GetCount(),
-                        trader->GetName().c_str(), trader->GetSession()->GetAccountId());
-                }
+            {
+                sLog->outCommand(_player->GetSession()->GetAccountId(), "GM %s (Account: %u) trade: %s (Entry: %d Count: %u) to player: %s (Account: %u)", _player->GetName().c_str(), _player->GetSession()->GetAccountId(), myItems[i]->GetTemplate()->Name1.c_str(), myItems[i]->GetEntry(), myItems[i]->GetCount(), trader->GetName().c_str(), trader->GetSession()->GetAccountId());
+            }
 
 
                 // logging
@@ -167,12 +164,9 @@ void WorldSession::moveItems(Item* myItems[], Item* hisItems[])
             {
 
             if (trader->GetSession()->GetSecurity() > SEC_PLAYER)
-                {
-                    sLog->outCommand(trader->GetSession()->GetAccountId(), "GM %s (Account: %u) trade: %s (Entry: %d Count: %u) to player: %s (Account: %u)",
-                        trader->GetName().c_str(), trader->GetSession()->GetAccountId(),
-                        myItems[i]->GetTemplate()->Name1.c_str(), myItems[i]->GetEntry(), myItems[i]->GetCount(),
-                        _player->GetName().c_str(), _player->GetSession()->GetAccountId());
-                }
+            {
+                sLog->outCommand(trader->GetSession()->GetAccountId(), "GM %s (Account: %u) trade: %s (Entry: %d Count: %u) to player: %s (Account: %u)", trader->GetName().c_str(), trader->GetSession()->GetAccountId(), hisItems[i]->GetTemplate()->Name1.c_str(), hisItems[i]->GetEntry(), hisItems[i]->GetCount(), _player->GetName().c_str(), _player->GetSession()->GetAccountId());
+            }
                 
                 // logging
 #if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
