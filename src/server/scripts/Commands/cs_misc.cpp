@@ -1526,7 +1526,7 @@ public:
         if (player == playerTarget)
             for (ItemPosCountVec::const_iterator itr = dest.begin(); itr != dest.end(); ++itr)
                 if (Item* item1 = player->GetItemByPos(itr->pos))
-                    item1->SetBinding(false);
+                    item1->SetBinding(true);
 
         if (count > 0 && item)
         {
