@@ -16,10 +16,10 @@ public:
     LearnAllSpellseBeforeConfigLoad() : WorldScript("LearnAllSpellseBeforeConfigLoad") { }
 
     void OnBeforeConfigLoad(bool /*reload*/) override {
-        learnlpells_announce = sConfigMgr->GetBoolDefault("LearnSpells.Announce", 1);
-        learnspells_enable = sConfigMgr->GetBoolDefault("LearnSpells.Enable", 1);
-        learnspells_onfirstlogin = sConfigMgr->GetBoolDefault("LearnSpells.OnFirstLogin", 0);
-        learnspells_maxlevel = sConfigMgr->GetIntDefault("learnspells_maxlevel", 80);
+        learnlpells_announce = false;
+        learnspells_enable = true;
+        learnspells_onfirstlogin = true;
+        learnspells_maxlevel = 80;
     }
 };
 
@@ -32,9 +32,7 @@ class LearnSpellsOnLevelUp : public PlayerScript
 
     void OnLogin(Player* player) override
     {
-        if (learnspells_enable && learnlpells_announce){
-            ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00LearnAllSpells |rmodule.");
-        }
+
     }
 
     void OnFirstLogin(Player* player) override
