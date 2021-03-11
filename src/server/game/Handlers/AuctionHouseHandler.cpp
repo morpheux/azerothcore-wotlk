@@ -256,8 +256,7 @@ void WorldSession::HandleAuctionSellItem(WorldPacket& recvData)
             return;
         }
 
-        sLog->outCommand(GetAccountId(), "GM %s (Account: %u) create auction: %s (Entry: %u Count: %u)", _player->GetName().c_str(), GetAccountId(), item->GetTemplate()->Name1.c_str(), item->GetCount());
-        sLog->outString("GM %s (Account: %u) create auction: %s (Entry: %u Count: %u)", _player->GetName().c_str(), GetAccountId(), item->GetTemplate()->Name1.c_str(), item->GetCount());
+        sLog->outCommand(GetAccountId(), "GM %s (Account: %u) create auction: %s (Entry: %u Count: %u)", _player->GetName().c_str(), GetAccountId(), item->GetTemplate()->Name1.c_str(), item->GetEntry(), item->GetCount());
 
         _player->ModifyMoney(-int32(deposit));
 
