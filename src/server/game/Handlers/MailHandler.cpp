@@ -277,6 +277,11 @@ void WorldSession::HandleSendMail(WorldPacket& recvData)
             {
                 Item* item = items[i];
 
+                if (GetPlayer()->GetSession()->GetSecurity() > SEC_PLAYER)
+                {
+                    sLog->outCommand(GetPlayer()->GetSession()->GetAccountId(), "GM %s (Account: %u) mail item: %s (Entry: %u Count: %u) to player: %s (Account: %u)", GetPlayer()->GetName().c_str(), GetPlayer()->GetSession()->GetAccountId(), item->GetTemplate()->Name1.c_str(), item->GetEntry(), item->GetCount(), receive->GetName().c_str(), receive->GetSession()->GetAccountId());
+                }
+
                 item->SetNotRefundable(GetPlayer()); // makes the item no longer refundable
                 player->MoveItemFromInventory(items[i]->GetBagSlot(), item->GetSlot(), true);
 
@@ -291,6 +296,11 @@ void WorldSession::HandleSendMail(WorldPacket& recvData)
 
             // if item send to character at another account, then apply item delivery delay
             needItemDelay = GetAccountId() != rc_account;
+        }
+
+        if (money > 0 && GetPlayer()->GetSession()->GetSecurity() > SEC_PLAYER)
+        {
+            sLog->outCommand(GetPlayer()->GetSession()->GetAccountId(), "GM %s (Account: %u) mail money: " UI64FMTD " to player: %s (Account: %u)", GetPlayer()->GetName().c_str(), GetPlayer()->GetSession()->GetAccountId(), money, receive->GetName().c_str(), receive->GetSession()->GetAccountId());
         }
 
         if( money >= 10 * GOLD )

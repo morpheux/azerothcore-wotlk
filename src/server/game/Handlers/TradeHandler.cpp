@@ -484,7 +484,7 @@ void WorldSession::HandleAcceptTradeOpcode(WorldPacket& /*recvPacket*/)
             CharacterDatabase.PExecute("INSERT INTO log_money VALUES(%u, %u, \"%s\", \"%s\", %u, \"%s\", %u, \"<TRADE>\", NOW())", trader->GetSession()->GetAccountId(), trader->GetGUIDLow(), trader->GetName().c_str(), trader->GetSession()->GetRemoteAddress().c_str(), GetAccountId(), _player->GetName().c_str(), his_trade->GetMoney());
         }
 
-            if (_player->GetSession()->GetSecurity() > SEC_PLAYER)
+            if (_player->GetSession()->GetSecurity() > SEC_PLAYER && my_trade->GetMoney() > 0)
             {
                 sLog->outCommand(_player->GetSession()->GetAccountId(), "GM %s (Account: %u) give money (Amount: " UI64FMTD ") to player: %s (Account: %u)",
                     _player->GetName().c_str(), _player->GetSession()->GetAccountId(),
@@ -492,7 +492,7 @@ void WorldSession::HandleAcceptTradeOpcode(WorldPacket& /*recvPacket*/)
                     trader->GetName().c_str(), trader->GetSession()->GetAccountId());
             }
         
-            if (trader->GetSession()->GetSecurity() > SEC_PLAYER)
+            if (trader->GetSession()->GetSecurity() > SEC_PLAYER && his_trade->GetMoney() > 0)
             {
                 sLog->outCommand(trader->GetSession()->GetAccountId(), "GM %s (Account: %u) give money (Amount: " UI64FMTD ") to player: %s (Account: %u)",
                     trader->GetName().c_str(), trader->GetSession()->GetAccountId(),
