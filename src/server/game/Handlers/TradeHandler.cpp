@@ -142,6 +142,16 @@ void WorldSession::moveItems(Item* myItems[], Item* hisItems[])
             // A roll back is not possible after we stored it
             if (myItems[i])
             {
+
+            if (_player->GetSession()->GetSecurity() > SEC_PLAYER)
+                {
+                    sLog->outCommand(_player->GetSession()->GetAccountId(), "GM %s (Account: %u) trade: %s (Entry: %d Count: %u) to player: %s (Account: %u)",
+                        _player->GetName().c_str(), _player->GetSession()->GetAccountId(),
+                        myItems[i]->GetTemplate()->Name1.c_str(), myItems[i]->GetEntry(), myItems[i]->GetCount(),
+                        trader->GetName().c_str(), trader->GetSession()->GetAccountId());
+                }
+
+
                 // logging
 #if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
                 sLog->outDebug(LOG_FILTER_NETWORKIO, "partner storing: %u", myItems[i]->GetGUIDLow());
@@ -155,6 +165,15 @@ void WorldSession::moveItems(Item* myItems[], Item* hisItems[])
             }
             if (hisItems[i])
             {
+
+            if (trader->GetSession()->GetSecurity() > SEC_PLAYER)
+                {
+                    sLog->outCommand(trader->GetSession()->GetAccountId(), "GM %s (Account: %u) trade: %s (Entry: %d Count: %u) to player: %s (Account: %u)",
+                        trader->GetName().c_str(), trader->GetSession()->GetAccountId(),
+                        myItems[i]->GetTemplate()->Name1.c_str(), myItems[i]->GetEntry(), myItems[i]->GetCount(),
+                        _player->GetName().c_str(), _player->GetSession()->GetAccountId());
+                }
+                
                 // logging
 #if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
                 sLog->outDebug(LOG_FILTER_NETWORKIO, "player storing: %u", hisItems[i]->GetGUIDLow());
@@ -470,6 +489,23 @@ void WorldSession::HandleAcceptTradeOpcode(WorldPacket& /*recvPacket*/)
         {
             CharacterDatabase.PExecute("INSERT INTO log_money VALUES(%u, %u, \"%s\", \"%s\", %u, \"%s\", %u, \"<TRADE>\", NOW())", trader->GetSession()->GetAccountId(), trader->GetGUIDLow(), trader->GetName().c_str(), trader->GetSession()->GetRemoteAddress().c_str(), GetAccountId(), _player->GetName().c_str(), his_trade->GetMoney());
         }
+
+            if (_player->GetSession()->GetSecurity() > SEC_PLAYER)
+            {
+                sLog->outCommand(_player->GetSession()->GetAccountId(), "GM %s (Account: %u) give money (Amount: " UI64FMTD ") to player: %s (Account: %u)",
+                    _player->GetName().c_str(), _player->GetSession()->GetAccountId(),
+                    my_trade->GetMoney(),
+                    trader->GetName().c_str(), trader->GetSession()->GetAccountId());
+            }
+            if (trader->GetSession()->GetSecurity() > SEC_PLAYER)
+            {
+                sLog->outCommand(trader->GetSession()->GetAccountId(), "GM %s (Account: %u) give money (Amount: " UI64FMTD ") to player: %s (Account: %u)",
+                    trader->GetName().c_str(), trader->GetSession()->GetAccountId(),
+                    his_trade->GetMoney(),
+                    _player->GetName().c_str(), _player->GetSession()->GetAccountId());
+            }
+        }
+
 
         // update money
         _player->ModifyMoney(-int32(my_trade->GetMoney()));
