@@ -79,6 +79,17 @@ class LearnSpellsOnLevelUp : public PlayerScript
     // -------------------------------------------- ^^^^^ level
 
     AdditionalSpellsList m_additionalSpells = {
+        {2,
+         {
+             {SPELLFAMILY_WARLOCK,
+              {
+                  AddSpell{688}, // Imp
+              }},
+             {SPELLFAMILY_SHAMAN,
+              {
+                  AddSpell{8071}, // Stoneskin
+              }},
+         }},
         {6,
          {
              {SPELLFAMILY_WARRIOR,
@@ -96,12 +107,39 @@ class LearnSpellsOnLevelUp : public PlayerScript
               {
                   AddSpell{3127}, // parry
               }},
+             {SPELLFAMILY_DRUID,
+              {
+                  AddSpell{5487}, // Bear Form
+              }},
          }},
         {10,
          {
              {SPELLFAMILY_HUNTER,
               {
                   AddSpell{1515}, // tame beast
+                  AddSpell{883}, // Call Pet
+                  AddSpell{2641}, // Dismiss Pet
+                  AddSpell{6991}, // Feed Pet
+                  AddSpell{982}, // Revive Pet
+              }},
+             {SPELLFAMILY_DRUID,
+              {
+                  AddSpell{6795}, // Growl
+                  AddSpell{6807}, // Maul
+                  AddSpell{18960}, // Moonglade
+              }},
+             {SPELLFAMILY_SHAMAN,
+              {
+                  AddSpell{3599}, // Searing Totem
+              }},
+             {SPELLFAMILY_WARLOCK,
+              {
+                  AddSpell{697}, // Voidwalker
+              }},
+             {SPELLFAMILY_WARRIOR,
+              {
+                  AddSpell{7386}, // Sunder Armor
+                  AddSpell{355}, // Taunt
               }},
          }},
         {12,
@@ -110,12 +148,21 @@ class LearnSpellsOnLevelUp : public PlayerScript
               {
                   AddSpell{3127}, // parry
               }},
+             {SPELLFAMILY_PALADIN,
+              {
+                  AddSpell{7328}, // Redemption
+              }},
          }},
         {14,
          {
              {SPELLFAMILY_HUNTER,
               {
                   AddSpell{6197}, // eagle eye
+              }},
+             {SPELLFAMILY_DRUID,
+              {
+                  AddSpell{1066}, // Aquatic Form
+                  AddSpell{8946}, // Cure Poison
               }},
          }},
         {20,
@@ -128,6 +175,18 @@ class LearnSpellsOnLevelUp : public PlayerScript
              {SPELLFAMILY_HUNTER,
               {
                   AddSpell{674}, // dual wield
+              }},
+             {SPELLFAMILY_SHAMAN,
+              {
+                  AddSpell{5394}, // Healing Stream
+              }},
+             {SPELLFAMILY_PALADIN,
+              {
+                  AddSpell{5502}, // Sense Undead
+              }},
+             {SPELLFAMILY_WARLOCK,
+              {
+                  AddSpell{712}, // Succubus
               }},
          }},
         {24,
@@ -158,6 +217,15 @@ class LearnSpellsOnLevelUp : public PlayerScript
               {
                   AddSpell{66842}, // Call of the Elements
               }},
+             {SPELLFAMILY_WARRIOR,
+              {
+                  AddSpell{2458}, // Berserker Stance
+                  AddSpell{20252}, // Intercept
+              }},
+             {SPELLFAMILY_WARLOCK,
+              {
+                  AddSpell{691}, // Felhunter
+              }},
          }},
         {32,
          {
@@ -184,6 +252,32 @@ class LearnSpellsOnLevelUp : public PlayerScript
               {
                   AddSpell{66844}, // Call of the Spirits
               }},
+             {SPELLFAMILY_WARLOCK,
+              {
+                  AddSpell{1122}, // Inferno
+              }},
+         }},
+        {50,
+         {
+             {SPELLFAMILY_SHAMAN,
+              {
+                  AddSpell{66844}, // Call of the Spirits
+              }},
+             {SPELLFAMILY_WARLOCK,
+              {
+                  AddSpell{1122}, // Inferno
+              }},
+         }},
+        {50,
+         {
+             {SPELLFAMILY_SHAMAN,
+              {
+                  AddSpell{66844}, // Call of the Spirits
+              }},
+             {SPELLFAMILY_WARLOCK,
+              {
+                  AddSpell{1122}, // Inferno
+              }},
          }},
         {66,
          {
@@ -195,6 +289,11 @@ class LearnSpellsOnLevelUp : public PlayerScript
              {SPELLFAMILY_WARLOCK,
               {
                   AddSpell{29858}, // Soulshatter
+                  AddSpell{18540}, // Doom
+              }},
+             {SPELLFAMILY_MAGE,
+              {
+                  AddSpell{28272}, // Pig
               }},
          }},
         {70,
