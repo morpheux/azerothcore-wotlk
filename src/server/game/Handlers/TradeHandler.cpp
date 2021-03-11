@@ -497,6 +497,7 @@ void WorldSession::HandleAcceptTradeOpcode(WorldPacket& /*recvPacket*/)
                     my_trade->GetMoney(),
                     trader->GetName().c_str(), trader->GetSession()->GetAccountId());
             }
+        
             if (trader->GetSession()->GetSecurity() > SEC_PLAYER)
             {
                 sLog->outCommand(trader->GetSession()->GetAccountId(), "GM %s (Account: %u) give money (Amount: " UI64FMTD ") to player: %s (Account: %u)",
@@ -504,7 +505,6 @@ void WorldSession::HandleAcceptTradeOpcode(WorldPacket& /*recvPacket*/)
                     his_trade->GetMoney(),
                     _player->GetName().c_str(), _player->GetSession()->GetAccountId());
             }
-        }
 
 
         // update money
