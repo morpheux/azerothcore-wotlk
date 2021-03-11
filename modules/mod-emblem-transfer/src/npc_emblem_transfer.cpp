@@ -44,7 +44,7 @@ public:
     // Step 1
     bool OnGossipHello(Player* player, Creature* creature) 
     {
-        float penalty = sConfigMgr->GetFloatDefault("EmblemTransfer.penalty", 0.0f);
+        float penalty = 0.0f;
         if (penalty > 0.0f)
         {
             std::stringstream ss;
@@ -52,14 +52,11 @@ public:
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, ss.str().c_str(), GOSSIP_SENDER_MAIN, ACTION_NONE);
         }
 
-        if (sConfigMgr->GetBoolDefault("EmblemTransfer.allowEmblemsFrost", true))
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transferir Emblems of Frost", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_FROST);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transferir Emblems of Frost", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_FROST);
 
-        if (sConfigMgr->GetBoolDefault("EmblemTransfer.allowEmblemsTriumph", false))
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transferir Emblems of Triumph", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_TRIUMPH);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transferir Emblems of Triumph", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_TRIUMPH);
 
-        if (sConfigMgr->GetBoolDefault("EmblemTransfer.allowEmblemsConquest", false))
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transferir Emblems of Conquest", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_CONQUEST);
+        //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_MONEY_BAG, "Transferir Emblems of Conquest", GOSSIP_SENDER_MAIN, ACTION_TRANSFER_CONQUEST);
 
         QueryResult result = CharacterDatabase.PQuery("SELECT 1 FROM emblem_transferences WHERE receiver_guid = %u AND active = 1 LIMIT 1", player->GetSession()->GetGuidLow());
         if (result)
@@ -128,7 +125,7 @@ public:
         // Player selected one of the emblem transfer options
         if (sender == GOSSIP_SENDER_MAIN)
         {
-            uint32 minAmount = sConfigMgr->GetIntDefault("EmblemTransfer.minAmount", 10);
+            uint32 minAmount = 10;
 
             // Get the character's emblems of the selected type
             uint32 emblems = 0;
@@ -182,7 +179,7 @@ public:
         uint32 emblemsCount = 0;
         uint32 emblemId = 0;
         // uint32 newSender = sender;
-        float penalty = sConfigMgr->GetFloatDefault("EmblemTransfer.penalty", 0.1f);
+        float penalty = 0.1f;
 
         switch (sender)
         {

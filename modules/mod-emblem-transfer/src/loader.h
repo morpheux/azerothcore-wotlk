@@ -1,2 +1,1 @@
-void AddWorldEmblemTransferScripts();
 void AddNpcEmblemTransferScripts();

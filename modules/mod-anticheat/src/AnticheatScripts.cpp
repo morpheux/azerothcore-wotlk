@@ -2,6 +2,8 @@
 #include "AnticheatMgr.h"
 #include "Object.h"
 #include "AccountMgr.h"
+#include "Chat.h"
+#include "Player.h"
 
 int64 resetTime = 0;
 int64 lastIterationPlayer = sWorld->GetUptime() + 30;//TODO: change 30 secs static to a configurable option
@@ -50,22 +52,6 @@ public:
 				if (Player* plr = itr->second->GetPlayer())
 					sAnticheatMgr->SavePlayerData(plr);
 		}
-	}
-	void OnBeforeConfigLoad(bool reload) override
-	{
-		/* from skeleton module */
-		if (!reload) {
-			std::string conf_path = _CONF_DIR;
-			std::string cfg_file = conf_path + "/Anticheat.conf";
-			#ifdef WIN32
-				cfg_file = "Anticheat.conf";
-			#endif // WIN32
-			std::string cfg_def_file = cfg_file + ".dist";
-			sConfigMgr->LoadMore(cfg_def_file.c_str());
-
-			sConfigMgr->LoadMore(cfg_file.c_str());
-		}
-		/* end from skeleton module */
 	}
 	void OnAfterConfigLoad(bool /* reload */) override // unusued parameter
 	{

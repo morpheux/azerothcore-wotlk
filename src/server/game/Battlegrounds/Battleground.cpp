@@ -4,13 +4,20 @@
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  */
 
+#include "ArenaSpectator.h"
 #include "ArenaTeam.h"
 #include "ArenaTeamMgr.h"
 #include "Battleground.h"
+#include "BattlegroundBE.h"
+#include "BattlegroundDS.h"
 #include "BattlegroundMgr.h"
-#include "Creature.h"
+#include "BattlegroundNA.h"
+#include "BattlegroundRL.h"
+#include "BattlegroundRV.h"
 #include "Chat.h"
+#include "Creature.h"
 #include "Formulas.h"
+#include "GameGraveyard.h"
 #include "GridNotifiersImpl.h"
 #include "Group.h"
 #include "MapManager.h"
@@ -19,20 +26,14 @@
 #include "Pet.h"
 #include "Player.h"
 #include "ReputationMgr.h"
+#include "ScriptMgr.h"
 #include "SpellAuraEffects.h"
 #include "SpellAuras.h"
+#include "Transport.h"
 #include "Util.h"
 #include "World.h"
 #include "WorldPacket.h"
-#include "ArenaSpectator.h"
-#include "BattlegroundBE.h"
-#include "BattlegroundDS.h"
-#include "BattlegroundNA.h"
-#include "BattlegroundRL.h"
-#include "BattlegroundRV.h"
-#include "Transport.h"
-#include "ScriptMgr.h"
-#include "GameGraveyard.h"
+
 #ifdef ELUNA
 #include "LuaEngine.h"
 #endif
@@ -256,6 +257,16 @@ void Battleground::Update(uint32 diff)
         case STATUS_IN_PROGRESS:
             if (isArena())
             {
+                if (GetStartTime() >= 11 * MINUTE * IN_MILLISECONDS) // pussywizard: 1min startup + 10min allowed duration
+                {
+                    for (BattlegroundPlayerMap::iterator itr = m_Players.begin(); itr != m_Players.end(); ++itr)
+                    {
+                        Player* player = itr->second;
+                        if (!player->HasAura(74410))
+                            player->AddAura(74410, player);
+                    }
+                }
+
                 if (GetStartTime() >= 46 * MINUTE * IN_MILLISECONDS) // pussywizard: 1min startup + 45min allowed duration
                 {
                     UpdateArenaWorldState();
@@ -409,13 +420,13 @@ inline void Battleground::_ProcessProgress(uint32 diff)
         if (newtime > (MINUTE * IN_MILLISECONDS))
         {
             if (newtime / (MINUTE * IN_MILLISECONDS) != m_PrematureCountDownTimer / (MINUTE * IN_MILLISECONDS))
-                PSendMessageToAll(LANG_BATTLEGROUND_PREMATURE_FINISH_WARNING, CHAT_MSG_SYSTEM, NULL, (uint32)(m_PrematureCountDownTimer / (MINUTE * IN_MILLISECONDS)));
+                PSendMessageToAll(LANG_BATTLEGROUND_PREMATURE_FINISH_WARNING, CHAT_MSG_SYSTEM, nullptr, (uint32)(m_PrematureCountDownTimer / (MINUTE * IN_MILLISECONDS)));
         }
         else
         {
             //announce every 15 seconds
             if (newtime / (15 * IN_MILLISECONDS) != m_PrematureCountDownTimer / (15 * IN_MILLISECONDS))
-                PSendMessageToAll(LANG_BATTLEGROUND_PREMATURE_FINISH_WARNING_SECS, CHAT_MSG_SYSTEM, NULL, (uint32)(m_PrematureCountDownTimer / IN_MILLISECONDS));
+                PSendMessageToAll(LANG_BATTLEGROUND_PREMATURE_FINISH_WARNING_SECS, CHAT_MSG_SYSTEM, nullptr, (uint32)(m_PrematureCountDownTimer / IN_MILLISECONDS));
         }
         m_PrematureCountDownTimer = newtime;
     }
@@ -556,7 +567,7 @@ inline void Battleground::_ProcessJoin(uint32 diff)
             if (GetStatus() == STATUS_IN_PROGRESS)
             {
                 for (ToBeTeleportedMap::const_iterator itr = m_ToBeTeleported.begin(); itr != m_ToBeTeleported.end(); ++itr)
-                    if (Player* p = ObjectAccessor::GetObjectInOrOutOfWorld(itr->first, (Player*)NULL))
+                    if (Player* p = ObjectAccessor::GetObjectInOrOutOfWorld(itr->first, (Player*)nullptr))
                         if (Player* t = ObjectAccessor::FindPlayer(itr->second))
                         {
                             if (!t->FindMap() || t->FindMap() != GetBgMap())

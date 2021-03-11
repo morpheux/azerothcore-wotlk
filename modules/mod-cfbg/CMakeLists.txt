@@ -1,16 +1,7 @@
 #
-# This file is part of the WarheadCore Project. See AUTHORS file for Copyright information
-#
-# This file is free software; as a special exception the author gives
-# unlimited permission to copy and/or distribute it, with or without
-# modifications, as long as this notice is preserved.
-#
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
-# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-#
-# User has manually chosen to ignore the git-tests, so throw them a warning.
-# This is done EACH compile so they can be alerted about the consequences.
+# Copyright (С) since 2019 Andrei Guluaev (Winfidonarleyan/Kargatum) https://github.com/Winfidonarleyan
+# Copyright (С) since 2019+ AzerothCore <www.azerothcore.org>
+# Licence MIT https://opensource.org/MIT
 #
 
 # Add cpp files
@@ -19,7 +10,7 @@ AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/CFBG_SC.cpp")
 AC_ADD_SCRIPT("${CMAKE_CURRENT_LIST_DIR}/src/CFBG.h")
 
 # Add scripts to script loader
-AC_ADD_SCRIPT_LOADER("CFBG" "${CMAKE_CURRENT_LIST_DIR}/src/cfbg_loader.cpp")
+AC_ADD_SCRIPT_LOADER("CFBG" "${CMAKE_CURRENT_LIST_DIR}/src/CFBGLoad.h")
 
 # Add config file
 AC_ADD_CONFIG_FILE("${CMAKE_CURRENT_LIST_DIR}/conf/CFBG.conf.dist")

@@ -35,29 +35,14 @@ struct SystemInfo
 
 static std::unordered_map<uint32, SystemInfo> KillingStreak;
 
-class MODKillStreak_Config : public WorldScript
-{
-public: MODKillStreak_Config() : WorldScript("MODKillStreak_Config") { };
-    void OnBeforeConfigLoad(bool reload) override
-    {
-        if (!reload) {
-            std::string conf_path = _CONF_DIR;
-            std::string cfg_file = conf_path + "/mod_killstreak.conf";
-            std::string cfg_file_2 = cfg_file + ".dist";
-
-            sConfigMgr->LoadMore(cfg_file_2.c_str());
-            sConfigMgr->LoadMore(cfg_file.c_str());
-            conf_minAmmount = sConfigMgr->GetIntDefault("KillStreak.MinAmount", 10);
-            conf_PVPToken = sConfigMgr->GetIntDefault("KillStreak.PVPToken", 29434);
-            conf_AnnounceType = sConfigMgr->GetBoolDefault("KillStreak.AnnounceGlobal", true);
-        }
-    }
-};
-
 class MODKillStreak : public PlayerScript{
 public:
 
     MODKillStreak() : PlayerScript("MODKillStreak") { }
+
+    uint32 conf_minAmmount = 5;
+    uint32 conf_PVPToken = 29434;
+    bool conf_AnnounceType = true;
 
     void SendKillStreakMessage(Player* pKiller, char* msg) {
         if(conf_AnnounceType)
@@ -82,7 +67,7 @@ public:
         if(KillingStreak[killerGUID].LastKillTime == 0){
             KillingStreak[killerGUID].LastKillTime = sWorld->GetGameTime();
         }
-        else if  (sWorld->GetGameTime() - KillingStreak[killerGUID].LastKillTime >= 5 * 60) { // hold the kill streak only for 5 minutes
+        else if  (sWorld->GetGameTime() - KillingStreak[killerGUID].LastKillTime >= 10 * 60) { // hold the kill streak only for 5 minutes
             KillingStreak[killerGUID].KillStreak = 0;
             KillingStreak[killerGUID].LastKillTime = sWorld->GetGameTime();
             KillingStreak[killerGUID].LastGUIDKill = 0;
@@ -133,6 +118,5 @@ public:
 };
 
 void AddKillStreakScripts() {
-    new MODKillStreak_Config();
     new MODKillStreak();
 }

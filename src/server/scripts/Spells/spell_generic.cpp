@@ -11,14 +11,13 @@
  * Scriptnames of files in this file should be prefixed with "spell_gen_"
  */
 
-#include <array>
-#include "ScriptMgr.h"
 #include "Battlefield.h"
 #include "BattlefieldMgr.h"
 #include "Battleground.h"
 #include "BattlegroundMgr.h"
 #include "Cell.h"
 #include "CellImpl.h"
+#include "Chat.h"
 #include "GridNotifiers.h"
 #include "GridNotifiersImpl.h"
 #include "Group.h"
@@ -26,11 +25,12 @@
 #include "LFGMgr.h"
 #include "Pet.h"
 #include "ReputationMgr.h"
+#include "ScriptMgr.h"
 #include "SkillDiscovery.h"
-#include "SpellScript.h"
 #include "SpellAuraEffects.h"
-#include "Chat.h"
+#include "SpellScript.h"
 #include "Vehicle.h"
+#include <array>
 
 
 // Ours
@@ -1611,7 +1611,7 @@ public:
                 default:
                     return;
             }
-            GetTarget()->CastSpell(GetTarget(), spellId, true, NULL, aurEff);
+            GetTarget()->CastSpell(GetTarget(), spellId, true, nullptr, aurEff);
         }
 
         void Register() override
@@ -2008,7 +2008,7 @@ public:
                 default:
                     return;
             }
-            GetTarget()->CastSpell(GetTarget(), spellId, true, NULL, aurEff);
+            GetTarget()->CastSpell(GetTarget(), spellId, true, nullptr, aurEff);
         }
 
         void Register() override
@@ -2681,7 +2681,7 @@ public:
 
         void AchievementCredit(SpellEffIndex /*effIndex*/)
         {
-            // but in effect handling OriginalCaster can become NULL
+            // but in effect handling OriginalCaster can become nullptr
             if (Unit* originalCaster = GetOriginalCaster())
                 if (GameObject* go = GetHitGObj())
                     if (go->GetGOValue()->Building.Health > 0 && go->GetGOInfo()->type == GAMEOBJECT_TYPE_DESTRUCTIBLE_BUILDING)
@@ -2740,7 +2740,7 @@ public:
             if (stackAmount >= 15 && stackAmount < 40)
             {
                 stackAmount = 40;
-                GetTarget()->CastSpell(GetTarget(), SPELL_TURKEY_VENGEANCE, true, NULL, aurEff, GetCasterGUID());
+                GetTarget()->CastSpell(GetTarget(), SPELL_TURKEY_VENGEANCE, true, nullptr, aurEff, GetCasterGUID());
             }
         }
 
@@ -3609,7 +3609,7 @@ public:
                 for (uint8 i = 0; i < GetSpellInfo()->StackAmount; ++i)
                     target->RemoveAurasDueToSpell(SPELL_VISUAL_SHIELD_1 + i);
 
-                target->CastSpell(target, SPELL_VISUAL_SHIELD_1 + GetAura()->GetStackAmount() - 1, true, NULL, aurEff);
+                target->CastSpell(target, SPELL_VISUAL_SHIELD_1 + GetAura()->GetStackAmount() - 1, true, nullptr, aurEff);
             }
             else
                 GetTarget()->RemoveAurasDueToSpell(GetId());
@@ -4345,7 +4345,7 @@ public:
                 return;
 
             // final heal
-            GetTarget()->CastSpell(GetTarget(), _spellId, true, NULL, aurEff, GetCasterGUID());
+            GetTarget()->CastSpell(GetTarget(), _spellId, true, nullptr, aurEff, GetCasterGUID());
         }
 
         void Register() override
@@ -4930,7 +4930,7 @@ public:
         void HandleEffectPeriodic(AuraEffect const* /*aurEff*/)
         {
             PreventDefaultAction();
-            GetTarget()->CastSpell((Unit*)NULL, SPELL_YOGG_SARON_WHISPER_DUMMY, true);
+            GetTarget()->CastSpell((Unit*)nullptr, SPELL_YOGG_SARON_WHISPER_DUMMY, true);
         }
 
         void Register() override

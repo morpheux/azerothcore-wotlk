@@ -17,7 +17,7 @@
 
 #include "CFBG.h"
 #include "Log.h"
-#include "Config.h"
+#include "ScriptMgr.h"
 #include "GroupMgr.h"
 #include "BattlegroundMgr.h"
 #include "Opcodes.h"
@@ -32,9 +32,9 @@ CFBG* CFBG::instance()
 
 void CFBG::LoadConfig()
 {
-	_IsEnableSystem = sConfigMgr->GetBoolDefault("CFBG.Enable", false);
-    _IsEnableAvgIlvl = sConfigMgr->GetBoolDefault("CFBG.Include.Avg.Ilvl.Enable", false);
-    _MaxPlayersCountInGroup = sConfigMgr->GetIntDefault("CFBG.Players.Count.In.Group", 3);
+    _IsEnableSystem = true;
+    _IsEnableAvgIlvl = true;
+    _MaxPlayersCountInGroup = 3;
 }
 
 bool CFBG::IsEnableSystem()
