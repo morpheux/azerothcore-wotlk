@@ -365,16 +365,43 @@ public:
         // save only in non-flight case
         else
             me->SaveRecallPosition();
+        // Destino
+        uint32 zoneDestino = sMapMgr->GetZoneId(tele->mapId, tele->position_x, tele->position_y, tele->position_z);
+        // Destino
+        uint32 zoneOrigem = sMapMgr->GetZoneId(me->GetMapId(), me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
 
-        uint32 zone = sMapMgr->GetZoneId(tele->mapId, tele->position_x, tele->position_y, tele->position_z);
-        uint32 zone2 = sMapMgr->GetZoneId(me->GetMapId(), me->GetPositionX(), me->GetPositionY(), me->GetPositionZ());
+        // Cidades Horde
+        uint32 orgrimmar = 1637;
+        uint32 thunderbluff = 1638;
+        uint32 undercity = 1497;
+        uint32 silvermoon = 3487;
 
-        if (!me->IsGameMaster() && zone && me->GetTeamId())
+        // Mapas da Horda
+        uint32 mulgore = 215;
+        uint32 durotar = 14;
+        uint32 tirisfal = 85;
+        uint32 eversong = 3430;
+
+        //Cidades Ally
+        uint32 stormwind = 1519;
+        uint32 ironforge = 1537;
+        uint32 darnassus = 1657;
+        uint32 theexodar = 3557;
+
+        // Mapas da Ally
+        uint32 elwynnforst = 12;
+        uint32 dunmorogh = 1;
+        uint32 teldrassil = 141;
+        uint32 azuremystisle = 3524;
+
+        if (!me->IsGameMaster() && zoneOrigem && zoneDestino && me->GetTeamId())
         {
             switch (me->GetTeamId()) {
             case TEAM_ALLIANCE:
             {
-                if (zone == 1637 || zone == 1638 || zone == 1497 || zone == 3487 || zone2 == 1637 || zone2 == 1638 || zone2 == 1497 || zone2 == 3487)
+                if (zoneOrigem == orgrimmar || zoneOrigem == thunderbluff || zoneOrigem == undercity || zoneOrigem == silvermoon ||
+                    zoneDestino == orgrimmar || zoneDestino == thunderbluff || zoneDestino == undercity || zoneDestino == silvermoon ||
+                    zoneDestino == mulgore || zoneDestino == durotar || zoneDestino == tirisfal || zoneDestino == eversong)
                 {
                     handler->SendSysMessage(60003);
                     handler->SetSentErrorMessage(true);
@@ -384,7 +411,9 @@ public:
             break;
             case TEAM_HORDE:
             {
-                if (zone == 1519 || zone == 1537 || zone == 1657 || zone == 3557 || zone2 == 1519 || zone2 == 1537 || zone2 == 1657 || zone2 == 3557)
+                if (zoneOrigem == stormwind || zoneOrigem == ironforge || zoneOrigem == darnassus || zoneOrigem == theexodar ||
+                    zoneDestino == stormwind || zoneDestino == ironforge || zoneDestino == darnassus || zoneDestino == theexodar ||
+                    zoneDestino == elwynnforst || zoneDestino == dunmorogh || zoneDestino == teldrassil || zoneDestino == azuremystisle)
                 {
                     handler->SendSysMessage(60003);
                     handler->SetSentErrorMessage(true);
