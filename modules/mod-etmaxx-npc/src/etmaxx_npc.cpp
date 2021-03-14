@@ -1644,6 +1644,7 @@ public:
                 player->AddAura(30567, player);
                 player->AddAura(30557, player);
                 player->AddAura(30562, player);
+                player->AddItem(33478, 1);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 10);
 
@@ -2169,7 +2170,6 @@ public:
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_shirt_guildtabard_01:35:35:-25:0|tEtMaXx Tabard Mark - 5 Event Mark", 6000, 0);               // 05 Event Mark 
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_amulet_01:35:35:-25:0|tEtMaXx Mount Mark - 7 Event Mark", 7000, 0);                   // 07 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_pearl_04:35:35:-25:0|tEtMaXx Sanctified Mark - 8 Event Mark", 8000, 0);              // 08 Event Mark 
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_09:35:35:-25:0|tMEGA ARMA VIP - 999 Event Mark", 9000, 0);                          // 999
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 100, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tComprar Tabard", 1, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tComprar Token Sanctified Normal", 2, 0);
@@ -2277,14 +2277,6 @@ public:
             if (MarkCheck(player, 8)) {
                 player->AddItem(80006, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Sanctified Mark recebida");
-                CloseGossipMenuFor(player);
-            }
-        }break;
-
-        case 9000: {
-            if (MarkCheck(player, 999)) {
-                player->AddItem(60002, 1);
-                ChatHandler(player->GetSession()).PSendSysMessage("MEGA ARMA VIP RECEBIDA !");
                 CloseGossipMenuFor(player);
             }
         }break;
