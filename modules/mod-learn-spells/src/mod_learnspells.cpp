@@ -30,7 +30,7 @@ class LearnSpellsOnLevelUp : public PlayerScript
     {
     }
 
-    void OnLogin(Player* player) override
+    void OnLogin(Player* /*player*/) override
     {
 
     }
