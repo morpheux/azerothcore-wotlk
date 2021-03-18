@@ -2441,54 +2441,53 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////                 NPC Event Chest                       ///////////////
+/////////////                 NPC T8                                ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
-class etmaxx_chest : public CreatureScript
+class etmaxx_startset : public CreatureScript
 {
 public:
-    etmaxx_chest() : CreatureScript("etmaxx_chest") { }
+    etmaxx_startset() : CreatureScript("etmaxx_startset") { }
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
-        player->PlayerTalkClass->ClearMenus();
+        ClearGossipMenuFor(player);
 
-        if (player->HasItemCount(80010, 1, true)) {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_key_04:35:35:-25:0|tDestrancar o Baú do Guardião", 100, 0, "TENHA CERTEZA QUE HÁ 41 SLOTS LIVRES EM SUAS BAGS", 0, false);
-        }
-        else {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tVolte quando tiver uma chave do Baú do Guardião", 9999, 0);
-        }
-
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_09:35:35:-25:0|tMe da logo essa token", 100, 0,"Tem certeza que vai gastar 1500 EtMaXx Mark e 5 EtMaXx Mega Mark ?",0,false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tQuero dar uma olhada no que você tem ai.", 200, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 9999, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tUpdate Menu", 9999, 0);
+ 
         SendGossipMenuFor(player, 800806, creature->GetGUID());
 
         return true;
     }
 
-    bool OnGossipSelect(Player* player, Creature* /*creature*/, uint32 sender, uint32 /*action*/)
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
     {
         player->PlayerTalkClass->ClearMenus();
 
         switch (sender)
         {
-
         case 100: {
-            player->DestroyItemCount(80010, 1, true);
-            player->AddItem(600600, 10);
-            player->AddItem(50161, 20);
-            player->AddItem(50162, 20);
-            ChatHandler(player->GetSession()).PSendSysMessage("Você destrancou o Baú do Guardião e foi recompensado");
+            player->DestroyItemCount(60000, 1500, true);
+            player->DestroyItemCount(60004, 5, true);
+            player->AddItem(800801, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("Você Recebeu 1 EtMaXx Tier 8 Token, fale com o NPC novamente para trocar por uma parte Tier 8");
             CloseGossipMenuFor(player);
+        }break;
+
+        case 200:  // Main menuu
+        {
+            player->GetSession()->SendListInventory(creature->GetGUID(), 80002);
         }break;
 
         case 9999:  // Main menu
         {
-            //OnGossipHello(player, creature);
-            CloseGossipMenuFor(player);
+            OnGossipHello(player, creature);
         }break;
 
         }
-
         return true;
     }
 };
@@ -2506,5 +2505,5 @@ void AddNpcEtmaxxScripts()
     new etmaxx_start();
 	new etmaxx_tabard();
     new etmaxx_event();
-    new etmaxx_chest();
+    new etmaxx_startset();
 }
