@@ -394,10 +394,9 @@ public:
         uint32 teldrassil = 141;
         uint32 azuremystisle = 3524;
 
-        if (!me->IsGameMaster() && zoneOrigem && zoneDestino && me->GetTeamId())
+        if (!me->IsGameMaster())
         {
-            switch (me->GetTeamId()) {
-            case TEAM_ALLIANCE:
+            if (me->GetTeamId() == TEAM_ALLIANCE)
             {
                 if (zoneOrigem == orgrimmar || zoneOrigem == thunderbluff || zoneOrigem == undercity || zoneOrigem == silvermoon ||
                     zoneDestino == orgrimmar || zoneDestino == thunderbluff || zoneDestino == undercity || zoneDestino == silvermoon ||
@@ -407,10 +406,8 @@ public:
                     handler->SetSentErrorMessage(true);
                     return false;
                 }
-            }
-            break;
-            case TEAM_HORDE:
-            {
+             
+            } else {
                 if (zoneOrigem == stormwind || zoneOrigem == ironforge || zoneOrigem == darnassus || zoneOrigem == theexodar ||
                     zoneDestino == stormwind || zoneDestino == ironforge || zoneDestino == darnassus || zoneDestino == theexodar ||
                     zoneDestino == elwynnforst || zoneDestino == dunmorogh || zoneDestino == teldrassil || zoneDestino == azuremystisle)
@@ -419,9 +416,6 @@ public:
                     handler->SetSentErrorMessage(true);
                     return false;
                 }
-            }
-            break;
-            case TEAM_NEUTRAL:{}break;
             }
         }
 
