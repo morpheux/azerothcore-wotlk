@@ -2470,11 +2470,17 @@ public:
         switch (sender)
         {
         case 100: {
-            player->DestroyItemCount(60000, 1500, true);
-            player->DestroyItemCount(60004, 5, true);
-            player->AddItem(800801, 1);
-            ChatHandler(player->GetSession()).PSendSysMessage("Você Recebeu 1 EtMaXx Tier 8 Token, fale com o NPC novamente para trocar por uma parte Tier 8");
-            CloseGossipMenuFor(player);
+            if (player->HasItemCount(60000, 1500) && player->HasItemCount(60004, 5)) {
+                player->DestroyItemCount(60000, 1500, true);
+                player->DestroyItemCount(60004, 5, true);
+                player->AddItem(800801, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Você Recebeu 1 EtMaXx Tier 8 Token, fale com o NPC novamente para trocar por uma parte Tier 8");
+                CloseGossipMenuFor(player);
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de 1500 EtMaXx Mark + 5 EtMaXx Mega Mark para pegar uma EtMaXx Tier 8 Token");
+                CloseGossipMenuFor(player);
+            } 
         }break;
 
         case 200:  // Main menuu
