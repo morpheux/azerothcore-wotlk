@@ -23,9 +23,9 @@ CFBG* CFBG::instance()
 void CFBG::LoadConfig()
 {
     //_IsEnableSystem = sConfigMgr->GetBoolDefault("CFBG.Enable", false);
-    _IsEnableSystem = false;
+    _IsEnableSystem = true;
     //_IsEnableAvgIlvl = sConfigMgr->GetBoolDefault("CFBG.Include.Avg.Ilvl.Enable", false);
-    _IsEnableAvgIlvl = true;
+    _IsEnableAvgIlvl = false;
     //_IsEnableBalancedTeams = sConfigMgr->GetBoolDefault("CFBG.BalancedTeams", false);
     _IsEnableBalancedTeams = false;
     //_IsEnableEvenTeams = sConfigMgr->GetBoolDefault("CFBG.EvenTeams.Enabled", false);
