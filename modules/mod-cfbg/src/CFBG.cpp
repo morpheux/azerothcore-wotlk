@@ -24,11 +24,16 @@ void CFBG::LoadConfig()
 {
     //_IsEnableSystem = sConfigMgr->GetBoolDefault("CFBG.Enable", false);
     _IsEnableSystem = false;
-    _IsEnableAvgIlvl = sConfigMgr->GetBoolDefault("CFBG.Include.Avg.Ilvl.Enable", false);
-    _IsEnableBalancedTeams = sConfigMgr->GetBoolDefault("CFBG.BalancedTeams", false);
-    _IsEnableEvenTeams = sConfigMgr->GetBoolDefault("CFBG.EvenTeams.Enabled", false);
-    _EvenTeamsMaxPlayersThreshold = sConfigMgr->GetIntDefault("CFBG.EvenTeams.MaxPlayersThreshold", 5);
-    _MaxPlayersCountInGroup = sConfigMgr->GetIntDefault("CFBG.Players.Count.In.Group", 3);
+    //_IsEnableAvgIlvl = sConfigMgr->GetBoolDefault("CFBG.Include.Avg.Ilvl.Enable", false);
+    _IsEnableAvgIlvl = true;
+    //_IsEnableBalancedTeams = sConfigMgr->GetBoolDefault("CFBG.BalancedTeams", false);
+    _IsEnableBalancedTeams = false;
+    //_IsEnableEvenTeams = sConfigMgr->GetBoolDefault("CFBG.EvenTeams.Enabled", false);
+    _IsEnableEvenTeams = true;
+    //_EvenTeamsMaxPlayersThreshold = sConfigMgr->GetIntDefault("CFBG.EvenTeams.MaxPlayersThreshold", 5);
+    _EvenTeamsMaxPlayersThreshold = 2;
+    //_MaxPlayersCountInGroup = sConfigMgr->GetIntDefault("CFBG.Players.Count.In.Group", 3);
+    _MaxPlayersCountInGroup = 3;
 }
 
 bool CFBG::IsEnableSystem()
