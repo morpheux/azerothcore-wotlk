@@ -2519,7 +2519,7 @@ public:
     {
         EventstarterAI(Creature* creature) : ScriptedAI(creature) {}
 
-        void UpdateAI(uint32 diff) override
+        void UpdateAI(uint32 /*diff*/) override
         {
             if (endevent)
             {
@@ -2531,27 +2531,27 @@ public:
 
     };
 
-    bool OnGossipHello(Player* player, Creature* npc)
+    bool OnGossipHello(Player* player, Creature* creature)
     {
         AddGossipItemFor(player, 0, "Start Event !", GOSSIP_SENDER_MAIN, 1);
-        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, npc);
+        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature);
         return true;
     }
 
-    bool OnGossipSelect(Player* player, Creature* npc, uint32 sender, uint32 uiAction)
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
     {
         if (!player)
             return false;
 
 
-        switch (uiAction)
+        switch (action)
 			case 1:
         {
             endevent = false;
 
-            npc->PlayDistanceSound(16037);
-            npc->PlayDirectMusic(17289);  //17346
-            npc->SetPhaseMask(2, 1);
+            creature->PlayDistanceSound(16037);
+            creature->PlayDirectMusic(17289);  //17346
+            creature->SetPhaseMask(2, 1);
 
             int FallObjectGuid[16]{ 166151, 166139, 166147, 166135, 166128, 166103, 166101, 166129, 166096, 166093, 166074, 166160, 166163, 166065, 166081, 166098 };
 
@@ -2617,7 +2617,7 @@ public:
 
             if (type == 1 && data == 1)
                 Events.ScheduleEvent(1, 15000);
-            for (int i = 2; i < 16; i++)
+            for (uint32 i = 2; i < 16; i++)
             {
 
                 if (type == 1 && data == i)
