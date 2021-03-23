@@ -2534,8 +2534,12 @@ public:
     bool OnGossipHello(Player* player, Creature* creature)
     {
         ClearGossipMenuFor(player);
+
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Inicie o Evento !", 1, 0);
-        SendGossipMenuFor(player, 800809, creature);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Inicie o Evento !", 1, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Inicie o Evento !", 1, 0);
+
+        SendGossipMenuFor(player, 800809, creature->GetGUID());
         return true;
     }
 
