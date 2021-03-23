@@ -2533,19 +2533,17 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
-        AddGossipItemFor(player, 0, "Start Event !", GOSSIP_SENDER_MAIN, 1);
-        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature);
+        ClearGossipMenuFor(player);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Inicie o Evento !", 1, 0);
+        SendGossipMenuFor(player, 800809, creature);
         return true;
     }
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
     {
-        if (!player)
-            return false;
-
-
-        switch (action)
-			case 1:
+        switch (sender)
+        {    
+		case 1:
         {
             endevent = false;
 
@@ -2562,11 +2560,8 @@ public:
             for (int i = 0; i < 16; i++)
             {
                 RandomData[i] = irand(0, 15);
-
-
                 for (int j = 0; j < 16; j++)
                 {
-
                     if (RandomData[i] == RandomData[j] && i != j)
                     {
                         i--;
@@ -2575,7 +2570,6 @@ public:
                 }
 
             }
-
             for (int i = 0; i < 15; i++)
             {
                 FallObjects[i] = ChatHandler(player->GetSession()).GetObjectGlobalyWithGuidOrNearWithDbGuid(FallObjectGuid[RandomData[i]], 555555);
@@ -2583,8 +2577,8 @@ public:
                 FallObjects[i]->AI()->SetData(1, 16);
             }
 
+        }break;
         }
-
         return true;
     }
 
