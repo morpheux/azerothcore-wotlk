@@ -2683,7 +2683,7 @@ public:
 void AddNpcEtmaxxScripts()
 {
     new etmaxx_npc();
-	new etmaxx_vip();
+	//new etmaxx_vip();
     new etmaxx_battlepass();
     new etmaxx_transmog_vendor();
     new etmaxx_start();
