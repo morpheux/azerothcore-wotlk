@@ -2150,19 +2150,19 @@ public:
     {
         ClearGossipMenuFor(player);
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tIniciar Evento", 0, 1);
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 0, 9999);
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tUpdate Menu", 0, 9999);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tIniciar Evento", 1, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 9999, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tUpdate Menu", 9999, 0);
 
         SendGossipMenuFor(player, 800809, creature->GetGUID());
         return true;
     }
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
     {
         ClearGossipMenuFor(player);
 
-        switch (action)
+        switch (sender)
         {    
 		case 1: {
 
