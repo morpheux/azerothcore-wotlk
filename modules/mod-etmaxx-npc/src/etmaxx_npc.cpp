@@ -142,7 +142,7 @@ public:
         }break;
 
         case 9999: {
-            player->SetPhaseMask(1, 1);
+            player->SetPhaseMask(2, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("Mudando de Fase");
             CloseGossipMenuFor(player);
         }break;
