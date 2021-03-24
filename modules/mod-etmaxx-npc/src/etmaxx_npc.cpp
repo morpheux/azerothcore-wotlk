@@ -2146,22 +2146,6 @@ class etmaxx_eventstarter : public CreatureScript
 public:
     etmaxx_eventstarter() : CreatureScript("etmaxx_eventstarter") { }
 
-    /*struct EventstarterAI : public ScriptedAI
-    {
-        EventstarterAI(Creature* creature) : ScriptedAI(creature) {}
-
-        void UpdateAI(uint32 diff) override
-        {
-            if (endevent)
-            {
-                me->SetPhaseMask(1, 1);
-                me->PlayDirectMusic(0);
-            }
-
-        }
-
-    };*/
-
     bool OnGossipHello(Player* player, Creature* creature)
     {
         ClearGossipMenuFor(player);
@@ -2181,37 +2165,10 @@ public:
         switch (action)
         {    
 		case 1: {
-            endevent = false;
 
             creature->PlayDistanceSound(16037);
             creature->PlayDirectMusic(17289);  //17346
-            creature->SetPhaseMask(2, 1);
-
-            /*int FallObjectGuid[16]{ 166151, 166139, 166147, 166135, 166128, 166103, 166101, 166129, 166096, 166093, 166074, 166160, 166163, 166065, 166081, 166098 };
-
-            int RandomData[16];
-
-            GameObject* FallObjects[16];
-
-            for (int i = 0; i < 16; i++)
-            {
-                RandomData[i] = irand(0, 15);
-                for (int j = 0; j < 16; j++)
-                {
-                    if (RandomData[i] == RandomData[j] && i != j)
-                    {
-                        i--;
-                    }
-
-                }
-
-            }
-            for (int i = 0; i < 15; i++)
-            {
-                FallObjects[i] = ChatHandler(player->GetSession()).GetObjectGlobalyWithGuidOrNearWithDbGuid(FallObjectGuid[RandomData[i]], 555555);
-                FallObjects[i]->AI()->SetData(1, i + 1);
-                FallObjects[i]->AI()->SetData(1, 16);
-            }*/
+            //creature->SetPhaseMask(2, 1);
 
         }break;
 
@@ -2232,87 +2189,6 @@ public:
 
 };
 
-
-///////////////////////////////////////////////////////////////////////////////////
-/////////////                 Evento Plataforma Fall                ///////////////
-///////////////////////////////////////////////////////////////////////////////////;
-uint32 timer = 30000;
-
-class FallObject : public GameObjectScript
-{
-
-public:
-    FallObject() : GameObjectScript("FallObject") {}
-
-
-    struct FallObjectAI : public GameObjectAI
-    {
-
-        FallObjectAI(GameObject* go) : GameObjectAI(go) {}
-
-
-        void SetData(uint32 type, uint32 data) override
-        {
-
-
-            if (type == 1 && data == 1)
-                Events.ScheduleEvent(1, 15000);
-            for (uint32 i = 2; i < 16; i++)
-            {
-
-                if (type == 1 && data == i)
-                {
-                    if (i == 2)
-                        timer = 25000;
-                    else
-                        timer += 10000;
-                    Events.ScheduleEvent(1, timer);
-                }
-            }
-
-            if (type == 1 && data == 16)
-                Events.ScheduleEvent(2, 185000);
-        }
-
-        void UpdateAI(uint32 diff) override
-        {
-            Events.Update(diff);
-
-            while (uint32 eventId = Events.ExecuteEvent())
-            {
-                switch (eventId)
-                {
-                case 1:
-                {
-                    go->PlayDistanceSound(17442);
-                    go->SetPhaseMask(2, 1);
-                    break;
-                }
-                case 2:
-                {
-                    go->SetPhaseMask(1, 1);
-                    endevent = true;
-                    break;
-                }
-                }
-            }
-        }
-
-
-    private:
-        EventMap Events;
-
-    };
-
-
-    GameObjectAI* GetAI(GameObject* go) const override
-    {
-        return new FallObjectAI(go);
-    }
-
-};
-
-
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
@@ -2327,5 +2203,4 @@ void AddNpcEtmaxxScripts()
     new etmaxx_event();
     new etmaxx_startset();
     new etmaxx_eventstarter();
-	new FallObject();
 }
