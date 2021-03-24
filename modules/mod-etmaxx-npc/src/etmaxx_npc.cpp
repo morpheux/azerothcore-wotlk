@@ -142,8 +142,8 @@ public:
         }break;
 
         case 9999: {
-            creature->PlayDistanceSound(17442);
-            ChatHandler(player->GetSession()).PSendSysMessage("Musica rolando");
+            player->SetPhaseMask(1, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("Mudando de Fase");
             CloseGossipMenuFor(player);
         }break;
 
