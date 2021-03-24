@@ -2508,7 +2508,7 @@ public:
 /////////////                 Evento Plataforma                     ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
-bool endevent;
+bool endevent = false;
 
 class etmaxx_eventstarter : public CreatureScript
 {
@@ -2535,9 +2535,9 @@ public:
     {
         ClearGossipMenuFor(player);
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Inicie o Evento !", 1, 0);
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Inicie o Evento !", 1, 0);
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Inicie o Evento !", 1, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tIniciar Evento", 1, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 9999, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tUpdate Menu", 9999, 0);
 
         SendGossipMenuFor(player, 800809, creature->GetGUID());
         return true;
@@ -2547,8 +2547,7 @@ public:
     {
         switch (sender)
         {    
-		case 1:
-        {
+		case 1: {
             endevent = false;
 
             creature->PlayDistanceSound(16037);
@@ -2582,6 +2581,12 @@ public:
             }
 
         }break;
+
+        case 9999:  // Main menu
+        {
+            OnGossipHello(player, creature);
+        }break;
+
         }
         return true;
     }
