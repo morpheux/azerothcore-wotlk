@@ -2159,5 +2159,4 @@ void AddNpcEtmaxxScripts()
 	new etmaxx_tabard();
     new etmaxx_event();
     new etmaxx_startset();
-    new etmaxx_gb();
 }
