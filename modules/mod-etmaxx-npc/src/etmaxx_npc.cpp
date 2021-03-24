@@ -2139,43 +2139,108 @@ public:
 /////////////                 Evento Plataforma                     ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
-class etmaxx_teste : public CreatureScript
+class etmaxx_gb : public CreatureScript
 {
 public:
-    etmaxx_teste() : CreatureScript("etmaxx_teste") { }
+    etmaxx_gb() : CreatureScript("etmaxx_gb") { }
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
         ClearGossipMenuFor(player);
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tIniciar Evento", 1, 0);
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 9999, 0);
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tUpdate Menu", 9999, 0);
+        if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 37500)
+        {
+            if (player->GetTeamId(true) == TEAM_ALLIANCE && !player->HasSpell(16056))
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitetiger:35:35:-25:0|tResgate seu Reins of the Ancient Frostsaber", 3, 0);
 
-        SendGossipMenuFor(player, 800809, creature->GetGUID());
+            if (player->GetTeamId(true) == TEAM_HORDE && !player->HasSpell(16081))
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_whitedirewolf:35:35:-25:0|tResgate seu Horn of the Arctic Wolf", 3, 0);
+        }
+
+        if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 50000 && !player->HasSpell(43688)) {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_druid_challangingroar:35:35:-25:0|tResgate seu Amani War Bear", 2, 0);
+        }
+
+        if (player->GetUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS) >= 62500 && !player->HasSpell(75614)) {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_celestialhorse:35:35:-25:0|tResgate Seu Celestial Steed", 1, 0);
+        }
+
+        if (player->HasItemCount(60018, 15)) {
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_necklace_27:35:35:-25:0|tResgate Sua Mount Mark", 5, 0);
+        }
+
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tQuero dar uma olhada", 4, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tTocar Musica", 6, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------------------------", 999, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 999, 0);
+
+        SendGossipMenuFor(player, 800807, creature->GetGUID());
         return true;
     }
 
     bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
     {
-        ClearGossipMenuFor(player);
+        player->PlayerTalkClass->ClearMenus();
 
         switch (sender)
-        {    
-		case 1: {
-
-            creature->PlayDistanceSound(16037);
-            creature->PlayDirectMusic(17289);  //17346
-            //creature->SetPhaseMask(2, 1);
-
-        }break;
-
-        case 9999:  // Main menu
         {
+        case 999: {
             OnGossipHello(player, creature);
         }break;
 
+        case 1: {
+            player->DestroyItemCount(54811, 1, true);
+            player->AddItem(54811, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 2: {
+            player->DestroyItemCount(33809, 1, true);
+            player->AddItem(33809, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 3:
+        {
+            if (player->GetTeamId(true) == TEAM_ALLIANCE)
+            {
+                player->DestroyItemCount(12302, 1, true);
+                player->AddItem(12302, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
+                CloseGossipMenuFor(player);
+            }
+
+            if (player->GetTeamId(true) == TEAM_HORDE)
+            {
+                player->DestroyItemCount(12351, 1, true);
+                player->AddItem(12351, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Team: Item Adicionado em sua Bag. Parabéns!");
+                CloseGossipMenuFor(player);
+            }
+        }break;
+
+        case 4: {
+            player->GetSession()->SendListInventory(creature->GetGUID(), 65000);
+        }break;
+
+        case 5: {
+            player->DestroyItemCount(60018, 15, true);
+            player->AddItem(47395, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("Parabéns, você é um vitorioso!");
+            CloseGossipMenuFor(player);
+        }break;
+
+        case 6: {
+            creature->PlayDistanceSound(16037);
+            //go->PlayDistanceSound(17442);
+            ChatHandler(player->GetSession()).PSendSysMessage("Musica rolando");
+            CloseGossipMenuFor(player);
+        }break;
+
         }
+
         return true;
     }
 };
@@ -2193,5 +2258,5 @@ void AddNpcEtmaxxScripts()
 	new etmaxx_tabard();
     new etmaxx_event();
     new etmaxx_startset();
-    new etmaxx_teste();
+    new etmaxx_gb();
 }
