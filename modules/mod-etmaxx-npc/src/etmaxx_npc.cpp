@@ -2139,7 +2139,7 @@ public:
 /////////////                 Evento Plataforma                     ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
-bool endevent = false;
+bool endevent;
 
 class etmaxx_eventstarter : public CreatureScript
 {
@@ -2176,6 +2176,8 @@ public:
 
     bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
     {
+        ClearGossipMenuFor(player);
+
         switch (sender)
         {    
 		case 1: {
@@ -2185,7 +2187,7 @@ public:
             creature->PlayDirectMusic(17289);  //17346
             creature->SetPhaseMask(2, 1);
 
-            int FallObjectGuid[16]{ 166151, 166139, 166147, 166135, 166128, 166103, 166101, 166129, 166096, 166093, 166074, 166160, 166163, 166065, 166081, 166098 };
+            /*int FallObjectGuid[16]{ 166151, 166139, 166147, 166135, 166128, 166103, 166101, 166129, 166096, 166093, 166074, 166160, 166163, 166065, 166081, 166098 };
 
             int RandomData[16];
 
@@ -2209,7 +2211,7 @@ public:
                 FallObjects[i] = ChatHandler(player->GetSession()).GetObjectGlobalyWithGuidOrNearWithDbGuid(FallObjectGuid[RandomData[i]], 555555);
                 FallObjects[i]->AI()->SetData(1, i + 1);
                 FallObjects[i]->AI()->SetData(1, 16);
-            }
+            }*/
 
         }break;
 
