@@ -2233,7 +2233,7 @@ public:
         }break;
 
         case 6: {
-            creature->PlayDistanceSound(16037);
+            //creature->PlayDistanceSound(16037);
             //go->PlayDistanceSound(17442);
             ChatHandler(player->GetSession()).PSendSysMessage("Musica rolando");
             CloseGossipMenuFor(player);
