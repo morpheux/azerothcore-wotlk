@@ -2146,11 +2146,11 @@ class etmaxx_eventstarter : public CreatureScript
 public:
     etmaxx_eventstarter() : CreatureScript("etmaxx_eventstarter") { }
 
-    struct EventstarterAI : public ScriptedAI
+    /*struct EventstarterAI : public ScriptedAI
     {
         EventstarterAI(Creature* creature) : ScriptedAI(creature) {}
 
-        void UpdateAI(uint32 /*diff*/) override
+        void UpdateAI(uint32 diff) override
         {
             if (endevent)
             {
@@ -2160,7 +2160,7 @@ public:
 
         }
 
-    };
+    };*/
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
@@ -2222,14 +2222,18 @@ public:
         return true;
     }
 
-    CreatureAI* GetAI(Creature* creature) const override
+    /*CreatureAI* GetAI(Creature* creature) const override
     {
         return new EventstarterAI(creature);
-    }
+   };*/
 
 
 };
 
+
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 Evento Plataforma Fall                ///////////////
+///////////////////////////////////////////////////////////////////////////////////;
 uint32 timer = 30000;
 
 class FallObject : public GameObjectScript
