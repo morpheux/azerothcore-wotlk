@@ -2139,12 +2139,10 @@ public:
 /////////////                 Evento Plataforma                     ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
-bool endevent;
-
-class etmaxx_eventstarter : public CreatureScript
+class etmaxx_teste : public CreatureScript
 {
 public:
-    etmaxx_eventstarter() : CreatureScript("etmaxx_eventstarter") { }
+    etmaxx_teste() : CreatureScript("etmaxx_teste") { }
 
     bool OnGossipHello(Player* player, Creature* creature)
     {
@@ -2180,13 +2178,6 @@ public:
         }
         return true;
     }
-
-    /*CreatureAI* GetAI(Creature* creature) const override
-    {
-        return new EventstarterAI(creature);
-   };*/
-
-
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -2202,5 +2193,5 @@ void AddNpcEtmaxxScripts()
 	new etmaxx_tabard();
     new etmaxx_event();
     new etmaxx_startset();
-    new etmaxx_eventstarter();
+    new etmaxx_teste();
 }
