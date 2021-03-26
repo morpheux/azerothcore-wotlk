@@ -396,7 +396,7 @@ public:
 
         if (!me->IsGameMaster())
         {
-            if (me->GetTeamId() == TEAM_ALLIANCE)
+            if (me->getRace() == RACE_HUMAN || me->getRace() == RACE_NIGHTELF || me->getRace() == RACE_DWARF || me->getRace() == RACE_DRAENEI || me->getRace() == RACE_GNOME)
             {
                 if (zoneOrigem == orgrimmar || zoneOrigem == thunderbluff || zoneOrigem == undercity || zoneOrigem == silvermoon ||
                     zoneDestino == orgrimmar || zoneDestino == thunderbluff || zoneDestino == undercity || zoneDestino == silvermoon ||
@@ -407,7 +407,9 @@ public:
                     return false;
                 }
              
-            } else {
+            }
+            if (me->getRace() == RACE_ORC || me->getRace() == RACE_UNDEAD_PLAYER || me->getRace() == RACE_TAUREN || me->getRace() == RACE_TROLL || me->getRace() == RACE_BLOODELF)
+            {
                 if (zoneOrigem == stormwind || zoneOrigem == ironforge || zoneOrigem == darnassus || zoneOrigem == theexodar ||
                     zoneDestino == stormwind || zoneDestino == ironforge || zoneDestino == darnassus || zoneDestino == theexodar ||
                     zoneDestino == elwynnforst || zoneDestino == dunmorogh || zoneDestino == teldrassil || zoneDestino == azuremystisle)
