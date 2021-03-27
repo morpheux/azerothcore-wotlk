@@ -125,7 +125,7 @@ public:
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tQuero dar uma olhada", 4, 0);
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------------------------", 999, 0);
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tUpdate menu", 999, 0);
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tToca Musica", 9999, 0);
+        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:30:30:-18:0|tToca Musica", 9999, 0);
 
         SendGossipMenuFor(player, 800807, creature->GetGUID());
         return true;
@@ -141,11 +141,11 @@ public:
             OnGossipHello(player, creature);
         }break;
 
-        case 9999: {
+        /*case 9999: {
             player->SetPhaseMask(2, 1);
             ChatHandler(player->GetSession()).PSendSysMessage("Mudando de Fase");
             CloseGossipMenuFor(player);
-        }break;
+        }break;*/
 
         case 1: {
             player->DestroyItemCount(54811, 1, true);
@@ -1240,6 +1240,8 @@ public:
                 player->learnSpell(33391);//journeyman riding
                 player->learnSpell(54586);//runeforging credit
                 player->learnSpell(48778);//acherus deathcharger
+                player->learnSpell(49998);//Death Strike Rank 1 (Sem bug)
+                player->removeSpell(45470, SPEC_MASK_ALL, false);//Remove a DeathStrike Bugada (cura infinita)
                 player->learnSkillRewardedSpells(776, 375);//Runeforging
                 player->learnSkillRewardedSpells(960, 375);//Runeforging
                 player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 38661, true);//Greathelm of the Scourge Champion
@@ -1802,12 +1804,12 @@ public:
         {
             OnGossipHello(player, creature);
         }break;
-
+        
         case 100: {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_book_11:35:35:-25:0|tProfissão Full - 3 Event Mark", 1000, 0);                           // 03 Event Mark                                        // 03 Event Mark
+            //AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_book_11:35:35:-25:0|tProfissão Full - 3 Event Mark", 1000, 0);                           // 03 Event Mark                                        // 03 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:35:35:-25:0|t10 000 Honor Points - 2 Event Mark", 2000, 0);              // 02 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:35:35:-25:0|t200 Arena Points - 2 Event Mark", 3000, 0); // 02 Event Mark
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:35:35:-25:0|t20 Emblem of Frost - 2 Event Mark", 4000, 0);                // 02 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:35:35:-25:0|t30 Emblem of Frost - 2 Event Mark", 4000, 0);                // 02 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:35:35:-25:0|tEtMaXx Transmog Mark - 4 Event Mark", 5000, 0);            // 04 Event Mark
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_shirt_guildtabard_01:35:35:-25:0|tEtMaXx Tabard Mark - 5 Event Mark", 6000, 0);               // 05 Event Mark 
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_amulet_01:35:35:-25:0|tEtMaXx Mount Mark - 7 Event Mark", 7000, 0);                   // 07 Event Mark
