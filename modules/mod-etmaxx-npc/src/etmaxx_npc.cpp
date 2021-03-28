@@ -1887,8 +1887,8 @@ public:
 
         case 4000: {
             if (MarkCheck(player, 2)) {
-                player->AddItem(49426, 20);
-                ChatHandler(player->GetSession()).PSendSysMessage("20 Emblem of Frost recebidos");
+                player->AddItem(49426, 30);
+                ChatHandler(player->GetSession()).PSendSysMessage("30 Emblem of Frost recebidos");
                 CloseGossipMenuFor(player);
             }
         }break;
