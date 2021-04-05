@@ -634,7 +634,7 @@ bool Utf8ToUpperOnlyLatin(std::string& utf8String)
     return WStrToUtf8(wstr, utf8String);
 }
 
-std::string acore::Impl::ByteArrayToHexStr(uint8 const* bytes, size_t arrayLen, bool reverse /* = false */)
+std::string ByteArrayToHexStr(uint8 const* bytes, uint32 arrayLen, bool reverse /* = false */)
 {
     int32 init = 0;
     int32 end = arrayLen;
@@ -658,9 +658,11 @@ std::string acore::Impl::ByteArrayToHexStr(uint8 const* bytes, size_t arrayLen, 
     return ss.str();
 }
 
-void acore::Impl::HexStrToByteArray(std::string const& str, uint8* out, size_t outlen, bool reverse /*= false*/)
+void HexStrToByteArray(std::string const& str, uint8* out, bool reverse /*= false*/)
 {
-    ASSERT(str.size() == (2 * outlen));
+    // string must have even number of characters
+    if (str.length() & 1)
+        return;
 
     int32 init = 0;
     int32 end = int32(str.length());

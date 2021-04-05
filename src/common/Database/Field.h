@@ -11,7 +11,6 @@
 #include "Log.h"
 
 #include <mysql.h>
-#include <array>
 
 class Field
 {
@@ -248,15 +247,6 @@ public:
         return data.value == nullptr;
     }
 
-    [[nodiscard]] std::vector<uint8> GetBinary() const;
-    template<size_t S>
-    [[nodiscard]] std::array<uint8, S> GetBinary() const
-    {
-        std::array<uint8, S> buf;
-        GetBinarySizeChecked(buf.data(), S);
-        return buf;
-    }
-
 protected:
     Field();
     ~Field();
@@ -280,7 +270,7 @@ protected:
 #endif
 
     void SetByteValue(void const* newValue, size_t const newSize, enum_field_types newType, uint32 length);
-    void SetStructuredValue(char* newValue, enum_field_types newType, uint32 length);
+    void SetStructuredValue(char* newValue, enum_field_types newType);
 
     void CleanUp()
     {
@@ -353,8 +343,6 @@ protected:
                 data.type == MYSQL_TYPE_DOUBLE ||
                 data.type == MYSQL_TYPE_LONGLONG );
     }
-
-    void GetBinarySizeChecked(uint8* buf, size_t size) const;
 
 private:
 #ifdef ACORE_DEBUG

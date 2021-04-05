@@ -61,10 +61,7 @@ void PreparedStatement::BindParameters()
                 m_stmt->setDouble(i, statement_data[i].data.d);
                 break;
             case TYPE_STRING:
-                m_stmt->setBinary(i, statement_data[i].binary, true);
-                break;
-            case TYPE_BINARY:
-                m_stmt->setBinary(i, statement_data[i].binary, false);
+                m_stmt->setString(i, statement_data[i].str.c_str());
                 break;
             case TYPE_NULL:
                 m_stmt->setNull(i);
@@ -182,18 +179,8 @@ void PreparedStatement::setString(const uint8 index, const std::string& value)
     if (index >= statement_data.size())
         statement_data.resize(index + 1);
 
-    statement_data[index].binary.resize(value.length() + 1);
-    memcpy(statement_data[index].binary.data(), value.c_str(), value.length() + 1);
+    statement_data[index].str = value;
     statement_data[index].type = TYPE_STRING;
-}
-
-void PreparedStatement::setBinary(const uint8 index, const std::vector<uint8>& value)
-{
-    if (index >= statement_data.size())
-        statement_data.resize(index + 1);
-
-    statement_data[index].binary = value;
-    statement_data[index].type = TYPE_BINARY;
 }
 
 void PreparedStatement::setNull(const uint8 index)
@@ -345,26 +332,21 @@ void MySQLPreparedStatement::setDouble(const uint8 index, const double value)
     setValue(param, MYSQL_TYPE_DOUBLE, &value, sizeof(double), (value > 0.0f));
 }
 
-void MySQLPreparedStatement::setBinary(const uint8 index, const std::vector<uint8>& value, bool isString)
+void MySQLPreparedStatement::setString(const uint8 index, const char* value)
 {
     CheckValidIndex(index);
     m_paramsSet[index] = true;
     MYSQL_BIND* param = &m_bind[index];
-    uint32 len = uint32(value.size());
-    param->buffer_type = MYSQL_TYPE_BLOB;
+    size_t len = strlen(value) + 1;
+    param->buffer_type = MYSQL_TYPE_VAR_STRING;
     delete [] static_cast<char*>(param->buffer);
     param->buffer = new char[len];
     param->buffer_length = len;
     param->is_null_value = 0;
     delete param->length;
-    param->length = new unsigned long(len);
-    if (isString)
-    {
-        *param->length -= 1;
-        param->buffer_type = MYSQL_TYPE_VAR_STRING;
-    }
+    param->length = new unsigned long(len - 1);
 
-    memcpy(param->buffer, value.data(), len);
+    memcpy(param->buffer, value, len);
 }
 
 void MySQLPreparedStatement::setNull(const uint8 index)
@@ -440,10 +422,7 @@ std::string MySQLPreparedStatement::getQueryString(std::string const& sqlPattern
                 ss << m_stmt->statement_data[i].data.d;
                 break;
             case TYPE_STRING:
-                ss << '\'' << (char const*)m_stmt->statement_data[i].binary.data() << '\'';
-                break;
-            case TYPE_BINARY:
-                ss << "BINARY";
+                ss << '\'' << m_stmt->statement_data[i].str << '\'';
                 break;
             case TYPE_NULL:
                 ss << "nullptr";

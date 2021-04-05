@@ -8,14 +8,13 @@
 #include "BigNumber.h"
 #include "ByteBuffer.h"
 #include "Common.h"
-#include "CryptoHash.h"
-#include "CryptoRandom.h"
 #include "DatabaseEnv.h"
 #include "Log.h"
 #include "Opcodes.h"
 #include "PacketLog.h"
 #include "Player.h"
 #include "ScriptMgr.h"
+#include "SHA1.h"
 #include "SharedDefines.h"
 #include "Util.h"
 #include "World.h"
@@ -93,10 +92,9 @@ struct ClientPktHeader
 WorldSocket::WorldSocket(void): WorldHandler(),
     m_LastPingTime(SystemTimePoint::min()), m_OverSpeedPings(0), m_Session(0),
     m_RecvWPct(0), m_RecvPct(), m_Header(sizeof (ClientPktHeader)),
-    m_OutBuffer(0), m_OutBufferSize(65536), m_OutActive(false)
+    m_OutBuffer(0), m_OutBufferSize(65536), m_OutActive(false),
+    m_Seed(static_cast<uint32> (rand32()))
 {
-    acore::Crypto::GetRandomBytes(m_Seed);
-
     reference_counting_policy().value (ACE_Event_Handler::Reference_Counting_Policy::ENABLED);
 
     msg_queue()->high_water_mark(8 * 1024 * 1024);
@@ -159,9 +157,7 @@ int WorldSocket::SendPacket(WorldPacket const& pct)
         sPacketLog->LogPacket(pct, SERVER_TO_CLIENT);
 
     ServerPktHeader header(pct.size() + 2, pct.GetOpcode());
-
-    if (m_Crypt.IsInitialized())
-        m_Crypt.EncryptSend((uint8*)header.header, header.getHeaderLength());
+    m_Crypt.EncryptSend ((uint8*)header.header, header.getHeaderLength());
 
     if (m_OutBuffer->space() >= pct.size() + header.getHeaderLength() && msg_queue()->is_empty())
     {
@@ -239,8 +235,15 @@ int WorldSocket::open(void* a)
     // Send startup packet.
     WorldPacket packet (SMSG_AUTH_CHALLENGE, 24);
     packet << uint32(1);                                    // 1...31
-    packet.append(m_Seed);
-    packet.append(acore::Crypto::GetRandomBytes<32>()); // new encryption seeds
+    packet << m_Seed;
+
+    BigNumber seed1;
+    seed1.SetRand(16 * 8);
+    packet.append(seed1.AsByteArray(16).get(), 16);               // new encryption seeds
+
+    BigNumber seed2;
+    seed2.SetRand(16 * 8);
+    packet.append(seed2.AsByteArray(16).get(), 16);               // new encryption seeds
 
     if (SendPacket(packet) == -1)
         return -1;
@@ -466,8 +469,7 @@ int WorldSocket::handle_input_header(void)
     ASSERT(m_RecvWPct == nullptr);
     ASSERT(m_Header.length() == sizeof(ClientPktHeader));
 
-    if (m_Crypt.IsInitialized())
-        m_Crypt.DecryptRecv((uint8*) m_Header.rd_ptr(), sizeof(ClientPktHeader));
+    m_Crypt.DecryptRecv ((uint8*) m_Header.rd_ptr(), sizeof(ClientPktHeader));
 
     ClientPktHeader& header = *((ClientPktHeader*) m_Header.rd_ptr());
 
@@ -733,6 +735,8 @@ int WorldSocket::ProcessIncoming(WorldPacket* new_pct)
 int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
 {
     // NOTE: ATM the socket is singlethread, have this in mind ...
+    uint8 digest[20];
+    uint32 clientSeed;
     uint32 loginServerID, loginServerType, regionID, battlegroupID, realm;
     uint64 DosResponse;
     uint32 BuiltNumberClient;
@@ -742,10 +746,10 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     //uint8 expansion = 0;
     LocaleConstant locale;
     std::string account;
+    SHA1Hash sha;
     WorldPacket packet, SendAddonPacked;
-    std::array<uint8, 4> clientSeed;
-    acore::Crypto::SHA1::Digest digest;
 
+    BigNumber k;
     bool wardenActive = sWorld->getBoolConfig(CONFIG_WARDEN_ENABLED);
 
     if (sWorld->IsClosed())
@@ -763,12 +767,12 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     recvPacket >> loginServerID;
     recvPacket >> account;
     recvPacket >> loginServerType;
-    recvPacket.read(clientSeed);
+    recvPacket >> clientSeed;
     recvPacket >> regionID;
     recvPacket >> battlegroupID;
     recvPacket >> realm;
     recvPacket >> DosResponse;
-    recvPacket.read(digest);
+    recvPacket.read(digest, 20);
 
 #if defined(ENABLE_EXTRAS) && defined(ENABLE_EXTRA_LOGS)
     sLog->outStaticDebug ("WorldSocket::HandleAuthSession: client %u, loginServerID %u, account %s, loginServerType %u, clientseed %u", BuiltNumberClient, loginServerID, account.c_str(), loginServerType, clientSeed);
@@ -838,7 +842,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
         security = SEC_ADMINISTRATOR;
         */
 
-    SessionKey sessionKey = fields[1].GetBinary<SESSION_KEY_LENGTH>();
+    k.SetHexStr (fields[1].GetCString());
 
     int64 mutetime = fields[6].GetInt64();
     //! Negative mutetime indicates amount of seconds to be muted effective on next login - which is now.
@@ -929,17 +933,17 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     }
 
     // Check that Key and account name are the same on client and server
-    uint8 t[4] = { 0x00, 0x00, 0x00, 0x00 };
+    uint32 t = 0;
+    uint32 seed = m_Seed;
 
-    acore::Crypto::SHA1 sha;
     sha.UpdateData (account);
-    sha.UpdateData(t);
-    sha.UpdateData(clientSeed);
-    sha.UpdateData(m_Seed);
-    sha.UpdateData(sessionKey);
+    sha.UpdateData ((uint8*) & t, 4);
+    sha.UpdateData ((uint8*) & clientSeed, 4);
+    sha.UpdateData ((uint8*) & seed, 4);
+    sha.UpdateBigNumbers (&k, nullptr);
     sha.Finalize();
 
-    if (sha.GetDigest() != digest)
+    if (memcmp (sha.GetDigest(), digest, 20))
     {
         packet.Initialize (SMSG_AUTH_RESPONSE, 1);
         packet << uint8 (AUTH_FAILED);
@@ -979,7 +983,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     // NOTE ATM the socket is single-threaded, have this in mind ...
     ACE_NEW_RETURN(m_Session, WorldSession(id, this, AccountTypes(security), expansion, mutetime, locale, recruiter, isRecruiter, skipQueue, TotalTime), -1);
 
-    m_Crypt.Init(sessionKey);
+    m_Crypt.Init(&k);
 
     // First reject the connection if packet contains invalid data or realm state doesn't allow logging in
     if (sWorld->IsClosed())
@@ -1014,7 +1018,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
 
     // Initialize Warden system only if it is enabled by config
     if (wardenActive)
-        m_Session->InitWarden(sessionKey, os);
+        m_Session->InitWarden(&k, os);
 
     // Sleep this Network thread for
     uint32 sleepTime = sWorld->getIntConfig(CONFIG_SESSION_ADD_DELAY);

@@ -5,12 +5,11 @@
  */
 
 #include "AccountMgr.h"
-#include "CryptoHash.h"
 #include "DatabaseEnv.h"
 #include "ObjectAccessor.h"
 #include "Player.h"
 #include "ScriptMgr.h"
-#include "SRP6.h"
+#include "SHA1.h"
 #include "Util.h"
 #include "WorldSession.h"
 
@@ -29,15 +28,13 @@ namespace AccountMgr
         Utf8ToUpperOnlyLatin(password);
 
         if (GetId(username))
-            return AOR_NAME_ALREADY_EXIST;                      // username does already exist
+            return AOR_NAME_ALREDY_EXIST;                       // username does already exist
 
         PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_INS_ACCOUNT);
 
         stmt->setString(0, username);
-        auto [salt, verifier] = acore::Crypto::SRP6::MakeRegistrationData(username, password);
-        stmt->setBinary(1, salt);
-        stmt->setBinary(2, verifier);
-        stmt->setInt8(3, uint8(sWorld->getIntConfig(CONFIG_EXPANSION)));
+        stmt->setString(1, CalculateShaPassHash(username, password));
+        stmt->setInt8(2, uint8(sWorld->getIntConfig(CONFIG_EXPANSION)));
 
         LoginDatabase.Execute(stmt);
 
@@ -145,15 +142,11 @@ namespace AccountMgr
         Utf8ToUpperOnlyLatin(newPassword);
 
         stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_USERNAME);
-        stmt->setString(0, newUsername);
-        stmt->setUInt32(1, accountId);
-        LoginDatabase.Execute(stmt);
 
-        auto [salt, verifier] = acore::Crypto::SRP6::MakeRegistrationData(newUsername, newPassword);
-        stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_LOGON);
-        stmt->setBinary(0, salt);
-        stmt->setBinary(1, verifier);
+        stmt->setString(0, newUsername);
+        stmt->setString(1, CalculateShaPassHash(newUsername, newPassword));
         stmt->setUInt32(2, accountId);
+
         LoginDatabase.Execute(stmt);
 
         return AOR_OK;
@@ -178,12 +171,11 @@ namespace AccountMgr
         Utf8ToUpperOnlyLatin(username);
         Utf8ToUpperOnlyLatin(newPassword);
 
-        auto [salt, verifier] = acore::Crypto::SRP6::MakeRegistrationData(username, newPassword);
+        PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_PASSWORD);
 
-        PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_LOGON);
-        stmt->setBinary(0, salt);
-        stmt->setBinary(1, verifier);
-        stmt->setUInt32(2, accountId);;
+        stmt->setString(0, CalculateShaPassHash(username, newPassword));
+        stmt->setUInt32(1, accountId);
+
         LoginDatabase.Execute(stmt);
 
         sScriptMgr->OnPasswordChange(accountId);
@@ -245,15 +237,10 @@ namespace AccountMgr
 
         PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_SEL_CHECK_PASSWORD);
         stmt->setUInt32(0, accountId);
-        if (PreparedQueryResult result = LoginDatabase.Query(stmt))
-        {
-            acore::Crypto::SRP6::Salt salt = (*result)[0].GetBinary<acore::Crypto::SRP6::SALT_LENGTH>();
-            acore::Crypto::SRP6::Verifier verifier = (*result)[1].GetBinary<acore::Crypto::SRP6::VERIFIER_LENGTH>();
-            if (acore::Crypto::SRP6::CheckLogin(username, password, salt, verifier))
-                return true;
-        }
+        stmt->setString(1, CalculateShaPassHash(username, password));
+        PreparedQueryResult result = LoginDatabase.Query(stmt);
 
-        return false;
+        return !!result;
     }
 
     uint32 GetCharactersCount(uint32 accountId)
@@ -264,6 +251,18 @@ namespace AccountMgr
         PreparedQueryResult result = CharacterDatabase.Query(stmt);
 
         return (result) ? (*result)[0].GetUInt64() : 0;
+    }
+
+    std::string CalculateShaPassHash(std::string const& name, std::string const& password)
+    {
+        SHA1Hash sha;
+        sha.Initialize();
+        sha.UpdateData(name);
+        sha.UpdateData(":");
+        sha.UpdateData(password);
+        sha.Finalize();
+
+        return ByteArrayToHexStr(sha.GetDigest(), sha.GetLength());
     }
 
     bool IsPlayerAccount(uint32 gmlevel)
