@@ -2763,10 +2763,7 @@ void Player::Regenerate(Powers power)
 
                 if (getClass() == CLASS_PRIEST && GetActiveSpec() == TALENT_TREE_PRIEST_SHADOW)
                 {
-                    if (recentCast) // Trinity Updates Mana in intervals of 2s, which is correct
-                        addvalue += GetFloatValue(UNIT_FIELD_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER) * ManaIncreaseRate * 0.001f * m_regenTimer * 0.50f;
-                    else
-                        addvalue += GetFloatValue(UNIT_FIELD_POWER_REGEN_FLAT_MODIFIER) * ManaIncreaseRate * 0.001f * m_regenTimer * 0.50f;
+                        addvalue += GetFloatValue(UNIT_FIELD_POWER_REGEN_INTERRUPTED_FLAT_MODIFIER) * 0.5f * 0.001f * m_regenTimer ;
                 }
                 else {
                     if (recentCast) // Trinity Updates Mana in intervals of 2s, which is correct
@@ -2774,9 +2771,6 @@ void Player::Regenerate(Powers power)
                     else
                         addvalue += GetFloatValue(UNIT_FIELD_POWER_REGEN_FLAT_MODIFIER) * ManaIncreaseRate * 0.001f * m_regenTimer;
                 }
-
-
-
             }
             break;
         case POWER_RAGE:                                    // Regenerate rage
@@ -7376,7 +7370,7 @@ void Player::RewardReputationPvP()
 {
     if(GetTeamId() == TEAM_ALLIANCE)
     {
-        // Reputação em Vitórias
+        // Reputaï¿½ï¿½o em Vitï¿½rias
         GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(69), 1); // Darnassus
         GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(930), 1); // Exodar
         GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(54), 1); // Gnomeregan
@@ -7386,7 +7380,7 @@ void Player::RewardReputationPvP()
     
     if(GetTeamId() == TEAM_ALLIANCE)
     {
-        // Reputação em Vitórias
+        // Reputaï¿½ï¿½o em Vitï¿½rias
         GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(530), 1); // Troll
         GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(76), 1); // Orgrimmar
         GetReputationMgr().ModifyReputation(sFactionStore.LookupEntry(911), 1); // Silvermoon
