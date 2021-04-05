@@ -189,7 +189,7 @@ private:
     /// True if the socket is registered with the reactor for output
     bool m_OutActive;
 
-    std::array<uint8, 4> m_Seed;
+    uint32 m_Seed;
 
 };
 
