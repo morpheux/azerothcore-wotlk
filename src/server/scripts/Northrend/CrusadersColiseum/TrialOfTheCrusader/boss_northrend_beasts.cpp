@@ -68,7 +68,7 @@ public:
 
     CreatureAI* GetAI(Creature* pCreature) const override
     {
-        return new npc_snobold_vassalAI(pCreature);
+        return GetTrialOfTheCrusaderAI<npc_snobold_vassalAI>(pCreature);
     }
 
     struct npc_snobold_vassalAI : public ScriptedAI
@@ -219,7 +219,7 @@ public:
 
     CreatureAI* GetAI(Creature* pCreature) const override
     {
-        return new boss_gormokAI(pCreature);
+        return GetTrialOfTheCrusaderAI<boss_gormokAI>(pCreature);
     }
 
     struct boss_gormokAI : public ScriptedAI
@@ -687,7 +687,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new boss_acidmawAI(creature);
+        return GetTrialOfTheCrusaderAI<boss_acidmawAI>(creature);
     }
 };
 
@@ -712,7 +712,7 @@ public:
 
     CreatureAI* GetAI(Creature* pCreature) const override
     {
-        return new boss_dreadscaleAI(pCreature);
+        return GetTrialOfTheCrusaderAI<boss_dreadscaleAI>(pCreature);
     }
 };
 
@@ -757,7 +757,7 @@ public:
 
     CreatureAI* GetAI(Creature* pCreature) const override
     {
-        return new boss_icehowlAI(pCreature);
+        return GetTrialOfTheCrusaderAI<boss_icehowlAI>(pCreature);
     }
 
     struct boss_icehowlAI : public ScriptedAI

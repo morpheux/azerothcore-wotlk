@@ -191,7 +191,7 @@ public:
 
     CreatureAI* GetAI(Creature* pCreature) const override
     {
-        return new boss_eadricAI(pCreature);
+        return GetTrialOfTheChampionAI<boss_eadricAI>(pCreature);
     }
 };
 
@@ -374,7 +374,7 @@ public:
 
     CreatureAI* GetAI(Creature* pCreature) const override
     {
-        return new boss_paletressAI(pCreature);
+        return GetTrialOfTheChampionAI<boss_paletressAI>(pCreature);
     }
 };
 
@@ -459,7 +459,7 @@ public:
 
     CreatureAI* GetAI(Creature* pCreature) const override
     {
-        return new npc_memoryAI(pCreature);
+        return GetTrialOfTheChampionAI<npc_memoryAI>(pCreature);
     }
 };
 
@@ -722,7 +722,7 @@ public:
 
     CreatureAI* GetAI(Creature* pCreature) const override
     {
-        return new npc_argent_soldierAI(pCreature);
+        return GetTrialOfTheChampionAI<npc_argent_soldierAI>(pCreature);
     }
 };
 

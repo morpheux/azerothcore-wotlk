@@ -151,7 +151,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new boss_toravonAI(creature);
+        return GetVaultOfArchavonAI<boss_toravonAI>(creature);
     }
 };
 
@@ -195,7 +195,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_frozen_orbAI(creature);
+        return GetVaultOfArchavonAI<npc_frozen_orbAI>(creature);
     }
 };
 
@@ -226,7 +226,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_frozen_orb_stalkerAI(creature);
+        return GetVaultOfArchavonAI<npc_frozen_orb_stalkerAI>(creature);
     }
 };
 

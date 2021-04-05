@@ -59,7 +59,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<npc_kilrekAI>(creature);
+        return GetKarazhanAI<npc_kilrekAI>(creature);
     }
 
     struct npc_kilrekAI : public ScriptedAI
@@ -124,7 +124,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_demon_chainAI(creature);
+        return GetKarazhanAI<npc_demon_chainAI>(creature);
     }
 
     struct npc_demon_chainAI : public ScriptedAI
@@ -162,7 +162,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_fiendish_portalAI(creature);
+        return GetKarazhanAI<npc_fiendish_portalAI>(creature);
     }
 
     struct npc_fiendish_portalAI : public PassiveAI
@@ -196,7 +196,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_fiendish_impAI(creature);
+        return GetKarazhanAI<npc_fiendish_impAI>(creature);
     }
 
     struct npc_fiendish_impAI : public ScriptedAI
@@ -238,7 +238,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_terestianAI>(creature);
+        return GetKarazhanAI<boss_terestianAI>(creature);
     }
 
     struct boss_terestianAI : public ScriptedAI

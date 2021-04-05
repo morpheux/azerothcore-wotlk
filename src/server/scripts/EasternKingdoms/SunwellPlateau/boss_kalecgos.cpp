@@ -342,7 +342,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_kalecgosAI>(creature);
+        return GetSunwellPlateauAI<boss_kalecgosAI>(creature);
     }
 };
 
@@ -363,7 +363,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_kalecAI>(creature);
+        return GetSunwellPlateauAI<boss_kalecAI>(creature);
     }
 
     struct boss_kalecAI : public ScriptedAI
@@ -480,7 +480,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_sathrovarrAI>(creature);
+        return GetSunwellPlateauAI<boss_sathrovarrAI>(creature);
     }
 
     struct boss_sathrovarrAI : public ScriptedAI

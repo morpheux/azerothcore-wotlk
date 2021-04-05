@@ -553,7 +553,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_zuljinAI>(creature);
+        return GetZulAmanAI<boss_zuljinAI>(creature);
     }
 };
 
@@ -590,7 +590,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_zuljin_vortexAI(creature);
+        return GetZulAmanAI<npc_zuljin_vortexAI>(creature);
     }
 };
 

@@ -6,6 +6,7 @@
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
 #include "Player.h"
+#include "mana_tombs.h"
 
 enum ePrince
 {
@@ -39,7 +40,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new boss_nexusprince_shaffarAI (creature);
+        return GetManaTombsAI<boss_nexusprince_shaffarAI>(creature);
     }
 
     struct boss_nexusprince_shaffarAI : public ScriptedAI
@@ -168,7 +169,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_yorAI(creature);
+        return GetManaTombsAI<npc_yorAI>(creature);
     }
 
     struct npc_yorAI : public ScriptedAI

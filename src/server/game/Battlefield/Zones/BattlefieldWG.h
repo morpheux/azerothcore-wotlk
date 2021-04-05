@@ -1213,6 +1213,11 @@ struct BfWGGameObjectBuilding
 
     void Init(GameObject* gobj, uint32 type, uint32 worldstate, uint8 damageText, uint8 destroyText)
     {
+        if (!gobj)
+        {
+            return;
+        }
+
         // GameObject associated to object
         m_Build = gobj->GetGUID();
 

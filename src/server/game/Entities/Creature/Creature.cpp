@@ -128,19 +128,24 @@ void CreatureTemplate::InitializeQueryData()
 
 bool AssistDelayEvent::Execute(uint64 /*e_time*/, uint32 /*p_time*/)
 {
-    if (Unit* victim = ObjectAccessor::GetUnit(m_owner, m_victim))
+    if (Unit* victim = ObjectAccessor::GetUnit(*m_owner, m_victim))
     {
+        // Initialize last damage timer if it doesn't exist
+        m_owner->SetLastDamagedTime(sWorld->GetGameTime() + MAX_AGGRO_RESET_TIME);
+
         while (!m_assistants.empty())
         {
-            Creature* assistant = ObjectAccessor::GetCreature(m_owner, *m_assistants.begin());
+            Creature* assistant = ObjectAccessor::GetCreature(*m_owner, *m_assistants.begin());
             m_assistants.pop_front();
 
-            if (assistant && assistant->CanAssistTo(&m_owner, victim))
+            if (assistant && assistant->CanAssistTo(m_owner, victim))
             {
                 assistant->SetNoCallAssistance(true);
                 assistant->CombatStart(victim);
                 if (assistant->IsAIEnabled)
                     assistant->AI()->AttackStart(victim);
+
+                assistant->SetLastDamagedTimePtr(m_owner->GetLastDamagedTimePtr());
             }
         }
     }
@@ -163,13 +168,13 @@ Creature::Creature(bool isWorldObject): Unit(isWorldObject), MovableMapObject(),
     m_transportCheckTimer(1000), lootPickPocketRestoreTime(0),  m_reactState(REACT_AGGRESSIVE), m_defaultMovementType(IDLE_MOTION_TYPE),
     m_DBTableGuid(0), m_equipmentId(0), m_originalEquipmentId(0), m_originalAnimTier(UNIT_BYTE1_FLAG_GROUND), m_AlreadyCallAssistance(false),
     m_AlreadySearchedAssistance(false), m_regenHealth(true), m_AI_locked(false), m_meleeDamageSchoolMask(SPELL_SCHOOL_MASK_NORMAL), m_originalEntry(0), m_moveInLineOfSightDisabled(false), m_moveInLineOfSightStrictlyDisabled(false),
-    m_homePosition(), m_transportHomePosition(), m_creatureInfo(nullptr), m_creatureData(nullptr), m_waypointID(0), m_path_id(0), m_formation(nullptr), _lastDamagedTime(0), m_cannotReachTarget(false), m_cannotReachTimer(0),
+    m_homePosition(), m_transportHomePosition(), m_creatureInfo(nullptr), m_creatureData(nullptr), m_waypointID(0), m_path_id(0), m_formation(nullptr), _lastDamagedTime(nullptr), m_cannotReachTarget(false), m_cannotReachTimer(0),
     _isMissingSwimmingFlagOutOfCombat(false)
 {
     m_regenTimer = CREATURE_REGEN_INTERVAL;
     m_valuesCount = UNIT_END;
 
-    for (uint8 i = 0; i < CREATURE_MAX_SPELLS; ++i)
+    for (uint8 i = 0; i < MAX_CREATURE_SPELLS; ++i)
         m_spells[i] = 0;
 
     for (uint8 i = SPELL_SCHOOL_NORMAL; i < MAX_SPELL_SCHOOL; ++i)
@@ -185,6 +190,8 @@ Creature::Creature(bool isWorldObject): Unit(isWorldObject), MovableMapObject(),
     TriggerJustRespawned = false;
     m_isTempWorldObject = false;
     _focusSpell = nullptr;
+
+    m_respawnedTime = time_t(0);
 }
 
 Creature::~Creature()
@@ -390,7 +397,7 @@ bool Creature::InitEntry(uint32 Entry, const CreatureData* data)
     if (!m_wanderDistance && m_defaultMovementType == RANDOM_MOTION_TYPE)
         m_defaultMovementType = IDLE_MOTION_TYPE;
 
-    for (uint8 i = 0; i < CREATURE_MAX_SPELLS; ++i)
+    for (uint8 i = 0; i < MAX_CREATURE_SPELLS; ++i)
         m_spells[i] = GetCreatureTemplate()->spells[i];
 
     return true;
@@ -1033,6 +1040,47 @@ bool Creature::isCanTrainingAndResetTalentsOf(Player* player) const
            && player->getClass() == GetCreatureTemplate()->trainer_class;
 }
 
+bool Creature::IsValidTrainerForPlayer(Player* player, uint32* npcFlags /*= nullptr*/) const
+{
+    if (!IsTrainer())
+    {
+        return false;
+    }
+
+    switch (m_creatureInfo->trainer_type)
+    {
+        case TRAINER_TYPE_CLASS:
+        case TRAINER_TYPE_PETS:
+            if (m_creatureInfo->trainer_class && m_creatureInfo->trainer_class != player->getClass())
+            {
+                if (npcFlags)
+                    *npcFlags &= ~UNIT_NPC_FLAG_TRAINER_CLASS;
+
+                return false;
+            }
+            break;
+        case TRAINER_TYPE_MOUNTS:
+            if (m_creatureInfo->trainer_race && m_creatureInfo->trainer_race != player->getRace())
+            {
+                return false;
+            }
+            break;
+        case TRAINER_TYPE_TRADESKILLS:
+            if (m_creatureInfo->trainer_spell && !player->HasSpell(m_creatureInfo->trainer_spell))
+            {
+                if (npcFlags)
+                    *npcFlags &= ~UNIT_NPC_FLAG_TRAINER_PROFESSION;
+
+                return false;
+            }
+            break;
+        default:
+            break;
+    }
+
+    return true;
+}
+
 Player* Creature::GetLootRecipient() const
 {
     if (!m_lootRecipient)
@@ -1249,8 +1297,7 @@ void Creature::SelectLevel(bool changelevel)
 
     // damage
 
-    // pussywizard: disabled until it's fixed
-    /*float basedamage = stats->GenerateBaseDamage(cInfo);
+    float basedamage = stats->GenerateBaseDamage(cInfo);
 
     float weaponBaseMinDamage = basedamage;
     float weaponBaseMaxDamage = basedamage * 1.5;
@@ -1265,19 +1312,7 @@ void Creature::SelectLevel(bool changelevel)
     SetBaseWeaponDamage(RANGED_ATTACK, MAXDAMAGE, weaponBaseMaxDamage);
 
     SetModifierValue(UNIT_MOD_ATTACK_POWER, BASE_VALUE, stats->AttackPower);
-    SetModifierValue(UNIT_MOD_ATTACK_POWER_RANGED, BASE_VALUE, stats->RangedAttackPower);*/
-
-    SetBaseWeaponDamage(BASE_ATTACK, MINDAMAGE, cInfo->mindmg);
-    SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, cInfo->maxdmg);
-
-    SetBaseWeaponDamage(OFF_ATTACK, MINDAMAGE, cInfo->mindmg);
-    SetBaseWeaponDamage(OFF_ATTACK, MAXDAMAGE, cInfo->maxdmg);
-
-    SetBaseWeaponDamage(RANGED_ATTACK, MINDAMAGE, cInfo->minrangedmg);
-    SetBaseWeaponDamage(RANGED_ATTACK, MAXDAMAGE, cInfo->maxrangedmg);
-
-    SetModifierValue(UNIT_MOD_ATTACK_POWER, BASE_VALUE, cInfo->attackpower);
-    SetModifierValue(UNIT_MOD_ATTACK_POWER_RANGED, BASE_VALUE, cInfo->rangedattackpower);
+    SetModifierValue(UNIT_MOD_ATTACK_POWER_RANGED, BASE_VALUE, stats->RangedAttackPower);
 
     sScriptMgr->Creature_SelectLevel(cInfo, this);
 }
@@ -1636,6 +1671,8 @@ void Creature::setDeathState(DeathState s, bool despawn)
 
     if (s == JUST_DIED)
     {
+        _lastDamagedTime.reset();
+
         m_corpseRemoveTime = time(nullptr) + m_corpseDelay;
         m_respawnTime = time(nullptr) + m_respawnDelay + m_corpseDelay;
 
@@ -1762,8 +1799,10 @@ void Creature::Respawn(bool force)
 
         //Re-initialize reactstate that could be altered by movementgenerators
         InitializeReactState();
-    }
 
+        m_respawnedTime = sWorld->GetGameTime();
+    }
+    m_respawnedTime = time(nullptr);
     // xinef: relocate notifier, fixes npc appearing in corpse position after forced respawn (instead of spawn)
     m_last_notify_position.Relocate(-5000.0f, -5000.0f, -5000.0f, 0.0f);
     UpdateObjectVisibility(false);
@@ -1881,7 +1920,7 @@ SpellInfo const* Creature::reachWithSpellAttack(Unit* victim)
     if (!victim)
         return nullptr;
 
-    for (uint32 i = 0; i < CREATURE_MAX_SPELLS; ++i)
+    for (uint32 i = 0; i < MAX_CREATURE_SPELLS; ++i)
     {
         if (!m_spells[i])
             continue;
@@ -1929,7 +1968,7 @@ SpellInfo const* Creature::reachWithSpellCure(Unit* victim)
     if (!victim)
         return nullptr;
 
-    for (uint32 i = 0; i < CREATURE_MAX_SPELLS; ++i)
+    for (uint32 i = 0; i < MAX_CREATURE_SPELLS; ++i)
     {
         if (!m_spells[i])
             continue;
@@ -2066,7 +2105,7 @@ void Creature::CallAssistance()
 
             if (!assistList.empty())
             {
-                AssistDelayEvent* e = new AssistDelayEvent(GetVictim()->GetGUID(), *this);
+                AssistDelayEvent* e = new AssistDelayEvent(GetVictim()->GetGUID(), this);
                 while (!assistList.empty())
                 {
                     // Pushing guids because in delay can happen some creature gets despawned => invalid pointer
@@ -2247,6 +2286,12 @@ bool Creature::CanCreatureAttack(Unit const* victim, bool skipDistCheck) const
     // pussywizard: or if enemy is in evade mode
     if (victim->GetTypeId() == TYPEID_UNIT && victim->ToCreature()->IsInEvadeMode())
         return false;
+
+    // cannot attack if is during 5 second grace period, unless being attacked
+    if (m_respawnedTime && (sWorld->GetGameTime() - m_respawnedTime) < 5 && victim->getAttackers().empty())
+    {
+        return false;
+    }
 
     if (!IS_PLAYER_GUID(GetCharmerOrOwnerGUID()))
     {
@@ -2510,10 +2555,10 @@ bool Creature::HasSpellCooldown(uint32 spell_id) const
 bool Creature::HasSpell(uint32 spellID) const
 {
     uint8 i;
-    for (i = 0; i < CREATURE_MAX_SPELLS; ++i)
+    for (i = 0; i < MAX_CREATURE_SPELLS; ++i)
         if (spellID == m_spells[i])
             break;
-    return i < CREATURE_MAX_SPELLS;                         //broke before end of iteration of known spells
+    return i < MAX_CREATURE_SPELLS;                         //broke before end of iteration of known spells
 }
 
 time_t Creature::GetRespawnTimeEx() const
@@ -3113,4 +3158,35 @@ void Creature::SetCannotReachTarget(bool cannotReach)
 
     if (cannotReach)
         sLog->outDebug(LOG_FILTER_UNITS, "Creature::SetCannotReachTarget() called with true. Details: %s", GetDebugInfo().c_str());
+}
+
+time_t Creature::GetLastDamagedTime() const
+{
+    if (!_lastDamagedTime)
+        return time_t(0);
+
+    return *_lastDamagedTime;
+}
+
+std::shared_ptr<time_t> const& Creature::GetLastDamagedTimePtr() const
+{
+    return _lastDamagedTime;
+}
+
+void Creature::SetLastDamagedTime(time_t val)
+{
+    if (val > 0)
+    {
+        if (_lastDamagedTime)
+            *_lastDamagedTime = val;
+        else
+            _lastDamagedTime = std::make_shared<time_t>(val);
+    }
+    else
+        _lastDamagedTime.reset();
+}
+
+void Creature::SetLastDamagedTimePtr(std::shared_ptr<time_t> const& val)
+{
+    _lastDamagedTime = val;
 }

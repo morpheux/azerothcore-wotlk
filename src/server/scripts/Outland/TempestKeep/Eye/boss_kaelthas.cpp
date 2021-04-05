@@ -708,7 +708,7 @@ public:
     };
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_kaelthasAI>(creature);
+        return GetTheEyeAI<boss_kaelthasAI>(creature);
     }
 };
 

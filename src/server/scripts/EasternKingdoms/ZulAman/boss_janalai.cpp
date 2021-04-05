@@ -437,7 +437,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_janalaiAI>(creature);
+        return GetZulAmanAI<boss_janalaiAI>(creature);
     }
 };
 
@@ -474,7 +474,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_janalai_firebombAI(creature);
+        return GetZulAmanAI<npc_janalai_firebombAI>(creature);
     }
 };
 
@@ -608,7 +608,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<npc_janalai_hatcherAI>(creature);
+        return GetZulAmanAI<npc_janalai_hatcherAI>(creature);
     }
 };
 
@@ -668,7 +668,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<npc_janalai_hatchlingAI>(creature);
+        return GetZulAmanAI<npc_janalai_hatchlingAI>(creature);
     }
 };
 
@@ -679,7 +679,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_janalai_eggAI(creature);
+        return GetZulAmanAI<npc_janalai_eggAI>(creature);
     }
 
     struct npc_janalai_eggAI : public ScriptedAI

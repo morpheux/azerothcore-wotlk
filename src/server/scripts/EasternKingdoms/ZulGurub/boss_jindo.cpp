@@ -167,7 +167,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new boss_jindoAI(creature);
+        return GetZulGurubAI<boss_jindoAI>(creature);
     }
 };
 
@@ -219,7 +219,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<npc_healing_wardAI>(creature);
+        return GetZulGurubAI<npc_healing_wardAI>(creature);
     }
 };
 
@@ -264,7 +264,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_shade_of_jindoAI(creature);
+        return GetZulGurubAI<npc_shade_of_jindoAI>(creature);
     }
 };
 

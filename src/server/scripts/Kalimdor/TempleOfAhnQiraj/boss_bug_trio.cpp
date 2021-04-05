@@ -36,7 +36,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_kriAI>(creature);
+        return GetTempleOfAhnQirajAI<boss_kriAI>(creature);
     }
 
     struct boss_kriAI : public ScriptedAI
@@ -132,7 +132,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_vemAI>(creature);
+        return GetTempleOfAhnQirajAI<boss_vemAI>(creature);
     }
 
     struct boss_vemAI : public ScriptedAI
@@ -224,7 +224,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_yaujAI>(creature);
+        return GetTempleOfAhnQirajAI<boss_yaujAI>(creature);
     }
 
     struct boss_yaujAI : public ScriptedAI

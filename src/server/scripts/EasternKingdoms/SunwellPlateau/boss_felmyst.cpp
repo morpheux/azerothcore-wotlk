@@ -375,7 +375,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return GetInstanceAI<boss_felmystAI>(creature);
+        return GetSunwellPlateauAI<boss_felmystAI>(creature);
     }
 };
 
@@ -386,7 +386,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_demonic_vaporAI(creature);
+        return GetSunwellPlateauAI<npc_demonic_vaporAI>(creature);
     }
 
     struct npc_demonic_vaporAI : public NullCreatureAI
@@ -422,7 +422,7 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_demonic_vapor_trailAI(creature);
+        return GetSunwellPlateauAI<npc_demonic_vapor_trailAI>(creature);
     }
 
     struct npc_demonic_vapor_trailAI : public NullCreatureAI

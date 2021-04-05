@@ -1516,10 +1516,11 @@ void WorldObject::UpdateAllowedPositionZ(float x, float y, float& z, float* grou
 
             if (max_z > INVALID_HEIGHT)
             {
-                if (canSwim && unit->GetMap()->IsInWater(x, y, max_z - WATER_HEIGHT_TOLERANCE)) {
+                if (canSwim && unit->GetMap()->IsInWater(x, y, max_z - Z_OFFSET_FIND_HEIGHT))
+                {
                     // do not allow creatures to walk on
                     // water level while swimming
-                    max_z = max_z - GetMinHeightInWater();
+                    max_z = std::max(max_z - GetMinHeightInWater(), ground_z);
                 }
                 else
                 {
@@ -3058,7 +3059,7 @@ uint64 WorldObject::GetTransGUID() const
 float WorldObject::GetMapHeight(float x, float y, float z, bool vmap/* = true*/, float distanceToSearch/* = DEFAULT_HEIGHT_SEARCH*/) const
 {
     if (z != MAX_HEIGHT)
-        z += GetCollisionHeight();
+        z += Z_OFFSET_FIND_HEIGHT;
 
     return GetMap()->GetHeight(GetPhaseMask(), x, y, z, vmap, distanceToSearch);
 }
@@ -3075,5 +3076,5 @@ float WorldObject::GetFloorZ() const
     if (!IsInWorld())
         return m_staticFloorZ;
 
-    return std::max<float>(m_staticFloorZ, GetMap()->GetGameObjectFloor(GetPhaseMask(), GetPositionX(), GetPositionY(), GetPositionZ() + GetCollisionHeight()));
+    return std::max<float>(m_staticFloorZ, GetMap()->GetGameObjectFloor(GetPhaseMask(), GetPositionX(), GetPositionY(), GetPositionZ() + Z_OFFSET_FIND_HEIGHT));
 }
