@@ -241,16 +241,16 @@ public:
         player->PlayerTalkClass->ClearMenus();
 
         if (result && bpvip == 0) {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero participar do EtMaXx VIP Battle Pass", 2, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero participar do EtMaXx VIP Battle Pass", 2, 0,"Tem certeza ?",0,false);
 
             if (player->HasItemCount(80001, 1, true)) {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", 4, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", 4, 0, "Tem certeza ?", 0, false);
             }
             if (player->HasItemCount(80002, 1, true)) {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", 5, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", 5, 0, "Tem certeza ?", 0, false);
             }
             if (player->HasItemCount(80003, 1, true)) {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", 6, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", 6, 0, "Tem certeza ?", 0, false);
             }
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", 3, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 5000, 0);
@@ -259,13 +259,13 @@ public:
         }
         else if(result && bpvip == 1) {
             if (player->HasItemCount(80001, 1, true)) {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", 4, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", 4, 0, "Tem certeza ?", 0, false);
             }
             if (player->HasItemCount(80002, 1, true)) {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", 5, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", 5, 0, "Tem certeza ?", 0, false);
             }
             if (player->HasItemCount(80003, 1, true)) {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", 6, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", 6, 0, "Tem certeza ?", 0, false);
             }
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", 3, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 5000, 0);
@@ -340,31 +340,31 @@ public:
            
 
         case 100: {
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Esta são as recompensas do Battle Pass deste mes:", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Battle Pass Normal:", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t10 000 de Gold - 100 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:25:25|t1000 EtMaXx Mark - 200 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:25:25|t10 EtMaXx Mega Mark - 300 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t40 Emblem of Frost - 400 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t12 000 Honor Points - 500 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|tEtMaXx Transmog Mark - 700 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t20 Caixa Misteriosa PvP - 800 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t2 EtMaXx Event Mark- 900 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 1000 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "------------------", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "Se possuir o Battle Pass VIP além das recompensas normais você receberá:", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t10 000 de Gold - 100 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t30 Emblem of Frost - 200 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t15 000 Honor Points  - 300 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t40 Emblem of Frost - 400 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t250 Arena Points - 500 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 600 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|tEtMaXx Transmog Mark - 700 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t600 Arena Points - 800 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|tBAG VIP - 900 Pontos", 100, 0);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_01:25:25|tEtMaXx Mount Mark + 30 Caixinhas Misteriosa - 1000 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Esta são as recompensas do Battle Pass deste mes:", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Battle Pass Normal:", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t15 000 de Gold - 100 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:25:25|t2000 EtMaXx Mark - 200 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:25:25|t15 EtMaXx Mega Mark - 300 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t80 000 Honor Points - 500 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t40 Caixa Misteriosa PvP - 800 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 900 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark- 1000 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Se possuir o Battle Pass VIP além das recompensas normais você receberá:", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t30 000 de Gold - 100 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t20 Caixa Misteriosa PvP - 200 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t90 000 Honor Points  - 300 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t400 Arena Points - 500 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 600 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|t2 BAG VIP - 900 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_01:25:25|tEtMaXx Mount Mark + 40 Caixinhas Misteriosa - 1000 Pontos", 100, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar....", 5000, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 5000, 0);
             SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         }break;
 
@@ -413,43 +413,43 @@ public:
                     CloseGossipMenuFor(player);
                 }
                 if (points >= 100 && viptier1 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t10 000 de Gold - 100 Pontos", 2100, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t10 000 de Gold - 100 Pontos", 3100, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t15 000 de Gold - 100 Pontos", 2100, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t30 000 de Gold - 100 Pontos", 3100, 0);
                 }
                 if (points >= 200 && viptier2 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:25:25|t1 000 EtMaXx Mark - 200 Pontos", 2200, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t30 Emblem of Frost - 200 Pontos", 3200, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:25:25|t2 000 EtMaXx Mark - 200 Pontos", 2200, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t20 Caixa Misteriosa PvP - 200 Pontos", 3200, 0);
                 }
                 if (points >= 300 && viptier3 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:25:25|t10 EtMaXx Mega Mark - 300 Pontos", 2300, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t15 000 Honor Points  - 300 Pontos", 3300, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:25:25|t15 EtMaXx Mega Mark - 300 Pontos", 2300, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t90 000 Honor Points  - 300 Pontos", 3300, 0);
                 }
                 if (points >= 400 && viptier4 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t40 Emblem of Frost - 400 Pontos", 2400, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t40 Emblem of Frost - 400 Pontos", 3400, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 2400, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 3400, 0);
                 }
                 if (points >= 500 && viptier5 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t12 000 Honor Points - 500 Pontos", 2500, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t250 Arena Points - 500 Pontos", 3500, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t80 000 Honor Points - 500 Pontos", 2500, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t400 Arena Points - 500 Pontos", 3500, 0);
                 }
                 if (points >= 600 && viptier6 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 600 Pontos", 3600, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 600 Pontos", 3600, 0);
                 }
                 if (points >= 700 && viptier7 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|tEtMaXx Transmog Mark - 700 Pontos", 2700, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|tEtMaXx Transmog Mark - 700 Pontos", 3700, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 2700, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 3700, 0);
                 }
                 if (points >= 800 && viptier8 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t20 Caixa Misteriosa PvP - 800 Pontos", 2800, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t600 Arena Points - 800 Pontos", 3800, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t40 Caixa Misteriosa PvP - 800 Pontos", 2800, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 3800, 0);
                 }
                 if (points >= 900 && viptier9 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t2 EtMaXx Event Mark- 900 Pontos", 2900, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|tBAG VIP - 900 Pontos", 3900, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 900 Pontos", 2900, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|t2 BAG VIP - 900 Pontos", 3900, 0);
                 }
                 if (points >= 1000 && viptier10 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 1000 Pontos", 21000, 0);
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_01:25:25|tEtMaXx Mount Mark + 30 Caixinhas Misteriosa - 1000 Pontos", 31000, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark- 1000 Pontos", 21000, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_01:25:25|tEtMaXx Mount Mark + 40 Caixinhas Misteriosa - 1000 Pontos", 31000, 0);
                 }
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
 
@@ -461,31 +461,31 @@ public:
                     CloseGossipMenuFor(player);
                 }
                 if (points >= 100 && tier1 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t10 000 de Gold - 100 Pontos", 2100, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t15 000 de Gold - 100 Pontos", 2100, 0);
                 }
                 if (points >= 200 && tier2 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:25:25|t1 000 EtMaXx Mark - 200 Pontos", 2200, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:25:25|t2 000 EtMaXx Mark - 200 Pontos", 2200, 0);
                 }
                 if (points >= 300 && tier3 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:25:25|t10 EtMaXx Mega Mark - 300 Pontos", 2300, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:25:25|t15 EtMaXx Mega Mark - 300 Pontos", 2300, 0);
                 }
                 if (points >= 400 && tier4 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t40 Emblem of Frost - 400 Pontos", 2400, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 2400, 0);
                 }
                 if (points >= 500 && tier5 == 0 ){
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t12 000 Honor Points - 500 Pontos", 2500, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t80 000 Honor Points - 500 Pontos", 2500, 0);
                 }
                 if (points >= 700 && tier7 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|tEtMaXx Transmog Mark - 700 Pontos", 2700, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 2700, 0);
                 }
                 if (points >= 800 && tier8 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t20 Caixa Misteriosa PvP - 800 Pontos", 2800, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t40 Caixa Misteriosa PvP - 800 Pontos", 2800, 0);
                 }
                 if (points >= 900 && tier9 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t2 EtMaXx Event Mark- 900 Pontos", 2900, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 900 Pontos", 2900, 0);
                 }
                 if (points >= 1000 && tier10 == 0) {
-                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 1000 Pontos", 21000, 0);
+                    AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark- 1000 Pontos", 21000, 0);
                 }
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             }
@@ -494,148 +494,135 @@ public:
 
         case 2100: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier1 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->ModifyMoney(100000000);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 1 Resgatada (10 000 de Gold)");
+            player->ModifyMoney(150000000);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 1 Resgatada (15 000 de Gold)");
             CloseGossipMenuFor(player);
         } break;
 
         case 2200: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier2 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->AddItem(60000, 1000);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 2 Resgatada (1000 EtMaXx mark)");
+            player->AddItem(60000, 2000);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 2 Resgatada (2000 EtMaXx mark)");
             CloseGossipMenuFor(player);
         } break;
 
         case 2300: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier3 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->AddItem(60004, 10);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 3 Resgatada (10 EtMaXx Mega Mark)");
+            player->AddItem(60004, 15);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 3 Resgatada (15 EtMaXx Mega Mark)");
             CloseGossipMenuFor(player);
         } break;
 
         case 2400: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier4 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->AddItem(49426, 40);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 4 Resgatada (40 Emblem of Frost)");
+            player->AddItem(49426, 60);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 4 Resgatada (60 Emblem of Frost)");
             CloseGossipMenuFor(player);
         } break;
 
         case 2500: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier5 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->ModifyHonorPoints(12000);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 5 Resgatada (10 000 Honor Points)");
+            player->ModifyHonorPoints(80000);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 5 Resgatada (80 000 Honor Points)");
             CloseGossipMenuFor(player);
         } break;   
 
         case 2700: {
-            if (player->HasItemCount(80004, 1, true)) {
-                ChatHandler(player->GetSession()).PSendSysMessage("Você já tem uma EtMaXx Transmog Mark, gaste a sua para pegar outra");
-                CloseGossipMenuFor(player);
-            }
-            else {
-                CharacterDatabase.PExecute("UPDATE character_battlepass SET tier7 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-                player->AddItem(80004, 1);
-                ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 7 Resgatada (EtMaXx Transmog Mark)");
-                CloseGossipMenuFor(player);
-            }
-            
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET tier7 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(80004, 3);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 7 Resgatada (3 EtMaXx Transmog Mark)");
+            CloseGossipMenuFor(player);
         } break;
 
         case 2800: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier8 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->AddItem(50162, 20);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 8 Resgatada (20 Caixa Misteriosa PvP)");
+            player->AddItem(50162, 40);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 8 Resgatada (40 Caixa Misteriosa PvP)");
             CloseGossipMenuFor(player);
         }
 
         case 2900: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier9 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->AddItem(600600, 2);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 9 Resgatada (2 EtMaXx Event Mark)");
+            player->AddItem(80009, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 9 Resgatada (EtMaXx Profession Mark)");
             CloseGossipMenuFor(player);
         } break;
 
         case 21000: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET tier10 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->AddItem(80009, 1);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 10 Resgatada (EtMaXx Profession Mark)");
+            player->AddItem(600600, 4);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 10 Resgatada (4 EtMaXx Event Mark)");
             CloseGossipMenuFor(player);
         } break;
 
         case 3100: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier1 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->ModifyMoney(100000000);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 1 Resgatada (10 000 de Gold)");
+            player->ModifyMoney(300000000);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 1 Resgatada (30 000 de Gold)");
             CloseGossipMenuFor(player);
         }break;
 
         case 3200: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier2 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->AddItem(49426, 30);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 2 Resgatada (30 Emblem of Frost)");
+            player->AddItem(50162, 20);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do VIP Tier 2 Resgatada (20 Caixa Misteriosa PvP)");
             CloseGossipMenuFor(player);
         }break;
 
         case 3300: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier3 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->ModifyHonorPoints(15000);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 3 Resgatada (15 000 Honor Points)");
+            player->ModifyHonorPoints(90000);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 3 Resgatada (90 000 Honor Points)");
             CloseGossipMenuFor(player);
         }break;
 
         case 3400: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier4 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->AddItem(49426, 40);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 4 Resgatada (40 Emblem of Frost)");
+            player->AddItem(49426, 60);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 4 Resgatada (60 Emblem of Frost)");
             CloseGossipMenuFor(player);
         }break;
 
         case 3500: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier5 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->ModifyArenaPoints(250);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 5 Resgatada (250 Arena Points)");
+            player->ModifyArenaPoints(400);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 5 Resgatada (400 Arena Points)");
             CloseGossipMenuFor(player);
         }break;
 
         case 3600: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier6 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->AddItem(600600, 4);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 6 Resgatada (4 EtMaXx Event Mark)");
+            player->AddItem(80009, 1);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do VIP Tier 6 Resgatada (EtMaXx Profession Mark)");
             CloseGossipMenuFor(player);
         }break;
 
         case 3700: {
-            if (player->HasItemCount(80004, 1, true)) {
-                ChatHandler(player->GetSession()).PSendSysMessage("Você já tem uma EtMaXx Transmog Mark, gaste a sua para pegar outra");
-                CloseGossipMenuFor(player);
-            }
-            else {
-                CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier7 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-                player->AddItem(80004, 1);
-                ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 7 Resgatada (EtMaXx Transmog Mark)");
-                CloseGossipMenuFor(player);
-            }
+            CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier7 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
+            player->AddItem(80004, 3);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 7 Resgatada (3 EtMaXx Transmog Mark)");
+            CloseGossipMenuFor(player);    
         }break;
 
         case 3800: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier8 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->ModifyArenaPoints(600);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 8 Resgatada (600 Arena Points)");
+            player->AddItem(600600, 4);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 8 Resgatada (4 EtMaXx Event Mark)");
             CloseGossipMenuFor(player);
         }break;
 
         case 3900: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier9 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-            player->AddItem(34845, 1);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 9 Resgatada (1 Bag VIP)");
+            player->AddItem(34845, 2);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 9 Resgatada (2 Bag VIP)");
             CloseGossipMenuFor(player);
         }break;
 
         case 31000: {
             CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier10 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
             player->AddItem(47395, 1);
-            player->AddItem(50161, 30);
-            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 10 Resgatada (1 EtMaXx Mount Mark + 30 Caixa Misteriosa)");
+            player->AddItem(50161, 40);
+            ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 10 Resgatada (1 EtMaXx Mount Mark + 40 Caixa Misteriosa)");
             CloseGossipMenuFor(player);
         }break;
 
@@ -659,7 +646,7 @@ public:
 
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_bone_humanskull_01:30:30:-18:0|t100 Enemy Head + 30.000 Honor", 10, 0,"Tem certeza ?",0,false);
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t70 Emblems of Frost", 20, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t70 Emblems of Frost", 20, 0, "Tem certeza ?", 0, false);
 
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:30:30:-18:0|t1200 de Arena Rating + 150 Arena Points", 30, 0, "Tem certeza ?", 0, false);
 
@@ -944,8 +931,8 @@ public:
 
         if (player->getClass() == CLASS_DEATH_KNIGHT && !player->HasItemCount(37836, 1, true) && player->GetAreaId() == 4342)
         {
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_deathknight_unholypresence:30:30:-18:0|tWOW INCRIVEL, QUERO FAZER TODAS AS QUESTS DE DK !", 300, 0);
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_deathknight_frostpresence:30:30:-18:0|tWOW INCRIVEL, JÁ CONHECO A LORE QUERO PULAR AS QUESTS DE DK !", 301, 0);
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_deathknight_unholypresence:30:30:-18:0|tQuero fazer todas as Quests de DK", 300, 0, "Tem certeza ?", 0, false);
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_deathknight_frostpresence:30:30:-18:0|tWOW INCRIVEL, JÁ CONHECO A LORE QUERO PULAR AS QUESTS DE DK !", 301, 0, "Tem certeza ?", 0, false);
             player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
             return true;
         }
@@ -953,12 +940,12 @@ public:
         if (!player->HasItemCount(37836, 1, true) && player->getLevel() <= 60) {
 
             if (player->getClass() == CLASS_DRUID) {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0);
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_forceofnature:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE BALANCE !", 101, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_druid_catform:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE FERAL !", 100, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_forceofnature:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE BALANCE !", 101, 0, "Tem certeza ?", 0, false);
                 player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
             } else if (player->getClass() == CLASS_SHAMAN) {
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shaman_lavaburst:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ELEMENTAL !", 200, 0);
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_shaman_stormstrike:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ENHANCEMENT !", 201, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shaman_lavaburst:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ELEMENTAL !", 200, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/ability_shaman_stormstrike:30:30:-18:0|tWOW INCRIVEL, QUERO UPAR DE ENHANCEMENT !", 201, 0, "Tem certeza ?", 0, false);
                 player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
             } else {
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_box_02:30:30:-18:0|tWOW INCRIVEL, ME DA LOGO ESSES ITEMS !", 1, 0);
@@ -1806,14 +1793,14 @@ public:
         }break;
         
         case 100: {
-            //AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_book_11:35:35:-25:0|tProfissão Full - 3 Event Mark", 1000, 0);                           // 03 Event Mark                                        // 03 Event Mark
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:35:35:-25:0|t10 000 Honor Points - 2 Event Mark", 2000, 0);              // 02 Event Mark
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:35:35:-25:0|t200 Arena Points - 2 Event Mark", 3000, 0); // 02 Event Mark
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:35:35:-25:0|t30 Emblem of Frost - 2 Event Mark", 4000, 0);                // 02 Event Mark
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:35:35:-25:0|tEtMaXx Transmog Mark - 4 Event Mark", 5000, 0);            // 04 Event Mark
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_shirt_guildtabard_01:35:35:-25:0|tEtMaXx Tabard Mark - 5 Event Mark", 6000, 0);               // 05 Event Mark 
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_amulet_01:35:35:-25:0|tEtMaXx Mount Mark - 7 Event Mark", 7000, 0);                   // 07 Event Mark
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_pearl_04:35:35:-25:0|tEtMaXx Sanctified Mark - 8 Event Mark", 8000, 0);              // 08 Event Mark 
+            //AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_book_11:35:35:-25:0|tProfissão Full - 3 Event Mark", 1000, 0,"Tem certeza ?",0,false);                           // 03 Event Mark                                        // 03 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:35:35:-25:0|t10 000 Honor Points - 2 Event Mark", 2000, 0, "Tem certeza ?", 0, false);              // 02 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:35:35:-25:0|t200 Arena Points - 2 Event Mark", 3000, 0, "Tem certeza ?", 0, false); // 02 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:35:35:-25:0|t30 Emblem of Frost - 2 Event Mark", 4000, 0, "Tem certeza ?", 0, false);                // 02 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:35:35:-25:0|tEtMaXx Transmog Mark - 4 Event Mark", 5000, 0, "Tem certeza ?", 0, false);            // 04 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_shirt_guildtabard_01:35:35:-25:0|tEtMaXx Tabard Mark - 5 Event Mark", 6000, 0, "Tem certeza ?", 0, false);               // 05 Event Mark 
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_amulet_01:35:35:-25:0|tEtMaXx Mount Mark - 7 Event Mark", 7000, 0, "Tem certeza ?", 0, false);                   // 07 Event Mark
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_pearl_04:35:35:-25:0|tEtMaXx Sanctified Mark - 8 Event Mark", 8000, 0, "Tem certeza ?", 0, false);              // 08 Event Mark 
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 100, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tComprar Tabard", 1, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tComprar Token Sanctified Normal", 2, 0);
@@ -1851,17 +1838,17 @@ public:
                 CloseGossipMenuFor(player);
             }
             else {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_blacksmithing:35:35:-25:0|tBlacksmithing", 10000, 0);
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_02:35:35:-25:0|tJewelcrafting", 20000, 0);
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_tailoring:35:35:-25:0|tTailoring", 30000, 0);
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engraving:35:35:-25:0|tEncanting", 40000, 0);
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_alchemy:35:35:-25:0|tAlchemy", 50000, 0);
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_inscription_tradeskill01:35:35:-25:0|tInscription", 60000, 0);
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engineering:35:35:-25:0|tEngineering", 70000, 0);
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_armorkit_17:35:35:-25:0|tLeatherworking", 80000, 0);
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_mining:35:35:-25:0|tMining", 90000, 0);
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_pelt_wolf_01:35:35:-25:0|tSkinning", 100000, 0);
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_herbalism:35:35:-25:0|tHerbalism", 110000, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_blacksmithing:35:35:-25:0|tBlacksmithing", 10000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_02:35:35:-25:0|tJewelcrafting", 20000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_tailoring:35:35:-25:0|tTailoring", 30000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engraving:35:35:-25:0|tEncanting", 40000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_alchemy:35:35:-25:0|tAlchemy", 50000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_inscription_tradeskill01:35:35:-25:0|tInscription", 60000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engineering:35:35:-25:0|tEngineering", 70000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_armorkit_17:35:35:-25:0|tLeatherworking", 80000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_mining:35:35:-25:0|tMining", 90000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_pelt_wolf_01:35:35:-25:0|tSkinning", 100000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_herbalism:35:35:-25:0|tHerbalism", 110000, 0, "Tem certeza ?", 0, false);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 1000, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:35:35:-25:0|tVoltar...", 100, 0);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -2014,7 +2001,7 @@ public:
         {
             if (ProfTokenCheck(player, 1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
-                player->SetSkill(202, player->GetSkillStep(202), 450, 450);
+                //player->SetSkill(202, player->GetSkillStep(202), 450, 450);
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
