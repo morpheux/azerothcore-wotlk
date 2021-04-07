@@ -1917,11 +1917,9 @@ public:
         {
             if (ProfTokenCheck(player,1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
-                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
-                player->SetSkill(164, player->GetSkillStep(164), 450, 450);
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -1931,11 +1929,9 @@ public:
         {
             if (ProfTokenCheck(player, 1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 755);
-                player->SetSkill(755, player->GetSkillStep(755), 450, 450);
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 755);
-                player->SetSkill(755, player->GetSkillStep(755), 450, 450);
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -1945,11 +1941,9 @@ public:
         {
             if (ProfTokenCheck(player, 1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 197);
-                player->SetSkill(197, player->GetSkillStep(197), 450, 450);
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 197);
-                player->SetSkill(197, player->GetSkillStep(197), 450, 450);
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -1959,11 +1953,9 @@ public:
         {
             if (ProfTokenCheck(player, 1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 333);
-                player->SetSkill(333, player->GetSkillStep(333), 450, 450);
                 CloseGossipMenuFor(player);
             } else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 333);
-                player->SetSkill(333, player->GetSkillStep(333), 450, 450);
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -1973,11 +1965,9 @@ public:
         {
             if (ProfTokenCheck(player, 1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 171);
-                player->SetSkill(171, player->GetSkillStep(171), 450, 450);
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 171);
-                player->SetSkill(171, player->GetSkillStep(171), 450, 450);
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -1987,11 +1977,9 @@ public:
         {
             if (ProfTokenCheck(player, 1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 773);
-                player->SetSkill(773, player->GetSkillStep(773), 450, 450);
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 773);
-                player->SetSkill(773, player->GetSkillStep(773), 450, 450);
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -2001,11 +1989,10 @@ public:
         {
             if (ProfTokenCheck(player, 1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
-                //player->SetSkill(202, player->GetSkillStep(202), 450, 450);
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player,3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
-                player->SetSkill(202, player->GetSkillStep(202), 450, 450);
+                // learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
+                player->SetSkill(202, 0, 0, 0);
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -2015,11 +2002,9 @@ public:
         {
             if (ProfTokenCheck(player, 1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 165);
-                player->SetSkill(165, player->GetSkillStep(165), 450, 450);
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 165);
-                player->SetSkill(165, player->GetSkillStep(165), 450, 450);
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -2029,11 +2014,9 @@ public:
         {
             if (ProfTokenCheck(player, 1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 186);
-                player->SetSkill(186, player->GetSkillStep(186), 450, 450);
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player, 3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 186);
-                player->SetSkill(186, player->GetSkillStep(186), 450, 450);
                 CloseGossipMenuFor(player);
             }
         }break;
