@@ -2001,7 +2001,7 @@ public:
         {
             if (ProfTokenCheck(player, 1)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
-                player->SetSkill(202, player->GetSkillStep(202), 450, 450);
+                //player->SetSkill(202, player->GetSkillStep(202), 450, 450);
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
