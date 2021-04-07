@@ -1916,7 +1916,11 @@ public:
         case 10000:
         {
             if (ProfTokenCheck(player,1)) {
+                if (player->GetFreePrimaryProfessionPoints() > 0) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
+                player->SetSkill(202, player->GetSkillStep(164), 450, 450);
+                player->SetFreePrimaryProfessions(player->GetFreePrimaryProfessionPoints() - 1);
+                }
                 CloseGossipMenuFor(player);
             }else if (MarkCheck(player,3)) {
                 learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
