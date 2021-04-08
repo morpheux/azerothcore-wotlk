@@ -1784,6 +1784,7 @@ public:
     bool LearnProfession(Player* player, int skill) {
         learn_commandscript::HandleLearnSkillRecipesHelper(player, skill);
         player->SetSkill(skill, player->GetSkillStep(skill), 450, 450);
+        return true;
     }
 
     static bool HasFreeProfession(Player* player, SkillType Skill)
