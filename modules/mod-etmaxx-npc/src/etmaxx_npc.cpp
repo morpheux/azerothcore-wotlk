@@ -1740,24 +1740,38 @@ class etmaxx_event : public CreatureScript
 public:
     etmaxx_event() : CreatureScript("etmaxx_event") { }
 
-    //secondary prof = 129, 185, 356
+    //int skillid[11] = {SKILL_BLACKSMITHING, SKILL_TAILORING, SKILL_LEATHERWORKING, SKILL_ENGINEERING, SKILL_ENCHANTING, SKILL_ALCHEMY, SKILL_MINING, SKILL_HERBALISM, SKILL_SKINNING, SKILL_INSCRIPTION, SKILL_JEWELCRAFTING};
+    //int skillid2[3] = { SKILL_FISHING, SKILL_FIRST_AID, SKILL_COOKING };
 
-    int skillid[11] = {164, 755, 197, 333, 171, 773, 202, 165, 186, 182, 393};
-    int craft = 0;
+    bool MarkCheck(Player* player, int count, int skill) {
 
-    bool MarkCheck(Player* player, int count) {
+        if (player->HasSkill(skill))
+        {
+            player->GetSession()->SendNotification("Você já tem essa profissão");
+            CloseGossipMenuFor(player);
+            return false;
+        }
+
         if (player->HasItemCount(600600, count, true)) {
             player->DestroyItemCount(600600, count, true);
             return true;
         }
         else {
-            ChatHandler(player->GetSession()).PSendSysMessage("Você não tem EtMaXx Event Mark suficientes.");
+            ChatHandler(player->GetSession()).PSendSysMessage("Você não tem EtMaXx Event Mark suficientes ou uma EtMaXx Profession Token.");
             CloseGossipMenuFor(player);
             return false;
         }
     }
 
-    bool ProfTokenCheck(Player* player, int count) {
+    bool ProfTokenCheck(Player* player, int count, int choice) {
+
+        if (player->HasSkill(choice))
+        {
+            player->GetSession()->SendNotification("Você já tem essa profissão");
+            CloseGossipMenuFor(player);
+            return false;
+        }
+
         if (player->HasItemCount(80009, count, true)) {
             player->DestroyItemCount(80009, count, true);
             return true;
@@ -1765,6 +1779,46 @@ public:
         else {
             return false;
         }
+    }
+
+    bool LearnProfession(Player* player, int skill) {
+        learn_commandscript::HandleLearnSkillRecipesHelper(player, skill);
+        player->SetSkill(skill, player->GetSkillStep(skill), 450, 450);
+    }
+
+    static bool HasFreeProfession(Player* player, SkillType Skill)
+    {
+        if (Skill == SKILL_FISHING || Skill == SKILL_COOKING || Skill == SKILL_FIRST_AID)
+            return true;
+
+        uint8 SkillCount = 0;
+
+        if (player->HasSkill(SKILL_MINING))
+            SkillCount++;
+        if (player->HasSkill(SKILL_SKINNING))
+            SkillCount++;
+        if (player->HasSkill(SKILL_HERBALISM))
+            SkillCount++;
+
+        for (uint32 i = 1; i < sSkillLineStore.GetNumRows(); ++i)
+        {
+            if (SkillLineEntry const* SkillInfo = sSkillLineStore.LookupEntry(i))
+            {
+                if (SkillInfo->categoryId == SKILL_CATEGORY_SECONDARY)
+                    continue;
+
+                if ((SkillInfo->categoryId != SKILL_CATEGORY_PROFESSION) || !SkillInfo->canLink)
+                    continue;
+
+                if (player->HasSkill(SkillInfo->id))
+                    SkillCount++;
+            }
+        }
+
+        if (SkillCount > 0 && player->HasSkill(Skill))
+            SkillCount--;
+
+        return SkillCount < 2;
     }
 
     bool OnGossipHello(Player* player, Creature* creature)
@@ -1826,18 +1880,6 @@ public:
         }break;
             
         case 1000: {
-
-            craft = 0;
-            for (int i = 0; i <= 10; i++) {
-                if (player->HasSkill(skillid[i])) {
-                    craft = craft + 1;
-                }
-            }
-            if (craft >= 2) {
-                ChatHandler(player->GetSession()).PSendSysMessage("Você só pode ter 2 Profissões, escolha outra recompensa");
-                CloseGossipMenuFor(player);
-            }
-            else {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_blacksmithing:35:35:-25:0|tBlacksmithing", 10000, 0, "Tem certeza ?", 0, false);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_gem_02:35:35:-25:0|tJewelcrafting", 20000, 0, "Tem certeza ?", 0, false);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_tailoring:35:35:-25:0|tTailoring", 30000, 0, "Tem certeza ?", 0, false);
@@ -1849,15 +1891,16 @@ public:
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_mining:35:35:-25:0|tMining", 90000, 0, "Tem certeza ?", 0, false);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_pelt_wolf_01:35:35:-25:0|tSkinning", 100000, 0, "Tem certeza ?", 0, false);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_herbalism:35:35:-25:0|tHerbalism", 110000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_food_15:35:35:-25:0|tCooking", 120000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_fishing:35:35:-25:0|tFishing", 130000, 0, "Tem certeza ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_sealofsacrifice:35:35:-25:0|tFirst Aid", 140000, 0, "Tem certeza ?", 0, false);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 1000, 0);
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:35:35:-25:0|tVoltar...", 100, 0);
                 SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-            }
-            
         }break;
 
         case 2000: {
-            if (MarkCheck(player, 2)) {
+            if (MarkCheck(player, 2, 2000)) {
                 player->ModifyHonorPoints(10000);
                 ChatHandler(player->GetSession()).PSendSysMessage("10.000 pontos de honra recebidos");
                 CloseGossipMenuFor(player);
@@ -1865,7 +1908,7 @@ public:
         }break;
 
         case 3000: {
-            if (MarkCheck(player,2)) {
+            if (MarkCheck(player,2, 3000)) {
                 player->ModifyArenaPoints(200);
                 ChatHandler(player->GetSession()).PSendSysMessage("200 pontos de Arena recebidos");
                 CloseGossipMenuFor(player);
@@ -1873,7 +1916,7 @@ public:
         }break;
 
         case 4000: {
-            if (MarkCheck(player, 2)) {
+            if (MarkCheck(player, 2, 4000)) {
                 player->AddItem(49426, 30);
                 ChatHandler(player->GetSession()).PSendSysMessage("30 Emblem of Frost recebidos");
                 CloseGossipMenuFor(player);
@@ -1881,7 +1924,7 @@ public:
         }break;
 
         case 5000: {
-            if (MarkCheck(player, 4)) {
+            if (MarkCheck(player, 4, 5000)) {
                 player->AddItem(80004, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Transmog Mark");
                 CloseGossipMenuFor(player);
@@ -1889,7 +1932,7 @@ public:
         }break;
 
         case 6000: {
-            if (MarkCheck(player, 5)) {
+            if (MarkCheck(player, 5, 6000)) {
                 player->AddItem(80005, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Tabard Mark recebida");
                 CloseGossipMenuFor(player);
@@ -1897,7 +1940,7 @@ public:
         }break;
 
         case 7000: {
-            if (MarkCheck(player, 7)) {
+            if (MarkCheck(player, 7, 7000)) {
                 player->AddItem(47395, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Mount Mark recebida");
                 CloseGossipMenuFor(player);
@@ -1905,7 +1948,7 @@ public:
         }break;
 
         case 8000: {
-            if (MarkCheck(player, 8)) {
+            if (MarkCheck(player, 8, 8000)) {
                 player->AddItem(80006, 1);
                 ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Sanctified Mark recebida");
                 CloseGossipMenuFor(player);
@@ -1915,27 +1958,38 @@ public:
         //BS
         case 10000:
         {
-            if (ProfTokenCheck(player,1)) {
-                if (player->GetFreePrimaryProfessionPoints() > 0) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
-                player->SetSkill(202, player->GetSkillStep(164), 450, 450);
-                player->SetFreePrimaryProfessions(player->GetFreePrimaryProfessionPoints() - 1);
+            if (HasFreeProfession(player, SKILL_BLACKSMITHING)) {
+                if (ProfTokenCheck(player, 1, SKILL_BLACKSMITHING)) {
+                    LearnProfession(player, SKILL_BLACKSMITHING);
+                    CloseGossipMenuFor(player);
                 }
-                CloseGossipMenuFor(player);
-            }else if (MarkCheck(player,3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 164);
+                else if (MarkCheck(player, 3, SKILL_BLACKSMITHING)) {
+                    LearnProfession(player, SKILL_BLACKSMITHING);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
+            
         }break;
 
         //Jewel
         case 20000:
         {
-            if (ProfTokenCheck(player, 1)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 755);
-                CloseGossipMenuFor(player);
-            }else if (MarkCheck(player,3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 755);
+            if (HasFreeProfession(player, SKILL_JEWELCRAFTING)) {
+                if (ProfTokenCheck(player, 1, SKILL_JEWELCRAFTING)) {
+                    LearnProfession(player, SKILL_JEWELCRAFTING);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_JEWELCRAFTING)) {
+                    LearnProfession(player, SKILL_JEWELCRAFTING);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -1943,11 +1997,18 @@ public:
         //Tailor
         case 30000:
         {
-            if (ProfTokenCheck(player, 1)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 197);
-                CloseGossipMenuFor(player);
-            }else if (MarkCheck(player,3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 197);
+            if (HasFreeProfession(player, SKILL_TAILORING)) {
+                if (ProfTokenCheck(player, 1, SKILL_TAILORING)) {
+                    LearnProfession(player, SKILL_TAILORING);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_TAILORING)) {
+                    LearnProfession(player, SKILL_TAILORING);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -1955,11 +2016,18 @@ public:
         //Enchanting
         case 40000:
         {
-            if (ProfTokenCheck(player, 1)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 333);
-                CloseGossipMenuFor(player);
-            } else if (MarkCheck(player,3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 333);
+            if (HasFreeProfession(player, SKILL_ENCHANTING)) {
+                if (ProfTokenCheck(player, 1, SKILL_ENCHANTING)) {
+                    LearnProfession(player, SKILL_ENCHANTING);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_ENCHANTING)) {
+                    LearnProfession(player, SKILL_ENCHANTING);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -1967,11 +2035,18 @@ public:
         //Alchemy
         case 50000:
         {
-            if (ProfTokenCheck(player, 1)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 171);
-                CloseGossipMenuFor(player);
-            }else if (MarkCheck(player,3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 171);
+            if (HasFreeProfession(player, SKILL_ALCHEMY)) {
+                if (ProfTokenCheck(player, 1, SKILL_ALCHEMY)) {
+                    LearnProfession(player, SKILL_ALCHEMY);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_ALCHEMY)) {
+                    LearnProfession(player, SKILL_ALCHEMY);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -1979,11 +2054,18 @@ public:
         //Inscription
         case 60000:
         {
-            if (ProfTokenCheck(player, 1)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 773);
-                CloseGossipMenuFor(player);
-            }else if (MarkCheck(player,3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 773);
+            if (HasFreeProfession(player, SKILL_INSCRIPTION)) {
+                if (ProfTokenCheck(player, 1, SKILL_INSCRIPTION)) {
+                    LearnProfession(player, SKILL_INSCRIPTION);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_INSCRIPTION)) {
+                    LearnProfession(player, SKILL_INSCRIPTION);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -1991,12 +2073,18 @@ public:
         //Engineering
         case 70000:
         {
-            if (ProfTokenCheck(player, 1)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
-                CloseGossipMenuFor(player);
-            }else if (MarkCheck(player,3)) {
-                // learn_commandscript::HandleLearnSkillRecipesHelper(player, 202);
-                player->SetSkill(202, 0, 0, 0);
+            if (HasFreeProfession(player, SKILL_ENGINEERING)) {
+                if (ProfTokenCheck(player, 1, SKILL_ENGINEERING)) {
+                    LearnProfession(player, SKILL_ENGINEERING);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_ENGINEERING)) {
+                    LearnProfession(player, SKILL_ENGINEERING);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -2004,11 +2092,18 @@ public:
         //leatherworking
         case 80000:
         {
-            if (ProfTokenCheck(player, 1)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 165);
-                CloseGossipMenuFor(player);
-            }else if (MarkCheck(player,3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 165);
+            if (HasFreeProfession(player, SKILL_LEATHERWORKING)) {
+                if (ProfTokenCheck(player, 1, SKILL_LEATHERWORKING)) {
+                    LearnProfession(player, SKILL_LEATHERWORKING);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_LEATHERWORKING)) {
+                    LearnProfession(player, SKILL_LEATHERWORKING);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -2016,11 +2111,18 @@ public:
         //Mining
         case 90000:
         {
-            if (ProfTokenCheck(player, 1)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 186);
-                CloseGossipMenuFor(player);
-            }else if (MarkCheck(player, 3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 186);
+            if (HasFreeProfession(player, SKILL_MINING)) {
+                if (ProfTokenCheck(player, 1, SKILL_MINING)) {
+                    LearnProfession(player, SKILL_MINING);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_MINING)) {
+                    LearnProfession(player, SKILL_MINING);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -2028,13 +2130,18 @@ public:
         //Skinning
         case 100000:
         {
-            if (ProfTokenCheck(player, 1)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 393);
-                player->SetSkill(393, player->GetSkillStep(393), 450, 450);
-                CloseGossipMenuFor(player);
-            }else if(MarkCheck(player, 3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 393);
-                player->SetSkill(393, player->GetSkillStep(393), 450, 450);
+            if (HasFreeProfession(player, SKILL_SKINNING)) {
+                if (ProfTokenCheck(player, 1, SKILL_SKINNING)) {
+                    LearnProfession(player, SKILL_SKINNING);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_SKINNING)) {
+                    LearnProfession(player, SKILL_SKINNING);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
         }break;
@@ -2042,13 +2149,75 @@ public:
         //Herbalism
         case 110000:
         {
-            if (ProfTokenCheck(player, 1)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 182);
-                player->SetSkill(182, player->GetSkillStep(182), 450, 450);
+            if (HasFreeProfession(player, SKILL_HERBALISM)) {
+                if (ProfTokenCheck(player, 1, SKILL_HERBALISM)) {
+                    LearnProfession(player, SKILL_HERBALISM);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_HERBALISM)) {
+                    LearnProfession(player, SKILL_HERBALISM);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
-            }else if (MarkCheck(player, 3)) {
-                learn_commandscript::HandleLearnSkillRecipesHelper(player, 182);
-                player->SetSkill(182, player->GetSkillStep(182), 450, 450);
+            }
+        }break;
+
+        //Cooking
+        case 120000:
+        {
+            if (HasFreeProfession(player, SKILL_COOKING)) {
+                if (ProfTokenCheck(player, 1, SKILL_COOKING)) {
+                    LearnProfession(player, SKILL_COOKING);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_COOKING)) {
+                    LearnProfession(player, SKILL_COOKING);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
+                CloseGossipMenuFor(player);
+            }
+        }break;
+
+        //Fishing
+        case 130000:
+        {
+            if (HasFreeProfession(player, SKILL_FISHING)) {
+                if (ProfTokenCheck(player, 1, SKILL_FISHING)) {
+                    LearnProfession(player, SKILL_FISHING);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_FISHING)) {
+                    LearnProfession(player, SKILL_FISHING);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
+                CloseGossipMenuFor(player);
+            }
+        }break;
+
+        //First Aid
+        case 140000:
+        {
+            if (HasFreeProfession(player, SKILL_FIRST_AID)) {
+                if (ProfTokenCheck(player, 1, SKILL_FIRST_AID)) {
+                    LearnProfession(player, SKILL_FIRST_AID);
+                    CloseGossipMenuFor(player);
+                }
+                else if (MarkCheck(player, 3, SKILL_FIRST_AID)) {
+                    LearnProfession(player, SKILL_FIRST_AID);
+                    CloseGossipMenuFor(player);
+                }
+            }
+            else {
+                ChatHandler(player->GetSession()).PSendSysMessage("Você não tem mais espaço para novas profissões");
                 CloseGossipMenuFor(player);
             }
         }break;
