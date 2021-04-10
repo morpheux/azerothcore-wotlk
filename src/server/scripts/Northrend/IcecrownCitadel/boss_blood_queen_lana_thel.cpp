@@ -161,6 +161,13 @@ public:
 
         void EnterCombat(Unit* who) override
         {
+            // BQ reseta se o prince não tiver completado, ao invés de teleportar geral!
+            if (instance->GetBossState(DATA_BLOOD_PRINCE_COUNCIL) != DONE)
+            {
+                EnterEvadeMode();
+                return;
+            }
+
             if (!instance->CheckRequiredBosses(DATA_BLOOD_QUEEN_LANA_THEL, who->ToPlayer()) || !me->IsVisible())
             {
                 EnterEvadeMode();
