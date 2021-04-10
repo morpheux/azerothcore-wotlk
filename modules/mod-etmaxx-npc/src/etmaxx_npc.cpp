@@ -652,7 +652,7 @@ public:
 
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tEscolha seu Transmog de Arma", 50, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tEscolha seu Transmog", 50, 0);
 
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_sword_26:30:30:-18:0|tPegue um item invisivel (Para Transmog)", 60, 0);
               
@@ -727,8 +727,20 @@ public:
                     SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
             } break;
-            // Menu de Armas
+
+            //Menu Geral
             case 50:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_sword_27:30:30:-18:0|tArmas", 70, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shirt_guildtabard_01:30:30:-18:0|tTabards", 13000, 0);
+
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
+                SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+            } break;
+
+            // Menu de Armas
+            case 70:
             {
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_61:30:30:-18:0|tTwo-Hand Axe", 1000, 0);
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_axe_03:30:30:-18:0|tOne-Hand Axe", 2000, 0);
@@ -901,7 +913,13 @@ public:
             case 12000:
             {              
                 player->GetSession()->SendListInventory(creature->GetGUID(), 90511);
-            } break;            
+            } break;
+
+            //Tabards
+            case 13000:
+            {
+                player->GetSession()->SendListInventory(creature->GetGUID(), 90512);
+            } break;
 
             case 100000:
             {
