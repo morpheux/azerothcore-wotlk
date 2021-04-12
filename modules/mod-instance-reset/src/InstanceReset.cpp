@@ -30,9 +30,11 @@ public:
             ChatHandler(player->GetSession()).PSendSysMessage("Cromi: Você não possuí pontos suficientes para resetar as instâncias.");
             CloseGossipMenuFor(player);
         }else{
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias normais ao custo de 1 ponto de reset.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown de minhas instancias normais ao custo de 1 ponto de reset.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
         }
-        
+
+        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias normais exceto ICC e Ruby sem custo.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
@@ -67,7 +69,35 @@ public:
                 }
             }
             CharacterDatabase.PExecute("UPDATE character_cromi SET resets=resets-1 WHERE guid=%u", player->GetSession()->GetGuidLow());
-            creature->MonsterWhisper("Seus cooldowns foram resetados" , player);
+            creature->MonsterWhisper("Todos os seus cooldowns foram resetados" , player);
+            CloseGossipMenuFor(player);
+        }
+
+        if (action == GOSSIP_ACTION_INFO_DEF + 2)
+        {
+            //RAID_DIFFICULTY_10MAN_NORMAL = 0,
+            //RAID_DIFFICULTY_25MAN_NORMAL = 1,
+            //RAID_DIFFICULTY_10MAN_HEROIC = 2,
+            //RAID_DIFFICULTY_25MAN_HEROIC = 3,
+
+            for (uint8 i = 0; i <= diff; ++i)
+            {
+                BoundInstancesMap const& m_boundInstances = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
+                for (BoundInstancesMap::const_iterator itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
+                {
+                    //InstanceSave* save = itr->second.save;
+                    if (itr->first != player->GetMapId())
+                    {
+                        if (itr->first != 631 || itr->first != 724) {
+                            sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
+                            itr = m_boundInstances.begin();
+                        }
+                    }
+                    else
+                        ++itr;
+                }
+            }
+            creature->MonsterWhisper("Seus cooldowns foram resetados exceto ICC e Ruby", player);
             CloseGossipMenuFor(player);
         }
         return true;
