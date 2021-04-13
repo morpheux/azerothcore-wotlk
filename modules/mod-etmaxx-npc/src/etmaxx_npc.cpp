@@ -2320,8 +2320,8 @@ public:
     {
         ClearGossipMenuFor(player);
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Mitica", 100, 0);
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_pet_scorchedstone:35:35:-25:0|tAtivar minha pedra-chave", 200, 0,"Tem certeza? O tempo vai começar a contar ao clicar em OK",0,false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Mitica", 100, 0, "Tem certeza? Caso você morra precisará falar com o NPC novamente", 0, false);
+        //AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_pet_scorchedstone:35:35:-25:0|tAtivar minha pedra-chave", 200, 0,"Tem certeza? O tempo vai começar a contar ao clicar em OK",0,false);
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 9999, 0);
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tUpdate Menu", 9999, 0);
  
