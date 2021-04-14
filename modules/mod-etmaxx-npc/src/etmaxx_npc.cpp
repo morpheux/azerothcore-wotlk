@@ -12,6 +12,7 @@
 #include "UnitAI.h"
 #include "GameObjectAI.h"
 #include "Map.h"
+#include "Group.h"
 
 // 25 tabards
 uint32 tabardHorda[] =
@@ -2307,8 +2308,52 @@ public:
 
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////                 Evento Plataforma                     ///////////////
+/////////////                 NPC Keystone                          ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_keystone : public CreatureScript
+{
+public:
+    etmaxx_keystone() : CreatureScript("etmaxx_keystone") { }
+
+    bool OnGossipHello(Player* player, Creature* creature)
+    {
+        ClearGossipMenuFor(player);
+
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Mitica", 100, 0, "Tem certeza? Caso você morra precisará falar com o NPC novamente", 0, false);
+        //AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_pet_scorchedstone:35:35:-25:0|tAtivar minha pedra-chave", 200, 0,"Tem certeza? O tempo vai começar a contar ao clicar em OK",0,false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 9999, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tUpdate Menu", 9999, 0);
+ 
+        SendGossipMenuFor(player, 800809, creature->GetGUID());
+
+        return true;
+    }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        player->PlayerTalkClass->ClearMenus();
+
+        switch (sender)
+        {
+        case 100: {
+            player->SetPhaseMask(10, true);
+        }break;
+
+        case 200:  // Main menuu
+        {
+            player->SetPhaseMask(12, true);
+        }break;
+
+        case 9999:  // Main menu
+        {
+            OnGossipHello(player, creature);
+        }break;
+
+        }
+        return true;
+    }
+};
 
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
@@ -2323,4 +2368,5 @@ void AddNpcEtmaxxScripts()
 	new etmaxx_tabard();
     new etmaxx_event();
     new etmaxx_startset();
+    new etmaxx_keystone();
 }

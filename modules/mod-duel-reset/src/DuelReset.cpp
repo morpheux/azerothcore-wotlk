@@ -31,8 +31,8 @@ class DuelResetScript : public PlayerScript
         void OnDuelStart(Player* player1, Player* player2) override
         {
                 // Temporary basic cooldown reset
-                player1->RemoveArenaSpellCooldowns();
-                player2->RemoveArenaSpellCooldowns();
+                //player1->RemoveArenaSpellCooldowns();
+                //player2->RemoveArenaSpellCooldowns();
                 player1->SaveHealthBeforeDuel();
                 player1->SetHealth(player1->GetMaxHealth());
                 player2->SaveHealthBeforeDuel();
