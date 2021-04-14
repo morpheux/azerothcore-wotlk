@@ -1466,7 +1466,7 @@ public:
 #endif
 
         ItemTemplate const* itemTemplate = sObjectMgr->GetItemTemplate(itemId);
-        if (!itemTemplate)
+        if (!itemTemplate || itemId == 0)
         {
             handler->PSendSysMessage(LANG_COMMAND_ITEMIDINVALID, itemId);
             handler->SetSentErrorMessage(true);
