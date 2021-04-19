@@ -86,15 +86,15 @@ public:
                     if (Vehicle* v = c->GetVehicleKit())
                         v->InstallAllAccessories(false);
 
-                        if (Creature* hplusController = pInstance->instance->GetCreature(pInstance->GetData64(DATA_HPLUS_CONTROLLER_GUID)))
+                    if (Creature* hplusController = pInstance->instance->GetCreature(pInstance->GetData64(DATA_HPLUS_CONTROLLER_GUID)))
+                    {
+                        if (hplusController->IsAlive())
                         {
-                            if (hplusController->IsAlive())
-                            {
-                                uint32 hplusAura = hplusController->GetAuraCount(MYTHIC_SPELL_TENACITY);
-                                if (Aura* aur = c->AddAura(MYTHIC_SPELL_TENACITY, c))
-                                    aur->SetStackAmount(hplusAura);
-                            }
+                            uint32 hplusAura = hplusController->GetAuraCount(MYTHIC_SPELL_TENACITY);
+                            if (Aura* aur = c->AddAura(MYTHIC_SPELL_TENACITY, c))
+                                aur->SetStackAmount(hplusAura);
                         }
+                    }
                 }
             }
         }
