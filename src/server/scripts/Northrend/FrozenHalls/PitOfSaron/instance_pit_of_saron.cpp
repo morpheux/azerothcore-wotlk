@@ -109,6 +109,9 @@ public:
 
         void OnCreatureCreate(Creature* creature) override
         {
+
+            AddAffixAffectedCreature(creature);
+
             if (teamIdInInstance == TEAM_NEUTRAL)
             {
                 Map::PlayerList const& players = instance->GetPlayers();
