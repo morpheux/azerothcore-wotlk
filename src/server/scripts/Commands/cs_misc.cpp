@@ -114,26 +114,22 @@ public:
             { "skirmish",           SEC_ADMINISTRATOR,      false, HandleSkirmishCommand,               "" },
 	        { "desbugar",	        SEC_PLAYER,				false, HandleDesbugarCommand,	            "" },
             { "mailbox",            SEC_MODERATOR,          false, &HandleMailBoxCommand,               "" },
-            { "mythic",             SEC_MODERATOR,          false, &HandleMythicCommand,                "" }
+            { "hplus",              SEC_MODERATOR,          false, &HandleHeroicPlusCommand,            "" }
         };
         return commandTable;
     }
 
-    static bool HandleMythicCommand(ChatHandler* handler, char const* args)
+    static bool HandleHeroicPlusCommand(ChatHandler* handler, char const* args)
     {
-        Player* usingPlayer = handler->GetSession()->GetPlayer();
-        usingPlayer->SetDungeonDifficulty(DUNGEON_DIFFICULTY_EPIC);
-        usingPlayer->SendDungeonDifficulty(usingPlayer->GetGroup());
-
-        handler->PSendSysMessage("Dungeon Difficulty changed: Dungeons set to Mythic! Please re-enter the dungeon, if you were already inside.");
-
         if (*args)
         {
             int32 level = atoi((char*)args);
-            if (usingPlayer->GetMap()->IsDungeon() && usingPlayer->GetInstanceScript())
+            Player* player = handler->GetSession()->GetPlayer();
+
+            if (player->GetMap()->IsDungeon() && player->GetDungeonDifficulty() == DUNGEON_DIFFICULTY_HEROIC)
             {
-                usingPlayer->GetInstanceScript()->StartMythic(level);
-                handler->PSendSysMessage("DEBUG: STARTED MYTHIC LEVEL %u", level);
+                player->GetInstanceScript()->StartHeroicPlus(level);
+                handler->PSendSysMessage("Dificuldade da Dungeon alterada para: + %u", level);
             }
         }
         handler->SetSentErrorMessage(true);

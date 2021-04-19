@@ -480,10 +480,10 @@ bool InstanceHasScript(WorldObject const* obj, char const* scriptName)
     return false;
 }
 
-void InstanceScript::StartMythic(uint32 level)
+void InstanceScript::StartHeroicPlus(uint32 level)
 {
     // Dungeon already set to a level
-    if (mythicLevel > 0)
+    if (heroicLevel > 0)
         return;
 
     // Testing purpose, always bursting
@@ -498,7 +498,7 @@ void InstanceScript::StartMythic(uint32 level)
         break;
     }
 
-    mythicLevel = level;
+    heroicLevel = level;
 
     for (Creature* cr : npcs)
         if (cr)

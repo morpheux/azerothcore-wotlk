@@ -224,7 +224,7 @@ public:
     uint32 GetEncounterCount() const { return bosses.size(); }
 
     void SetAffixActive(MythicAffix affix) { affixesActive.push_back(affix); }
-    void StartMythic(uint32 level);
+    void StartHeroicPlus(uint32 level);
     std::vector<MythicAffix> GetActiveAffixes() { return affixesActive; }
     void AddAffixAffectedCreature(Creature* creature) { npcs.push_back(creature); }
 
@@ -249,7 +249,7 @@ private:
     MinionInfoMap minions;
     uint32 completedEncounters; // completed encounter mask, bit indexes are DungeonEncounter.dbc boss numbers, used for packets
     std::vector<MythicAffix> affixesActive;
-    uint32 mythicLevel;
+    uint32 heroicLevel;
     std::vector<Creature*> npcs;
 };
 
