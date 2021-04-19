@@ -30,6 +30,7 @@ public:
         uint64 NPC_GuardFirstGUID;
         uint64 NPC_GuardSecondGUID;
         uint64 NPC_SindragosaGUID;
+        uint64 NPC_HeroicPlusControllerGUID;
 
         uint64 NPC_GarfrostGUID;
         uint64 NPC_MartinOrGorkunGUID;
@@ -60,6 +61,7 @@ public:
             NPC_MartinOrGorkunGUID = 0;
             NPC_RimefangGUID = 0;
             NPC_TyrannusGUID = 0;
+            NPC_HeroicPlusControllerGUID = 0;
 
             GO_IceWallGUID = 0;
 
@@ -112,15 +114,20 @@ public:
         {
             AddAffixAffectedCreature(creature);
 
-            if (NPC_RimefangGUID)
-                if (Creature* c = instance->GetCreature(NPC_RimefangGUID))
+            if (NPC_HeroicPlusControllerGUID)
+            {
+
+                if (Creature* c = instance->GetCreature(NPC_HeroicPlusControllerGUID))
                 {
-                    if (c->IsAlive()) {
+                    if (c->IsAlive())
+                    {
                         uint32 hplusAura = c->GetAuraCount(MYTHIC_SPELL_TENACITY);
                         if (Aura* aur = creature->AddAura(MYTHIC_SPELL_TENACITY, creature))
                             aur->SetStackAmount(hplusAura);
                     }
                 }
+            }
+
 
             if (teamIdInInstance == TEAM_NEUTRAL)
             {
@@ -257,6 +264,9 @@ public:
                 case NPC_SINDRAGOSA:
                     NPC_SindragosaGUID = creature->GetGUID();
                     break;
+                case NPC_HPLUS_CONTROLLER:
+                    NPC_HeroicPlusControllerGUID = creature->GetGUID();
+                    break;
             }
         }
 
@@ -374,6 +384,8 @@ public:
                     return NPC_MartinOrGorkunGUID;
                 case DATA_RIMEFANG_GUID:
                     return NPC_RimefangGUID;
+                case DATA_HPLUS_CONTROLLER_GUID:
+                    return NPC_HeroicPlusControllerGUID;
                 case DATA_TYRANNUS_GUID:
                     return NPC_TyrannusGUID;
                 case DATA_LEADER_SECOND_GUID:

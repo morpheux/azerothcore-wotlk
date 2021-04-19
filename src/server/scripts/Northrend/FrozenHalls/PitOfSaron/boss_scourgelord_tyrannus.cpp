@@ -6,6 +6,7 @@
 #include "ScriptedCreature.h"
 #include "ScriptMgr.h"
 #include "Vehicle.h"
+#include "SpellAuraEffects.h"
 
 enum Texts
 {
@@ -84,6 +85,16 @@ public:
                     c->StopMovingOnCurrentPos();
                     if (Vehicle* v = c->GetVehicleKit())
                         v->InstallAllAccessories(false);
+
+                        if (Creature* hplusController = pInstance->instance->GetCreature(pInstance->GetData64(DATA_HPLUS_CONTROLLER_GUID)))
+                        {
+                            if (hplusController->IsAlive())
+                            {
+                                uint32 hplusAura = hplusController->GetAuraCount(MYTHIC_SPELL_TENACITY);
+                                if (Aura* aur = c->AddAura(MYTHIC_SPELL_TENACITY, c))
+                                    aur->SetStackAmount(hplusAura);
+                            }
+                        }
                 }
             }
         }
@@ -104,6 +115,17 @@ public:
 
                 // start real fight
                 me->RemoveAllAuras();
+
+                if (Creature* hplusController = pInstance->instance->GetCreature(pInstance->GetData64(DATA_HPLUS_CONTROLLER_GUID)))
+                {
+                    if (hplusController->IsAlive())
+                    {
+                        uint32 hplusAura = hplusController->GetAuraCount(MYTHIC_SPELL_TENACITY);
+                        if (Aura* aur = me->AddAura(MYTHIC_SPELL_TENACITY, me))
+                            aur->SetStackAmount(hplusAura);
+                    }
+                }
+
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                 DoZoneInCombat();
                 me->CastSpell(me, 43979, true);

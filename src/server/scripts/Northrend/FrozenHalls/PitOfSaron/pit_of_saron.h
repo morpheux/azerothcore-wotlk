@@ -28,6 +28,7 @@ enum DataTypes
     DATA_GARFROST_GUID,
     DATA_MARTIN_OR_GORKUN_GUID,
     DATA_RIMEFANG_GUID,
+    DATA_HPLUS_CONTROLLER_GUID,
     DATA_TYRANNUS_GUID,
     DATA_LEADER_SECOND_GUID,
     DATA_SINDRAGOSA_GUID,
@@ -104,6 +105,8 @@ enum CreatureIds
     NPC_FREED_SLAVE_1_HORDE                     = 37579, // mage
     NPC_FREED_SLAVE_2_HORDE                     = 37578, // warr
     NPC_FREED_SLAVE_3_HORDE                     = 37577, // warr
+
+    NPC_HPLUS_CONTROLLER                        = 80999,
 };
 
 enum GameObjectIds
