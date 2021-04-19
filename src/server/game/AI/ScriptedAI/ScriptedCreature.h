@@ -352,6 +352,7 @@ struct ScriptedAI : public CreatureAI
             case DUNGEON_DIFFICULTY_NORMAL:
                 return normal5;
             case DUNGEON_DIFFICULTY_HEROIC:
+            case DUNGEON_DIFFICULTY_EPIC:
                 return heroic10;
             default:
                 break;

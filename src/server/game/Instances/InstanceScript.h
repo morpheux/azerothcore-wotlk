@@ -77,6 +77,19 @@ enum BoundaryType
 
 typedef std::map<BoundaryType, float> BossBoundaryMap;
 
+enum MythicAffix
+{
+    MYTHIC_AFFIX_NONE = 0,
+    MYTHIC_AFFIX_BURSTING = 1,
+
+    MYTHIC_AFFIX_MAX
+};
+
+enum MythicSpellId
+{
+    MYTHIC_SPELL_TENACITY = 58549
+};
+
 struct DoorData
 {
     uint32 entry, bossId;
@@ -210,6 +223,11 @@ public:
 
     uint32 GetEncounterCount() const { return bosses.size(); }
 
+    void SetAffixActive(MythicAffix affix) { affixesActive.push_back(affix); }
+    void StartMythic(uint32 level);
+    std::vector<MythicAffix> GetActiveAffixes() { return affixesActive; }
+    void AddAffixAffectedCreature(Creature* creature) { npcs.push_back(creature); }
+
     // Allows to perform particular actions
     virtual void DoAction(int32 /*action*/) {}
 protected:
@@ -230,6 +248,9 @@ private:
     DoorInfoMap doors;
     MinionInfoMap minions;
     uint32 completedEncounters; // completed encounter mask, bit indexes are DungeonEncounter.dbc boss numbers, used for packets
+    std::vector<MythicAffix> affixesActive;
+    uint32 mythicLevel;
+    std::vector<Creature*> npcs;
 };
 
 #endif

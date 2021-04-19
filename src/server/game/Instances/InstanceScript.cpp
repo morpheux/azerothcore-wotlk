@@ -17,6 +17,7 @@
 #include "Pet.h"
 #include "Player.h"
 #include "Spell.h"
+#include "SpellAuras.h"
 #include "WorldSession.h"
 
 void InstanceScript::SaveToDB()
@@ -477,4 +478,30 @@ bool InstanceHasScript(WorldObject const* obj, char const* scriptName)
     }
 
     return false;
+}
+
+void InstanceScript::StartMythic(uint32 level)
+{
+    // Dungeon already set to a level
+    if (mythicLevel > 0)
+        return;
+
+    // Testing purpose, always bursting
+    switch (level)
+    {
+    case 0:
+    case 1:
+        SetAffixActive(MYTHIC_AFFIX_BURSTING);
+        break;
+    default:
+        SetAffixActive(MYTHIC_AFFIX_BURSTING);
+        break;
+    }
+
+    mythicLevel = level;
+
+    for (Creature* cr : npcs)
+        if (cr)
+            if (Aura* aur = cr->AddAura(MYTHIC_SPELL_TENACITY, cr))
+                aur->SetStackAmount(level);
 }

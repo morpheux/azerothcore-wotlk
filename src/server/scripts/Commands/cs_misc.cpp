@@ -16,6 +16,7 @@
 #include "GroupMgr.h"
 #include "GuildMgr.h"
 #include "InstanceSaveMgr.h"
+#include "InstanceScript.h"
 #include "Language.h"
 #include "LFG.h"
 #include "MapManager.h"
@@ -112,9 +113,31 @@ public:
             { "playall",            SEC_GAMEMASTER,         false, HandlePlayAllCommand,                "" },
             { "skirmish",           SEC_ADMINISTRATOR,      false, HandleSkirmishCommand,               "" },
 	        { "desbugar",	        SEC_PLAYER,				false, HandleDesbugarCommand,	            "" },
-            { "mailbox",            SEC_MODERATOR,          false, &HandleMailBoxCommand,               "" }
+            { "mailbox",            SEC_MODERATOR,          false, &HandleMailBoxCommand,               "" },
+            { "mythic",             SEC_MODERATOR,          false, &HandleMythicCommand,                "" }
         };
         return commandTable;
+    }
+
+    static bool HandleMythicCommand(ChatHandler* handler, char const* args)
+    {
+        Player* usingPlayer = handler->GetSession()->GetPlayer();
+        usingPlayer->SetDungeonDifficulty(DUNGEON_DIFFICULTY_EPIC);
+        usingPlayer->SendDungeonDifficulty(usingPlayer->GetGroup());
+
+        handler->PSendSysMessage("Dungeon Difficulty changed: Dungeons set to Mythic! Please re-enter the dungeon, if you were already inside.");
+
+        if (*args)
+        {
+            int32 level = atoi((char*)args);
+            if (usingPlayer->GetMap()->IsDungeon() && usingPlayer->GetInstanceScript())
+            {
+                usingPlayer->GetInstanceScript()->StartMythic(level);
+                handler->PSendSysMessage("DEBUG: STARTED MYTHIC LEVEL %u", level);
+            }
+        }
+        handler->SetSentErrorMessage(true);
+        return true;
     }
 
     static bool HandleSkirmishCommand(ChatHandler* handler, char const* args)
