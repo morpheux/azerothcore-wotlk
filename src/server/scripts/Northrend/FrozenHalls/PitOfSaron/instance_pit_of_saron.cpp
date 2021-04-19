@@ -112,8 +112,8 @@ public:
         {
             AddAffixAffectedCreature(creature);
 
-            if (NPC_TyrannusGUID)
-                if (Creature* c = instance->GetCreature(NPC_TyrannusGUID))
+            if (NPC_RimefangGUID)
+                if (Creature* c = instance->GetCreature(NPC_RimefangGUID))
                 {
                     if (c->IsAlive()) {
                         uint32 hplusAura = c->GetAuraCount(MYTHIC_SPELL_TENACITY);
