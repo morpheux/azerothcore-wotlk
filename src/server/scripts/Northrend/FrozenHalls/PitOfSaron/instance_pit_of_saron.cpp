@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "ScriptedCreature.h"
 #include "ScriptMgr.h"
+#include "SpellAuras.h"
 
 class instance_pit_of_saron : public InstanceMapScript
 {
@@ -110,6 +111,16 @@ public:
         void OnCreatureCreate(Creature* creature) override
         {
             AddAffixAffectedCreature(creature);
+
+            if (NPC_TyrannusGUID)
+                if (Creature* c = instance->GetCreature(NPC_TyrannusGUID))
+                {
+                    if (c->IsAlive()) {
+                        uint32 hplusAura = c->GetAuraCount(MYTHIC_SPELL_TENACITY);
+                        if (Aura* aur = creature->AddAura(MYTHIC_SPELL_TENACITY, creature))
+                            aur->SetStackAmount(hplusAura);
+                    }
+                }
 
             if (teamIdInInstance == TEAM_NEUTRAL)
             {
