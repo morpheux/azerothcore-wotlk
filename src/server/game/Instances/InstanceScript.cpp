@@ -483,8 +483,8 @@ bool InstanceHasScript(WorldObject const* obj, char const* scriptName)
 void InstanceScript::StartHeroicPlus(uint32 level)
 {
     // Dungeon already set to a level
-    if (heroicLevel > 0)
-        return;
+    //if (heroicLevel > 0)
+      //  return;
 
     // Testing purpose, always bursting
     switch (level)
@@ -500,8 +500,9 @@ void InstanceScript::StartHeroicPlus(uint32 level)
 
     heroicLevel = level;
 
-    for (Creature* cr : npcs)
+    for (Creature* cr : npcs) {
         if (cr)
             if (Aura* aur = cr->AddAura(MYTHIC_SPELL_TENACITY, cr))
                 aur->SetStackAmount(level);
+    }   
 }

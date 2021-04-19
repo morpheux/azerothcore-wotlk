@@ -109,7 +109,6 @@ public:
 
         void OnCreatureCreate(Creature* creature) override
         {
-
             AddAffixAffectedCreature(creature);
 
             if (teamIdInInstance == TEAM_NEUTRAL)
