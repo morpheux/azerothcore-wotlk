@@ -13,6 +13,7 @@
 #include "GameObjectAI.h"
 #include "Map.h"
 #include "Group.h"
+#include "InstanceScript.h"
 
 // 25 tabards
 uint32 tabardHorda[] =
@@ -2320,8 +2321,18 @@ public:
     {
         ClearGossipMenuFor(player);
 
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Mitica", 100, 0, "Tem certeza? Caso você morra precisará falar com o NPC novamente", 0, false);
-        //AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_pet_scorchedstone:35:35:-25:0|tAtivar minha pedra-chave", 200, 0,"Tem certeza? O tempo vai começar a contar ao clicar em OK",0,false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 5", 5, 0, "Tem certeza?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 10", 10, 0, "Tem certeza?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 15", 15, 0, "Tem certeza?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 20", 20, 0, "Tem certeza?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 25", 25, 0, "Tem certeza?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 30", 30, 0, "Tem certeza?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 35", 35, 0, "Tem certeza?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 40", 40, 0, "Tem certeza?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 45", 45, 0, "Tem certeza?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 50", 50, 0, "Tem certeza?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 100", 100, 0, "Tem certeza?", 0, false);
+        
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 9999, 0);
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tUpdate Menu", 9999, 0);
  
@@ -2336,13 +2347,20 @@ public:
 
         switch (sender)
         {
-        case 100: {
-            player->SetPhaseMask(10, true);
-        }break;
-
-        case 200:  // Main menuu
+        case 5:
+        case 10:
+        case 15:
+        case 20:
+        case 25:
+        case 30:
+        case 35:
+        case 40:
+        case 45:
+        case 50:
+        case 100:
         {
-            player->SetPhaseMask(12, true);
+            player->GetInstanceScript()->StartHeroicPlus(sender);
+            creature->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
         }break;
 
         case 9999:  // Main menu

@@ -116,14 +116,18 @@ public:
 
             if (NPC_HeroicPlusControllerGUID)
             {
-
                 if (Creature* c = instance->GetCreature(NPC_HeroicPlusControllerGUID))
                 {
                     if (c->IsAlive())
                     {
                         uint32 hplusAura = c->GetAuraCount(MYTHIC_SPELL_TENACITY);
-                        if (Aura* aur = creature->AddAura(MYTHIC_SPELL_TENACITY, creature))
-                            aur->SetStackAmount(hplusAura);
+                        if (hplusAura > 0) {
+
+                            creature->SetLevel(83, true);
+
+                            if (Aura* aur = creature->AddAura(MYTHIC_SPELL_TENACITY, creature))
+                                aur->SetStackAmount(hplusAura);
+                        }
                     }
                 }
             }
