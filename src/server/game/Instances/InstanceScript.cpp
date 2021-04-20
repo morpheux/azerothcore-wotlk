@@ -483,13 +483,12 @@ bool InstanceHasScript(WorldObject const* obj, char const* scriptName)
 void InstanceScript::StartHeroicPlus(uint32 level)
 {
     for (Creature* cr : npcs) {
-        if (cr && cr->IsAlive())
+        if (cr && cr->IsAlive() && cr->IsInWorld())
         {
             // Creature Customizations
-            uint32 id = cr->GetCreatureData()->id;
             cr->SetLevel(83, true);
-            Aura* aur = cr->AddAura(MYTHIC_SPELL_TENACITY, cr);
 
+            Aura* aur = cr->AddAura(MYTHIC_SPELL_TENACITY, cr);
             if (aur)
                aur->SetStackAmount(level);
         }
