@@ -249,7 +249,6 @@ private:
     MinionInfoMap minions;
     uint32 completedEncounters; // completed encounter mask, bit indexes are DungeonEncounter.dbc boss numbers, used for packets
     std::vector<MythicAffix> affixesActive;
-    uint32 heroicLevel;
     std::vector<Creature*> npcs;
 };
 
