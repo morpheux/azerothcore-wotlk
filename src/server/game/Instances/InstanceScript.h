@@ -226,7 +226,11 @@ public:
     void SetAffixActive(MythicAffix affix) { affixesActive.push_back(affix); }
     void StartHeroicPlus(uint32 level);
     std::vector<MythicAffix> GetActiveAffixes() { return affixesActive; }
-    void AddAffixAffectedCreature(Creature* creature) { npcs.push_back(creature); }
+    void AddAffixAffectedCreature(Creature* creature)
+    {
+        if(creature)
+            npcs.push_back(creature);
+    }
 
     // Allows to perform particular actions
     virtual void DoAction(int32 /*action*/) {}

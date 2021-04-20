@@ -112,7 +112,7 @@ public:
 
         void OnCreatureCreate(Creature* creature) override
         {
-            if(creature && creature->getLevel() > 79 && creature->IsInWorld() && creature->IsAlive())
+            if(creature)
                 AddAffixAffectedCreature(creature);
 
             if (NPC_HeroicPlusControllerGUID)
