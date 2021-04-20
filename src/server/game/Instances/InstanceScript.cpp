@@ -482,33 +482,14 @@ bool InstanceHasScript(WorldObject const* obj, char const* scriptName)
 
 void InstanceScript::StartHeroicPlus(uint32 level)
 {
-    // Dungeon already set to a level
-    //if (heroicLevel > 0)
-      //  return;
-
-    // Testing purpose, always bursting
-    switch (level)
-    {
-    case 0:
-    case 1:
-        SetAffixActive(MYTHIC_AFFIX_BURSTING);
-        break;
-    default:
-        SetAffixActive(MYTHIC_AFFIX_BURSTING);
-        break;
-    }
-
-    heroicLevel = level;
-
     for (Creature* cr : npcs) {
         if (cr && cr->IsAlive())
         {
             // Creature Customizations
             cr->SetLevel(83, true);
+            Aura* aur = cr->AddAura(MYTHIC_SPELL_TENACITY, cr);
 
-
-            // Auras
-            if (Aura* aur = cr->AddAura(MYTHIC_SPELL_TENACITY, cr))
+            if (aur)
                 aur->SetStackAmount(level);
         }
     }   
