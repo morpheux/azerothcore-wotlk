@@ -486,11 +486,16 @@ void InstanceScript::StartHeroicPlus(uint32 level)
         if (cr && cr->IsAlive())
         {
             // Creature Customizations
-            cr->SetLevel(83, true);
-            Aura* aur = cr->AddAura(MYTHIC_SPELL_TENACITY, cr);
+            if (cr->getLevel() >= 80)
+            {
+                uint32 id = cr->GetCreatureData()->id;
+                cr->SetLevel(83, true);
+                Aura* aur = cr->AddAura(MYTHIC_SPELL_TENACITY, cr);
 
-            if (aur)
-                aur->SetStackAmount(level);
+                if (aur)
+                    aur->SetStackAmount(level);
+            }
+
         }
     }   
 }
