@@ -2321,6 +2321,12 @@ public:
     {
         ClearGossipMenuFor(player);
 
+
+        // 658 = Pit of Saron
+        // 668 = Halls of Reflection
+        // 632 = Forge of Souls
+
+        if (player->GetMapId() == 658) {        
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 5", 5, 0, "Tem certeza?", 0, false);
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 10", 10, 0, "Tem certeza?", 0, false);
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 15", 15, 0, "Tem certeza?", 0, false);
@@ -2332,7 +2338,7 @@ public:
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 45", 45, 0, "Tem certeza?", 0, false);
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 50", 50, 0, "Tem certeza?", 0, false);
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bone_skull_02:35:35:-25:0|tQuero fazer a masmorra na dificuldade Heroic Plus + 100", 100, 0, "Tem certeza?", 0, false);
-        
+        }
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 9999, 0);
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tUpdate Menu", 9999, 0);
  
