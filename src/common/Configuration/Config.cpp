@@ -42,7 +42,7 @@ namespace
         std::ifstream in(file);
 
         if (in.fail())
-            //throw ConfigException(acore::StringFormat("Config::LoadFile: Failed open file '%s'", file.c_str()));
+            throw ConfigException(acore::StringFormat("Config::LoadFile: Failed open file '%s'", file.c_str()));
 
         uint32 count = 0;
 
