@@ -646,11 +646,11 @@ public:
     {
         player->PlayerTalkClass->ClearMenus();
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_bone_humanskull_01:30:30:-18:0|t100 Enemy Head + 30.000 Honor", 10, 0,"Tem certeza ?",0,false);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_bone_humanskull_01:30:30:-18:0|t50 Enemy Head + 30.000 Honor", 10, 0,"Tem certeza ?",0,false);
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t70 Emblems of Frost", 20, 0, "Tem certeza ?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t30 Emblems of Frost", 20, 0, "Tem certeza ?", 0, false);
 
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:30:30:-18:0|t1200 de Arena Rating + 150 Arena Points", 30, 0, "Tem certeza ?", 0, false);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:30:30:-18:0|t1200 de Arena Rating + 100 Arena Points", 30, 0, "Tem certeza ?", 0, false);
 
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
 
@@ -681,8 +681,8 @@ public:
                     AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
                     SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
-                else if (player->HasItemCount(600500, 100, true) && (player->GetHonorPoints() >= 30000)) {
-                    player->DestroyItemCount(600500, 100, true);
+                else if (player->HasItemCount(600500, 50, true) && (player->GetHonorPoints() >= 30000)) {
+                    player->DestroyItemCount(600500, 50, true);
                     player->ModifyHonorPoints(-30000);
                     player->AddItem(80004, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
@@ -700,8 +700,8 @@ public:
                     AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
                     SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
-                else if (player->HasItemCount(49426, 70, true)) {
-                    player->DestroyItemCount(49426, 70, true);
+                else if (player->HasItemCount(49426, 30, true)) {
+                    player->DestroyItemCount(49426, 30, true);
                     player->AddItem(80004, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
                     CloseGossipMenuFor(player);
@@ -718,8 +718,8 @@ public:
                     AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
                     SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
                 }
-                else if (player->GetArenaPersonalRating(0) >= 1200 && player->GetArenaPoints() >= 150) {
-                    player->ModifyArenaPoints(-150);
+                else if (player->GetArenaPersonalRating(0) >= 1200 && player->GetArenaPoints() >= 100) {
+                    player->ModifyArenaPoints(-100);
                     player->AddItem(80004, 1);
                     ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
                     CloseGossipMenuFor(player);
