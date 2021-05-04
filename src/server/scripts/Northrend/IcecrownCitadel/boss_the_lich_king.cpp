@@ -938,7 +938,7 @@ public:
                     events.ScheduleEvent(EVENT_QUAKE, 62500);
                     events.ScheduleEvent(EVENT_PAIN_AND_SUFFERING, 3500, EVENT_GROUP_ABILITIES);
                     events.ScheduleEvent(EVENT_SUMMON_ICE_SPHERE, 8000, EVENT_GROUP_ABILITIES);
-                    events.ScheduleEvent(EVENT_SUMMON_RAGING_SPIRIT, 4000, EVENT_GROUP_ABILITIES);
+                    events.ScheduleEvent(EVENT_SUMMON_RAGING_SPIRIT, 6000, EVENT_GROUP_ABILITIES);
                     break;
                 case POINT_CENTER_2:
                     me->SetFacingTo(0.0f);
@@ -950,7 +950,7 @@ public:
                     events.ScheduleEvent(EVENT_QUAKE_2, 62500);
                     events.ScheduleEvent(EVENT_PAIN_AND_SUFFERING, 3500, EVENT_GROUP_ABILITIES);
                     events.ScheduleEvent(EVENT_SUMMON_ICE_SPHERE, 8000, EVENT_GROUP_ABILITIES);
-                    events.ScheduleEvent(EVENT_SUMMON_RAGING_SPIRIT, 4000, EVENT_GROUP_ABILITIES);
+                    events.ScheduleEvent(EVENT_SUMMON_RAGING_SPIRIT, 6000, EVENT_GROUP_ABILITIES);
                     break;
                 default:
                     break;
