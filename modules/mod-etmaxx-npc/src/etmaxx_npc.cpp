@@ -1236,8 +1236,13 @@ public:
 
             case 301:
             {
+                int DKL = 1;
 
-                int DKL = 58;
+                if (player->getLevel() == 80) {
+                    DKL = 80
+                }else{
+                    DKL = 58
+                }
 
                 player->SetLevel(DKL);
                 player->learnSpell(53428);//runeforging
@@ -2380,6 +2385,99 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Migração DK Fix                   ///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_start : public CreatureScript
+{
+public:
+    etmaxx_dk() : CreatureScript("etmaxx_dk") { }
+
+    bool OnGossipHello(Player* player, Creature* creature)
+    {
+        player->PlayerTalkClass->ClearMenus();
+
+        if (player->getClass() == CLASS_DEATH_KNIGHT && !player->HasItemCount(37836, 1, true)
+        {
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_deathknight_frostpresence:30:30:-18:0|tCompletar todas as Quests de DK", 301, 0, "Tem certeza ?", 0, false);
+            player->SEND_GOSSIP_MENU(800802, creature->GetGUID());
+            return true;
+        }
+        else {
+            ChatHandler(player->GetSession()).PSendSysMessage("Eu só falo com Cavaleiros da Morte!");
+            CloseGossipMenuFor(player);
+        }
+        return true;
+    }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        switch (sender)
+        {
+        case 301:
+        {
+            player->SetLevel(80);
+            player->learnSpell(53428);//runeforging
+            player->learnSpell(53441);//runeforging
+            player->learnSpell(53344);//runeforging
+            player->learnSpell(62158);//runeforging
+            player->learnSpell(33391);//journeyman riding
+            player->learnSpell(54586);//runeforging credit
+            player->learnSpell(48778);//acherus deathcharger
+            player->learnSpell(49998);//Death Strike Rank 1 (Sem bug)
+            player->removeSpell(45470, SPEC_MASK_ALL, false);//Remove a DeathStrike Bugada (cura infinita)
+            player->learnSkillRewardedSpells(776, 375);//Runeforging
+            player->learnSkillRewardedSpells(960, 375);//Runeforging
+            //player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 38661, true);//Greathelm of the Scourge Champion
+            //player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 38666, true);//Plated Saronite Bracers
+            //player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 38668, true);//The Plaguebringer's Girdle
+            //player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 38667, true);//Bloodbane's Gauntlets of Command
+            //player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 38665, true);//Saronite War Plate
+            //player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 38669, true);//Engraved Saronite Legplates
+            //player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 38663, true);// Blood-Soaked Saronite Plated Spaulders
+            //player->EquipNewItem(EQUIPMENT_SLOT_FEET, 38670, true);//Greaves of the Slaughter
+            //player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 38675, true);//Signet of the Dark Brotherhood
+            //player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 38674, true);//Soul Harvester's Charm
+            //player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 38671, true);//Valanar's Signet Ring
+            //player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 38672, true);// Keleseth's Signet Ring
+            //player->EquipNewItem(19, 10050, true);
+            //player->EquipNewItem(20, 10050, true);
+            //player->EquipNewItem(21, 10050, true);
+            //player->EquipNewItem(22, 10050, true);
+            //player->AddItem(39320, true);//Sky Darkener's Shroud of Blood
+            //player->AddItem(38664, true);//Sky Darkener's Shroud of the Unholy
+            //player->AddItem(39322, true);//Shroud of the North Wind
+            //player->AddItem(38632, true);//Greatsword of the Ebon Blade
+            player->AddItem(6948, true);//Hearthstone
+            //player->AddItem(38707, true);//Runed Soulblade
+            //player->AddItem(40483, true);//Insignia of the Scourge
+
+            // Quests
+            if (player->GetQuestStatus(12657) == QUEST_STATUS_NONE)//The Might Of The Scourge
+            {
+                player->AddQuest(sObjectMgr->GetQuestTemplate(12657), nullptr);
+                player->RewardQuest(sObjectMgr->GetQuestTemplate(12657), false, player);
+            }
+            if (player->GetQuestStatus(12801) == QUEST_STATUS_NONE)//The Light of Dawn
+            {
+                player->AddQuest(sObjectMgr->GetQuestTemplate(12801), nullptr);
+                player->RewardQuest(sObjectMgr->GetQuestTemplate(12801), false, player);
+            }
+            if (player->GetTeamId() == TEAM_ALLIANCE && player->GetQuestStatus(13188) == QUEST_STATUS_NONE)//Where Kings Walk
+                player->AddQuest(sObjectMgr->GetQuestTemplate(13188), nullptr);
+            else if (player->GetTeamId() == TEAM_HORDE && player->GetQuestStatus(13189) == QUEST_STATUS_NONE)//Saurfang's Blessing
+                player->AddQuest(sObjectMgr->GetQuestTemplate(13189), nullptr);
+
+            player->AddItem(37836, 1);
+
+            ObjectAccessor::SaveAllPlayers();//Save
+        }break;
+        }
+    }
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Instanciando o NPC                    ///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
@@ -2393,4 +2491,5 @@ void AddNpcEtmaxxScripts()
     new etmaxx_event();
     new etmaxx_startset();
     new etmaxx_keystone();
+    new etmaxx_dk();
 }
