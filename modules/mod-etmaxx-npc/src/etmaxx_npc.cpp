@@ -2428,29 +2428,29 @@ public:
             player->removeSpell(45470, SPEC_MASK_ALL, false);//Remove a DeathStrike Bugada (cura infinita)
             player->learnSkillRewardedSpells(776, 375);//Runeforging
             player->learnSkillRewardedSpells(960, 375);//Runeforging
-            //player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 38661, true);//Greathelm of the Scourge Champion
-            //player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 38666, true);//Plated Saronite Bracers
-            //player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 38668, true);//The Plaguebringer's Girdle
-            //player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 38667, true);//Bloodbane's Gauntlets of Command
-            //player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 38665, true);//Saronite War Plate
-            //player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 38669, true);//Engraved Saronite Legplates
-            //player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 38663, true);// Blood-Soaked Saronite Plated Spaulders
-            //player->EquipNewItem(EQUIPMENT_SLOT_FEET, 38670, true);//Greaves of the Slaughter
-            //player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 38675, true);//Signet of the Dark Brotherhood
-            //player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 38674, true);//Soul Harvester's Charm
-            //player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 38671, true);//Valanar's Signet Ring
-            //player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 38672, true);// Keleseth's Signet Ring
-            //player->EquipNewItem(19, 10050, true);
-            //player->EquipNewItem(20, 10050, true);
-            //player->EquipNewItem(21, 10050, true);
-            //player->EquipNewItem(22, 10050, true);
-            //player->AddItem(39320, true);//Sky Darkener's Shroud of Blood
-            //player->AddItem(38664, true);//Sky Darkener's Shroud of the Unholy
-            //player->AddItem(39322, true);//Shroud of the North Wind
-            //player->AddItem(38632, true);//Greatsword of the Ebon Blade
+            player->EquipNewItem(EQUIPMENT_SLOT_HEAD, 38661, true);//Greathelm of the Scourge Champion
+            player->EquipNewItem(EQUIPMENT_SLOT_WRISTS, 38666, true);//Plated Saronite Bracers
+            player->EquipNewItem(EQUIPMENT_SLOT_WAIST, 38668, true);//The Plaguebringer's Girdle
+            player->EquipNewItem(EQUIPMENT_SLOT_HANDS, 38667, true);//Bloodbane's Gauntlets of Command
+            player->EquipNewItem(EQUIPMENT_SLOT_CHEST, 38665, true);//Saronite War Plate
+            player->EquipNewItem(EQUIPMENT_SLOT_LEGS, 38669, true);//Engraved Saronite Legplates
+            player->EquipNewItem(EQUIPMENT_SLOT_SHOULDERS, 38663, true);// Blood-Soaked Saronite Plated Spaulders
+            player->EquipNewItem(EQUIPMENT_SLOT_FEET, 38670, true);//Greaves of the Slaughter
+            player->EquipNewItem(EQUIPMENT_SLOT_TRINKET1, 38675, true);//Signet of the Dark Brotherhood
+            player->EquipNewItem(EQUIPMENT_SLOT_TRINKET2, 38674, true);//Soul Harvester's Charm
+            player->EquipNewItem(EQUIPMENT_SLOT_FINGER1, 38671, true);//Valanar's Signet Ring
+            player->EquipNewItem(EQUIPMENT_SLOT_FINGER2, 38672, true);// Keleseth's Signet Ring
+            player->EquipNewItem(19, 10050, true);
+            player->EquipNewItem(20, 10050, true);
+            player->EquipNewItem(21, 10050, true);
+            player->EquipNewItem(22, 10050, true);
+            player->AddItem(39320, true);//Sky Darkener's Shroud of Blood
+            player->AddItem(38664, true);//Sky Darkener's Shroud of the Unholy
+            player->AddItem(39322, true);//Shroud of the North Wind
+            player->AddItem(38632, true);//Greatsword of the Ebon Blade
             player->AddItem(6948, true);//Hearthstone
-            //player->AddItem(38707, true);//Runed Soulblade
-            //player->AddItem(40483, true);//Insignia of the Scourge
+            player->AddItem(38707, true);//Runed Soulblade
+            player->AddItem(40483, true);//Insignia of the Scourge
 
             // Quests
             if (player->GetQuestStatus(12657) == QUEST_STATUS_NONE)//The Might Of The Scourge
@@ -2463,14 +2463,19 @@ public:
                 player->AddQuest(sObjectMgr->GetQuestTemplate(12801), nullptr);
                 player->RewardQuest(sObjectMgr->GetQuestTemplate(12801), false, player);
             }
-            if (player->GetTeamId() == TEAM_ALLIANCE && player->GetQuestStatus(13188) == QUEST_STATUS_NONE)//Where Kings Walk
+            if (player->GetTeamId() == TEAM_ALLIANCE && player->GetQuestStatus(13188) == QUEST_STATUS_NONE) {
                 player->AddQuest(sObjectMgr->GetQuestTemplate(13188), nullptr);
-            else if (player->GetTeamId() == TEAM_HORDE && player->GetQuestStatus(13189) == QUEST_STATUS_NONE)//Saurfang's Blessing
+                player->RewardQuest(sObjectMgr->GetQuestTemplate(13188), false, player);
+            }
+            else if (player->GetTeamId() == TEAM_HORDE && player->GetQuestStatus(13189) == QUEST_STATUS_NONE) {//Saurfang's Blessing
                 player->AddQuest(sObjectMgr->GetQuestTemplate(13189), nullptr);
-
+                player->RewardQuest(sObjectMgr->GetQuestTemplate(13189), false, player);
+            }
             player->AddItem(37836, 1);
+            player->TeleportTo(571, 5741.36f, 626.982f, 648.354f, 0.28f); //Dalaran
 
             ObjectAccessor::SaveAllPlayers();//Save
+
         }break;
         }
     }
