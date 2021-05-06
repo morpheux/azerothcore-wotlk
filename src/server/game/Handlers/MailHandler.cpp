@@ -294,13 +294,8 @@ void WorldSession::HandleSendMail(WorldPacket& recvData)
                 draft.AddItem(item);
             }
 
-            // if item send to character at another account, then apply item delivery delay
+            // if item send to character at another account, then apply item delivery delayy
             needItemDelay = GetAccountId() != rc_account;
-        }
-
-        if (money > 0 && GetPlayer()->GetSession()->GetSecurity() > SEC_PLAYER)
-        {
-            sLog->outCommand(GetPlayer()->GetSession()->GetAccountId(), "GM %s (Account: %u) mail money: " UI64FMTD " to player: %s (Account: %u)", GetPlayer()->GetName().c_str(), GetPlayer()->GetSession()->GetAccountId(), money, receive->GetName().c_str(), receive->GetSession()->GetAccountId());
         }
 
         if( money >= 10 * GOLD )
