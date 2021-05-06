@@ -2903,10 +2903,8 @@ public: etmaxx_dk() : CreatureScript("etmaxx_dk") {}
 
         }break;
         }
+        return true;
     }
-
-          return true;
-      }
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
