@@ -294,7 +294,7 @@ void WorldSession::HandleSendMail(WorldPacket& recvData)
                 draft.AddItem(item);
             }
 
-            // if item send to character at another account, then apply item delivery delay
+            // if item send to character at another account, then apply item delivery delayy
             needItemDelay = GetAccountId() != rc_account;
         }
 
