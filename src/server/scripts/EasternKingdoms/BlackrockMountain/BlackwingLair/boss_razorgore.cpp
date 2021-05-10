@@ -66,7 +66,7 @@ public:
             instance->SetData(DATA_EGG_EVENT, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* victim) override
+        void EnterCombat(Unit* /*victim*/) override
         {
             DoChangePhase();
         }
