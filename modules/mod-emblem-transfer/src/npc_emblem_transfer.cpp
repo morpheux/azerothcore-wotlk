@@ -62,7 +62,7 @@ public:
         if (result)
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Pegar Meus Emblemas Transferidos", GOSSIP_SENDER_MAIN, ACTION_RETRIEVE_EMBLEMS);
 
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        player->SEND_GOSSIP_MENU(100000, creature->GetGUID());
 
         return true;
     }
