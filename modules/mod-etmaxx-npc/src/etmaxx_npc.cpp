@@ -807,6 +807,8 @@ public: etmaxx_transmog_vendor() : CreatureScript("etmaxx_transmog_vendor") {}
 
           AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t30 Emblems of Frost", 20, 0, "Tem certeza ?", 0, false);
 
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_holy_championsbond:30:30:-18:0|t60 Badge of Justice", 40, 0, "Tem certeza ?", 0, false);
+
           AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:30:30:-18:0|t1200 de Arena Rating + 100 Arena Points", 30, 0, "Tem certeza ?", 0, false);
 
           AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
@@ -831,18 +833,11 @@ public: etmaxx_transmog_vendor() : CreatureScript("etmaxx_transmog_vendor") {}
           case 100:	// Main menu
           {
               OnGossipHello(player, creature);
-          }
-
-          break;
+          }break;
 
           case 10:
           {
-              if (player->HasItemCount(80004, 1))
-              {
-                  AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
-                  SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-              }
-              else if (player->HasItemCount(600500, 50, true) && (player->GetHonorPoints() >= 30000))
+            if (player->HasItemCount(600500, 50, true) && (player->GetHonorPoints() >= 30000))
               {
                   player->DestroyItemCount(600500, 50, true);
                   player->ModifyHonorPoints(-30000);
@@ -852,21 +847,14 @@ public: etmaxx_transmog_vendor() : CreatureScript("etmaxx_transmog_vendor") {}
               }
               else
               {
-                  AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 1000 enemy Head + 50.000 de Honor", 100, 0);
+                  AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 50 enemy Head + 30.000 de Honor", 100, 0);
                   SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
               }
-          }
-
-          break;
+          }break;
 
           case 20:
           {
-              if (player->HasItemCount(80004, 1))
-              {
-                  AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê só pode ter 1 EtMaXx Transmog Mark, gaste a sua para pegar outra", 100, 0);
-                  SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-              }
-              else if (player->HasItemCount(49426, 30, true))
+            if (player->HasItemCount(49426, 30, true))
               {
                   player->DestroyItemCount(49426, 30, true);
                   player->AddItem(80004, 1);
@@ -875,12 +863,10 @@ public: etmaxx_transmog_vendor() : CreatureScript("etmaxx_transmog_vendor") {}
               }
               else
               {
-                  AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 200 Emblem of Frost", 100, 0);
+                  AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 30 Emblem of Frost", 100, 0);
                   SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
               }
-          }
-
-          break;
+          }break;
 
           case 30:
           {
@@ -898,12 +884,26 @@ public: etmaxx_transmog_vendor() : CreatureScript("etmaxx_transmog_vendor") {}
               }
               else
               {
-                  AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 1300 de Arena Rating + 200 Arena Points", 100, 0);
+                  AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 1200 de Arena Rating + 100 Arena Points", 100, 0);
                   SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
               }
-          }
+          }break;
 
-          break;
+          case 40:
+          {
+            if (player->HasItemCount(29434, 60, true))
+              {
+                  player->DestroyItemCount(29434, 60, true);
+                  player->AddItem(80004, 1);
+                  ChatHandler(player->GetSession()).PSendSysMessage("Obrigado por adquirir uma EtMaXx Transmog Mark");
+                  CloseGossipMenuFor(player);
+              }
+              else
+              {
+                  AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVocê precisa de 60 Badge of Justice", 100, 0);
+                  SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+              }
+          }break;
 
           //Menu Geral
           case 50:
@@ -914,9 +914,7 @@ public: etmaxx_transmog_vendor() : CreatureScript("etmaxx_transmog_vendor") {}
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
               AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
               SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-          }
-
-          break;
+          }break;
 
           // Menu de Armas
           case 70:
@@ -936,9 +934,7 @@ public: etmaxx_transmog_vendor() : CreatureScript("etmaxx_transmog_vendor") {}
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
               AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
               SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-          }
-
-          break;
+          }break;
 
           case 60:
           {
@@ -956,33 +952,25 @@ public: etmaxx_transmog_vendor() : CreatureScript("etmaxx_transmog_vendor") {}
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "---------------------------------------", 100, 0);
               AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 100, 0);
               SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
-          }
-
-          break;
+          }break;
 
           case 600:
           {
               player->AddItem(100100, 1);
               CloseGossipMenuFor(player);
-          }
-
-          break;
+          }break;
 
           case 601:
           {
               player->AddItem(100103, 1);
               CloseGossipMenuFor(player);
-          }
-
-          break;
+          }break;
 
           case 602:
           {
               player->AddItem(100110, 1);
               CloseGossipMenuFor(player);
-          }
-
-          break;
+          }break;
 
           case 603:
           {
