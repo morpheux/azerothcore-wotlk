@@ -116,11 +116,9 @@ public: etmaxx_npc() : CreatureScript("etmaxx_npc") {}
           {
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/Ability_mount_celestialhorse:35:35:-25:0|tResgate Seu Celestial Steed", 1, 0);
           }
+        
 
-          if (player->HasItemCount(60018, 15))
-          {
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_necklace_27:35:35:-25:0|tResgate Sua Mount Mark", 5, 0);
-          }
+          AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_necklace_27:35:35:-25:0|tResgate Sua Mount Mark", 5, 0);
 
           AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tQuero dar uma olhada", 4, 0);
           AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------------------------", 999, 0);
@@ -200,10 +198,15 @@ public: etmaxx_npc() : CreatureScript("etmaxx_npc") {}
 
           case 5:
           {
-              player->DestroyItemCount(60018, 15, true);
-              player->AddItem(47395, 1);
-              ChatHandler(player->GetSession()).PSendSysMessage("Parabéns, você é um vitorioso!");
-              CloseGossipMenuFor(player);
+              if(player->HasItemCount(60018,15,true)){
+                player->DestroyItemCount(60018, 15, true);
+                player->AddItem(47395, 1);
+                ChatHandler(player->GetSession()).PSendSysMessage("Parabéns, você é um vitorioso!");
+                CloseGossipMenuFor(player);
+              }else{
+                ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de 15 EtMaXx Victory Mark");
+              }
+              
           }
 
           break;
