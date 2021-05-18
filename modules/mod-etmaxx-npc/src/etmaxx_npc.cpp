@@ -2900,13 +2900,56 @@ public: etmaxx_dk() : CreatureScript("etmaxx_dk") {}
 
 
 ///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Profissão Dalaran Jewel         	///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_jc : public CreatureScript
+{
+public: etmaxx_jc() : CreatureScript("etmaxx_jc") {}
+
+      bool OnGossipHello(Player* player, Creature* creature)
+      {
+          player->PlayerTalkClass->ClearMenus();
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_misc_conjuremanajewel:30:30:-18:0|tReagentes", 1, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 1", 2, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 2", 3, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 3", 4, 0);
+          player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+          return true;
+      }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        switch (sender)
+        {
+            case 1:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50077);   
+                }break;
+
+            case 2:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50064); 
+            }
+
+            case 3:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50065); 
+            }
+
+            case 4:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50079); 
+            }
+        }
+        return true;
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Scripts de Itens                   	///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
-class LevelItem : public ItemScript
+class etmaxx_fireaura : public ItemScript
 {
 public:
-    LevelItem() : ItemScript("fireaura") { }
+    etmaxx_fireaura() : ItemScript("etmaxx_fireaura") { }
 
     bool OnUse(Player* p, Item* i, const SpellCastTargets&) override
     {
@@ -2935,4 +2978,6 @@ void AddNpcEtmaxxScripts()
     new etmaxx_startset();
     new etmaxx_keystone();
     new etmaxx_dk();
+    new etmaxx_fireaura();
+    new etmaxx_jc();
 }
