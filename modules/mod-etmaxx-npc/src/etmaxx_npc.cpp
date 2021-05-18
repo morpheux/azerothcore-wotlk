@@ -2928,15 +2928,294 @@ public: etmaxx_jc() : CreatureScript("etmaxx_jc") {}
 
             case 2:{
                 player->GetSession()->SendListInventory(creature->GetGUID(), 50064); 
-            }
+            }break;
 
             case 3:{
                 player->GetSession()->SendListInventory(creature->GetGUID(), 50065); 
-            }
+            }break;
 
             case 4:{
                 player->GetSession()->SendListInventory(creature->GetGUID(), 50079); 
-            }
+            }break;
+        }
+        return true;
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Profissão Dalaran Leather       	///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_lw : public CreatureScript
+{
+public: etmaxx_lw() : CreatureScript("etmaxx_lw") {}
+
+      bool OnGossipHello(Player* player, Creature* creature)
+      {
+          player->PlayerTalkClass->ClearMenus();
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_armorkit_17:30:30:-18:0|tReagentes 1", 1, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_armorkit_17:30:30:-18:0|tReagentes 2", 2, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 1", 3, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 2", 4, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 3", 5, 0);
+          player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+          return true;
+      }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        switch (sender)
+        {
+            case 1:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50066);   
+                }break;
+
+            case 2:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50067); 
+            }break;
+
+            case 3:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50051); 
+            }break;
+
+            case 4:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50052); 
+            }break;
+
+            case 5:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50053); 
+            }break;
+        }
+        return true;
+    }
+};
+
+
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Profissão Dalaran tailor         	///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_tl : public CreatureScript
+{
+public: etmaxx_tl() : CreatureScript("etmaxx_tl") {}
+
+      bool OnGossipHello(Player* player, Creature* creature)
+      {
+          player->PlayerTalkClass->ClearMenus();
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_tailoring:30:30:-18:0|tReagentes 1", 1, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_tailoring_03:30:30:-18:0|tRecipes 2", 2, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 1", 3, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 2", 4, 0);
+          player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+          return true;
+      }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        switch (sender)
+        {
+            case 1:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50068);   
+                }break;
+
+            case 2:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50069); 
+            }break;
+
+            case 3:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50054); 
+            }break;
+
+            case 4:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50055); 
+            }break;
+        }
+        return true;
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Profissão Dalaran BS           	///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_bs : public CreatureScript
+{
+public: etmaxx_bs() : CreatureScript("etmaxx_bs") {}
+
+      bool OnGossipHello(Player* player, Creature* creature)
+      {
+          player->PlayerTalkClass->ClearMenus();
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_blacksmithing:30:30:-18:0|tReagentes 1", 1, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_blacksmithing:30:30:-18:0|tRecipes 2", 2, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 1", 3, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 2", 4, 0);
+          player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+          return true;
+      }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        switch (sender)
+        {
+            case 1:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50072);   
+                }break;
+
+            case 2:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50073); 
+            }break;
+
+            case 3:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50057); 
+            }break;
+
+            case 4:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50059); 
+            }break;
+        }
+        return true;
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Profissão Dalaran Enchanting     	///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_ec : public CreatureScript
+{
+public: etmaxx_ec() : CreatureScript("etmaxx_ec") {}
+
+      bool OnGossipHello(Player* player, Creature* creature)
+      {
+          player->PlayerTalkClass->ClearMenus();
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_engraving:30:30:-18:0|tReagentes 1", 1, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 2", 2, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 1", 3, 0);
+          player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+          return true;
+      }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        switch (sender)
+        {
+            case 1:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50076);   
+                }break;
+
+            case 2:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50062); 
+            }break;
+
+            case 3:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50063); 
+            }break;
+        }
+        return true;
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Profissão Dalaran Engineering  	///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_eng : public CreatureScript
+{
+public: etmaxx_eng() : CreatureScript("etmaxx_eng") {}
+
+      bool OnGossipHello(Player* player, Creature* creature)
+      {
+          player->PlayerTalkClass->ClearMenus();
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_engineering:30:30:-18:0|tReagentes 1", 1, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_engineering:30:30:-18:0|tReagentes 2", 2, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 1", 3, 0);
+          player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+          return true;
+      }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        switch (sender)
+        {
+            case 1:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50070);   
+                }break;
+
+            case 2:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50071); 
+            }break;
+
+            case 3:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50056); 
+            }break;
+        }
+        return true;
+    }
+};
+
+
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Profissão Dalaran Cooking     	///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_cook : public CreatureScript
+{
+public: etmaxx_cook() : CreatureScript("etmaxx_cook") {}
+
+      bool OnGossipHello(Player* player, Creature* creature)
+      {
+          player->PlayerTalkClass->ClearMenus();
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_food_15:30:30:-18:0|tReagentes 1", 1, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 1", 2, 0);
+          player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+          return true;
+      }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        switch (sender)
+        {
+            case 1:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50074);   
+                }break;
+
+            case 2:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50060); 
+            }break;
+        }
+        return true;
+    }
+};
+
+
+///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Profissão Dalaran Alchemy     	///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_alc : public CreatureScript
+{
+public: etmaxx_alc() : CreatureScript("etmaxx_alc") {}
+
+      bool OnGossipHello(Player* player, Creature* creature)
+      {
+          player->PlayerTalkClass->ClearMenus();
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tReagentes 1", 1, 0);
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 1", 2, 0);
+          player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+          return true;
+      }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        switch (sender)
+        {
+            case 1:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50075);   
+                }break;
+
+            case 2:{
+                player->GetSession()->SendListInventory(creature->GetGUID(), 50061); 
+            }break;
         }
         return true;
     }
@@ -2980,4 +3259,11 @@ void AddNpcEtmaxxScripts()
     new etmaxx_dk();
     new etmaxx_fireaura();
     new etmaxx_jc();
+    new etmaxx_lw();
+    new etmaxx_tl();
+    new etmaxx_bs();
+    new etmaxx_ec();
+    new etmaxx_eng();
+    new etmaxx_cook();
+    new etmaxx_alc();
 }
