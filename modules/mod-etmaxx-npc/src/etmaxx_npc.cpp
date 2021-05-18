@@ -2951,7 +2951,7 @@ class etmaxx_fireaura : public ItemScript
 public:
     etmaxx_fireaura() : ItemScript("etmaxx_fireaura") { }
 
-    bool OnUse(Player* p, Item* i, const SpellCastTargets&) override
+    bool OnUse(Player* p, Item* /*i*/, const SpellCastTargets&) override
     {
         if(p->HasAura(51193)){
             p->RemoveAura(51193);
