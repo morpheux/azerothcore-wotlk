@@ -336,7 +336,7 @@ public:
 
         void JustDied(Unit*  /*pKiller*/) override
         {
-            RespawnDragons(true);
+            RespawnDragons(false); //achei
             _JustDied();
             Talk(SAY_SARTHARION_DEATH);
         }
@@ -847,7 +847,7 @@ struct boss_sartharion_dragonAI : public BossAI
 
     void JustDied(Unit* /*killer*/) override
     {
-        //_JustDied();
+        //_JustDied(); //achei2
         events.Reset();
 
         // Despawn minions only if not called by Sartharion
