@@ -3229,7 +3229,8 @@ class etmaxx_changefac : public CreatureScript
 {
 public: etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
 
-        void SetFactionForRace(Player* player, uint8 Race)
+      
+      void SetFactionForRace(Player* player, uint8 Race)
         {
             player->setTeamId(player->TeamIdForRace(Race));
             ChrRacesEntry const* DBCRace = sChrRacesStore.LookupEntry(Race);
@@ -3255,32 +3256,29 @@ public: etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
         switch (sender)
         {
             case 1:{
-                /*Map* instance;
-                Map::PlayerList const& plrList = instance->GetPlayers();
-                for (Map::PlayerList::const_iterator itr = plrList.begin(); itr != plrList.end(); ++itr){
-                    if (Player* plr = itr->GetSource())
-                            {
-                                plr->UpdateAreaDependentAuras(plr->GetAreaId());
-                                for (Unit::ControlSet::const_iterator itr = plr->m_Controlled.begin(); itr != plr->m_Controlled.end(); ++itr)
-                                {
-                                    Unit::AuraMap& am = (*itr)->GetOwnedAuras();
-                                    for (Unit::AuraMap::iterator itra = am.begin(); itra != am.end();){
-                                                (*itr)->setRace(2);
-                                        }
-                                }
-                            }*/
-                            
-                    player->setRace(2);
-                    SetFactionForRace(player, 2);
-                    CloseGossipMenuFor(player);
-                    ChatHandler(player->GetSession()).PSendSysMessage("Camuflado!");         
+                Map* map = player->GetMap();
+                Map::PlayerList const& playerlist = map->GetPlayers();
+                for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
+                    if (!itr->GetSource())
+                        continue;
+                    itr->GetSource()->setRace(2);
+                    SetFactionForRace(itr->GetSource(), 2);
+                }
+                CloseGossipMenuFor(player);
+                ChatHandler(player->GetSession()).PSendSysMessage("Camuflado Horda!");        
             }break;
 
             case 2:{
-                player->setRace(1);
-                SetFactionForRace(player, 1);
+                Map* map = player->GetMap();
+                Map::PlayerList const& playerlist = map->GetPlayers();
+                for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
+                    if (!itr->GetSource())
+                        continue;
+                    itr->GetSource()->setRace(1);
+                    SetFactionForRace(itr->GetSource(), 1);
+                }
                 CloseGossipMenuFor(player);
-                ChatHandler(player->GetSession()).PSendSysMessage("Camuflado!"); 
+                ChatHandler(player->GetSession()).PSendSysMessage("Camuflado Ally!"); 
             }break;
 
             case 5000:{ // Main menu
