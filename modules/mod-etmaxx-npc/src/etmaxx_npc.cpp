@@ -3239,7 +3239,11 @@ public: etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
       bool OnGossipHello(Player* player, Creature* creature)
       {
           player->PlayerTalkClass->ClearMenus();
-          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tCamuflagem Horda", 1, 0);
+          if(player->GetTeamId() == TEAM_ALLIANCE){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tCamuflagem Horda", 1, 0);
+          }else{
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tCamuflagem Aliança", 2, 0);
+          }
           AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 5000, 0);
           AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tUpdate Menu...", 5000, 0);
           player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -3248,13 +3252,33 @@ public: etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
 
     bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
     {
-        
-
         switch (sender)
         {
             case 1:{
-                player->setRace(2);
-                SetFactionForRace(player, 2);
+                /*Map* instance;
+                Map::PlayerList const& plrList = instance->GetPlayers();
+                for (Map::PlayerList::const_iterator itr = plrList.begin(); itr != plrList.end(); ++itr){
+                    if (Player* plr = itr->GetSource())
+                            {
+                                plr->UpdateAreaDependentAuras(plr->GetAreaId());
+                                for (Unit::ControlSet::const_iterator itr = plr->m_Controlled.begin(); itr != plr->m_Controlled.end(); ++itr)
+                                {
+                                    Unit::AuraMap& am = (*itr)->GetOwnedAuras();
+                                    for (Unit::AuraMap::iterator itra = am.begin(); itra != am.end();){
+                                                (*itr)->setRace(2);
+                                        }
+                                }
+                            }*/
+                            
+                    player->setRace(2);
+                    SetFactionForRace(player, 2);
+                    CloseGossipMenuFor(player);
+                    ChatHandler(player->GetSession()).PSendSysMessage("Camuflado!");         
+            }break;
+
+            case 2:{
+                player->setRace(1);
+                SetFactionForRace(player, 1);
                 CloseGossipMenuFor(player);
                 ChatHandler(player->GetSession()).PSendSysMessage("Camuflado!"); 
             }break;
@@ -3262,8 +3286,7 @@ public: etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
             case 5000:{ // Main menu
               OnGossipHello(player, creature);
             }break;
-        }
-        return true;
+        }return true;
     }
 };
 
