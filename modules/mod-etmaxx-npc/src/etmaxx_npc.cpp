@@ -3222,6 +3222,50 @@ public: etmaxx_alc() : CreatureScript("etmaxx_alc") {}
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Troca de facção (ICC)          	///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_changefac : public CreatureScript
+{
+public: etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
+
+        void SetFactionForRace(Player* player, uint8 Race)
+        {
+            player->setTeamId(player->TeamIdForRace(Race));
+            ChrRacesEntry const* DBCRace = sChrRacesStore.LookupEntry(Race);
+            player->setFaction(DBCRace ? DBCRace->FactionID : 0);
+        }
+
+      bool OnGossipHello(Player* player, Creature* creature)
+      {
+          player->PlayerTalkClass->ClearMenus();
+          AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tCamuflagem Horda", 1, 0);
+          AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 5000, 0);
+          AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tUpdate Menu...", 5000, 0);
+          player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+          return true;
+      }
+
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 sender, uint32 /*action*/)
+    {
+        
+
+        switch (sender)
+        {
+            case 1:{
+                player->setRace(2);
+                SetFactionForRace(player, 2); 
+            }break;
+
+            case 5000:{ // Main menu
+              OnGossipHello(player, creature);
+            }break;
+        }
+        return true;
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
 /////////////                 Scripts de Itens                   	///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
@@ -3266,4 +3310,5 @@ void AddNpcEtmaxxScripts()
     new etmaxx_eng();
     new etmaxx_cook();
     new etmaxx_alc();
+    new etmaxx_changefac();
 }
