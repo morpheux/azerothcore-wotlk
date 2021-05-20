@@ -3254,7 +3254,9 @@ public: etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
         {
             case 1:{
                 player->setRace(2);
-                SetFactionForRace(player, 2); 
+                SetFactionForRace(player, 2);
+                CloseGossipMenuFor(player);
+                ChatHandler(player->GetSession()).PSendSysMessage("Camuflado!"); 
             }break;
 
             case 5000:{ // Main menu
