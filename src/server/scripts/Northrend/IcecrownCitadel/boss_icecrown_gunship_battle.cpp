@@ -618,18 +618,7 @@ public:
             if (_teamIdInInstance == TEAM_HORDE)
             {
                 creatureEntry = NPC_IGB_HIGH_OVERLORD_SAURFANG;
-                textId = isVictory ? SAY_SAURFANG_VICTORY : SAY_SAURFANG_WIPE;
-                Player* player;
-                Map* map = player->GetMap();
-                Map::PlayerList const& playerlist = map->GetPlayers();
-                for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
-                    if (!itr->GetSource())
-                        continue;
-                    if (itr->GetSource()->getRace(true) == RACE_HUMAN || itr->GetSource()->getRace(true) == RACE_DWARF || itr->GetSource()->getRace(true) == RACE_NIGHTELF || itr->GetSource()->getRace(true) == RACE_GNOME || itr->GetSource()->getRace(true) == RACE_DRAENEI){
-                        itr->GetSource()->setRace(itr->GetSource()->getRace(true));
-                        SetFactionForRace(itr->GetSource(), itr->GetSource()->getRace(true));
-                    }
-                }
+                textId = isVictory ? SAY_SAURFANG_VICTORY : SAY_SAURFANG_WIPE;              
             }
             if (Creature* creature = me->FindNearestCreature(creatureEntry, 200.0f))
                 creature->AI()->Talk(textId);
@@ -754,6 +743,7 @@ public:
             checkTimer = 1000;
         }
 
+        //Usado na troca de facção abaixo
         void SetFactionForRace(Player* player, uint8 Race)
         {
             player->setTeamId(player->TeamIdForRace(Race));
@@ -766,16 +756,20 @@ public:
             if (!me->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP))
                 return;
             me->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
+            
+            //Muda a facção dos Allys (na raid horda)
             Map* map = player->GetMap();
-                Map::PlayerList const& playerlist = map->GetPlayers();
-                for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
-                    if (!itr->GetSource())
-                        continue;
-                    if (itr->GetSource()->getRace() == RACE_HUMAN || itr->GetSource()->getRace() == RACE_DWARF || itr->GetSource()->getRace() == RACE_NIGHTELF || itr->GetSource()->getRace() == RACE_GNOME || itr->GetSource()->getRace() == RACE_DRAENEI){
-                        itr->GetSource()->setRace(RACE_ORC);
-                        SetFactionForRace(itr->GetSource(), RACE_ORC);
-                    }
+            Map::PlayerList const& playerlist = map->GetPlayers();
+            for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
+                if (!itr->GetSource())
+                    continue;
+                if (itr->GetSource()->getRace() == RACE_HUMAN || itr->GetSource()->getRace() == RACE_DWARF || itr->GetSource()->getRace() == RACE_NIGHTELF || itr->GetSource()->getRace() == RACE_GNOME || itr->GetSource()->getRace() == RACE_DRAENEI){
+                    itr->GetSource()->setRace(RACE_ORC);
+                    SetFactionForRace(itr->GetSource(), RACE_ORC);
                 }
+            }
+            //Termina aqui
+
             me->GetTransport()->setActive(true);
             me->GetTransport()->ToMotionTransport()->EnableMovement(true);
             _events.ScheduleEvent(EVENT_INTRO_H_1, 5000);
@@ -1106,6 +1100,7 @@ public:
             checkTimer = 1000;
         }
 
+        //Usado na Troca de facção abaixo
         void SetFactionForRace(Player* player, uint8 Race)
         {
             player->setTeamId(player->TeamIdForRace(Race));
@@ -1119,16 +1114,19 @@ public:
                 return;
             me->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
             Map* map = player->GetMap();
+
+            //Muda a facção dos Hordas (dentro da raid ally)
             Map::PlayerList const& playerlist = map->GetPlayers();
             for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
                 if (!itr->GetSource())
                     continue;
-                if (itr->GetSource()->getRace() == RACE_ORC || itr->GetSource()->getRace() == RACE_UNDEAD_PLAYER || itr->GetSource()->getRace() == RACE_TAUREN || itr->GetSource()->getRace() == RACE_TROLL || itr->GetSource()->getRace() == RACE_BLOODELF){
-                    itr->GetSource()->setRace(RACE_HUMAN);
-                    SetFactionForRace(itr->GetSource(), RACE_HUMAN);
-                    ChatHandler(itr->GetSource()->GetSession()).PSendSysMessage("Camuflado para Aliança");
-                    }  
-                }
+                if (itr->GetSource()->getRace(true) == RACE_ORC || itr->GetSource()->getRace(true) == RACE_UNDEAD_PLAYER || itr->GetSource()->getRace(true) == RACE_TAUREN || itr->GetSource()->getRace(true) == RACE_TROLL || itr->GetSource()->getRace(true) == RACE_BLOODELF){
+                    itr->GetSource()->setRace(itr->GetSource()->getRace(true));
+                    SetFactionForRace(itr->GetSource(), itr->GetSource()->getRace(true));
+                }  
+            }
+            //Termina aqui
+
             me->GetTransport()->setActive(true);
             me->GetTransport()->ToMotionTransport()->EnableMovement(true);
             _events.ScheduleEvent(EVENT_INTRO_A_1, 5000);

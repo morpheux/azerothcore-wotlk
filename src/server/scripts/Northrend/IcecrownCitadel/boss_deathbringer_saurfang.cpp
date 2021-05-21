@@ -738,6 +738,13 @@ public:
         std::list<Creature*> _guardList;
     };
 
+    void SetFactionForRace(Player* player, uint8 Race)
+        {
+            player->setTeamId(player->TeamIdForRace(Race));
+            ChrRacesEntry const* DBCRace = sChrRacesStore.LookupEntry(Race);
+            player->setFaction(DBCRace ? DBCRace->FactionID : 0);
+        }
+
     bool OnGossipHello(Player* player, Creature* creature) override
     {
         InstanceScript* instance = creature->GetInstanceScript();
@@ -755,6 +762,16 @@ public:
         InstanceScript* instance = creature->GetInstanceScript();
         if (instance && instance->GetBossState(DATA_DEATHBRINGER_SAURFANG) != DONE && instance->GetBossState(DATA_DEATHBRINGER_SAURFANG) != IN_PROGRESS)
         {
+            Map* map = player->GetMap();
+            Map::PlayerList const& playerlist = map->GetPlayers();
+            for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
+                if (!itr->GetSource())
+                    continue;
+                if (itr->GetSource()->getRace(true) == RACE_HUMAN || itr->GetSource()->getRace(true) == RACE_DWARF || itr->GetSource()->getRace(true) == RACE_NIGHTELF || itr->GetSource()->getRace(true) == RACE_GNOME || itr->GetSource()->getRace(true) == RACE_DRAENEI){
+                    itr->GetSource()->setRace(itr->GetSource()->getRace(true));
+                    SetFactionForRace(itr->GetSource(), itr->GetSource()->getRace(true));
+                }
+            }
             ClearGossipMenuFor(player);
             CloseGossipMenuFor(player);
             if (action == -ACTION_START_EVENT)
@@ -964,11 +981,32 @@ public:
         return true;
     }
 
+    //usado na troca de facção abaixo
+    void SetFactionForRace(Player* player, uint8 Race)
+        {
+            player->setTeamId(player->TeamIdForRace(Race));
+            ChrRacesEntry const* DBCRace = sChrRacesStore.LookupEntry(Race);
+            player->setFaction(DBCRace ? DBCRace->FactionID : 0);
+        }
+
     bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action) override
     {
         InstanceScript* instance = creature->GetInstanceScript();
         if (instance && instance->GetBossState(DATA_DEATHBRINGER_SAURFANG) != DONE && instance->GetBossState(DATA_DEATHBRINGER_SAURFANG) != IN_PROGRESS)
         {
+            //Volta o pessoal pra facção original
+            Map* map = player->GetMap();
+            Map::PlayerList const& playerlist = map->GetPlayers();
+            for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
+                if (!itr->GetSource())
+                    continue;
+                if (itr->GetSource()->getRace(true) == RACE_ORC || itr->GetSource()->getRace(true) == RACE_UNDEAD_PLAYER || itr->GetSource()->getRace(true) == RACE_TAUREN || itr->GetSource()->getRace(true) == RACE_TROLL || itr->GetSource()->getRace(true) == RACE_BLOODELF){
+                    itr->GetSource()->setRace(itr->GetSource()->getRace(true));
+                    SetFactionForRace(itr->GetSource(), itr->GetSource()->getRace(true));
+                }  
+            }
+            //termina aqui
+
             ClearGossipMenuFor(player);
             CloseGossipMenuFor(player);
             if (action == -ACTION_START_EVENT + 1)
