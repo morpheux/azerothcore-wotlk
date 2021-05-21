@@ -630,7 +630,6 @@ public:
                         SetFactionForRace(itr->GetSource(), itr->GetSource()->getRace(true));
                     }
                 }
-                CloseGossipMenuFor(player);
             }
             if (Creature* creature = me->FindNearestCreature(creatureEntry, 200.0f))
                 creature->AI()->Talk(textId);
