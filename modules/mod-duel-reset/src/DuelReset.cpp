@@ -31,8 +31,8 @@ class DuelResetScript : public PlayerScript
         void OnDuelStart(Player* player1, Player* player2) override
         {
                 // Temporary basic cooldown reset
-                //player1->RemoveArenaSpellCooldowns();
-                //player2->RemoveArenaSpellCooldowns();
+                player1->RemoveArenaSpellCooldowns();
+                player2->RemoveArenaSpellCooldowns();
                 player1->SaveHealthBeforeDuel();
                 player1->SetHealth(player1->GetMaxHealth());
                 player2->SaveHealthBeforeDuel();
@@ -59,8 +59,8 @@ class DuelResetScript : public PlayerScript
             // Temporary basic cooldown reset
             winner->SetHealth(winner->GetMaxHealth());
             loser->SetHealth(loser->GetMaxHealth());
-            winner->RemoveAllSpellCooldown();
-            loser->RemoveAllSpellCooldown();
+            //winner->RemoveAllSpellCooldown();
+            //loser->RemoveAllSpellCooldown();
 
             // check if player1 class uses mana
             if (winner->getPowerType() == POWER_MANA || winner->getClass() == CLASS_DRUID)
