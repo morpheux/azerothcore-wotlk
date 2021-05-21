@@ -91,7 +91,7 @@ uint32 tabardAlly[] = { 60020,	//Tabard of Stormwind
 */
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////	EtMaXx PvP Reward NPC								///////////////
+/////////////	                    EtMaXx Cafe      				///////////////
 ///////////////////////////////////////////////////////////////////////////////////
 class etmaxx_npc : public CreatureScript
 {
@@ -208,6 +208,7 @@ public: etmaxx_npc() : CreatureScript("etmaxx_npc") {}
                 CloseGossipMenuFor(player);
               }else{
                 ChatHandler(player->GetSession()).PSendSysMessage("Você precisa de 15 EtMaXx Victory Mark");
+                CloseGossipMenuFor(player);
               }
               
           }
@@ -2660,7 +2661,7 @@ public: etmaxx_event() : CreatureScript("etmaxx_event") {}
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////                 NPC T8                               	///////////////
+/////////////                 NPC Ladrão de Ulduar                 	///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
 class etmaxx_startset : public CreatureScript
@@ -2671,7 +2672,7 @@ public: etmaxx_startset() : CreatureScript("etmaxx_startset") {}
       {
           ClearGossipMenuFor(player);
 
-          AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_09:35:35:-25:0|tMe da logo essa token", 100, 0, "Tem certeza que vai gastar 1500 EtMaXx Mark e 5 EtMaXx Mega Mark ?", 0, false);
+          AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_09:35:35:-25:0|tMe da logo essa token", 100, 0, "Tem certeza que vai gastar 500 EtMaXx Mark e 2 EtMaXx Mega Mark ?", 0, false);
           AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_10:35:35:-25:0|tQuero dar uma olhada no que você tem ai.", 200, 0);
           AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 9999, 0);
           AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/PaperDollInfoFrame/UI-GearManager-Undo:35:35:-25:0|tUpdate Menu", 9999, 0);
@@ -2689,10 +2690,10 @@ public: etmaxx_startset() : CreatureScript("etmaxx_startset") {}
           {
           case 100:
           {
-              if (player->HasItemCount(60000, 1500) && player->HasItemCount(60004, 5))
+              if (player->HasItemCount(60000, 500) && player->HasItemCount(60004, 2))
               {
-                  player->DestroyItemCount(60000, 1500, true);
-                  player->DestroyItemCount(60004, 5, true);
+                  player->DestroyItemCount(60000, 500, true);
+                  player->DestroyItemCount(60004, 2, true);
                   player->AddItem(800801, 1);
                   ChatHandler(player->GetSession()).PSendSysMessage("Você Recebeu 1 EtMaXx Tier 8 Token, fale com o NPC novamente para trocar por uma parte Tier 8");
                   CloseGossipMenuFor(player);
