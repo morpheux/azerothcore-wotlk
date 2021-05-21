@@ -15,6 +15,9 @@
 #include "Group.h"
 #include "InstanceScript.h"
 
+
+
+
 // 25 tabards
 uint32 tabardHorda[] = { 60044,	//Tabard of Orgrimmar
     60045,	//Tabard of Orgrimmar
@@ -3240,10 +3243,10 @@ public: etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
       bool OnGossipHello(Player* player, Creature* creature)
       {
           player->PlayerTalkClass->ClearMenus();
-          if(player->GetTeamId() == TEAM_ALLIANCE){
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tCamuflagem Horda", 1, 0);
-          }else{
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tCamuflagem Aliança", 2, 0);
+          if(creature->FindNearestCreature(39371,100.0f)){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tCamuflagem Aliança", 1, 0);
+          }else if(creature->FindNearestCreature(31428,100.0f)){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tCamuflagem Horda", 2, 0);
           }
           AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 5000, 0);
           AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tUpdate Menu...", 5000, 0);
@@ -3261,11 +3264,13 @@ public: etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
                 for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
                     if (!itr->GetSource())
                         continue;
-                    itr->GetSource()->setRace(2);
-                    SetFactionForRace(itr->GetSource(), 2);
+                    if (itr->GetSource()->getRace() == RACE_ORC || itr->GetSource()->getRace() == RACE_UNDEAD_PLAYER || itr->GetSource()->getRace() == RACE_TAUREN || itr->GetSource()->getRace() == RACE_TROLL || itr->GetSource()->getRace() == RACE_BLOODELF){
+                        itr->GetSource()->setRace(RACE_HUMAN);
+                        SetFactionForRace(itr->GetSource(), RACE_HUMAN);
+                        ChatHandler(itr->GetSource()->GetSession()).PSendSysMessage("Camuflado para Aliança");
+                    }  
                 }
-                CloseGossipMenuFor(player);
-                ChatHandler(player->GetSession()).PSendSysMessage("Camuflado Horda!");        
+                CloseGossipMenuFor(player);      
             }break;
 
             case 2:{
@@ -3274,11 +3279,13 @@ public: etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
                 for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
                     if (!itr->GetSource())
                         continue;
-                    itr->GetSource()->setRace(1);
-                    SetFactionForRace(itr->GetSource(), 1);
+                    if (itr->GetSource()->getRace() == RACE_HUMAN || itr->GetSource()->getRace() == RACE_DWARF || itr->GetSource()->getRace() == RACE_NIGHTELF || itr->GetSource()->getRace() == RACE_GNOME || itr->GetSource()->getRace() == RACE_DRAENEI){
+                        itr->GetSource()->setRace(RACE_ORC);
+                        SetFactionForRace(itr->GetSource(), RACE_ORC);
+                        ChatHandler(itr->GetSource()->GetSession()).PSendSysMessage("Camuflado para Horda");
+                    }
                 }
                 CloseGossipMenuFor(player);
-                ChatHandler(player->GetSession()).PSendSysMessage("Camuflado Ally!"); 
             }break;
 
             case 5000:{ // Main menu

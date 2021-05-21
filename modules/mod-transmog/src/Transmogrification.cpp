@@ -639,9 +639,9 @@ void Transmogrification::LoadConfig(bool reload)
     TokenEntry = uint32(60000);
     TokenAmount = uint32(100);
 
-    AllowPoor = true;
-    AllowCommon = true;
-    AllowUncommon = true;
+    AllowPoor = false;
+    AllowCommon = false;
+    AllowUncommon = false;
     AllowRare = true;
     AllowEpic = true;
     AllowLegendary = true;
