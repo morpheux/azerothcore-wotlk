@@ -586,7 +586,7 @@ public:
             }
 
             uint32 cannonEntry = _teamIdInInstance == TEAM_HORDE ? NPC_HORDE_GUNSHIP_CANNON : NPC_ALLIANCE_GUNSHIP_CANNON;
-            if (GameObject* go = _instance->instance->GetGameObject(_instance->GetGuidData(DATA_ICECROWN_GUNSHIP_BATTLE)))
+            if (GameObject* go = _instance->instance->GetGameObject(_instance->GetData64(DATA_ICECROWN_GUNSHIP_BATTLE)))
                 if (MotionTransport* t = go->ToMotionTransport())
                 {
                     Transport::PassengerSet const& passengers = t->GetStaticPassengers();
@@ -598,7 +598,7 @@ public:
                         cannon->CastSpell(cannon, SPELL_EJECT_ALL_PASSENGERS, true);
 
                         WorldPacket data(SMSG_PLAYER_VEHICLE_DATA, cannon->GetPackGUID().size() + 4);
-                        data << cannon->GetPackGUID();
+                        data.append(cannon->GetPackGUID());
                         data << uint32(0);
                         cannon->SendMessageToSet(&data, true);
 
@@ -618,8 +618,8 @@ public:
 
             if (isVictory)
             {
-                if (Transport * transport = _instance->instance->GetTransport(_instance->GetGuidData(DATA_ICECROWN_GUNSHIP_BATTLE)))
-                    if (MotionTransport* otherTransport = transport->ToMotionTransport())
+                if (GameObject* go = HashMapHolder<GameObject>::Find(_instance->GetData64(DATA_ICECROWN_GUNSHIP_BATTLE)))
+                    if (MotionTransport* otherTransport = go->ToMotionTransport())
                         otherTransport->EnableMovement(true);
 
                 me->GetTransport()->ToMotionTransport()->EnableMovement(true);
@@ -632,7 +632,7 @@ public:
                 }
 
                 for (uint8 i = 0; i < 2; ++i)
-                    if (GameObject* go = _instance->instance->GetGameObject(_instance->GetGuidData(i == 0 ? DATA_ICECROWN_GUNSHIP_BATTLE : DATA_ENEMY_GUNSHIP)))
+                    if (GameObject* go = _instance->instance->GetGameObject(_instance->GetData64(i == 0 ? DATA_ICECROWN_GUNSHIP_BATTLE : DATA_ENEMY_GUNSHIP)))
                         if (MotionTransport* t = go->ToMotionTransport())
                         {
                             Transport::PassengerSet const& passengers = t->GetPassengers();
@@ -649,16 +649,16 @@ public:
             else
             {
                 uint32 teleportSpellId = _teamIdInInstance == TEAM_HORDE ? SPELL_TELEPORT_PLAYERS_ON_RESET_H : SPELL_TELEPORT_PLAYERS_ON_RESET_A;
-                me->m_Events.AddEvent(new ResetEncounterEvent(me, teleportSpellId, _instance->GetGuidData(DATA_ENEMY_GUNSHIP)), me->m_Events.CalculateTime(8000));
+                me->m_Events.AddEvent(new ResetEncounterEvent(me, teleportSpellId, _instance->GetData64(DATA_ENEMY_GUNSHIP)), me->m_Events.CalculateTime(8000));
             }
         }
 
-        void SetGUID(ObjectGuid guid, int32 id/* = 0*/) override
+        void SetGUID(uint64 guid, int32 id/* = 0*/) override
         {
             if (id != ACTION_SHIP_VISITS_ENEMY && id != ACTION_SHIP_VISITS_SELF)
                 return;
 
-            std::map<ObjectGuid, uint32>::iterator itr = _shipVisits.find(guid);
+            std::map<uint64, uint32>::iterator itr = _shipVisits.find(guid);
             if (itr == _shipVisits.end())
             {
                 if (id == ACTION_SHIP_VISITS_ENEMY)
@@ -693,7 +693,7 @@ public:
             if (id != ACTION_SHIP_VISITS_ENEMY)
                 return 0;
 
-            for (std::map<ObjectGuid, uint32>::const_iterator itr = _shipVisits.begin(); itr != _shipVisits.end(); ++itr)
+            for (std::map<uint64, uint32>::const_iterator itr = _shipVisits.begin(); itr != _shipVisits.end(); ++itr)
                 if (itr->second == 0)
                     return 0;
 
@@ -703,7 +703,7 @@ public:
     private:
         InstanceScript* _instance;
         TeamId _teamIdInInstance;
-        std::map<ObjectGuid, uint32> _shipVisits;
+        std::map<uint64, uint32> _shipVisits;
         bool _died;
         bool _summonedFirstMage;
     };
@@ -736,7 +736,6 @@ public:
             checkTimer = 1000;
         }
 
-        //Usado na troca de facção abaixo
         void SetFactionForRace(Player* player, uint8 Race)
         {
             player->setTeamId(player->TeamIdForRace(Race));
@@ -749,20 +748,16 @@ public:
             if (!me->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP))
                 return;
             me->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
-            
-            //Muda a facção dos Allys (na raid horda)
             Map* map = player->GetMap();
-            Map::PlayerList const& playerlist = map->GetPlayers();
-            for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
-                if (!itr->GetSource())
-                    continue;
-                if (itr->GetSource()->getRace() == RACE_HUMAN || itr->GetSource()->getRace() == RACE_DWARF || itr->GetSource()->getRace() == RACE_NIGHTELF || itr->GetSource()->getRace() == RACE_GNOME || itr->GetSource()->getRace() == RACE_DRAENEI){
-                    itr->GetSource()->setRace(RACE_ORC);
-                    SetFactionForRace(itr->GetSource(), RACE_ORC);
+                Map::PlayerList const& playerlist = map->GetPlayers();
+                for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
+                    if (!itr->GetSource())
+                        continue;
+                    if (itr->GetSource()->getRace() == RACE_HUMAN || itr->GetSource()->getRace() == RACE_DWARF || itr->GetSource()->getRace() == RACE_NIGHTELF || itr->GetSource()->getRace() == RACE_GNOME || itr->GetSource()->getRace() == RACE_DRAENEI){
+                        itr->GetSource()->setRace(RACE_ORC);
+                        SetFactionForRace(itr->GetSource(), RACE_ORC);
+                    }
                 }
-            }
-            //Termina aqui
-
             me->GetTransport()->setActive(true);
             me->GetTransport()->ToMotionTransport()->EnableMovement(true);
             _events.ScheduleEvent(EVENT_INTRO_H_1, 5000);
@@ -1093,33 +1088,11 @@ public:
             checkTimer = 1000;
         }
 
-        //Usado na Troca de facção abaixo
-        void SetFactionForRace(Player* player, uint8 Race)
-        {
-            player->setTeamId(player->TeamIdForRace(Race));
-            ChrRacesEntry const* DBCRace = sChrRacesStore.LookupEntry(Race);
-            player->setFaction(DBCRace ? DBCRace->FactionID : 0);
-        }
-
-        void sGossipSelect(Player* player, uint32 /*sender*/, uint32 /*action*/) override
+        void sGossipSelect(Player* /*player*/, uint32 /*sender*/, uint32 /*action*/) override
         {
             if (!me->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP))
                 return;
             me->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
-            Map* map = player->GetMap();
-
-            //Muda a facção dos Hordas (dentro da raid ally)
-            Map::PlayerList const& playerlist = map->GetPlayers();
-            for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
-                if (!itr->GetSource())
-                    continue;
-                if (itr->GetSource()->getRace(true) == RACE_ORC || itr->GetSource()->getRace(true) == RACE_UNDEAD_PLAYER || itr->GetSource()->getRace(true) == RACE_TAUREN || itr->GetSource()->getRace(true) == RACE_TROLL || itr->GetSource()->getRace(true) == RACE_BLOODELF){
-                    itr->GetSource()->setRace(itr->GetSource()->getRace(true));
-                    SetFactionForRace(itr->GetSource(), itr->GetSource()->getRace(true));
-                }  
-            }
-            //Termina aqui
-
             me->GetTransport()->setActive(true);
             me->GetTransport()->ToMotionTransport()->EnableMovement(true);
             _events.ScheduleEvent(EVENT_INTRO_A_1, 5000);
