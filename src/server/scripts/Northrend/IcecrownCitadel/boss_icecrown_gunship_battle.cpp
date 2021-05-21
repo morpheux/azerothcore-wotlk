@@ -553,6 +553,12 @@ public:
                 captain->AI()->DoAction(ACTION_SPAWN_MAGE);
         }
 
+        void SetFactionForRace(Player* player, uint8 Race){
+                player->setTeamId(player->TeamIdForRace(Race));
+                ChrRacesEntry const* DBCRace = sChrRacesStore.LookupEntry(Race);
+                player->setFaction(DBCRace ? DBCRace->FactionID : 0);
+        };
+
         void JustDied(Unit* /*killer*/) override
         {
             if (_died || _instance->GetBossState(DATA_ICECROWN_GUNSHIP_BATTLE) != IN_PROGRESS)
@@ -607,11 +613,24 @@ public:
                 }
 
             uint32 creatureEntry = NPC_IGB_MURADIN_BRONZEBEARD;
-            uint8 textId = isVictory ? SAY_MURADIN_VICTORY : SAY_MURADIN_WIPE;
+            uint8 textId = isVictory ? SAY_MURADIN_VICTORY : SAY_MURADIN_WIPE;  
+            
             if (_teamIdInInstance == TEAM_HORDE)
             {
                 creatureEntry = NPC_IGB_HIGH_OVERLORD_SAURFANG;
                 textId = isVictory ? SAY_SAURFANG_VICTORY : SAY_SAURFANG_WIPE;
+                Player* player;
+                Map* map = player->GetMap();
+                Map::PlayerList const& playerlist = map->GetPlayers();
+                for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
+                    if (!itr->GetSource())
+                        continue;
+                    if (itr->GetSource()->getRace(true) == RACE_HUMAN || itr->GetSource()->getRace(true) == RACE_DWARF || itr->GetSource()->getRace(true) == RACE_NIGHTELF || itr->GetSource()->getRace(true) == RACE_GNOME || itr->GetSource()->getRace(true) == RACE_DRAENEI){
+                        itr->GetSource()->setRace(itr->GetSource()->getRace(true));
+                        SetFactionForRace(itr->GetSource(), itr->GetSource()->getRace(true));
+                    }
+                }
+                CloseGossipMenuFor(player);
             }
             if (Creature* creature = me->FindNearestCreature(creatureEntry, 200.0f))
                 creature->AI()->Talk(textId);
@@ -1088,11 +1107,29 @@ public:
             checkTimer = 1000;
         }
 
-        void sGossipSelect(Player* /*player*/, uint32 /*sender*/, uint32 /*action*/) override
+        void SetFactionForRace(Player* player, uint8 Race)
+        {
+            player->setTeamId(player->TeamIdForRace(Race));
+            ChrRacesEntry const* DBCRace = sChrRacesStore.LookupEntry(Race);
+            player->setFaction(DBCRace ? DBCRace->FactionID : 0);
+        }
+
+        void sGossipSelect(Player* player, uint32 /*sender*/, uint32 /*action*/) override
         {
             if (!me->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP))
                 return;
             me->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
+            Map* map = player->GetMap();
+            Map::PlayerList const& playerlist = map->GetPlayers();
+            for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
+                if (!itr->GetSource())
+                    continue;
+                if (itr->GetSource()->getRace() == RACE_ORC || itr->GetSource()->getRace() == RACE_UNDEAD_PLAYER || itr->GetSource()->getRace() == RACE_TAUREN || itr->GetSource()->getRace() == RACE_TROLL || itr->GetSource()->getRace() == RACE_BLOODELF){
+                    itr->GetSource()->setRace(RACE_HUMAN);
+                    SetFactionForRace(itr->GetSource(), RACE_HUMAN);
+                    ChatHandler(itr->GetSource()->GetSession()).PSendSysMessage("Camuflado para Aliança");
+                    }  
+                }
             me->GetTransport()->setActive(true);
             me->GetTransport()->ToMotionTransport()->EnableMovement(true);
             _events.ScheduleEvent(EVENT_INTRO_A_1, 5000);
