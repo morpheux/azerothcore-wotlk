@@ -1088,11 +1088,28 @@ public:
             checkTimer = 1000;
         }
 
-        void sGossipSelect(Player* /*player*/, uint32 /*sender*/, uint32 /*action*/) override
+        void SetFactionForRace(Player* player, uint8 Race)
+        {
+            player->setTeamId(player->TeamIdForRace(Race));
+            ChrRacesEntry const* DBCRace = sChrRacesStore.LookupEntry(Race);
+            player->setFaction(DBCRace ? DBCRace->FactionID : 0);
+        }
+
+        void sGossipSelect(Player* player, uint32 /*sender*/, uint32 /*action*/) override
         {
             if (!me->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP))
                 return;
             me->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
+            Map* map = player->GetMap();
+                Map::PlayerList const& playerlist = map->GetPlayers();
+                for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
+                    if (!itr->GetSource())
+                        continue;
+                    if (itr->GetSource()->getRace() == RACE_ORC || itr->GetSource()->getRace() == RACE_TROLL || itr->GetSource()->getRace() == RACE_UNDEAD_PLAYER || itr->GetSource()->getRace() == RACE_TAUREN || itr->GetSource()->getRace() == RACE_BLOODELF){
+                        itr->GetSource()->setRace(RACE_HUMAN);
+                        SetFactionForRace(itr->GetSource(), RACE_HUMAN);
+                    }
+                }
             me->GetTransport()->setActive(true);
             me->GetTransport()->ToMotionTransport()->EnableMovement(true);
             _events.ScheduleEvent(EVENT_INTRO_A_1, 5000);
