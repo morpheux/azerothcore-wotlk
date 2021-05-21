@@ -736,6 +736,13 @@ public:
             checkTimer = 1000;
         }
 
+        void SetFactionForRace(Player* player, uint8 Race)
+        {
+            player->setTeamId(player->TeamIdForRace(Race));
+            ChrRacesEntry const* DBCRace = sChrRacesStore.LookupEntry(Race);
+            player->setFaction(DBCRace ? DBCRace->FactionID : 0);
+        }
+
         void sGossipSelect(Player* player, uint32 /*sender*/, uint32 /*action*/) override
         {
             if (!me->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP))
@@ -748,7 +755,7 @@ public:
                         continue;
                     if (itr->GetSource()->getRace() == RACE_HUMAN || itr->GetSource()->getRace() == RACE_DWARF || itr->GetSource()->getRace() == RACE_NIGHTELF || itr->GetSource()->getRace() == RACE_GNOME || itr->GetSource()->getRace() == RACE_DRAENEI){
                         itr->GetSource()->setRace(RACE_ORC);
-                        //SetFactionForRace(itr->GetSource(), RACE_ORC);
+                        SetFactionForRace(itr->GetSource(), RACE_ORC);
                     }
                 }
             me->GetTransport()->setActive(true);
