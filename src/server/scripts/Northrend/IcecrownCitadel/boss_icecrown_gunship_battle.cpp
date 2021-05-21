@@ -736,11 +736,21 @@ public:
             checkTimer = 1000;
         }
 
-        void sGossipSelect(Player* /*player*/, uint32 /*sender*/, uint32 /*action*/) override
+        void sGossipSelect(Player* player, uint32 /*sender*/, uint32 /*action*/) override
         {
             if (!me->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP))
                 return;
             me->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
+            Map* map = player->GetMap();
+                Map::PlayerList const& playerlist = map->GetPlayers();
+                for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr){
+                    if (!itr->GetSource())
+                        continue;
+                    if (itr->GetSource()->getRace() == RACE_HUMAN || itr->GetSource()->getRace() == RACE_DWARF || itr->GetSource()->getRace() == RACE_NIGHTELF || itr->GetSource()->getRace() == RACE_GNOME || itr->GetSource()->getRace() == RACE_DRAENEI){
+                        itr->GetSource()->setRace(RACE_ORC);
+                        //SetFactionForRace(itr->GetSource(), RACE_ORC);
+                    }
+                }
             me->GetTransport()->setActive(true);
             me->GetTransport()->ToMotionTransport()->EnableMovement(true);
             _events.ScheduleEvent(EVENT_INTRO_H_1, 5000);
