@@ -106,6 +106,8 @@ public:
         if (action == GOSSIP_ACTION_INFO_DEF + 3)
         {
             if(player->HasItemCount(60000,2000) && player->HasItemCount(60004,5)){
+                player->DestroyItemCount(60000,2000,true);
+                player->DestroyItemCount(60004,5,true);
                 player->AddItem(800807,1);
                 CloseGossipMenuFor(player);
             }else{
