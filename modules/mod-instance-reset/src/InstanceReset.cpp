@@ -34,7 +34,9 @@ public:
         }
 
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias normais exceto ICC e Ruby sem custo.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
-
+        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "---------------------------------", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Comprar uma Token de Heroic Reset", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
+        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Resetar TODAS minhas instancias", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
@@ -100,6 +102,36 @@ public:
             creature->MonsterWhisper("Seus cooldowns foram resetados exceto ICC e Ruby", player);
             CloseGossipMenuFor(player);
         }
+
+        if (action == GOSSIP_ACTION_INFO_DEF + 3)
+        {
+            if(player->HasItemCount(60000,2000) && player->HasItemCount(60004,5)){
+                player->AddItem(800807,1);
+                CloseGossipMenuFor(player);
+            }else{
+                creature->MonsterWhisper("Você precisa de 2000 EtMaXx Mark + 5 EtMaXx Mega Mark", player);
+                CloseGossipMenuFor(player);
+            }
+        }
+
+        if (action == GOSSIP_ACTION_INFO_DEF + 4)
+        {
+            for (uint8 i = 0; i <= 3; ++i)
+            {
+                BoundInstancesMap const& m_boundInstances = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
+                for (BoundInstancesMap::const_iterator itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
+                {
+                    if (itr->first != player->GetMapId())
+                    {
+                        sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
+                        itr = m_boundInstances.begin();
+                    }
+                    else
+                        ++itr;
+                }
+            }
+        }
+
         return true;
     }
 };
