@@ -266,57 +266,58 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
 
           if (result && bpvip == 0)
           {
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero participar do EtMaXx VIP Battle Pass", 2, 0, "Tem certeza ?", 0, false);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_qiraj_jewelglyphed:30:30:-18:0|tQuero participar do EtMaXx VIP Battle Pass", 2, 0, "Tem certeza ?", 0, false);
 
               if (player->HasItemCount(80001, 1, true))
               {
-                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", 4, 0, "Tem certeza ?", 0, false);
+                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_08:30:30:-18:0|tQuero entregar um EtMaXx BP Daily Mark", 4, 0, "Tem certeza ?", 0, false);
               }
 
               if (player->HasItemCount(80002, 1, true))
               {
-                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", 5, 0, "Tem certeza ?", 0, false);
+                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_11:30:30:-18:0|tQuero entregar um EtMaXx BP Week Mark", 5, 0, "Tem certeza ?", 0, false);
               }
 
               if (player->HasItemCount(80003, 1, true))
               {
-                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", 6, 0, "Tem certeza ?", 0, false);
+                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_qiraj_jewelblessed:30:30:-18:0|tQuero entregar um EtMaXx BP Unique Mark", 6, 0, "Tem certeza ?", 0, false);
               }
 
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", 3, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_elvencoins:30:30:-18:0|tQuero ver meus Battle Points", 3, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 5000, 0);
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Me Mostre o Battle Pass", 100, 0);
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Resgate sua Recompensa", 2000, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_05:30:30:-18:0|tMe Mostre o Battle Pass", 100, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_02:30:30:-18:0|tResgate sua Recompensa", 2000, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_shortblade_47:30:30:-18:0|tTransmogs Exclusivos do Battlepass", 3000, 0);
           }
           else if (result && bpvip == 1)
           {
               if (player->HasItemCount(80001, 1, true))
               {
-                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Daily Mark", 4, 0, "Tem certeza ?", 0, false);
+                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_08:30:30:-18:0|tQuero entregar um EtMaXx BP Daily Mark", 4, 0, "Tem certeza ?", 0, false);
               }
 
               if (player->HasItemCount(80002, 1, true))
               {
-                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Week Mark", 5, 0, "Tem certeza ?", 0, false);
+                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_11:30:30:-18:0|tQuero entregar um EtMaXx BP Week Mark", 5, 0, "Tem certeza ?", 0, false);
               }
 
               if (player->HasItemCount(80003, 1, true))
               {
-                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero entregar um EtMaXx BP Unique Mark", 6, 0, "Tem certeza ?", 0, false);
+                  AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_qiraj_jewelblessed:30:30:-18:0|tQuero entregar um EtMaXx BP Unique Mark", 6, 0, "Tem certeza ?", 0, false);
               }
 
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero ver meus Battle Points", 3, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_elvencoins:30:30:-18:0|tQuero ver meus Battle Points", 3, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 5000, 0);
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Me Mostre o Battle Pass", 100, 0);
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Resgate sua Recompensa", 2000, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_05:30:30:-18:0|tMe Mostre o Battle Pass", 100, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_02:30:30:-18:0|tResgate sua Recompensa", 2000, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_shortblade_47:30:30:-18:0|tTransmogs Exclusivos do Battlepass", 3000, 0);
           }
           else
           {
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Quero Participar do EtMaXx Battle Pass", 1, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_04:30:30:-18:0|tQuero Participar do EtMaXx Battle Pass", 1, 0);
           }
 
           SendGossipMenuFor(player, 800808, creature->GetGUID());
-          //player->PlayerTalkClass->SendGossipMenu(800806, creature->GetGUID());
           return true;
       }
 
@@ -394,7 +395,7 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
           }
 
           break;
-
+ 
           case 100:
           {
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Esta são as recompensas do Battle Pass deste mes:", 100, 0);
@@ -405,21 +406,21 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t80 000 Honor Points - 500 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 100, 0);
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t40 Caixa Misteriosa PvP - 800 Pontos", 100, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 900 Pontos", 100, 0);
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark- 1000 Pontos", 100, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:25:25|tEtMaXx Battle Pass Weapon - 1000 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Se possuir o Battle Pass VIP além das recompensas normais você receberá:", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t30 000 de Gold - 100 Pontos", 100, 0);
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t20 Caixa Misteriosa PvP - 200 Pontos", 100, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:25:25|tEtMaXx Battle Pass Weapon - 200 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t90 000 Honor Points  - 300 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t400 Arena Points - 500 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 600 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 100, 0);
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|t2 BAG VIP - 900 Pontos", 100, 0);
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_01:25:25|tEtMaXx Mount Mark + 40 Caixinhas Misteriosa - 1000 Pontos", 100, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|t2 BAG VIP + Bandeira da Discordia - 900 Pontos", 100, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_01:25:25|tEtMaXx VIP Battle Pass + EtMaXx Fire Aura - 1000 Pontos", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 5000, 0);
               SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -441,9 +442,12 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
           case 5000:	// Main menu
           {
               OnGossipHello(player, creature);
-          }
+          }break;
 
-          break;
+          case 3000:	// Main menu
+          {
+              player->GetSession()->SendListInventory(creature->GetGUID(), 99000);
+          }
 
           case 2000:	// Resgate de Recompensas
           {
@@ -488,7 +492,7 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
                   if (points >= 200 && viptier2 == 0)
                   {
                       AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:25:25|t2 000 EtMaXx Mark - 200 Pontos", 2200, 0);
-                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t20 Caixa Misteriosa PvP - 200 Pontos", 3200, 0);
+                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:25:25|tEtMaXx Battle Pass Weapon - 200 Pontos", 3200, 0);
                   }
 
                   if (points >= 300 && viptier3 == 0)
@@ -522,20 +526,20 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
 
                   if (points >= 800 && viptier8 == 0)
                   {
-                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t40 Caixa Misteriosa PvP - 800 Pontos", 2800, 0);
+                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 2800, 0);
                       AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 3800, 0);
                   }
 
                   if (points >= 900 && viptier9 == 0)
                   {
                       AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 900 Pontos", 2900, 0);
-                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|t2 BAG VIP - 900 Pontos", 3900, 0);
+                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|t2 BAG VIP  + Bandeira da Discordia - 900 Pontos", 3900, 0);
                   }
 
                   if (points >= 1000 && viptier10 == 0)
                   {
-                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark- 1000 Pontos", 21000, 0);
-                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_01:25:25|tEtMaXx Mount Mark + 40 Caixinhas Misteriosa - 1000 Pontos", 31000, 0);
+                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:25:25|tEtMaXx Battle Pass Weapon - 1000 Pontos", 21000, 0);
+                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_qiraj_jewelglyphed:25:25|tEtMaXx VIP Battle Pass + EtMaXx Fire Aura - 1000 Pontos", 31000, 0);
                   }
 
                   SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -582,7 +586,7 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
 
                   if (points >= 800 && tier8 == 0)
                   {
-                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_04:25:25|t40 Caixa Misteriosa PvP - 800 Pontos", 2800, 0);
+                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 2800, 0);
                   }
 
                   if (points >= 900 && tier9 == 0)
@@ -592,7 +596,7 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
 
                   if (points >= 1000 && tier10 == 0)
                   {
-                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark- 1000 Pontos", 21000, 0);
+                      AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:25:25|tEtMaXx Battle Pass Weapon- 1000 Pontos", 21000, 0);
                   }
 
                   SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
@@ -664,8 +668,8 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
           case 2800:
           {
               CharacterDatabase.PExecute("UPDATE character_battlepass SET tier8 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-              player->AddItem(50162, 40);
-              ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 8 Resgatada (40 Caixa Misteriosa PvP)");
+              player->AddItem(600600, 4);
+              ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 8 Resgatada (4 EtMaXx Event Mark)");
               CloseGossipMenuFor(player);
           }
 
@@ -682,8 +686,8 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
           case 21000:
           {
               CharacterDatabase.PExecute("UPDATE character_battlepass SET tier10 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-              player->AddItem(600600, 4);
-              ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 10 Resgatada (4 EtMaXx Event Mark)");
+              player->AddItem(800808, 1);
+              ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do Tier 10 Resgatada (EtMaXx Battle Pass Weapon)");
               CloseGossipMenuFor(player);
           }
 
@@ -702,8 +706,8 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
           case 3200:
           {
               CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier2 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-              player->AddItem(50162, 20);
-              ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do VIP Tier 2 Resgatada (20 Caixa Misteriosa PvP)");
+              player->AddItem(800808, 1);
+              ChatHandler(player->GetSession()).PSendSysMessage("Recompensa do VIP Tier 2 Resgatada (EtMaXx Battle Pass Weapon)");
               CloseGossipMenuFor(player);
           }
 
@@ -773,6 +777,7 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
           {
               CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier9 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
               player->AddItem(34845, 2);
+              player->AddItem(38578, 1);
               ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 9 Resgatada (2 Bag VIP)");
               CloseGossipMenuFor(player);
           }
@@ -782,9 +787,9 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
           case 31000:
           {
               CharacterDatabase.PExecute("UPDATE character_battlepass SET viptier10 = 1 WHERE guid = %u", player->GetSession()->GetGuidLow());
-              player->AddItem(47395, 1);
-              player->AddItem(50161, 40);
-              ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 10 Resgatada (1 EtMaXx Mount Mark + 40 Caixa Misteriosa)");
+              player->AddItem(80000, 1);
+              player->AddItem(800806, 1);
+              ChatHandler(player->GetSession()).PSendSysMessage("Recompensa VIP Tier 10 Resgatada (EtMaXx VIP Battle Pass + EtMaXx Fire Aura)");
               CloseGossipMenuFor(player);
           }
 
