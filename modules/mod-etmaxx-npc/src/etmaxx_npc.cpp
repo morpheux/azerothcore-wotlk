@@ -447,7 +447,7 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
           case 3000:	// Main menu
           {
               player->GetSession()->SendListInventory(creature->GetGUID(), 99000);
-          }
+          }break;
 
           case 2000:	// Resgate de Recompensas
           {
