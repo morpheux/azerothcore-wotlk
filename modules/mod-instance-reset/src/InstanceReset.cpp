@@ -116,20 +116,24 @@ public:
 
         if (action == GOSSIP_ACTION_INFO_DEF + 4)
         {
-            for (uint8 i = 0; i <= 3; ++i)
-            {
-                BoundInstancesMap const& m_boundInstances = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
-                for (BoundInstancesMap::const_iterator itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
+            if(player->HasItemCount(800807,1)){
+                for (uint8 i = 0; i <= 3; ++i)
                 {
-                    if (itr->first != player->GetMapId())
+                    BoundInstancesMap const& m_boundInstances = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
+                    for (BoundInstancesMap::const_iterator itr = m_boundInstances.begin(); itr != m_boundInstances.end();)
                     {
-                        sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
-                        itr = m_boundInstances.begin();
+                        if (itr->first != player->GetMapId())
+                        {
+                            sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
+                            itr = m_boundInstances.begin();
+                        }
+                        else
+                            ++itr;
                     }
-                    else
-                        ++itr;
                 }
+                player->DestroyItemCount(800807,1,true);
             }
+            
         }
 
         return true;
