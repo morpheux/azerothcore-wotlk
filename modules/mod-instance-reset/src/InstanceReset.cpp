@@ -35,7 +35,7 @@ public:
 
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias normais exceto ICC e Ruby sem custo.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, "---------------------------------", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
-        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Comprar uma Token de Heroic Reset", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
+        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Comprar uma EtMaXx Instance Reset", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Resetar TODAS minhas instancias", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
@@ -136,6 +136,9 @@ public:
                 player->DestroyItemCount(800807,1,true);
                 creature->MonsterWhisper("Todas suas instancias foram resetadas", player);
                 CloseGossipMenuFor(player);
+            }else{
+                creature->MonsterWhisper("Você não tem uma EtMaXx Instance Reset", player);
+                CloseGossipMenuFor(player);  
             }
             
         }
