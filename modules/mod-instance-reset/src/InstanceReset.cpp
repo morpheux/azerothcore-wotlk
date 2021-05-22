@@ -132,6 +132,8 @@ public:
                     }
                 }
                 player->DestroyItemCount(800807,1,true);
+                creature->MonsterWhisper("Todas suas instancias foram resetadas", player);
+                CloseGossipMenuFor(player);
             }
             
         }
