@@ -641,7 +641,7 @@ void Transmogrification::LoadConfig(bool reload)
 
     AllowPoor = false;
     AllowCommon = false;
-    AllowUncommon = false;
+    AllowUncommon = true;
     AllowRare = true;
     AllowEpic = true;
     AllowLegendary = true;

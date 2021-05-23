@@ -287,7 +287,7 @@ public: etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 5000, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_05:30:30:-18:0|tMe Mostre o Battle Pass", 100, 0);
               AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_02:30:30:-18:0|tResgate sua Recompensa", 2000, 0);
-              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_shortblade_47:30:30:-18:0|tTransmogs Exclusivos do Battlepass", 3000, 0);
+              AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_shortblade_47:30:30:-18:0|tTransmogs Exclusivos do Battlepass", 10, 0);
           }
           else if (result && bpvip == 1)
           {
