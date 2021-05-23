@@ -527,47 +527,47 @@ public:
             //-------------------------------FIM DA CHEGAGEM VIP------------------------------------
 
             //-------------------------------INICIO DA CHEGAGEM FREE------------------------------------
-            if (points >= 100 && tier1 == 0 && bpvip == 0)
+            if (points >= 100 && tier1 == 0)
             {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t15 000 de Gold - 100 Pontos", 2100, 0);
             }
 
-            if (points >= 200 && tier2 == 0 && bpvip == 0)
+            if (points >= 200 && tier2 == 0)
             {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:25:25|t2 000 EtMaXx Mark - 200 Pontos", 2200, 0);
             }
 
-            if (points >= 300 && tier3 == 0 && bpvip == 0)
+            if (points >= 300 && tier3 == 0)
             {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:25:25|t15 EtMaXx Mega Mark - 300 Pontos", 2300, 0);
             }
 
-            if (points >= 400 && tier4 == 0 && bpvip == 0)
+            if (points >= 400 && tier4 == 0)
             {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 2400, 0);
             }
 
-            if (points >= 500 && tier5 == 0 && bpvip == 0)
+            if (points >= 500 && tier5 == 0)
             {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t80 000 Honor Points - 500 Pontos", 2500, 0);
             }
 
-            if (points >= 700 && tier7 == 0 && bpvip == 0)
+            if (points >= 700 && tier7 == 0)
             {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 2700, 0);
             }
 
-            if (points >= 800 && tier8 == 0 && bpvip == 0)
+            if (points >= 800 && tier8 == 0)
             {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 2800, 0);
             }
 
-            if (points >= 900 && tier9 == 0 && bpvip == 0)
+            if (points >= 900 && tier9 == 0)
             {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 900 Pontos", 2900, 0);
             }
 
-            if (points >= 1000 && tier10 == 0 && bpvip == 0)
+            if (points >= 1000 && tier10 == 0)
             {
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:25:25|tEtMaXx Battle Pass Weapon- 1000 Pontos", 21000, 0);
             }
