@@ -235,7 +235,6 @@ public:
     uint32 viptier2 = 0;
     uint32 viptier3 = 0;
     uint32 viptier4 = 0;
-    ;
     uint32 viptier5 = 0;
     uint32 viptier6 = 0;
     uint32 viptier7 = 0;
@@ -345,40 +344,49 @@ public:
 
         case 4:
         {
-            if (player->HasItemCount(80001, 1))
-            {
+                QueryResult result = CharacterDatabase.PQuery("SELECT points FROM character_battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+                if (result)
+                {
+                Field *fields = result->Fetch();
+                points = fields[1].GetUInt32();
+                }
                 player->DestroyItemCount(80001, 1, true);
                 points = points + 8;
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
                 CloseGossipMenuFor(player);
-            }
         }
         break;
 
         case 5:
         {
-            if (player->HasItemCount(80002, 1))
-            {
+                QueryResult result = CharacterDatabase.PQuery("SELECT points FROM character_battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+                if (result)
+                {
+                Field *fields = result->Fetch();
+                points = fields[1].GetUInt32();
+                }
                 player->DestroyItemCount(80002, 1, true);
                 points = points + 40;
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
                 CloseGossipMenuFor(player);
-            }
         }
         break;
 
         case 6:
         {
-            if (player->HasItemCount(80003, 1))
-            {
+                QueryResult result = CharacterDatabase.PQuery("SELECT points FROM character_battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
+                if (result)
+                {
+                Field *fields = result->Fetch();
+                points = fields[1].GetUInt32();
+                }
                 player->DestroyItemCount(80003, 1, true);
                 points = points + 280;
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
                 CloseGossipMenuFor(player);
-            }
         }
         break;
 
