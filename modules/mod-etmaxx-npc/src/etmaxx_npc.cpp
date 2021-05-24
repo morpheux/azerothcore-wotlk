@@ -344,12 +344,6 @@ public:
 
         case 4:
         {
-                QueryResult result = CharacterDatabase.PQuery("SELECT points FROM character_battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
-                if (result)
-                {
-                Field *fields = result->Fetch();
-                points = fields[1].GetUInt32();
-                }
                 player->DestroyItemCount(80001, 1, true);
                 points = points + 8;
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
@@ -360,12 +354,6 @@ public:
 
         case 5:
         {
-                QueryResult result = CharacterDatabase.PQuery("SELECT points FROM character_battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
-                if (result)
-                {
-                Field *fields = result->Fetch();
-                points = fields[1].GetUInt32();
-                }
                 player->DestroyItemCount(80002, 1, true);
                 points = points + 40;
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
@@ -376,12 +364,6 @@ public:
 
         case 6:
         {
-                QueryResult result = CharacterDatabase.PQuery("SELECT points FROM character_battlepass WHERE guid = %u", player->GetSession()->GetGuidLow());
-                if (result)
-                {
-                Field *fields = result->Fetch();
-                points = fields[1].GetUInt32();
-                }
                 player->DestroyItemCount(80003, 1, true);
                 points = points + 280;
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
