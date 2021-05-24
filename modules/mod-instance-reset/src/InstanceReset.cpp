@@ -35,7 +35,7 @@ public:
 
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Eu gostaria de resetar o cooldown das minhas instancias normais exceto ICC e Ruby sem custo.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, "---------------------------------", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
-        AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Comprar uma EtMaXx Instance Reset", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
+        //AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Comprar uma EtMaXx Instance Reset", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, "Resetar TODAS minhas instancias", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 4);
         SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
