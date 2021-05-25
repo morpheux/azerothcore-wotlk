@@ -1171,7 +1171,9 @@ public:
                 player->AddAura(30557, player);
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
-                player->AddItem(60119, 50);
+                player->AddItem(60119, 50); // token lvlup
+                player->AddItem(70506, 1); // Etmaxx Start
+                player->AddQuest(sObjectMgr->GetQuestTemplate(80211), nullptr); 
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Guerreiro");
                 CloseGossipMenuFor(player);
             }
@@ -1194,6 +1196,8 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60019, 50);
+                player->AddItem(70506, 1);
+                player->AddQuest(sObjectMgr->GetQuestTemplate(80208), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Paladino");
                 CloseGossipMenuFor(player);
             }
@@ -1217,6 +1221,8 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
+                player->AddItem(70506, 1);
+                player->AddQuest(sObjectMgr->GetQuestTemplate(80216), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Ladino");
                 CloseGossipMenuFor(player);
             }
@@ -1239,6 +1245,8 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
+                player->AddItem(70506, 1);
+                player->AddQuest(sObjectMgr->GetQuestTemplate(80205), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Sacerdote");
                 CloseGossipMenuFor(player);
             }
@@ -1261,6 +1269,8 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
+                player->AddItem(70506, 1);
+                player->AddQuest(sObjectMgr->GetQuestTemplate(80200), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Mago");
                 CloseGossipMenuFor(player);
             }
@@ -1283,6 +1293,8 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
+                player->AddItem(70506, 1);
+                player->AddQuest(sObjectMgr->GetQuestTemplate(80210), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Bruxo");
                 CloseGossipMenuFor(player);
             }
@@ -1305,6 +1317,8 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
+                player->AddItem(70506, 1);
+                player->AddQuest(sObjectMgr->GetQuestTemplate(80209), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Caçador");
                 CloseGossipMenuFor(player);
             }
@@ -1332,6 +1346,8 @@ public:
             player->AddItem(45695, 1);
             player->AddItem(37836, 1);
             player->AddItem(60119, 50);
+            player->AddItem(70506, 1);
+            player->AddQuest(sObjectMgr->GetQuestTemplate(80202), nullptr);
             ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
             CloseGossipMenuFor(player);
         }
@@ -1355,6 +1371,8 @@ public:
             player->AddItem(50731, 1);
             player->AddItem(37836, 1);
             player->AddItem(60119, 50);
+            player->AddItem(70506, 1);
+            player->AddQuest(sObjectMgr->GetQuestTemplate(80201), nullptr);
             ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
             CloseGossipMenuFor(player);
         }
@@ -1379,6 +1397,8 @@ public:
             player->AddItem(45887, 1);
             player->AddItem(37836, 1);
             player->AddItem(60119, 50);
+            player->AddItem(70506, 1);
+            player->AddQuest(sObjectMgr->GetQuestTemplate(80213), nullptr);
             ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
             CloseGossipMenuFor(player);
         }
@@ -1403,6 +1423,8 @@ public:
             player->AddItem(50303, 1);
             player->AddItem(37836, 1);
             player->AddItem(60119, 50);
+            player->AddItem(70506, 1);
+            player->AddQuest(sObjectMgr->GetQuestTemplate(80215), nullptr);
             ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
             CloseGossipMenuFor(player);
         }
@@ -1492,6 +1514,7 @@ public:
             player->AddItem(33478, 1);
             player->AddItem(37836, 1);
             player->AddItem(60119, 10);
+            player->AddQuest(sObjectMgr->GetQuestTemplate(80217), nullptr);
 
             ChatHandler(player->GetSession()).PSendSysMessage("Você já está bem avançado em sua jornada, não precisa da minha ajuda. Receba apenas minha benção");
 
@@ -3138,31 +3161,22 @@ public:
 /////////////                 NPC Troca de facção (ICC)          	///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
-class etmaxx_changefac : public CreatureScript
+class etmaxx_tutorial : public CreatureScript
 {
 public:
-    etmaxx_changefac() : CreatureScript("etmaxx_changefac") {}
-
-    void SetFactionForRace(Player *player, uint8 Race)
-    {
-        player->setTeamId(player->TeamIdForRace(Race));
-        ChrRacesEntry const *DBCRace = sChrRacesStore.LookupEntry(Race);
-        player->setFaction(DBCRace ? DBCRace->FactionID : 0);
-    }
+    etmaxx_tutorial() : CreatureScript("etmaxx_tutorial") {}
 
     bool OnGossipHello(Player *player, Creature *creature)
     {
         player->PlayerTalkClass->ClearMenus();
-        if (creature->FindNearestCreature(39371, 100.0f))
+        if (player->GetQuestStatus(92010) == QUEST_STATUS_NONE && player->HasItemCount(70506, 1, true))
         {
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tCamuflagem Aliança", 1, 0);
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_book_11:30:30:-18:0|tVamos para Dalaran!", 1, 0);
         }
-        else if (creature->FindNearestCreature(31428, 100.0f))
+        else
         {
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|tCamuflagem Horda", 2, 0);
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/Ability_Spy:30:30:-18:0|tVocê ainda tem algo a fazer por aqui...", 2, 0);
         }
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 5000, 0);
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tUpdate Menu...", 5000, 0);
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
@@ -3173,45 +3187,16 @@ public:
         {
         case 1:
         {
-            Map *map = player->GetMap();
-            Map::PlayerList const &playerlist = map->GetPlayers();
-            for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr)
-            {
-                if (!itr->GetSource())
-                    continue;
-                if (itr->GetSource()->getRace() == RACE_ORC || itr->GetSource()->getRace() == RACE_UNDEAD_PLAYER || itr->GetSource()->getRace() == RACE_TAUREN || itr->GetSource()->getRace() == RACE_TROLL || itr->GetSource()->getRace() == RACE_BLOODELF)
-                {
-                    itr->GetSource()->setRace(RACE_HUMAN);
-                    SetFactionForRace(itr->GetSource(), RACE_HUMAN);
-                    ChatHandler(itr->GetSource()->GetSession()).PSendSysMessage("Camuflado para Aliança");
-                }
-            }
+            player->DestroyItemCount(70506, 1, true);
+            player->TeleportTo(571, 5920.42f, 646.38f, 644.69f, 0.49f);
             CloseGossipMenuFor(player);
         }
         break;
 
         case 2:
         {
-            Map *map = player->GetMap();
-            Map::PlayerList const &playerlist = map->GetPlayers();
-            for (Map::PlayerList::const_iterator itr = playerlist.begin(); itr != playerlist.end(); ++itr)
-            {
-                if (!itr->GetSource())
-                    continue;
-                if (itr->GetSource()->getRace() == RACE_HUMAN || itr->GetSource()->getRace() == RACE_DWARF || itr->GetSource()->getRace() == RACE_NIGHTELF || itr->GetSource()->getRace() == RACE_GNOME || itr->GetSource()->getRace() == RACE_DRAENEI)
-                {
-                    itr->GetSource()->setRace(RACE_ORC);
-                    SetFactionForRace(itr->GetSource(), RACE_ORC);
-                    ChatHandler(itr->GetSource()->GetSession()).PSendSysMessage("Camuflado para Horda");
-                }
-            }
+            ChatHandler(player->GetSession()).PSendSysMessage("Complete todas as missões iniciais, fala com o EtMaXx Start e depois volte até mim");
             CloseGossipMenuFor(player);
-        }
-        break;
-
-        case 5000:
-        { // Main menu
-            OnGossipHello(player, creature);
         }
         break;
         }
@@ -3267,5 +3252,5 @@ void AddNpcEtmaxxScripts()
     new etmaxx_eng();
     new etmaxx_cook();
     new etmaxx_alc();
-    new etmaxx_changefac();
+    new etmaxx_tutorial();
 }
