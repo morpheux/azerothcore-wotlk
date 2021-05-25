@@ -3169,7 +3169,7 @@ public:
     bool OnGossipHello(Player *player, Creature *creature)
     {
         player->PlayerTalkClass->ClearMenus();
-        if (player->GetQuestStatus(92010) == QUEST_STATUS_NONE && player->HasItemCount(70506, 1, true))
+        if (player->GetQuestStatus(92010) == QUEST_STATUS_COMPLETE && player->HasItemCount(70506, 1, true))
         {
             AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_book_11:30:30:-18:0|tVamos para Dalaran!", 1, 0);
         }
