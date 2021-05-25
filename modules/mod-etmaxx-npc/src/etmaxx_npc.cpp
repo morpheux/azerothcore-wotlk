@@ -1172,7 +1172,7 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50); // token lvlup
-                player->AddItem(70506, 1); // Etmaxx Start
+                player->AddItem(70506, 2); // Etmaxx Start
                 player->AddQuest(sObjectMgr->GetQuestTemplate(80211), nullptr); 
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Guerreiro");
                 CloseGossipMenuFor(player);
@@ -1196,7 +1196,7 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60019, 50);
-                player->AddItem(70506, 1);
+                player->AddItem(70506, 2);
                 player->AddQuest(sObjectMgr->GetQuestTemplate(80208), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Paladino");
                 CloseGossipMenuFor(player);
@@ -1221,7 +1221,7 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
-                player->AddItem(70506, 1);
+                player->AddItem(70506, 2);
                 player->AddQuest(sObjectMgr->GetQuestTemplate(80216), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Ladino");
                 CloseGossipMenuFor(player);
@@ -1245,7 +1245,7 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
-                player->AddItem(70506, 1);
+                player->AddItem(70506, 2);
                 player->AddQuest(sObjectMgr->GetQuestTemplate(80205), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Sacerdote");
                 CloseGossipMenuFor(player);
@@ -1269,7 +1269,7 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
-                player->AddItem(70506, 1);
+                player->AddItem(70506, 2);
                 player->AddQuest(sObjectMgr->GetQuestTemplate(80200), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Mago");
                 CloseGossipMenuFor(player);
@@ -1293,7 +1293,7 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
-                player->AddItem(70506, 1);
+                player->AddItem(70506, 2);
                 player->AddQuest(sObjectMgr->GetQuestTemplate(80210), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Bruxo");
                 CloseGossipMenuFor(player);
@@ -1317,7 +1317,7 @@ public:
                 player->AddAura(30562, player);
                 player->AddItem(37836, 1);
                 player->AddItem(60119, 50);
-                player->AddItem(70506, 1);
+                player->AddItem(70506, 2);
                 player->AddQuest(sObjectMgr->GetQuestTemplate(80209), nullptr);
                 ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Caçador");
                 CloseGossipMenuFor(player);
@@ -1346,7 +1346,7 @@ public:
             player->AddItem(45695, 1);
             player->AddItem(37836, 1);
             player->AddItem(60119, 50);
-            player->AddItem(70506, 1);
+            player->AddItem(70506, 2);
             player->AddQuest(sObjectMgr->GetQuestTemplate(80202), nullptr);
             ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
             CloseGossipMenuFor(player);
@@ -1371,7 +1371,7 @@ public:
             player->AddItem(50731, 1);
             player->AddItem(37836, 1);
             player->AddItem(60119, 50);
-            player->AddItem(70506, 1);
+            player->AddItem(70506, 2);
             player->AddQuest(sObjectMgr->GetQuestTemplate(80201), nullptr);
             ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Druida");
             CloseGossipMenuFor(player);
@@ -1397,7 +1397,7 @@ public:
             player->AddItem(45887, 1);
             player->AddItem(37836, 1);
             player->AddItem(60119, 50);
-            player->AddItem(70506, 1);
+            player->AddItem(70506, 2);
             player->AddQuest(sObjectMgr->GetQuestTemplate(80213), nullptr);
             ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
             CloseGossipMenuFor(player);
@@ -1423,7 +1423,7 @@ public:
             player->AddItem(50303, 1);
             player->AddItem(37836, 1);
             player->AddItem(60119, 50);
-            player->AddItem(70506, 1);
+            player->AddItem(70506, 2);
             player->AddQuest(sObjectMgr->GetQuestTemplate(80215), nullptr);
             ChatHandler(player->GetSession()).PSendSysMessage("Boa Sorte em sua jornada bravo Xamã");
             CloseGossipMenuFor(player);
