@@ -374,30 +374,30 @@ public:
 
         case 100:
         {
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Esta são as recompensas do Battle Pass deste mes:", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Battle Pass Normal:", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t15 000 de Gold - 100 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:25:25|t2000 EtMaXx Mark - 200 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:25:25|t15 EtMaXx Mega Mark - 300 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t80 000 Honor Points - 500 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 900 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:25:25|tEtMaXx Battle Pass Weapon - 1000 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "Se possuir o Battle Pass VIP além das recompensas normais você receberá:", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t30 000 de Gold - 100 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:25:25|tEtMaXx Battle Pass Weapon - 200 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t90 000 Honor Points  - 300 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t400 Arena Points - 500 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 600 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|t2 BAG VIP + Bandeira da Discordia - 900 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_01:25:25|tEtMaXx VIP Battle Pass + EtMaXx Fire Aura - 1000 Pontos", 100, 0);
-            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "------------------------", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engineering:30:30:-18:0|tEsta são as recompensas do Battle Pass deste mes:", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engineering:30:30:-18:0|tBattle Pass Normal:", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:30:30:-18:0|t15 000 de Gold - 100 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:30:30:-18:0|t2000 EtMaXx Mark - 200 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:30:30:-18:0|t15 EtMaXx Mega Mark - 300 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t60 Emblem of Frost - 400 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:30:30:-18:0|t80 000 Honor Points - 500 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:30:30:-18:0|t3 EtMaXx Transmog Mark - 700 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:30:30:-18:0|t4 EtMaXx Event Mark - 800 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:30:30:-18:0|tEtMaXx Profession Mark - 900 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:30:30:-18:0|tEtMaXx Battle Pass Weapon - 1000 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engineering:30:30:-18:0|t------------------", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engineering:30:30:-18:0|tSe possuir o Battle Pass VIP além das recompensas normais você receberá:", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:30:30:-18:0|t30 000 de Gold - 100 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:30:30:-18:0|tEtMaXx Battle Pass Weapon - 200 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:30:30:-18:0|t90 000 Honor Points  - 300 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t60 Emblem of Frost - 400 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:30:30:-18:0|t400 Arena Points - 500 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:30:30:-18:0|tEtMaXx Profession Mark - 600 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:30:30:-18:0|t3 EtMaXx Transmog Mark - 700 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:30:30:-18:0|t4 EtMaXx Event Mark - 800 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:30:30:-18:0|t2 BAG VIP + Bandeira da Discordia - 900 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_box_01:30:30:-18:0|tEtMaXx VIP Battle Pass + EtMaXx Fire Aura - 1000 Pontos", 100, 0);
+            AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/trade_engineering:30:30:-18:0|t------------------------", 100, 0);
             AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|tVoltar...", 5000, 0);
             SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         }
@@ -462,104 +462,104 @@ public:
             //-------------------------------INICIO DA CHEGAGEM VIP------------------------------------
             if (points >= 100 && viptier1 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t30 000 de Gold - 100 Pontos", 3100, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:30:30:-18:0|t30 000 de Gold - 100 Pontos", 3100, 0);
             }
 
             if (points >= 200 && viptier2 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:25:25|tEtMaXx Battle Pass Weapon - 200 Pontos", 3200, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:30:30:-18:0|tEtMaXx Battle Pass Weapon - 200 Pontos", 3200, 0);
             }
 
             if (points >= 300 && viptier3 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t90 000 Honor Points  - 300 Pontos", 3300, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:30:30:-18:0|t90 000 Honor Points  - 300 Pontos", 3300, 0);
             }
 
             if (points >= 400 && viptier4 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 3400, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t60 Emblem of Frost - 400 Pontos", 3400, 0);
             }
 
             if (points >= 500 && viptier5 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:25:25|t400 Arena Points - 500 Pontos", 3500, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/achievement_featsofstrength_gladiator_10:30:30:-18:0|t400 Arena Points - 500 Pontos", 3500, 0);
             }
 
             if (points >= 600 && viptier6 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 600 Pontos", 3600, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:30:30:-18:0|tEtMaXx Profession Mark - 600 Pontos", 3600, 0);
             }
 
             if (points >= 700 && viptier7 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 3700, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:30:30:-18:0|t3 EtMaXx Transmog Mark - 700 Pontos", 3700, 0);
             }
 
             if (points >= 800 && viptier8 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 3800, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:30:30:-18:0|t4 EtMaXx Event Mark - 800 Pontos", 3800, 0);
             }
 
             if (points >= 800 && viptier8 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 3800, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:30:30:-18:0|t4 EtMaXx Event Mark - 800 Pontos", 3800, 0);
             }
 
             if (points >= 900 && viptier9 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:25:25|t2 BAG VIP  + Bandeira da Discordia - 900 Pontos", 3900, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_bag_enchantedrunecloth:30:30:-18:0|t2 BAG VIP  + Bandeira da Discordia - 900 Pontos", 3900, 0);
             }
 
             if (points >= 1000 && viptier10 == 0 && bpvip == 1)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_qiraj_jewelglyphed:25:25|tEtMaXx VIP Battle Pass + EtMaXx Fire Aura - 1000 Pontos", 31000, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_qiraj_jewelglyphed:30:30:-18:0|tEtMaXx VIP Battle Pass + EtMaXx Fire Aura - 1000 Pontos", 31000, 0);
             }
             //-------------------------------FIM DA CHEGAGEM VIP------------------------------------
 
             //-------------------------------INICIO DA CHEGAGEM FREE------------------------------------
             if (points >= 100 && tier1 == 0)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:25:25|t15 000 de Gold - 100 Pontos", 2100, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_coin_01:30:30:-18:0|t15 000 de Gold - 100 Pontos", 2100, 0);
             }
 
             if (points >= 200 && tier2 == 0)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:25:25|t2 000 EtMaXx Mark - 200 Pontos", 2200, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_rune_08:30:30:-18:0|t2 000 EtMaXx Mark - 200 Pontos", 2200, 0);
             }
 
             if (points >= 300 && tier3 == 0)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:25:25|t15 EtMaXx Mega Mark - 300 Pontos", 2300, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_jewelry_talisman_08:30:30:-18:0|t15 EtMaXx Mega Mark - 300 Pontos", 2300, 0);
             }
 
             if (points >= 400 && tier4 == 0)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:25:25|t60 Emblem of Frost - 400 Pontos", 2400, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|t60 Emblem of Frost - 400 Pontos", 2400, 0);
             }
 
             if (points >= 500 && tier5 == 0)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:25:25|t80 000 Honor Points - 500 Pontos", 2500, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_divinepurpose:30:30:-18:0|t80 000 Honor Points - 500 Pontos", 2500, 0);
             }
 
             if (points >= 700 && tier7 == 0)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:25:25|t3 EtMaXx Transmog Mark - 700 Pontos", 2700, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_holy_championsgrace:30:30:-18:0|t3 EtMaXx Transmog Mark - 700 Pontos", 2700, 0);
             }
 
             if (points >= 800 && tier8 == 0)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:25:25|t4 EtMaXx Event Mark - 800 Pontos", 2800, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_bijou_gold:30:30:-18:0|t4 EtMaXx Event Mark - 800 Pontos", 2800, 0);
             }
 
             if (points >= 900 && tier9 == 0)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:25:25|tEtMaXx Profession Mark - 900 Pontos", 2900, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_scroll_16:30:30:-18:0|tEtMaXx Profession Mark - 900 Pontos", 2900, 0);
             }
 
             if (points >= 1000 && tier10 == 0)
             {
-                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:25:25|tEtMaXx Battle Pass Weapon- 1000 Pontos", 21000, 0);
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/inv_weapon_hand_18:30:30:-18:0|tEtMaXx Battle Pass Weapon- 1000 Pontos", 21000, 0);
             }
             //-------------------------------FIM DA CHEGAGEM FREE------------------------------------
             SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
