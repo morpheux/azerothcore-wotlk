@@ -771,6 +771,7 @@ public:
                     itr->GetSource()->setRace(itr->GetSource()->getRace(true));
                     SetFactionForRace(itr->GetSource(), itr->GetSource()->getRace(true));
                 }
+                itr->GetSource()->CombatStop(true);
             }
             ClearGossipMenuFor(player);
             CloseGossipMenuFor(player);
@@ -1003,7 +1004,8 @@ public:
                 if (itr->GetSource()->getRace(true) == RACE_ORC || itr->GetSource()->getRace(true) == RACE_UNDEAD_PLAYER || itr->GetSource()->getRace(true) == RACE_TAUREN || itr->GetSource()->getRace(true) == RACE_TROLL || itr->GetSource()->getRace(true) == RACE_BLOODELF){
                     itr->GetSource()->setRace(itr->GetSource()->getRace(true));
                     SetFactionForRace(itr->GetSource(), itr->GetSource()->getRace(true));
-                }  
+                }
+                itr->GetSource()->CombatStop(true);  
             }
             //termina aqui
 
