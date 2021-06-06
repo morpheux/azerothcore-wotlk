@@ -16,6 +16,7 @@
 #include "BanManager.h"
 #include "CircularBuffer.h"
 #include "Common.h"
+#include "Cryptography/BigNumber.h"
 #include "DatabaseEnv.h"
 #include "GossipDef.h"
 #include "Packet.h"
