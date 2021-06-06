@@ -4,20 +4,24 @@
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  */
 
-#include <algorithm>
-#include <openssl/md5.h>
-
-#include "Common.h"
-#include "Database/DatabaseEnv.h"
+#include "AuthSocket.h"
+#include "AES.h"
+#include "AuthCodes.h"
 #include "ByteBuffer.h"
-#include "Configuration/Config.h"
+#include "Common.h"
+#include "Config.h"
+#include "CryptoGenerics.h"
+#include "CryptoHash.h"
+#include "CryptoRandom.h"
+#include "DatabaseEnv.h"
 #include "Log.h"
 #include "RealmList.h"
-#include "AuthSocket.h"
-#include "AuthCodes.h"
 #include "TOTP.h"
-#include "SHA1.h"
-#include "openssl/crypto.h"
+#include "Threading.h"
+#include <algorithm>
+#include <openssl/crypto.h>
+#include <openssl/md5.h>
+#include <sstream>
 
 #define ChunkSize 2048
 
