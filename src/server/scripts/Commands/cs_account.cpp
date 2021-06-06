@@ -15,7 +15,6 @@ EndScriptData */
 #include "AES.h"
 #include "Base32.h"
 #include "Chat.h"
-#include "CryptoGenerics.h"
 #include "Language.h"
 #include "Player.h"
 #include "Realm.h"
