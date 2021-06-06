@@ -48,23 +48,6 @@ public:
             teamIdInInstance = TEAM_NEUTRAL;
             InstanceProgress = INSTANCE_PROGRESS_NONE;
 
-            NPC_LeaderFirstGUID = 0;
-            NPC_LeaderSecondGUID = 0;
-            NPC_TyrannusEventGUID = 0;
-            NPC_Necrolyte1GUID = 0;
-            NPC_Necrolyte2GUID = 0;
-            NPC_GuardFirstGUID = 0;
-            NPC_GuardSecondGUID = 0;
-            NPC_SindragosaGUID = 0;
-
-            NPC_GarfrostGUID = 0;
-            NPC_MartinOrGorkunGUID = 0;
-            NPC_RimefangGUID = 0;
-            NPC_TyrannusGUID = 0;
-            NPC_HeroicPlusControllerGUID = 0;
-
-            GO_IceWallGUID = 0;
-
             bAchievEleven = true;
             bAchievDontLookUp = true;
         }
