@@ -86,7 +86,7 @@ public:
                     if (Vehicle* v = c->GetVehicleKit())
                         v->InstallAllAccessories(false);
 
-                    if (Creature* hplusController = pInstance->instance->GetCreature(pInstance->GetData64(DATA_HPLUS_CONTROLLER_GUID)))
+                    if (Creature* hplusController = pInstance->instance->GetCreature(pInstance->GetGuidData(DATA_HPLUS_CONTROLLER_GUID)))
                     {
                         if (hplusController->IsAlive())
                         {
