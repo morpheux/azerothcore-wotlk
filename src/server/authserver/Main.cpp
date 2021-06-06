@@ -24,7 +24,6 @@
 #include "RealmList.h"
 #include "RealmAcceptor.h"
 #include "DatabaseLoader.h"
-#include "SecretMgr.h"
 #include "SharedDefines.h"
 #include "Util.h"
 #include "ProcessPriority.h"

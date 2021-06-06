@@ -12,7 +12,6 @@
 #define __WORLDSESSION_H
 
 #include "AccountMgr.h"
-#include "AuthDefines.h"
 #include "AddonMgr.h"
 #include "BanManager.h"
 #include "CircularBuffer.h"
