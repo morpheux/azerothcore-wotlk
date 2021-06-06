@@ -3412,7 +3412,7 @@ public:
         chr->SetUInt32Value(UNIT_FIELD_BYTES_0, ((chr->getRace()) | (chr->getClass() << 8) | (chr->getGender() << 16) | (powerType << 24)));
 
         chr->SetByteValue(UNIT_FIELD_BYTES_2, 1, UNIT_BYTE2_FLAG_PVP);
-        chr->SetUInt32Value(UNIT_FIELD_FLAGS, UNIT_FLAG_PVP_ATTACKABLE);
+        chr->SetUInt32Value(UNIT_FIELD_FLAGS, UNIT_FLAG_PLAYER_CONTROLLED);
 
 		//-1 is default value
         chr->SetUInt32Value(PLAYER_FIELD_WATCHED_FACTION_INDEX, uint32(-1));
