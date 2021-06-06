@@ -47,7 +47,6 @@ public:
 
         static std::vector<ChatCommand> accountCommandTable =
         {
-            { "2fa",        SEC_PLAYER,         true,   nullptr, "", account2faCommandTable    },
             { "addon",      SEC_MODERATOR,      false,  &HandleAccountAddonCommand,         "" },
             { "create",     SEC_CONSOLE,        true,   &HandleAccountCreateCommand,        "" },
             { "delete",     SEC_CONSOLE,        true,   &HandleAccountDeleteCommand,        "" },
@@ -395,91 +394,6 @@ public:
                 return false;
         }
 
-        return true;
-    }
-
-    static bool HandleAccountSet2FACommand(ChatHandler* handler, char const* args)
-    {
-        if (!*args)
-        {
-            handler->SendSysMessage(LANG_CMD_SYNTAX);
-            handler->SetSentErrorMessage(true);
-            return false;
-        }
-
-        char* _account = strtok((char*)args, " ");
-        char* _secret = strtok(nullptr, " ");
-
-        if (!_account || !_secret)
-        {
-            handler->SendSysMessage(LANG_CMD_SYNTAX);
-            handler->SetSentErrorMessage(true);
-            return false;
-        }
-
-        std::string accountName = _account;
-        std::string secret = _secret;
-
-        if (!Utf8ToUpperOnlyLatin(accountName))
-        {
-            handler->PSendSysMessage(LANG_ACCOUNT_NOT_EXIST, accountName.c_str());
-            handler->SetSentErrorMessage(true);
-            return false;
-        }
-
-        uint32 targetAccountId = AccountMgr::GetId(accountName);
-        if (!targetAccountId)
-        {
-            handler->PSendSysMessage(LANG_ACCOUNT_NOT_EXIST, accountName.c_str());
-            handler->SetSentErrorMessage(true);
-            return false;
-        }
-
-        if (handler->HasLowerSecurityAccount(nullptr, targetAccountId, true))
-            return false;
-
-        if (secret == "off")
-        {
-            auto* stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_ACCOUNT_TOTP_SECRET);
-            stmt->setNull(0);
-            stmt->setUInt32(1, targetAccountId);
-            LoginDatabase.Execute(stmt);
-            handler->PSendSysMessage(LANG_2FA_REMOVE_COMPLETE);
-            return true;
-        }
-
-        auto const& masterKey = sSecretMgr->GetSecret(SECRET_TOTP_MASTER_KEY);
-        if (!masterKey.IsAvailable())
-        {
-            handler->SendSysMessage(LANG_2FA_COMMANDS_NOT_SETUP);
-            handler->SetSentErrorMessage(true);
-            return false;
-        }
-
-        Optional<std::vector<uint8>> decoded = Acore::Encoding::Base32::Decode(secret);
-        if (!decoded)
-        {
-            handler->SendSysMessage(LANG_2FA_SECRET_INVALID);
-            handler->SetSentErrorMessage(true);
-            return false;
-        }
-
-        if (128 < (decoded->size() + Acore::Crypto::AES::IV_SIZE_BYTES + Acore::Crypto::AES::TAG_SIZE_BYTES))
-        {
-            handler->SendSysMessage(LANG_2FA_SECRET_TOO_LONG);
-            handler->SetSentErrorMessage(true);
-            return false;
-        }
-
-        if (masterKey)
-            Acore::Crypto::AEEncryptWithRandomIV<Acore::Crypto::AES>(*decoded, *masterKey);
-
-        auto* stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_ACCOUNT_TOTP_SECRET);
-        stmt->setBinary(0, *decoded);
-        stmt->setUInt32(1, targetAccountId);
-        LoginDatabase.Execute(stmt);
-
-        handler->PSendSysMessage(LANG_2FA_SECRET_SET_COMPLETE, accountName.c_str());
         return true;
     }
 
