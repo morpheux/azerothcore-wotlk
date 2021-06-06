@@ -243,7 +243,7 @@ public:
     void SetTotalTime(uint32 TotalTime) { m_total_time = TotalTime; }
     uint32 GetTotalTime() const { return m_total_time; }
 
-    void InitWarden(SessionKey const&, std::string const& os);
+	void InitWarden(BigNumber* k, std::string const& os);
 
     /// Session in auth.queue currently
     void SetInQueue(bool state) { m_inQueue = state; }

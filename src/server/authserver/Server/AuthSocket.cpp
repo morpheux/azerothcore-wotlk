@@ -129,7 +129,7 @@ typedef struct AuthHandler
 #endif
 
 // Launch a thread to transfer a patch to the client
-class PatcherRunnable: public acore::Runnable
+class PatcherRunnable: public Acore::Runnable
 {
 public:
     PatcherRunnable(class AuthSocket*);

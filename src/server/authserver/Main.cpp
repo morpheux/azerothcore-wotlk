@@ -125,8 +125,6 @@ extern int main(int argc, char** argv)
     if (!StartDB())
         return 1;
 
-    sSecretMgr->Initialize();
-
     // Get the list of realms for the server
     sRealmList->Initialize(sConfigMgr->GetOption<int32>("RealmsStateUpdateDelay", 20));
     if (sRealmList->GetRealms().empty())
