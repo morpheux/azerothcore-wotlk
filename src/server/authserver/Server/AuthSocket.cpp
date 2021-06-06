@@ -14,6 +14,7 @@
 #include "Log.h"
 #include "RealmList.h"
 #include "TOTP.h"
+#include "SHA1.h"
 #include "Threading.h"
 #include <algorithm>
 #include <openssl/crypto.h>
