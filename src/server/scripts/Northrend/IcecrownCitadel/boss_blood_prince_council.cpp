@@ -229,13 +229,13 @@ public:
         void EnterCombat(Unit* who) override
         {
             bool valid = true;
-            if (Creature* keleseth = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_KELESETH_GUID)))
+            if (Creature* keleseth = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_KELESETH_GUID)))
                 if (!keleseth->IsAlive() || keleseth->IsInEvadeMode())
                     valid = false;
-            if (Creature* taldaram = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_TALDARAM_GUID)))
+            if (Creature* taldaram = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID)))
                 if (!taldaram->IsAlive() || taldaram->IsInEvadeMode())
                     valid = false;
-            if (Creature* valanar = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+            if (Creature* valanar = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 if (!valanar->IsAlive() || valanar->IsInEvadeMode())
                     valid = false;
             if (!valid)
@@ -254,10 +254,10 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
-            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_TALDARAM_GUID)))
+            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID)))
                 if (!taldaram->IsInEvadeMode())
                     taldaram->SetInCombatWithZone();
-            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 if (!valanar->IsInEvadeMode())
                     valanar->SetInCombatWithZone();
 
@@ -295,10 +295,10 @@ public:
             }
 
             Talk(SAY_KELESETH_DEATH);
-            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_TALDARAM_GUID)))
+            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID)))
                 if (taldaram->IsAlive())
                     Unit::Kill(taldaram, taldaram);
-            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 if (valanar->IsAlive())
                     Unit::Kill(valanar, valanar);
         }
@@ -360,7 +360,7 @@ public:
             {
                 case ACTION_STAND_UP:
                     summons.DespawnEntry(WORLD_TRIGGER);
-                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_UNK_29 | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PREVENT_EMOTES_FROM_CHAT_TEXT | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
                     me->RemoveFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_DEAD);
                     me->RemoveFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH);
                     me->SetReactState(REACT_AGGRESSIVE);
@@ -419,9 +419,9 @@ public:
             me->SetHealth(me->GetMaxHealth());
             DoAction(ACTION_REMOVE_INVOCATION);
             _evading = true;
-            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_TALDARAM_GUID)))
+            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID)))
                 taldaram->AI()->EnterEvadeMode();
-            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 valanar->AI()->EnterEvadeMode();
             ScriptedAI::EnterEvadeMode();
             _evading = false;
@@ -489,13 +489,13 @@ public:
         void EnterCombat(Unit* who) override
         {
             bool valid = true;
-            if (Creature* keleseth = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_KELESETH_GUID)))
+            if (Creature* keleseth = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_KELESETH_GUID)))
                 if (!keleseth->IsAlive() || keleseth->IsInEvadeMode())
                     valid = false;
-            if (Creature* taldaram = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_TALDARAM_GUID)))
+            if (Creature* taldaram = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID)))
                 if (!taldaram->IsAlive() || taldaram->IsInEvadeMode())
                     valid = false;
-            if (Creature* valanar = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+            if (Creature* valanar = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 if (!valanar->IsAlive() || valanar->IsInEvadeMode())
                     valid = false;
             if (!valid)
@@ -514,10 +514,10 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
-            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_KELESETH_GUID)))
+            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_KELESETH_GUID)))
                 if (!keleseth->IsInEvadeMode())
                     keleseth->SetInCombatWithZone();
-            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 if (!valanar->IsInEvadeMode())
                     valanar->SetInCombatWithZone();
 
@@ -550,10 +550,10 @@ public:
             }
 
             Talk(EMOTE_TALDARAM_DEATH);
-            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_KELESETH_GUID)))
+            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_KELESETH_GUID)))
                 if (keleseth->IsAlive())
                     Unit::Kill(keleseth, keleseth);
-            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 if (valanar->IsAlive())
                     Unit::Kill(valanar, valanar);
         }
@@ -630,7 +630,7 @@ public:
             {
                 case ACTION_STAND_UP:
                     summons.DespawnEntry(WORLD_TRIGGER);
-                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_UNK_29 | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PREVENT_EMOTES_FROM_CHAT_TEXT | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
                     me->RemoveFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_DEAD);
                     me->RemoveFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH);
                     me->SetReactState(REACT_AGGRESSIVE);
@@ -651,7 +651,7 @@ public:
                     me->RemoveAurasDueToSpell(SPELL_INVOCATION_OF_BLOOD_TALDARAM);
                     break;
                 case ACTION_FLAME_BALL_CHASE:
-                    summons.DoAction(ACTION_FLAME_BALL_CHASE, 1);
+                    summons.DoAction(ACTION_FLAME_BALL_CHASE);
                     break;
                 default:
                     break;
@@ -704,9 +704,9 @@ public:
             me->SetHealth(me->GetMaxHealth());
             DoAction(ACTION_REMOVE_INVOCATION);
             _evading = true;
-            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_KELESETH_GUID)))
+            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_KELESETH_GUID)))
                 keleseth->AI()->EnterEvadeMode();
-            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+            if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 valanar->AI()->EnterEvadeMode();
             ScriptedAI::EnterEvadeMode();
             _evading = false;
@@ -774,13 +774,13 @@ public:
         void EnterCombat(Unit* who) override
         {
             bool valid = true;
-            if (Creature* keleseth = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_KELESETH_GUID)))
+            if (Creature* keleseth = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_KELESETH_GUID)))
                 if (!keleseth->IsAlive() || keleseth->IsInEvadeMode())
                     valid = false;
-            if (Creature* taldaram = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_TALDARAM_GUID)))
+            if (Creature* taldaram = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID)))
                 if (!taldaram->IsAlive() || taldaram->IsInEvadeMode())
                     valid = false;
-            if (Creature* valanar = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+            if (Creature* valanar = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 if (!valanar->IsAlive() || valanar->IsInEvadeMode())
                     valid = false;
             if (!valid)
@@ -802,10 +802,10 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
-            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_KELESETH_GUID)))
+            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_KELESETH_GUID)))
                 if (!keleseth->IsInEvadeMode())
                     keleseth->SetInCombatWithZone();
-            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_TALDARAM_GUID)))
+            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID)))
                 if (!taldaram->IsInEvadeMode())
                     taldaram->SetInCombatWithZone();
 
@@ -847,10 +847,10 @@ public:
 
             Talk(SAY_VALANAR_DEATH);
             instance->SetBossState(DATA_BLOOD_PRINCE_COUNCIL, DONE);
-            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_KELESETH_GUID)))
+            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_KELESETH_GUID)))
                 if (keleseth->IsAlive())
                     Unit::Kill(keleseth, keleseth);
-            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_TALDARAM_GUID)))
+            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID)))
                 if (taldaram->IsAlive())
                     Unit::Kill(taldaram, taldaram);
         }
@@ -925,7 +925,7 @@ public:
             {
                 case ACTION_STAND_UP:
                     summons.DespawnEntry(WORLD_TRIGGER);
-                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_UNK_29 | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PREVENT_EMOTES_FROM_CHAT_TEXT | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
                     me->RemoveFlag(UNIT_DYNAMIC_FLAGS, UNIT_DYNFLAG_DEAD);
                     me->RemoveFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH);
                     me->SetReactState(REACT_AGGRESSIVE);
@@ -953,8 +953,8 @@ public:
 
         bool CheckRoom()
         {
-            Creature* keleseth = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_KELESETH_GUID));
-            Creature* taldaram = instance->instance->GetCreature(instance->GetData64(DATA_PRINCE_TALDARAM_GUID));
+            Creature* keleseth = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_KELESETH_GUID));
+            Creature* taldaram = instance->instance->GetCreature(instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID));
             if (keleseth && taldaram && CheckBoundary(me) && CheckBoundary(keleseth) && CheckBoundary(taldaram))
                 return true;
 
@@ -977,10 +977,10 @@ public:
                 case EVENT_INVOCATION_OF_BLOOD:
                     {
                         uint32 visualSpellId = 0;
-                        Creature* current = instance->instance->GetCreature(instance->GetData64(invocationOrder[currentInvocationIndex]));
+                        Creature* current = instance->instance->GetCreature(instance->GetGuidData(invocationOrder[currentInvocationIndex]));
                         if (++currentInvocationIndex >= 3)
                             currentInvocationIndex = 0;
-                        Creature* next = instance->instance->GetCreature(instance->GetData64(invocationOrder[currentInvocationIndex]));
+                        Creature* next = instance->instance->GetCreature(instance->GetGuidData(invocationOrder[currentInvocationIndex]));
                         switch (invocationOrder[currentInvocationIndex])
                         {
                             case DATA_PRINCE_KELESETH_GUID:
@@ -1045,9 +1045,9 @@ public:
             me->SetHealth(me->GetMaxHealth());
             DoAction(ACTION_REMOVE_INVOCATION);
             _evading = true;
-            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_KELESETH_GUID)))
+            if (Creature* keleseth = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_KELESETH_GUID)))
                 keleseth->AI()->EnterEvadeMode();
-            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_TALDARAM_GUID)))
+            if (Creature* taldaram = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID)))
                 taldaram->AI()->EnterEvadeMode();
             BossAI::EnterEvadeMode();
             _evading = false;
@@ -1136,15 +1136,15 @@ public:
                 me->GetMotionMaster()->MovePoint(POINT_INTRO_DESPAWN, introFinalPos);
                 _events.Reset();
 
-                if (Creature* keleseth = ObjectAccessor::GetCreature(*me, _instance->GetData64(DATA_PRINCE_KELESETH_GUID)))
+                if (Creature* keleseth = ObjectAccessor::GetCreature(*me, _instance->GetGuidData(DATA_PRINCE_KELESETH_GUID)))
                 {
                     keleseth->AI()->DoAction(ACTION_STAND_UP);
                 }
-                if (Creature* taldaram = ObjectAccessor::GetCreature(*me, _instance->GetData64(DATA_PRINCE_TALDARAM_GUID)))
+                if (Creature* taldaram = ObjectAccessor::GetCreature(*me, _instance->GetGuidData(DATA_PRINCE_TALDARAM_GUID)))
                 {
                     taldaram->AI()->DoAction(ACTION_STAND_UP);
                 }
-                if (Creature* valanar = ObjectAccessor::GetCreature(*me, _instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+                if (Creature* valanar = ObjectAccessor::GetCreature(*me, _instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 {
                     valanar->AI()->DoAction(ACTION_STAND_UP);
                 }
@@ -1249,7 +1249,6 @@ public:
     {
         npc_ball_of_flameAI(Creature* creature) : ScriptedAI(creature), _instance(creature->GetInstanceScript())
         {
-            _chaseGUID = 0;
             _exploded = false;
             _started = false;
             if (me->GetEntry() == NPC_BALL_OF_INFERNO_FLAME)
@@ -1258,7 +1257,7 @@ public:
         }
 
         InstanceScript* _instance;
-        uint64 _chaseGUID;
+        ObjectGuid _chaseGUID;
         bool _exploded;
         bool _started;
 
@@ -1285,7 +1284,7 @@ public:
             }
         }
 
-        void SetGUID(uint64 guid, int32 /*type*/) override
+        void SetGUID(ObjectGuid guid, int32 /*type*/) override
         {
             _chaseGUID = guid;
         }
@@ -1367,7 +1366,7 @@ public:
         {
             if (InstanceScript* instance = me->GetInstanceScript())
             {
-                if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetData64(DATA_PRINCE_VALANAR_GUID)))
+                if (Creature* valanar = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PRINCE_VALANAR_GUID)))
                 {
                     valanar->AI()->JustSummoned(me);
                 }

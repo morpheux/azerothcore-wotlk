@@ -7,7 +7,6 @@
 #include "ScriptedCreature.h"
 #include "ScriptMgr.h"
 
-
 DoorData const doorData[] =
 {
     { GO_MAGTHERIDON_DOORS,  TYPE_MAGTHERIDON,   DOOR_TYPE_ROOM,  BOUNDARY_S },
@@ -38,7 +37,6 @@ public:
             _wardersSet.clear();
             _cubesSet.clear();
             _columnSet.clear();
-            _magtheridonGUID = 0;
         }
 
         void OnCreatureCreate(Creature* creature) override
@@ -120,8 +118,8 @@ public:
             {
                 if (state == IN_PROGRESS)
                 {
-                    for (std::set<uint64>::const_iterator itr = _wardersSet.begin(); itr != _wardersSet.end(); ++itr)
-                        if (Creature* warder = instance->GetCreature(*itr))
+                    for (ObjectGuid const guid : _wardersSet)
+                        if (Creature* warder = instance->GetCreature(guid))
                             if (warder->IsAlive())
                             {
                                 warder->InterruptNonMeleeSpells(true);
@@ -130,8 +128,8 @@ public:
                 }
                 else
                 {
-                    for (std::set<uint64>::const_iterator itr = _cubesSet.begin(); itr != _cubesSet.end(); ++itr)
-                        if (GameObject* cube = instance->GetGameObject(*itr))
+                    for (ObjectGuid const guid : _cubesSet)
+                        if (GameObject* cube = instance->GetGameObject(guid))
                             cube->SetFlag(GAMEOBJECT_FLAGS, GO_FLAG_NOT_SELECTABLE);
 
                     if (state == NOT_STARTED)
@@ -151,13 +149,13 @@ public:
                             magtheridon->SetInCombatWithZone();
                     break;
                 case DATA_ACTIVATE_CUBES:
-                    for (std::set<uint64>::const_iterator itr = _cubesSet.begin(); itr != _cubesSet.end(); ++itr)
-                        if (GameObject* cube = instance->GetGameObject(*itr))
+                    for (ObjectGuid const guid : _cubesSet)
+                        if (GameObject* cube = instance->GetGameObject(guid))
                             cube->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_NOT_SELECTABLE);
                     break;
                 case DATA_COLLAPSE:
-                    for (std::set<uint64>::const_iterator itr = _columnSet.begin(); itr != _columnSet.end(); ++itr)
-                        if (GameObject* column = instance->GetGameObject(*itr))
+                    for (ObjectGuid const guid : _columnSet)
+                        if (GameObject* column = instance->GetGameObject(guid))
                             column->SetGoState(GOState(data));
                     break;
             }
@@ -207,11 +205,10 @@ public:
         }
 
     private:
-        uint64 _magtheridonGUID;
-        std::set<uint64> _wardersSet;
-        std::set<uint64> _cubesSet;
-        std::set<uint64> _columnSet;
-
+        ObjectGuid _magtheridonGUID;
+        GuidSet _wardersSet;
+        GuidSet _cubesSet;
+        GuidSet _columnSet;
     };
 
     InstanceScript* GetInstanceScript(InstanceMap* map) const override
@@ -224,4 +221,3 @@ void AddSC_instance_magtheridons_lair()
 {
     new instance_magtheridons_lair();
 }
-

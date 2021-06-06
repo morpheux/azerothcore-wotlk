@@ -244,12 +244,12 @@ public:
     {
         npc_titoAI(Creature* creature) : ScriptedAI(creature) { }
 
-        uint64 DorotheeGUID;
+        ObjectGuid DorotheeGUID;
         uint32 YipTimer;
 
         void Reset() override
         {
-            DorotheeGUID = 0;
+            DorotheeGUID.Clear();
             YipTimer = 10000;
         }
 
@@ -262,7 +262,7 @@ public:
         {
             if (DorotheeGUID)
             {
-                Creature* Dorothee = (ObjectAccessor::GetCreature((*me), DorotheeGUID));
+                Creature* Dorothee = ObjectAccessor::GetCreature(*me, DorotheeGUID);
                 if (Dorothee && Dorothee->IsAlive())
                 {
                     CAST_AI(boss_dorothee::boss_dorotheeAI, Dorothee->AI())->TitoDied = true;
@@ -853,7 +853,7 @@ public:
         uint32 FearTimer;
         uint32 SwipeTimer;
 
-        uint64 HoodGUID;
+        ObjectGuid HoodGUID;
         float TempThreat;
 
         bool IsChasing;
@@ -864,7 +864,7 @@ public:
             FearTimer = urand(25000, 35000);
             SwipeTimer = 5000;
 
-            HoodGUID = 0;
+            HoodGUID.Clear();
             TempThreat = 0;
 
             IsChasing = false;
@@ -923,7 +923,7 @@ public:
 
                     if (Unit* target = ObjectAccessor::GetUnit(*me, HoodGUID))
                     {
-                        HoodGUID = 0;
+                        HoodGUID.Clear();
                         if (DoGetThreat(target))
                             DoModifyThreatPercent(target, -100);
                         me->AddThreat(target, TempThreat);
@@ -1056,7 +1056,7 @@ public:
         uint32 EntryYellTimer;
         uint32 AggroYellTimer;
 
-        uint64 RomuloGUID;
+        ObjectGuid RomuloGUID;
 
         uint32 Phase;
 
@@ -1075,7 +1075,7 @@ public:
 
         void Reset() override
         {
-            RomuloGUID = 0;
+            RomuloGUID.Clear();
             Phase = PHASE_JULIANNE;
 
             BlindingPassionTimer = 30000;
@@ -1171,7 +1171,7 @@ public:
 
         InstanceScript* instance;
 
-        uint64 JulianneGUID;
+        ObjectGuid JulianneGUID;
         uint32 Phase;
 
         uint32 EntryYellTimer;
@@ -1187,7 +1187,7 @@ public:
 
         void Reset() override
         {
-            JulianneGUID = 0;
+            JulianneGUID.Clear();
             Phase = PHASE_ROMULO;
 
             BackwardLungeTimer = 15000;
@@ -1265,7 +1265,7 @@ public:
             Talk(SAY_ROMULO_AGGRO);
             if (JulianneGUID)
             {
-                Creature* Julianne = (ObjectAccessor::GetCreature((*me), JulianneGUID));
+                Creature* Julianne = ObjectAccessor::GetCreature(*me, JulianneGUID);
                 if (Julianne && Julianne->GetVictim())
                 {
                     me->AddThreat(Julianne->GetVictim(), 1.0f);

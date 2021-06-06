@@ -286,7 +286,7 @@ public:
                 return;
 
             me->m_Events.AddEvent(new SuckBackEvent(*me, ACTION_ESSENCE_OF_SUFFERING), me->m_Events.CalculateTime(1500));
-            me->SetTarget(0);
+            me->SetTarget();
             me->SetFacingTo(M_PI / 2.0f);
         }
 
@@ -397,7 +397,7 @@ public:
                 return;
 
             me->m_Events.AddEvent(new SuckBackEvent(*me, ACTION_ESSENCE_OF_DESIRE), me->m_Events.CalculateTime(1500));
-            me->SetTarget(0);
+            me->SetTarget();
             me->SetFacingTo(M_PI / 2.0f);
         }
 
@@ -484,11 +484,11 @@ public:
         boss_essence_of_angerAI(Creature* creature) : ScriptedAI(creature) { }
 
         EventMap events;
-        uint64 targetGUID;
+        ObjectGuid targetGUID;
 
         void Reset() override
         {
-            targetGUID = 0;
+            targetGUID.Clear();
             events.Reset();
         }
 
@@ -553,7 +553,7 @@ public:
                 case EVENT_ANGER_SEETHE:
                     if (Unit* victim = me->GetVictim())
                     {
-                        uint64 victimGUID = victim->GetGUID();
+                        ObjectGuid victimGUID = victim->GetGUID();
                         if (targetGUID && targetGUID != victimGUID)
                             me->CastSpell(me, SPELL_SEETHE, false);
                         // victim can be lost
@@ -615,7 +615,7 @@ public:
             if (targets.empty())
                 return;
 
-            targets.sort(acore::ObjectDistanceOrderPred(GetCaster()));
+            targets.sort(Acore::ObjectDistanceOrderPred(GetCaster()));
             WorldObject* target = targets.front();
             targets.clear();
             targets.push_back(target);

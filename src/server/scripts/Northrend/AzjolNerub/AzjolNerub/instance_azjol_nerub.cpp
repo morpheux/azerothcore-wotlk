@@ -26,8 +26,6 @@ public:
         {
             SetBossNumber(MAX_ENCOUNTERS);
             LoadDoorData(doorData);
-            _krikthirGUID = 0;
-            _hadronoxGUID = 0;
         };
 
         void OnCreatureCreate(Creature* creature) override
@@ -115,8 +113,8 @@ public:
         }
 
     private:
-        uint64 _krikthirGUID;
-        uint64 _hadronoxGUID;
+        ObjectGuid _krikthirGUID;
+        ObjectGuid _hadronoxGUID;
     };
 
     InstanceScript* GetInstanceScript(InstanceMap* map) const override

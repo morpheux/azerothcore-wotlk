@@ -120,7 +120,7 @@ public:
         void JustSummoned(Creature* summon) override
         {
             if (instance)
-                instance->SetData64(DATA_SUMMONED_NPC, summon->GetGUID());
+                instance->SetGuidData(DATA_SUMMONED_NPC, summon->GetGUID());
 
             if (summon->GetEntry() == NPC_DP_CRYSTAL_STALKER)
             {
@@ -141,7 +141,7 @@ public:
         void SummonedCreatureDespawn(Creature* summon) override
         {
             if (instance)
-                instance->SetData64(DATA_DELETED_NPC, summon->GetGUID());
+                instance->SetGuidData(DATA_DELETED_NPC, summon->GetGUID());
         }
 
         void MoveInLineOfSight(Unit* who) override
@@ -289,12 +289,11 @@ public:
         npc_time_riftAI(Creature* creature) : NullCreatureAI(creature)
         {
             instance = creature->GetInstanceScript();
-            riftKeeperGUID = 0;
         }
 
         EventMap events;
         InstanceScript* instance;
-        uint64 riftKeeperGUID;
+        ObjectGuid riftKeeperGUID;
 
         void Reset() override
         {
@@ -308,7 +307,7 @@ public:
             events.ScheduleEvent(EVENT_CHECK_DEATH, 8000);
         }
 
-        void SetGUID(uint64 guid, int32) override
+        void SetGUID(ObjectGuid guid, int32) override
         {
             riftKeeperGUID = guid;
         }
@@ -321,7 +320,7 @@ public:
             if (Creature* summon = me->SummonCreature(entry, pos, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 150000))
                 if (instance)
                 {
-                    if (Unit* medivh = ObjectAccessor::GetUnit(*me, instance->GetData64(DATA_MEDIVH)))
+                    if (Unit* medivh = ObjectAccessor::GetUnit(*me, instance->GetGuidData(DATA_MEDIVH)))
                     {
                         float o = medivh->GetAngle(summon) + frand(-1.0f, 1.0f);
                         summon->SetHomePosition(medivh->GetPositionX() + 14.0f * cos(o), medivh->GetPositionY() + 14.0f * sin(o), medivh->GetPositionZ(), summon->GetAngle(medivh));

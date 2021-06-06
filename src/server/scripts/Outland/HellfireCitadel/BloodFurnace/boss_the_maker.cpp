@@ -48,7 +48,7 @@ public:
                 return;
 
             instance->SetData(DATA_THE_MAKER, NOT_STARTED);
-            instance->HandleGameObject(instance->GetData64(DATA_DOOR2), true);
+            instance->HandleGameObject(instance->GetGuidData(DATA_DOOR2), true);
         }
 
         void EnterCombat(Unit* /*who*/) override
@@ -63,7 +63,7 @@ public:
                 return;
 
             instance->SetData(DATA_THE_MAKER, IN_PROGRESS);
-            instance->HandleGameObject(instance->GetData64(DATA_DOOR2), false);
+            instance->HandleGameObject(instance->GetGuidData(DATA_DOOR2), false);
         }
 
         void KilledUnit(Unit* victim) override
@@ -80,8 +80,8 @@ public:
                 return;
 
             instance->SetData(DATA_THE_MAKER, DONE);
-            instance->HandleGameObject(instance->GetData64(DATA_DOOR2), true);
-            instance->HandleGameObject(instance->GetData64(DATA_DOOR3), true);
+            instance->HandleGameObject(instance->GetGuidData(DATA_DOOR2), true);
+            instance->HandleGameObject(instance->GetGuidData(DATA_DOOR3), true);
 
         }
 

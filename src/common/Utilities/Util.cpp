@@ -6,67 +6,19 @@
 
 #include "Util.h"
 #include "Common.h"
-#include "utf8.h"
-#include "Log.h"
-#include "DatabaseWorker.h"
-#include "SQLOperation.h"
-#include "Errors.h"
-#include "TypeList.h"
-#include "SFMT.h"
-#include "Errors.h" // for ASSERT
-#include <ace/TSS_T.h>
-#include <array>
-#include <cwchar>
+#include "Containers.h"
+// #include "IpAddress.h"
+#include "StringConvert.h"
+#include "StringFormat.h"
+#include <utf8.h>
+#include <algorithm>
+#include <iomanip>
+#include <sstream>
 #include <string>
-#include <random>
-
-typedef ACE_TSS<SFMTRand> SFMTRandTSS;
-static SFMTRandTSS sfmtRand;
-static SFMTEngine engine;
-
-int32 irand(int32 min, int32 max)
-{
-    ASSERT(max >= min);
-    return int32(sfmtRand->IRandom(min, max));
-}
-
-uint32 urand(uint32 min, uint32 max)
-{
-    ASSERT(max >= min);
-    return sfmtRand->URandom(min, max);
-}
-
-float frand(float min, float max)
-{
-    ASSERT(max >= min);
-    return float(sfmtRand->Random() * (max - min) + min);
-}
-
-uint32 rand32()
-{
-    return int32(sfmtRand->BRandom());
-}
-
-double rand_norm()
-{
-    return sfmtRand->Random();
-}
-
-double rand_chance()
-{
-    return sfmtRand->Random() * 100.0;
-}
-
-uint32 urandweighted(size_t count, double const* chances)
-{
-    std::discrete_distribution<uint32> dd(chances, chances + count);
-    return dd(SFMTEngine::Instance());
-}
-
-SFMTEngine& SFMTEngine::Instance()
-{
-    return engine;
-}
+#include <cctype>
+#include <cstdarg>
+#include <ctime>
+#include <ace/Default_Constants.h>
 
 Tokenizer::Tokenizer(const std::string& src, const char sep, uint32 vectorReserve)
 {
@@ -172,7 +124,6 @@ void stripLineInvisibleChars(std::string& str)
         str.erase(wpos, str.size());
     if (str.find("|TInterface") != std::string::npos)
         str.clear();
-
 }
 
 std::string secsToTimeString(uint64 timeInSecs, bool shortText)
@@ -392,7 +343,7 @@ bool Utf8toWStr(char const* utf8str, size_t csize, wchar_t* wstr, size_t& wsize)
 {
     try
     {
-        acore::CheckedBufferOutputIterator<wchar_t> out(wstr, wsize);
+        Acore::CheckedBufferOutputIterator<wchar_t> out(wstr, wsize);
         out = utf8::utf8to16(utf8str, utf8str + csize, out);
         wsize -= out.remaining(); // remaining unused space
         wstr[wsize] = L'\0';
@@ -634,7 +585,7 @@ bool Utf8ToUpperOnlyLatin(std::string& utf8String)
     return WStrToUtf8(wstr, utf8String);
 }
 
-std::string ByteArrayToHexStr(uint8 const* bytes, uint32 arrayLen, bool reverse /* = false */)
+std::string Acore::Impl::ByteArrayToHexStr(uint8 const* bytes, size_t arrayLen, bool reverse /* = false */)
 {
     int32 init = 0;
     int32 end = arrayLen;
@@ -658,11 +609,9 @@ std::string ByteArrayToHexStr(uint8 const* bytes, uint32 arrayLen, bool reverse 
     return ss.str();
 }
 
-void HexStrToByteArray(std::string const& str, uint8* out, bool reverse /*= false*/)
+void Acore::Impl::HexStrToByteArray(std::string const& str, uint8* out, size_t outlen, bool reverse /*= false*/)
 {
-    // string must have even number of characters
-    if (str.length() & 1)
-        return;
+    ASSERT(str.size() == (2 * outlen));
 
     int32 init = 0;
     int32 end = int32(str.length());

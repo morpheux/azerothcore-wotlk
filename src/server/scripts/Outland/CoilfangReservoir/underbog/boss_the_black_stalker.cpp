@@ -55,13 +55,13 @@ public:
 
         EventMap events;
         SummonList summons;
-        uint64 lTarget;
+        ObjectGuid lTarget;
 
         void Reset() override
         {
             events.Reset();
             summons.DespawnAll();
-            lTarget = 0;
+            lTarget.Clear();
         }
 
         void EnterCombat(Unit*) override
@@ -143,7 +143,7 @@ public:
                     if (Unit* target = ObjectAccessor::GetUnit(*me, lTarget))
                     {
                         if (!target->HasAura(SPELL_LEVITATE))
-                            lTarget = 0;
+                            lTarget.Clear();
                         else
                         {
                             target->CastSpell(target, SPELL_MAGNETIC_PULL, true);
@@ -155,11 +155,11 @@ public:
                     if (Unit* target = ObjectAccessor::GetUnit(*me, lTarget))
                     {
                         if (!target->HasAura(SPELL_LEVITATE))
-                            lTarget = 0;
+                            lTarget.Clear();
                         else
                         {
                             target->AddAura(SPELL_SUSPENSION, target);
-                            lTarget = 0;
+                            lTarget.Clear();
                         }
                     }
                     break;

@@ -200,7 +200,7 @@ public:
             if (targets.empty())
                 return;
 
-            targets.sort(acore::ObjectDistanceOrderPred(GetCaster(), false));
+            targets.sort(Acore::ObjectDistanceOrderPred(GetCaster(), false));
             if (targets.size() > GetSpellValue()->MaxAffectedTargets)
             {
                 std::list<WorldObject*>::iterator itr = targets.begin();

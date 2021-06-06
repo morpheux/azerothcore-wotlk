@@ -40,10 +40,11 @@ enum KologarnSpells
     SPELL_STONE_SHOUT_25                = 64005,
 
     // EYEBEAM
+    SPELL_FOCUSED_EYEBEAM_SUMMON        = 63342,
     SPELL_FOCUSED_EYEBEAM_10            = 63347,
     SPELL_FOCUSED_EYEBEAM_25            = 63977,
-    SPELL_FOCUSED_EYEBEAM_RIGHT         = 63676, // NPC -> KOLOGARN
-    SPELL_FOCUSED_EYEBEAM_LEFT          = 63352, // KOLOGARN -> NPC
+    SPELL_FOCUSED_EYEBEAM_RIGHT         = 63702,
+    SPELL_FOCUSED_EYEBEAM_LEFT          = 63676,
 
     // ARMS
     SPELL_ARM_DEAD_10                   = 63629,
@@ -136,10 +137,10 @@ public:
 
     struct boss_kologarnAI : public ScriptedAI
     {
-        boss_kologarnAI(Creature* pCreature) : ScriptedAI(pCreature), vehicle(me->GetVehicleKit()),
-            _left(0), _right(0), summons(me), breathReady(false)
+        boss_kologarnAI(Creature* pCreature) : ScriptedAI(pCreature), vehicle(me->GetVehicleKit()), summons(me), breathReady(false)
         {
             m_pInstance = me->GetInstanceScript();
+            eyebeamTarget = nullptr;
             assert(vehicle);
             me->SetStandState(UNIT_STAND_STATE_SUBMERGED);
         }
@@ -147,9 +148,11 @@ public:
         InstanceScript* m_pInstance;
 
         Vehicle* vehicle;
-        uint64 _left, _right;
+        ObjectGuid _left, _right;
         EventMap events;
         SummonList summons;
+
+        Unit* eyebeamTarget;
 
         bool _looksAchievement, breathReady;
         uint8 _rubbleAchievement;
@@ -319,7 +322,7 @@ public:
                 // left arm
                 if (who->GetGUID() == _left)
                 {
-                    _left = 0;
+                    _left.Clear();
                     if (me->IsInCombat())
                     {
                         Talk(SAY_LEFT_ARM_GONE);
@@ -328,7 +331,7 @@ public:
                 }
                 else
                 {
-                    _right = 0;
+                    _right.Clear();
                     if (me->IsInCombat())
                     {
                         Talk(SAY_RIGHT_ARM_GONE);
@@ -359,7 +362,7 @@ public:
             events.ScheduleEvent(EVENT_SMASH, 8000);
             events.ScheduleEvent(EVENT_SWEEP, 17000);
             events.ScheduleEvent(EVENT_GRIP, 15000);
-            events.ScheduleEvent(EVENT_FOCUSED_EYEBEAM, 25000);
+            events.ScheduleEvent(EVENT_FOCUSED_EYEBEAM, 10000);
             events.ScheduleEvent(EVENT_PREPARE_BREATH, 3000);
             //events.ScheduleEvent(EVENT_ENRAGE, x); no info
 
@@ -429,37 +432,17 @@ public:
                     Talk(EMOTE_STONE_GRIP);
                     return;
                 case EVENT_FOCUSED_EYEBEAM:
+                {
+                    events.ScheduleEvent(EVENT_FOCUSED_EYEBEAM, 20000);
+
+                    if ((eyebeamTarget = SelectTarget(SELECT_TARGET_FARTHEST, 0, 0, true)))
                     {
-                        events.ScheduleEvent(EVENT_FOCUSED_EYEBEAM, 13000 + rand() % 5000);
-                        Unit* target = nullptr;
-                        Map::PlayerList const& pList = me->GetMap()->GetPlayers();
-                        for(auto itr = pList.begin(); itr != pList.end(); ++itr)
-                        {
-                            if (itr->GetSource()->GetPositionZ() < 420)
-                                continue;
-
-                            target = itr->GetSource();
-                            if (urand(0, 3) == 3)
-                                break;
-                        }
-                        if (!target)
-                            break;
-
-                        if (Creature* eye = me->SummonCreature(NPC_EYE_LEFT, target->GetPositionX(), target->GetPositionY() - 6, target->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 12000))
-                        {
-                            eye->GetMotionMaster()->MoveFollow(target, 0.01f, M_PI * 3 / 2, MOTION_SLOT_CONTROLLED);
-                            me->CastSpell(eye, SPELL_FOCUSED_EYEBEAM_LEFT, true);
-                        }
-                        if (Creature* eye2 = me->SummonCreature(NPC_EYE_RIGHT, target->GetPositionX(), target->GetPositionY() + 6, target->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 12000))
-                        {
-                            eye2->GetMotionMaster()->MoveFollow(target, 0.01f, M_PI / 2, MOTION_SLOT_CONTROLLED);
-                            eye2->CastSpell(me, SPELL_FOCUSED_EYEBEAM_RIGHT, true);
-                        }
-
-                        Talk(EMOTE_EYES);
-                        events.DelayEvents(12000, 0);
-                        return;
+                        me->CastSpell(eyebeamTarget, SPELL_FOCUSED_EYEBEAM_SUMMON, false);
                     }
+
+                    Talk(EMOTE_EYES);
+                    return;
+                }
                 case EVENT_RESTORE_ARM_LEFT:
                     // shouldn't happen
                     AttachLeftArm();
@@ -540,7 +523,7 @@ public:
         {
             if (!_combatStarted)
                 if (InstanceScript* instance = me->GetInstanceScript())
-                    if (Creature* cr = ObjectAccessor::GetCreature(*me, instance->GetData64(TYPE_KOLOGARN)))
+                    if (Creature* cr = ObjectAccessor::GetCreature(*me, instance->GetGuidData(TYPE_KOLOGARN)))
                     {
                         _combatStarted = true;
                         if (!cr->IsInCombat() && who)
@@ -577,7 +560,7 @@ public:
                 cr->CastSpell(cr, SPELL_RUBBLE_FALL, true);
 
                 if (me->GetInstanceScript())
-                    if (Creature* kologarn = ObjectAccessor::GetCreature(*me, me->GetInstanceScript()->GetData64(TYPE_KOLOGARN)))
+                    if (Creature* kologarn = ObjectAccessor::GetCreature(*me, me->GetInstanceScript()->GetGuidData(TYPE_KOLOGARN)))
                         for (uint8 i = 0; i < 5; ++i)
                             if (Creature* cr2 = kologarn->SummonCreature(NPC_RUBBLE_SUMMON, cr->GetPositionX() + irand(-5, 5), cr->GetPositionY() + irand(-5, 5), cr->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000))
                             {
@@ -588,7 +571,7 @@ public:
             }
 
             if (me->GetInstanceScript())
-                if (Creature* cr = ObjectAccessor::GetCreature(*me, me->GetInstanceScript()->GetData64(TYPE_KOLOGARN)))
+                if (Creature* cr = ObjectAccessor::GetCreature(*me, me->GetInstanceScript()->GetGuidData(TYPE_KOLOGARN)))
                     cr->AI()->DoAction(DATA_KOLOGARN_RUBBLE_ACHIEV);
 
             me->ExitVehicle();
@@ -605,26 +588,39 @@ public:
     {
         return GetUlduarAI<boss_kologarn_eyebeamAI>(pCreature);
     }
-
-    struct boss_kologarn_eyebeamAI : public NullCreatureAI
+    struct boss_kologarn_eyebeamAI : public ScriptedAI
     {
-        boss_kologarn_eyebeamAI(Creature* c) : NullCreatureAI(c), _timer(1), _damaged(false) {}
+        boss_kologarn_eyebeamAI(Creature* c) : ScriptedAI(c), _timer(1), _damaged(false), justSpawned(true)
+        {
+            m_pInstance = (InstanceScript*)c->GetInstanceScript();
+        }
 
+        InstanceScript* m_pInstance;
         uint32 _timer;
-        bool _damaged;
+        bool _damaged, justSpawned;
 
         void DamageDealt(Unit* /*victim*/, uint32& damage, DamageEffectType /*damageType*/) override
         {
             if (damage > 0 && !_damaged && me->GetInstanceScript())
             {
                 _damaged = true;
-                if (Creature* cr = ObjectAccessor::GetCreature(*me, me->GetInstanceScript()->GetData64(TYPE_KOLOGARN)))
+                if (Creature* cr = ObjectAccessor::GetCreature(*me, me->GetInstanceScript()->GetGuidData(TYPE_KOLOGARN)))
                     cr->AI()->DoAction(DATA_KOLOGARN_LOOKS_ACHIEV);
             }
         }
 
         void UpdateAI(uint32 diff) override
         {
+            if (justSpawned)
+            {
+                me->DespawnOrUnsummon(10000);
+                if (Creature* cr = ObjectAccessor::GetCreature(*me, m_pInstance->GetGuidData(TYPE_KOLOGARN)))
+                {
+                    me->CastSpell(cr, me->GetEntry() == NPC_EYE_LEFT ? SPELL_FOCUSED_EYEBEAM_LEFT : SPELL_FOCUSED_EYEBEAM_RIGHT, true);
+                }
+                me->CastSpell(me, SPELL_FOCUSED_EYEBEAM, true);
+                justSpawned = false;
+            }
             if (_timer)
             {
                 _timer += diff;
@@ -638,9 +634,8 @@ public:
     };
 };
 
-
 // predicate function to select non main tank target
-class StoneGripTargetSelector : public acore::unary_function<Unit*, bool>
+class StoneGripTargetSelector : public Acore::unary_function<Unit*, bool>
 {
 public:
     StoneGripTargetSelector(Creature* me, Unit const* victim) : _me(me), _victim(victim) {}
@@ -822,7 +817,7 @@ public:
     {
         if (target)
             if (InstanceScript* instance = target->GetInstanceScript())
-                if (Creature* cr = ObjectAccessor::GetCreature(*target, instance->GetData64(TYPE_KOLOGARN)))
+                if (Creature* cr = ObjectAccessor::GetCreature(*target, instance->GetGuidData(TYPE_KOLOGARN)))
                     return cr->AI()->GetData(DATA_KOLOGARN_LOOKS_ACHIEV);
 
         return false;
@@ -838,7 +833,7 @@ public:
     {
         if (target)
             if (InstanceScript* instance = target->GetInstanceScript())
-                if (Creature* cr = ObjectAccessor::GetCreature(*target, instance->GetData64(TYPE_KOLOGARN)))
+                if (Creature* cr = ObjectAccessor::GetCreature(*target, instance->GetGuidData(TYPE_KOLOGARN)))
                     return cr->AI()->GetData(DATA_KOLOGARN_RUBBLE_ACHIEV);
 
         return false;
@@ -854,7 +849,7 @@ public:
     {
         if (target)
             if (InstanceScript* instance = target->GetInstanceScript())
-                if (Creature* cr = ObjectAccessor::GetCreature(*target, instance->GetData64(TYPE_KOLOGARN)))
+                if (Creature* cr = ObjectAccessor::GetCreature(*target, instance->GetGuidData(TYPE_KOLOGARN)))
                     return cr->AI()->GetData(DATA_KOLOGARN_ARMS_ACHIEV);
 
         return false;

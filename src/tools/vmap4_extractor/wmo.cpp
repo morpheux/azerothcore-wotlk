@@ -559,5 +559,4 @@ void MapObject::Extract(ADT::MODF const& mapObjDef, char const* WmoInstName, uin
     fwrite(&nlen, sizeof(uint32), 1, pDirfile);
     fwrite(WmoInstName, sizeof(char), nlen, pDirfile);
 
-
 }

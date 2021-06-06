@@ -288,7 +288,7 @@ public:
             {
                 corki->GetMotionMaster()->MovePoint(1, go->GetPositionX() + 5, go->GetPositionY(), go->GetPositionZ());
                 if (player)
-                    player->KilledMonsterCredit(NPC_CORKI_CREDIT_1, 0);
+                    player->KilledMonsterCredit(NPC_CORKI_CREDIT_1);
             }
         }
 
@@ -298,7 +298,7 @@ public:
             {
                 corki->GetMotionMaster()->MovePoint(1, go->GetPositionX() - 5, go->GetPositionY(), go->GetPositionZ());
                 if (player)
-                    player->KilledMonsterCredit(NPC_CORKI_2, 0);
+                    player->KilledMonsterCredit(NPC_CORKI_2);
             }
         }
 
@@ -308,7 +308,7 @@ public:
             {
                 corki->GetMotionMaster()->MovePoint(1, go->GetPositionX() + 4, go->GetPositionY(), go->GetPositionZ());
                 if (player)
-                    player->KilledMonsterCredit(NPC_CORKI_CREDIT_3, 0);
+                    player->KilledMonsterCredit(NPC_CORKI_CREDIT_3);
             }
         }
 
@@ -426,7 +426,7 @@ public:
         uint32 HealTimer;
         uint32 FrostShockTimer;
 
-        void SetGUID(uint64 guid, int32  /*questId*/) override
+        void SetGUID(ObjectGuid guid, int32  /*questId*/) override
         {
             me->SetStandState(UNIT_STAND_STATE_STAND);
             Start(true, false, guid);
@@ -584,7 +584,7 @@ public:
 
         if (Creature* prisoner = go->FindNearestCreature(NPC_MAGHAR_PRISONER, 5.0f))
         {
-            player->KilledMonsterCredit(NPC_MAGHAR_PRISONER, 0);
+            player->KilledMonsterCredit(NPC_MAGHAR_PRISONER);
 
             prisoner->AI()->Talk(SAY_FREE, player);
             prisoner->DespawnOrUnsummon(6000);

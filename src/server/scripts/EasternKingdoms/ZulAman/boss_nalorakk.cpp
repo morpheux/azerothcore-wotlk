@@ -143,14 +143,14 @@ public:
             me->GetPosition(x, y, z);
 
             {
-                CellCoord pair(acore::ComputeCellCoord(x, y));
+                CellCoord pair(Acore::ComputeCellCoord(x, y));
                 Cell cell(pair);
                 cell.SetNoCreate();
 
-                acore::AllFriendlyCreaturesInGrid check(me);
-                acore::CreatureListSearcher<acore::AllFriendlyCreaturesInGrid> searcher(me, templist, check);
+                Acore::AllFriendlyCreaturesInGrid check(me);
+                Acore::CreatureListSearcher<Acore::AllFriendlyCreaturesInGrid> searcher(me, templist, check);
 
-                TypeContainerVisitor<acore::CreatureListSearcher<acore::AllFriendlyCreaturesInGrid>, GridTypeMapContainer> cSearcher(searcher);
+                TypeContainerVisitor<Acore::CreatureListSearcher<Acore::AllFriendlyCreaturesInGrid>, GridTypeMapContainer> cSearcher(searcher);
 
                 cell.Visit(pair, cSearcher, *(me->GetMap()), *me, me->GetGridActivationRange());
             }
@@ -170,14 +170,14 @@ public:
             me->GetPosition(x, y, z);
 
             {
-                CellCoord pair(acore::ComputeCellCoord(x, y));
+                CellCoord pair(Acore::ComputeCellCoord(x, y));
                 Cell cell(pair);
                 cell.SetNoCreate();
 
-                acore::AllFriendlyCreaturesInGrid check(me);
-                acore::CreatureListSearcher<acore::AllFriendlyCreaturesInGrid> searcher(me, templist, check);
+                Acore::AllFriendlyCreaturesInGrid check(me);
+                Acore::CreatureListSearcher<Acore::AllFriendlyCreaturesInGrid> searcher(me, templist, check);
 
-                TypeContainerVisitor<acore::CreatureListSearcher<acore::AllFriendlyCreaturesInGrid>, GridTypeMapContainer> cSearcher(searcher);
+                TypeContainerVisitor<Acore::CreatureListSearcher<Acore::AllFriendlyCreaturesInGrid>, GridTypeMapContainer> cSearcher(searcher);
 
                 cell.Visit(pair, cSearcher, *(me->GetMap()), *me, me->GetGridActivationRange());
             }
