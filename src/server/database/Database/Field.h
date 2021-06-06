@@ -281,7 +281,7 @@ protected:
 #endif
 
     void SetByteValue(void const* newValue, size_t const newSize, enum_field_types newType, uint32 length);
-    void SetStructuredValue(char* newValue, enum_field_types newType, uint32 length);
+    void SetStructuredValue(char* newValue, enum_field_types newType);
 
     void CleanUp()
     {
