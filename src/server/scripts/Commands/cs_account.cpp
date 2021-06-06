@@ -45,12 +45,6 @@ public:
             { "ip",         SEC_PLAYER,         true,   &HandleAccountLockIpCommand,        "" }
         };
 
-        static std::vector<ChatCommand> account2faCommandTable
-        {
-            { "setup",      SEC_PLAYER,         false,  &HandleAccount2FASetupCommand,      "" },
-            { "remove",     SEC_PLAYER,         false,  &HandleAccount2FARemoveCommand,     "" },
-        };
-
         static std::vector<ChatCommand> accountCommandTable =
         {
             { "2fa",        SEC_PLAYER,         true,   nullptr, "", account2faCommandTable    },
