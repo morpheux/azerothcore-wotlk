@@ -36,7 +36,6 @@ public:
             { "addon",      SEC_GAMEMASTER,     true,   &HandleAccountSetAddonCommand,      "" },
             { "gmlevel",    SEC_CONSOLE,        true,   &HandleAccountSetGmLevelCommand,    "" },
             { "password",   SEC_CONSOLE,        true,   &HandleAccountSetPasswordCommand,   "" },
-            { "2fa",        SEC_PLAYER,         true,   &HandleAccountSet2FACommand,        "" }
         };
 
         static std::vector<ChatCommand> accountLockCommandTable
