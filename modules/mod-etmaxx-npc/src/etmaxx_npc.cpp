@@ -349,7 +349,7 @@ public:
                 player->DestroyItemCount(80001, qty, true);
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
-                ChatHandler(player->GetSession()).PSendSysMessage("Você tem %u", points);
+                ChatHandler(player->GetSession()).PSendSysMessage("Você tem %u Battle Points", points);
                 CloseGossipMenuFor(player);
         }
         break;
@@ -361,7 +361,7 @@ public:
                 player->DestroyItemCount(80002, qty, true);
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
-                ChatHandler(player->GetSession()).PSendSysMessage("Você tem %u", points);
+                ChatHandler(player->GetSession()).PSendSysMessage("Você tem %u Battle Points", points);
                 CloseGossipMenuFor(player);
         }
         break;
@@ -373,7 +373,7 @@ public:
                 player->DestroyItemCount(80003, qty, true);
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
-                ChatHandler(player->GetSession()).PSendSysMessage("Você tem %u", points);
+                ChatHandler(player->GetSession()).PSendSysMessage("Você tem %u Battle Points", points);
                 CloseGossipMenuFor(player);
         }
         break;
