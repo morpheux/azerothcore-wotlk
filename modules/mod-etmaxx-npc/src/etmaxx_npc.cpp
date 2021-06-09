@@ -220,7 +220,7 @@ public:
     etmaxx_battlepass() : CreatureScript("etmaxx_battlepass") {}
 
     uint32 bpvip = 0;
-    uint32 points = 0;
+    uint points = 0;
     uint32 tier1 = 0;
     uint32 tier2 = 0;
     uint32 tier3 = 0;
@@ -344,30 +344,36 @@ public:
 
         case 4:
         {
-                player->DestroyItemCount(80001, 1, true);
-                points = points + 8;
+                uint qty = player->GetItemCount(80001,true);
+                points = points + (qty * 8);
+                player->DestroyItemCount(80001, qty, true);
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
+                ChatHandler(player->GetSession()).PSendSysMessage("Você tem %u", points);
                 CloseGossipMenuFor(player);
         }
         break;
 
         case 5:
         {
-                player->DestroyItemCount(80002, 1, true);
-                points = points + 40;
+                uint qty = player->GetItemCount(80002,true);
+                points = points + (qty * 40);
+                player->DestroyItemCount(80002, qty, true);
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
+                ChatHandler(player->GetSession()).PSendSysMessage("Você tem %u", points);
                 CloseGossipMenuFor(player);
         }
         break;
 
         case 6:
         {
-                player->DestroyItemCount(80003, 1, true);
-                points = points + 280;
+                uint qty = player->GetItemCount(80003,true);
+                points = points + (qty * 280);
+                player->DestroyItemCount(80003, qty, true);
                 CharacterDatabase.PExecute("UPDATE character_battlepass SET points = %u WHERE guid = %u", points, player->GetSession()->GetGuidLow());
                 ChatHandler(player->GetSession()).PSendSysMessage("Battle Points adicionados ao seu Passe");
+                ChatHandler(player->GetSession()).PSendSysMessage("Você tem %u", points);
                 CloseGossipMenuFor(player);
         }
         break;
