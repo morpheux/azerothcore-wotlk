@@ -35,27 +35,27 @@ public:
 
         fetchQueueList();
         std::stringstream infoQueue;
-        infoQueue << "Встать в очередь на Solo 3vs3 арену\n";
-        infoQueue << "Игроков в очереди: " << (cache3v3Queue[MELEE] + cache3v3Queue[RANGE] + cache3v3Queue[HEALER]);
+        infoQueue << "Entre na Fila para Arena 3v3 Solo\n";
+        infoQueue << "Jogadores na Fila: " << (cache3v3Queue[MELEE] + cache3v3Queue[RANGE] + cache3v3Queue[HEALER]);
         infoQueue << "\n\n";
-        infoQueue << "Мили в очереди: " << cache3v3Queue[MELEE] << "\n";
-        infoQueue << "Кастеров в очереди: " << cache3v3Queue[RANGE] << "\n";
-        infoQueue << "Хилов в очереди: " << cache3v3Queue[HEALER];
+        infoQueue << "Meeles na Fila: " << cache3v3Queue[MELEE] << "\n";
+        infoQueue << "Casters na Fila: " << cache3v3Queue[RANGE] << "\n";
+        infoQueue << "Healers na Fila: " << cache3v3Queue[HEALER];
 
         std::stringstream infoQueue2;
-        infoQueue2 << "Выйти из очереди\n\n";
-        infoQueue2 << "Игроков в очереди: " << (cache3v3Queue[MELEE] + cache3v3Queue[RANGE] + cache3v3Queue[HEALER]);
+        infoQueue2 << "Saia da Fila\n\n";
+        infoQueue2 << "Jogadores na Fila: " << (cache3v3Queue[MELEE] + cache3v3Queue[RANGE] + cache3v3Queue[HEALER]);
         infoQueue2 << "\n\n";
-        infoQueue2 << "Мили в очереди: " << cache3v3Queue[MELEE] << "\n";
-        infoQueue2 << "Кастеров в очереди: " << cache3v3Queue[RANGE] << "\n";
-        infoQueue2 << "Хилов в очереди: " << cache3v3Queue[HEALER];
+        infoQueue2 << "Meeles na Fila: " << cache3v3Queue[MELEE] << "\n";
+        infoQueue2 << "Casters na Fila: " << cache3v3Queue[RANGE] << "\n";
+        infoQueue2 << "Healers na Fila: " << cache3v3Queue[HEALER];
 
         if (player->InBattlegroundQueueForBattlegroundQueueType(BATTLEGROUND_QUEUE_5v5)
             || player->InBattlegroundQueueForBattlegroundQueueType(BATTLEGROUND_QUEUE_3v3_SOLO))
-            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, infoQueue2.str().c_str(), GOSSIP_SENDER_MAIN, 3, "Вы действительно хотите выйти из очереди Solo 3vs3 арены?", 0, false);
+            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, infoQueue2.str().c_str(), GOSSIP_SENDER_MAIN, 3, "Você realmente quer sair da fila de arena Solo 3v3?", 0, false);
 
         if (player->GetArenaTeamId(ArenaTeam::GetSlotByType(ARENA_TEAM_5v5)) == 0)
-            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Создать команду Solo 3vs3 арены", GOSSIP_SENDER_MAIN, 1, "", 0, false);
+            player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Criar uma equipe de arena Solo 3v3", GOSSIP_SENDER_MAIN, 1, "", 0, false);
         else
         {
             if (player->InBattlegroundQueueForBattlegroundQueueType(BATTLEGROUND_QUEUE_5v5) == false &&
@@ -93,7 +93,7 @@ public:
                 player->GetSession()->SendPacket(&data);
             }
             else if (ArenaCheckFullEquipAndTalents(player) && JoinQueueArena(player, me, true, ARENA_TYPE_3v3_SOLO) == false)
-                ChatHandler(player->GetSession()).SendSysMessage("Что-то пошло не так, когда вы пытались встать в очередь. Вы уже стоите в другой очереди на арену/бг?");
+                ChatHandler(player->GetSession()).SendSysMessage("Alguma coisa deu errado quando você tentou entrar na fila. Você já está em outra arena/fila de BG?");
 
             player->CLOSE_GOSSIP_MENU();
             return true;
@@ -131,7 +131,7 @@ private:
         std::stringstream err;
 
         if (player->GetFreeTalentPoints() > 0)
-            err << "You have currently " << player->GetFreeTalentPoints() << " free talent points. Please spend all your talent points before queueing arena.\n";
+            err << "Você tem atualmente " << player->GetFreeTalentPoints() << " pontos de talentos para gastar. Por favor gaste tudo antes de joinar arena.\n";
 
         Item* newItem = NULL;
         for (uint8 slot = EQUIPMENT_SLOT_START; slot < EQUIPMENT_SLOT_END; ++slot)
@@ -142,7 +142,7 @@ private:
             newItem = player->GetItemByPos(INVENTORY_SLOT_BAG_0, slot);
             if (newItem == NULL)
             {
-                err << "Your character is not fully equipped.\n";
+                err << "Seu personagem não está totalmmente equipado.\n";
                 break;
             }
         }
