@@ -163,12 +163,14 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, PvPDiffi
     // announce world (this doesn't need mutex)
     if (isRated && sWorld->getBoolConfig(CONFIG_ARENA_QUEUE_ANNOUNCER_ENABLE))
         if (ArenaTeam* team = sArenaTeamMgr->GetArenaTeamById(arenateamid))
+        {
             if (ginfo->ArenaType == ARENA_TYPE_3v3_SOLO) {
-                //sWorld->SendWorldText(LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN, team->GetName().c_str(), arenabracket, arenabracket, ginfo->ArenaTeamRating, ginfo->ArenaMatchmakerRating);
             }
             else {
                 sWorld->SendWorldText(LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN, team->GetName().c_str(), arenabracket, arenabracket, ginfo->ArenaTeamRating, ginfo->ArenaMatchmakerRating);
             }
+        }
+
 
 
     //add players from group to ginfo

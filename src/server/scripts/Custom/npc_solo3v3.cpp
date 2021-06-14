@@ -54,7 +54,7 @@ public:
             || player->InBattlegroundQueueForBattlegroundQueueType(BATTLEGROUND_QUEUE_3v3_SOLO))
             player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, infoQueue2.str().c_str(), GOSSIP_SENDER_MAIN, 3, "Вы действительно хотите выйти из очереди Solo 3vs3 арены?", 0, false);
 
-        if (player->GetArenaTeamId(ArenaTeam::GetSlotByType(ARENA_TEAM_5v5)) == NULL)
+        if (player->GetArenaTeamId(ArenaTeam::GetSlotByType(ARENA_TEAM_5v5)) == 0)
             player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_CHAT, "Создать команду Solo 3vs3 арены", GOSSIP_SENDER_MAIN, 1, "", 0, false);
         else
         {
