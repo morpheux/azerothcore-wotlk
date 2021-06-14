@@ -29,7 +29,7 @@ void CFBG::LoadConfig()
     //_IsEnableBalancedTeams = sConfigMgr->GetBoolDefault("CFBG.BalancedTeams", false);
     _IsEnableBalancedTeams = false;
     //_IsEnableEvenTeams = sConfigMgr->GetBoolDefault("CFBG.EvenTeams.Enabled", false);
-    _IsEnableEvenTeams = true;
+    _IsEnableEvenTeams = false;
     //_EvenTeamsMaxPlayersThreshold = sConfigMgr->GetIntDefault("CFBG.EvenTeams.MaxPlayersThreshold", 5);
     _EvenTeamsMaxPlayersThreshold = 2;
     //_MaxPlayersCountInGroup = sConfigMgr->GetIntDefault("CFBG.Players.Count.In.Group", 3);
@@ -648,91 +648,6 @@ bool CFBG::FillPlayersToCFBG(BattlegroundQueue* bgqueue, Battleground* bg, const
     bgqueue->m_SelectionPools[TEAM_HORDE].Init();
 
     uint32 bgPlayersSize = bg->GetPlayersSize();
-
-    // if CFBG.EvenTeams is enabled, do not allow to have more player in one faction:
-    // if treshold is enabled and if the current players quantity inside the BG is greater than the treshold
-    if (IsEnableEvenTeams() && !(EvenTeamsMaxPlayersThreshold() > 0 && bgPlayersSize >= EvenTeamsMaxPlayersThreshold()*2))
-    {
-        uint32 bgQueueSize = bgqueue->m_QueuedGroups[bracket_id][BG_QUEUE_CFBG].size();
-
-        // if there is an even size of players in BG and only one in queue do not allow to join the BG
-        if (bgPlayersSize % 2 == 0 && bgQueueSize == 1) {
-            return false;
-        }
-
-        // if the sum of the players in BG and the players in queue is odd, add all in BG except one
-        if ((bgPlayersSize + bgQueueSize) % 2 != 0) {
-
-            uint32 playerCount = 0;
-
-            // add to the alliance pool the players in queue except the last
-            BattlegroundQueue::GroupsQueueType::const_iterator Ali_itr = bgqueue->m_QueuedGroups[bracket_id][BG_QUEUE_CFBG].begin();
-            while (playerCount < bgQueueSize-1 && Ali_itr != bgqueue->m_QueuedGroups[bracket_id][BG_QUEUE_CFBG].end() && bgqueue->m_SelectionPools[TEAM_ALLIANCE].AddGroup((*Ali_itr), aliFree))
-            {
-                Ali_itr++;
-                playerCount++;
-            }
-
-            // add to the horde pool the players in queue except the last
-            playerCount = 0;
-            BattlegroundQueue::GroupsQueueType::const_iterator Horde_itr = bgqueue->m_QueuedGroups[bracket_id][BG_QUEUE_CFBG].begin();
-            while (playerCount < bgQueueSize-1 && Horde_itr != bgqueue->m_QueuedGroups[bracket_id][BG_QUEUE_CFBG].end() && bgqueue->m_SelectionPools[TEAM_HORDE].AddGroup((*Horde_itr), hordeFree))
-            {
-                Horde_itr++;
-                playerCount++;
-            }
-
-            return true;
-        }
-
-        /* only for EvenTeams */
-        uint32 playerCount = 0;
-        uint32 sumLevel = 0;
-        uint32 sumItemLevel = 0;
-        averagePlayersLevelQueue = 0;
-        averagePlayersItemLevelQueue = 0;
-
-        BattlegroundQueue::GroupsQueueType::const_iterator Ali_itr = bgqueue->m_QueuedGroups[bracket_id][BG_QUEUE_CFBG].begin();
-        while (Ali_itr != bgqueue->m_QueuedGroups[bracket_id][BG_QUEUE_CFBG].end() && bgqueue->m_SelectionPools[TEAM_ALLIANCE].AddGroup((*Ali_itr), aliFree))
-        {
-            if (*Ali_itr && !(*Ali_itr)->Players.empty())
-            {
-                auto playerGuid = *((*Ali_itr)->Players.begin()->first);
-                if (auto player = ObjectAccessor::FindPlayerInOrOutOfWorld(playerGuid))
-                {
-                    sumLevel += player->getLevel();
-                    sumItemLevel += player->GetAverageItemLevel();
-                }
-            }
-            Ali_itr++;
-            playerCount++;
-        }
-
-        BattlegroundQueue::GroupsQueueType::const_iterator Horde_itr = bgqueue->m_QueuedGroups[bracket_id][BG_QUEUE_CFBG].begin();
-        while (Horde_itr != bgqueue->m_QueuedGroups[bracket_id][BG_QUEUE_CFBG].end() && bgqueue->m_SelectionPools[TEAM_HORDE].AddGroup((*Horde_itr), hordeFree))
-        {
-            if (*Horde_itr && !(*Horde_itr)->Players.empty())
-            {
-                auto playerGuid = *((*Horde_itr)->Players.begin()->first);
-                if (auto player = ObjectAccessor::FindPlayerInOrOutOfWorld(playerGuid))
-                {
-                    sumLevel += player->getLevel();
-                    sumItemLevel += player->GetAverageItemLevel();
-                }
-            }
-            Horde_itr++;
-            playerCount++;
-        }
-
-        if (playerCount > 0 && sumLevel > 0)
-        {
-            averagePlayersLevelQueue = sumLevel / playerCount;
-            averagePlayersItemLevelQueue = sumItemLevel / playerCount;
-            joiningPlayers = playerCount;
-        }
-
-        return true;
-    }
 
     // if CFBG.EvenTeams is disabled:
     // quick check if nothing we can do:
