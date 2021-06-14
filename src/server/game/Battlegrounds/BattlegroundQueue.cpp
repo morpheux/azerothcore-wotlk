@@ -716,8 +716,7 @@ bool BattlegroundQueue::CheckSolo3v3Arena(BattlegroundBracketId bracket_id)
 
                 Solo3v3TalentCat plrCat = GetTalentCatForSolo3v3(plr); // get talent cat
 
-                if (filterTalents && soloTeam[TEAM_ALLIANCE][plrCat] == false // is slot free in alliance team?
-                    || (!filterTalents && m_SelectionPools[TEAM_ALLIANCE].GetPlayerCount() != 3))
+                if ((filterTalents && soloTeam[TEAM_ALLIANCE][plrCat] == false) || (!filterTalents && m_SelectionPools[TEAM_ALLIANCE].GetPlayerCount() != 3))
                 {
                     if (m_SelectionPools[TEAM_ALLIANCE].AddGroup((*itr), 3)) // added successfully?
                     {
@@ -732,7 +731,7 @@ bool BattlegroundQueue::CheckSolo3v3Arena(BattlegroundBracketId bracket_id)
                         }
                     }
                 }
-                else if (filterTalents && soloTeam[TEAM_HORDE][plrCat] == false || !filterTalents) // nope? and in horde team?
+                else if ((filterTalents && soloTeam[TEAM_HORDE][plrCat] == false) || !filterTalents)
                 {
                     if (m_SelectionPools[TEAM_HORDE].AddGroup((*itr), 3))
                     {
