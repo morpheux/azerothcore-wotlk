@@ -164,7 +164,7 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, PvPDiffi
     if (isRated && sWorld->getBoolConfig(CONFIG_ARENA_QUEUE_ANNOUNCER_ENABLE))
         if (ArenaTeam* team = sArenaTeamMgr->GetArenaTeamById(arenateamid))
             if (ginfo->ArenaType == ARENA_TYPE_3v3_SOLO) {
-
+                //sWorld->SendWorldText(LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN, team->GetName().c_str(), arenabracket, arenabracket, ginfo->ArenaTeamRating, ginfo->ArenaMatchmakerRating);
             }
             else {
                 sWorld->SendWorldText(LANG_ARENA_QUEUE_ANNOUNCE_WORLD_JOIN, team->GetName().c_str(), arenabracket, arenabracket, ginfo->ArenaTeamRating, ginfo->ArenaMatchmakerRating);
@@ -284,14 +284,14 @@ void BattlegroundQueue::RemovePlayer(uint64 guid, bool sentToBg, uint32 playerQu
     // mostly people with the highest levels are in battlegrounds, thats why
     // we count from MAX_BATTLEGROUND_QUEUES - 1 to 0
 
-    uint32 index = (groupInfo->teamId == TEAM_HORDE) ? BG_QUEUE_PREMADE_HORDE : BG_QUEUE_PREMADE_ALLIANCE;
+    uint32 index = (groupInfo->teamId == TEAM_HORDE
+) ? BG_QUEUE_PREMADE_HORDE : BG_QUEUE_PREMADE_ALLIANCE;
 
     for (int32 bracket_id_tmp = MAX_BATTLEGROUND_BRACKETS - 1; bracket_id_tmp >= 0 && bracket_id == -1; --bracket_id_tmp)
     {
         //we must check premade and normal team's queue - because when players from premade are joining bg,
-        return;
         //they leave groupinfo so we can't use its players size to find out index
-        for (uint8 j = 0; j < BG_QUEUE_GROUP_TYPES_COUNT; ++j)
+        for (uint8 j = 0; j < BG_QUEUE_MAX; ++j)
         {
             GroupsQueueType::iterator k = m_QueuedGroups[bracket_id_tmp][j].begin();
             for (; k != m_QueuedGroups[bracket_id_tmp][j].end(); ++k)
