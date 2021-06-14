@@ -16,13 +16,6 @@
 
 #define COUNT_OF_PLAYERS_TO_AVERAGE_WAIT_TIME 10
 
-
-struct PlayerQueueInfo                                      // stores information for players in queue
-{
-    //uint32  LastOnlineTime;                                 // for tracking and removing offline players from queue after 5 minutes
-    GroupQueueInfo* GroupInfo;                             // pointer to the associated groupqueueinfo
-};
-
 struct GroupQueueInfo;                                       // stores information about the group in queue (also used when joined as solo!)
 {
     std::map<uint64, PlayerQueueInfo*> Players; // player queue info map
@@ -43,6 +36,12 @@ struct GroupQueueInfo;                                       // stores informati
     // pussywizard: for internal use
     uint8 _bracketId;
     uint8 _groupType;
+};
+
+struct PlayerQueueInfo                                      // stores information for players in queue
+{
+    //uint32  LastOnlineTime;                                 // for tracking and removing offline players from queue after 5 minutes
+    GroupQueueInfo* GroupInfo;                             // pointer to the associated groupqueueinfo
 };
 
 enum BattlegroundQueueGroupTypes
