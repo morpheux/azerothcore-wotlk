@@ -647,8 +647,6 @@ bool CFBG::FillPlayersToCFBG(BattlegroundQueue* bgqueue, Battleground* bg, const
     bgqueue->m_SelectionPools[TEAM_ALLIANCE].Init();
     bgqueue->m_SelectionPools[TEAM_HORDE].Init();
 
-    uint32 bgPlayersSize = bg->GetPlayersSize();
-
     // if CFBG.EvenTeams is disabled:
     // quick check if nothing we can do:
     if (!sBattlegroundMgr->isTesting() && aliFree > hordeFree && bgqueue->m_QueuedGroups[bracket_id][BG_QUEUE_CFBG].empty())
