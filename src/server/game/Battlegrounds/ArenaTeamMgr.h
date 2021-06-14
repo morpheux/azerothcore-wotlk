@@ -32,6 +32,8 @@ public:
     ArenaTeamContainer::iterator GetArenaTeamMapBegin() { return ArenaTeamStore.begin(); }
     ArenaTeamContainer::iterator GetArenaTeamMapEnd()   { return ArenaTeamStore.end(); }
 
+    uint32 GenerateTempArenaTeamId();
+
     void DistributeArenaPoints();
 
     uint32 GenerateArenaTeamId();
@@ -41,6 +43,7 @@ public:
     void SetLastArenaLogId(uint32 id) { LastArenaLogId = id; }
 
 protected:
+    uint32 NextTempArenaTeamId;
     uint32 NextArenaTeamId;
     ArenaTeamContainer ArenaTeamStore;
     uint32 LastArenaLogId;

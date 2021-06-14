@@ -17,6 +17,7 @@
 ArenaTeamMgr::ArenaTeamMgr()
 {
     NextArenaTeamId = 1;
+    NextTempArenaTeamId = 0xFFF00000;
     LastArenaLogId = 0;
 }
 
@@ -116,12 +117,19 @@ void ArenaTeamMgr::RemoveArenaTeam(uint32 arenaTeamId)
 
 uint32 ArenaTeamMgr::GenerateArenaTeamId()
 {
-    if (NextArenaTeamId >= 0xFFFFFFFE)
+    if (NextArenaTeamId >= 0xFFF00000)
     {
         sLog->outError("Arena team ids overflow!! Can't continue, shutting down server. ");
         World::StopNow(ERROR_EXIT_CODE);
     }
     return NextArenaTeamId++;
+}
+
+uint32 ArenaTeamMgr::GenerateTempArenaTeamId()
+{
+    if (NextTempArenaTeamId >= 0xFFFFFFFE)
+        NextTempArenaTeamId = 0xFFF00000;
+    return NextTempArenaTeamId++;
 }
 
 void ArenaTeamMgr::LoadArenaTeams()
