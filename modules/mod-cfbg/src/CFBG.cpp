@@ -697,7 +697,7 @@ bool CFBG::FillPlayersToCFBG(BattlegroundQueue* bgqueue, Battleground* bg, const
         {
             if (*Ali_itr && !(*Ali_itr)->Players.empty())
             {
-                auto playerGuid = *((*Ali_itr)->Players.begin());
+                auto playerGuid = *((*Ali_itr)->Players.begin()->first);
                 if (auto player = ObjectAccessor::FindPlayerInOrOutOfWorld(playerGuid))
                 {
                     sumLevel += player->getLevel();
@@ -713,7 +713,7 @@ bool CFBG::FillPlayersToCFBG(BattlegroundQueue* bgqueue, Battleground* bg, const
         {
             if (*Horde_itr && !(*Horde_itr)->Players.empty())
             {
-                auto playerGuid = *((*Horde_itr)->Players.begin());
+                auto playerGuid = *((*Horde_itr)->Players.begin()->first);
                 if (auto player = ObjectAccessor::FindPlayerInOrOutOfWorld(playerGuid))
                 {
                     sumLevel += player->getLevel();
