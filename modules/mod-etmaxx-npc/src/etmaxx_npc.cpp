@@ -3184,12 +3184,78 @@ class etmaxx_buff : public CreatureScript
 public:
     etmaxx_buff() : CreatureScript("etmaxx_buff") {}
 
+    uint itemid1 = 0;
+    uint qty1 = 0;
+    uint qtytotal1 = 0;
+
+    uint itemid2 = 0;
+    uint qty2 = 0;
+    uint qtytotal2 = 0;
+
+    uint itemid3 = 0;
+    uint qty3 = 0;
+    uint qtytotal3 = 0;
+
+    uint itemid4 = 0;
+    uint qty4 = 0;
+    uint qtytotal4 = 0;
+
+    uint itemid5 = 0;
+    uint qty5 = 0;
+    uint qtytotal5 = 0;
+
+    uint itemid6 = 0;
+    uint qty6 = 0;
+    uint qtytotal6 = 0;
+
+    uint itemid7 = 0;
+    uint qty7 = 0;
+    uint qtytotal7 = 0;
+
+    uint itemid8 = 0;
+    uint qty8 = 0;
+    uint qtytotal8 = 0;
+
     bool OnGossipHello(Player *player, Creature *creature)
     {
+        //EtMaXx Mark
+        QueryResult result = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 1" );
+        if (result)
+        {
+            Field *fields = result->Fetch();
+            itemid1 = fields[0].GetUInt32();
+            qty1 = fields[1].GetUInt32();
+            qtytotal1 = fields[2].GetUInt32();
+        }
+
+        //EtMaXx Mega Mark
+        QueryResult result = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 2" );
+        if (result)
+        {
+            Field *fields = result->Fetch();
+            itemid2 = fields[0].GetUInt32();
+            qty2 = fields[1].GetUInt32();
+            qtytotal2 = fields[2].GetUInt32();
+        }
+
         player->PlayerTalkClass->ClearMenus();
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|t", 1, 0);
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 1", 2, 0);
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        
+        if (qty1 < qtytotal1 && player->HasItemCount(itemid1,1000)){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_rune_08:30:30:-18:0|tDoar EtMaXx Mark", 1, 0, "Será descontado 1.000 EtMaXx Marks, Tem Certeza?", 0, false);
+        }
+        
+        if (qty2 < qtytotal2 && player->HasItemCount(itemid2,10)){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_jewelry_talisman_08:30:30:-18:0|tDoar EtMaXx Mega Mark", 2, 0, "Será Descontado 10 EtMaXx Mega Mark, Tem certeza?", 0, false);
+        }
+        
+        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar Enemy Head", 3, 0);
+        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar Emblem of Frost", 4, 0);
+        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar EtMaXx Event Mark", 5, 0);
+        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar Badge of Justice", 6, 0);
+        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar Gold", 7, 0);
+        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tSacrificar sua propia vida!", 8, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tVerificar Items", 9, 0);
+        player->SEND_GOSSIP_MENU(800810, creature->GetGUID());
         return true;
     }
 
@@ -3199,13 +3265,28 @@ public:
         {
         case 1:
         {
-            player->GetSession()->SendListInventory(creature->GetGUID(), 50075);
+            player->DestroyItemCount(itemid1,1000,true);
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty1+1000, itemid1);
+            ChatHandler(player->GetSession()).PSendSysMessage("Obrigado, 1000 EtMaXx Marks foram removidas");
+            CloseGossipMenuFor(player);
         }
         break;
 
         case 2:
         {
-            player->GetSession()->SendListInventory(creature->GetGUID(), 50061);
+            player->DestroyItemCount(itemid2,10,true);
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty2+10, itemid2);
+            ChatHandler(player->GetSession()).PSendSysMessage("Obrigado, 10 EtMaXx Mega Marks foram removidas");
+            CloseGossipMenuFor(player);
+        }
+        break;
+
+        case 9:
+        {
+            ChatHandler(player->GetSession()).PSendSysMessage("RESUMO DOS ITEMS PARA O RITUAL");
+            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Mark, %u de 50.000", qty1);
+            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Mega Mark, %u de 500", qty2);
+            CloseGossipMenuFor(player);
         }
         break;
         }
