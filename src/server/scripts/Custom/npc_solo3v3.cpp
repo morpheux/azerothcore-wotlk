@@ -198,7 +198,7 @@ private:
             return false;
 
         // queue result (default ok)
-        //GroupJoinBattlegroundResult err = GroupJoinBattlegroundResult(bg->GetBgTypeID());
+        GroupJoinBattlegroundResult err = GroupJoinBattlegroundResult(bg->GetBgTypeID());
 
         uint32 ateamId = 0;
 

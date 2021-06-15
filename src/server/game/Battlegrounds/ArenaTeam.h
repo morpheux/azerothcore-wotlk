@@ -180,6 +180,8 @@ public:
     void FinishWeek();
     void FinishGame(int32 mod, const Map* bgMap);
 
+    uint64 playerGuid;
+
 protected:
 
     uint32      TeamId;
