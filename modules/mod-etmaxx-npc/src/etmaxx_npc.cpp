@@ -3267,7 +3267,7 @@ public:
         {
             player->DestroyItemCount(itemid1,1000,true);
             WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty1+1000, itemid1);
-            ChatHandler(player->GetSession()).PSendSysMessage("Obrigado, 1000 EtMaXx Marks foram removidas");
+            ChatHandler(player->GetSession()).PSendSysMessage("Obrigado, 1000 EtMaXx Marks foram removidasss");
             CloseGossipMenuFor(player);
         }
         break;
