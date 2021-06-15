@@ -3176,6 +3176,44 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
+/////////////                 NPC Buffs em ICC                    	///////////////
+///////////////////////////////////////////////////////////////////////////////////;
+
+class etmaxx_buff : public CreatureScript
+{
+public:
+    etmaxx_buff() : CreatureScript("etmaxx_buff") {}
+
+    bool OnGossipHello(Player *player, Creature *creature)
+    {
+        player->PlayerTalkClass->ClearMenus();
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/trade_alchemy:30:30:-18:0|t", 1, 0);
+        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tRecipes 1", 2, 0);
+        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        return true;
+    }
+
+    bool OnGossipSelect(Player *player, Creature *creature, uint32 sender, uint32 /*action*/)
+    {
+        switch (sender)
+        {
+        case 1:
+        {
+            player->GetSession()->SendListInventory(creature->GetGUID(), 50075);
+        }
+        break;
+
+        case 2:
+        {
+            player->GetSession()->SendListInventory(creature->GetGUID(), 50061);
+        }
+        break;
+        }
+        return true;
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////////
 /////////////                 NPC tutorial                        	///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
@@ -3271,4 +3309,5 @@ void AddNpcEtmaxxScripts()
     new etmaxx_cook();
     new etmaxx_alc();
     new etmaxx_tutorial();
+    new etmaxx_buff();
 }
