@@ -3216,6 +3216,25 @@ public:
     uint qty8 = 0;
     uint qtytotal8 = 0;
 
+    uint itemid9 = 0;
+    uint qty9 = 0;
+
+    uint spellid1 = 0;
+    uint autocast1 = 0;
+
+    uint spellid2 = 0;
+    uint autocast2 = 0;
+
+    uint spellid3 = 0;
+    uint autocast3 = 0;
+    
+    uint spellid4 = 0;
+    uint autocast4 = 0;
+
+    uint tempo = 0;
+    
+    
+
     bool OnGossipHello(Player *player, Creature *creature)
     {
         //EtMaXx Mark
@@ -3298,42 +3317,96 @@ public:
             qtytotal8 = fields8[2].GetUInt32();
         }
 
+        //Buff Fortitude of Frost 62650
+        QueryResult buff1 = WorldDatabase.PQuery("SELECT spell, autocast FROM spell_area WHERE area = 4812 AND spell = 62650" );
+        if (buffs)
+        {
+            Field *fields8 = buff1->Fetch();
+            spellid1 = fields8[0].GetUInt32();
+            autocast1 = fields8[1].GetUInt32();
+        }
+
+        //Buff Resilience of nature 62670
+        QueryResult buff2 = WorldDatabase.PQuery("SELECT spell, autocast FROM spell_area WHERE area = 4812 AND spell = 62670" );
+        if (buffs)
+        {
+            Field *fields8 = buff2->Fetch();
+            spellid2 = fields8[0].GetUInt32();
+            autocast2 = fields8[1].GetUInt32();
+        }
+
+        //Buff Speed of Invention 62671
+        QueryResult buff3 = WorldDatabase.PQuery("SELECT spell, autocast FROM spell_area WHERE area = 4812 AND spell = 62671" );
+        if (buffs)
+        {
+            Field *fields8 = buff3->Fetch();
+            spellid3 = fields8[0].GetUInt32();
+            autocast3 = fields8[1].GetUInt32();
+        }
+
+        //Buff Fury of the Storm 62702
+        QueryResult buff4 = WorldDatabase.PQuery("SELECT spell, autocast FROM spell_area WHERE area = 4812 AND spell = 62702" );
+        if (buffs)
+        {
+            Field *fields8 = buff4->Fetch();
+            spellid4 = fields8[0].GetUInt32();
+            autocast4 = fields8[1].GetUInt32();
+        }
+
+        //Buff Ativo ?
+        QueryResult result9 = WorldDatabase.PQuery("SELECT itemID, qty FROM mod_icc_buff WHERE id = 9" );
+        if (result9)
+        {
+            Field *fields8 = result9->Fetch();
+            itemid9 = fields8[0].GetUInt32();
+            qty9 = fields8[1].GetUInt32();
+        }
+
         player->PlayerTalkClass->ClearMenus();
         
-        if (qty1 < qtytotal1 && player->HasItemCount(itemid1,1000)){
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_rune_08:30:30:-18:0|tDoar EtMaXx Mark", 1, 0, "Será descontado 1.000 EtMaXx Marks, Tem Certeza?", 0, false);
-        }
+        if(autocast1 == 0 && autocast2 == 0 && autocast3 == 0 && autocast4 == 0){
+
+            if (qty1 < qtytotal1 && player->HasItemCount(itemid1,1000)){
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_rune_08:30:30:-18:0|tDoar EtMaXx Mark", 1, 0, "Será descontado 1.000 EtMaXx Marks, Tem Certeza?", 0, false);
+            }
         
-        if (qty2 < qtytotal2 && player->HasItemCount(itemid2,10)){
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_jewelry_talisman_08:30:30:-18:0|tDoar EtMaXx Mega Mark", 2, 0, "Será Descontado 10 EtMaXx Mega Mark, Tem certeza?", 0, false);
+            if (qty2 < qtytotal2 && player->HasItemCount(itemid2,10)){
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_jewelry_talisman_08:30:30:-18:0|tDoar EtMaXx Mega Mark", 2, 0, "Será Descontado 10 EtMaXx Mega Mark, Tem certeza?", 0, false);
+            }
+
+            if (qty3 < qtytotal3 && player->HasItemCount(itemid3,100)){
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_bone_humanskull_01:30:30:-18:0|tDoar Enemy Head", 3, 0, "Será Descontado 10 Enemy Head, Tem certeza?", 0, false);
+            }
+
+            if (qty4 < qtytotal4 && player->HasItemCount(itemid4,400)){
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|tDoar Emblem of Frost", 4, 0, "Será Descontado 10 Emblem of Frost, Tem certeza?", 0, false);
+            }
+
+            if (qty5 < qtytotal5 && player->HasItemCount(itemid5,5)){
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_bijou_gold:30:30:-18:0|tDoar EtMaXx Event Mark", 5, 0, "Será Descontado 1 EtMaXx Event Mark, Tem certeza?", 0, false);
+            }
+            
+            if (qty6 < qtytotal6 && player->HasItemCount(itemid6,200)){
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_holy_championsbond:30:30:-18:0|tDoar Badge of Justice", 6, 0, "Será Descontado 10 Badge of Justice, Tem certeza?", 0, false);
+            }
+
+            if (qty7 < qtytotal7 && player->GetMoney() > 10000){
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_coin_01:30:30:-18:0|tDoar Gold", 7, 0, "Será Descontado 10.000 de Gold, Tem certeza?", 0, false);
+            }
+
+            if (qty8 < qtytotal8){
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shadow_lifedrain:30:30:-18:0|tSacrificar sua propia vida!", 8, 0, "Essa Ação levará a sua morte! Tem certeza disso ?", 0, false);
+            }
+            
+            if(qty1 >= qtytotal1 && qty2 >= qtytotal2 && qty3 >= qtytotal3 && qty4 >= qtytotal4 && qty5 >= qtytotal5 && qty6 >= qtytotal6 && qty7 >= qtytotal7 && qty8 >= qtytotal8){
+                AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_lightning_lightningbolt01:30:30:-18:0|tO RITUAL ESTÁ PRONTO, ATIVAR ?", 10, 0, "Isso Ativará os Buff em ICC por 24 horas, porém será possivel reativar dentro de 48 horas, tem certeza que deseja iniciar o ritual ?", 0, false);
+            }
+            
+        }else{
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tVerificar estado do ritual", 9, 0);
         }
 
-        if (qty3 < qtytotal3 && player->HasItemCount(itemid3,100)){
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_bone_humanskull_01:30:30:-18:0|tDoar Enemy Head", 3, 0, "Será Descontado 10 Enemy Head, Tem certeza?", 0, false);
-        }
-
-        if (qty4 < qtytotal4 && player->HasItemCount(itemid4,400)){
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|tDoar Emblem of Frost", 4, 0, "Será Descontado 10 Emblem of Frost, Tem certeza?", 0, false);
-        }
-
-        if (qty5 < qtytotal5 && player->HasItemCount(itemid5,5)){
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_bijou_gold:30:30:-18:0|tDoar EtMaXx Event Mark", 5, 0, "Será Descontado 1 EtMaXx Event Mark, Tem certeza?", 0, false);
-        }
         
-        if (qty6 < qtytotal6 && player->HasItemCount(itemid6,200)){
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_holy_championsbond:30:30:-18:0|tDoar Badge of Justice", 6, 0, "Será Descontado 10 Badge of Justice, Tem certeza?", 0, false);
-        }
-
-        if (qty7 < qtytotal7 && player->GetMoney() > 10000){
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_coin_01:30:30:-18:0|tDoar Gold", 7, 0, "Será Descontado 10.000 de Gold, Tem certeza?", 0, false);
-        }
-
-        if (qty8 < qtytotal8){
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shadow_lifedrain:30:30:-18:0|tSacrificar sua propia vida!", 8, 0, "Essa Ação levará a sua morte! Tem certeza disso ?", 0, false);
-        }
-
-        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 1000, 0);
-        AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tVerificar Items", 9, 0);
         player->SEND_GOSSIP_MENU(800810, creature->GetGUID());
         return true;
     }
@@ -3416,6 +3489,15 @@ public:
 
         case 9:
         {
+            if(autocast1 == 1 && autocast2 == 1 && autocast3 == 1 && autocast4 == 1){
+                QueryResult resultexpire1 = WorldDatabase.PQuery("SELECT FROM_UNIXTIME(expiredate, '%%d-%%m-%%Y..%%H:%%I:%%s') as expiredate FROM mod_icc_buff WHERE id = 9;");
+                if (resultexpire1) {
+                    Field* fields = resultexpire1->Fetch();
+                    tempo = fields[0].GetCString());
+                }
+                ChatHandler(player->GetSession()).PSendSysMessage("O Ritual está ativo! os Buffs em ICC estão habilitados até %s", tempo);
+                CloseGossipMenuFor(player);
+            }else{
             ChatHandler(player->GetSession()).PSendSysMessage("-------------------------------");
             ChatHandler(player->GetSession()).PSendSysMessage("RESUMO DOS ITEMS PARA O RITUAL");
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Mark, %u de 50000", qty1);
@@ -3427,6 +3509,28 @@ public:
             ChatHandler(player->GetSession()).PSendSysMessage("Gold, %u de 500000", qty7);
             ChatHandler(player->GetSession()).PSendSysMessage("Sacrificios, %u de 10", qty8);
             ChatHandler(player->GetSession()).PSendSysMessage("-------------------------------");
+            CloseGossipMenuFor(player);
+            }
+        }
+        break;
+
+        case 10:
+        {
+            WorldDatabase.PExecute("UPDATE spell_area SET autocast = 1 WHERE area = 4812 AND spell = 62650");
+            WorldDatabase.PExecute("UPDATE spell_area SET autocast = 1 WHERE area = 4812 AND spell = 62670");
+            WorldDatabase.PExecute("UPDATE spell_area SET autocast = 1 WHERE area = 4812 AND spell = 62671");
+            WorldDatabase.PExecute("UPDATE spell_area SET autocast = 1 WHERE area = 4812 AND spell = 62672");
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty9+1, itemid9);
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET usedate = UNIX_TIMESTAMP(NOW()) WHERE id = 9");
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET expiredate = UNIX_TIMESTAMP(NOW() + INTERVAL 24 HOUR) WHERE id = 9");
+            QueryResult resultexpire2 = WorldDatabase.PQuery("SELECT FROM_UNIXTIME(expiredate, '%%d-%%m-%%Y..%%H:%%I:%%s') as expiredate FROM mod_icc_buff WHERE id = 9;");
+            if (resultexpire2) {
+                Field* fields = resultexpire2->Fetch();
+                tempo = fields[0].GetCString());
+            }
+            char msg[1000];
+            sprintf(msg, "|cffFF0000[Ritual dos Titãns]|r Os Buffs em ICC Foram ativados até %s", tempo);
+            sWorld->SendGlobalText(msg, NULL);
             CloseGossipMenuFor(player);
         }
         break;
