@@ -3231,7 +3231,7 @@ public:
     uint spellid4 = 0;
     uint autocast4 = 0;
 
-    uint tempo = 0;
+    char tempo[100];
     
     
 
