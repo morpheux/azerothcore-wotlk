@@ -3319,7 +3319,7 @@ public:
 
         //Buff Fortitude of Frost 62650
         QueryResult buff1 = WorldDatabase.PQuery("SELECT spell, autocast FROM spell_area WHERE area = 4812 AND spell = 62650" );
-        if (buffs)
+        if (buff1)
         {
             Field *fields8 = buff1->Fetch();
             spellid1 = fields8[0].GetUInt32();
