@@ -3222,7 +3222,7 @@ public:
         QueryResult result1 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 1" );
         if (result1)
         {
-            Field *fields = result->Fetch();
+            Field *fields = result1->Fetch();
             itemid1 = fields[0].GetUInt32();
             qty1 = fields[1].GetUInt32();
             qtytotal1 = fields[2].GetUInt32();
@@ -3232,7 +3232,7 @@ public:
         QueryResult result2 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 2" );
         if (result2)
         {
-            Field *fields = result->Fetch();
+            Field *fields = result2->Fetch();
             itemid2 = fields[0].GetUInt32();
             qty2 = fields[1].GetUInt32();
             qtytotal2 = fields[2].GetUInt32();
