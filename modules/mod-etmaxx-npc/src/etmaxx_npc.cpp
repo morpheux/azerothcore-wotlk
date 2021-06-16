@@ -3328,7 +3328,7 @@ public:
 
         //Buff Resilience of nature 62670
         QueryResult buff2 = WorldDatabase.PQuery("SELECT spell, autocast FROM spell_area WHERE area = 4812 AND spell = 62670" );
-        if (buffs)
+        if (buff2
         {
             Field *fields8 = buff2->Fetch();
             spellid2 = fields8[0].GetUInt32();
@@ -3337,7 +3337,7 @@ public:
 
         //Buff Speed of Invention 62671
         QueryResult buff3 = WorldDatabase.PQuery("SELECT spell, autocast FROM spell_area WHERE area = 4812 AND spell = 62671" );
-        if (buffs)
+        if (buff3)
         {
             Field *fields8 = buff3->Fetch();
             spellid3 = fields8[0].GetUInt32();
@@ -3346,7 +3346,7 @@ public:
 
         //Buff Fury of the Storm 62702
         QueryResult buff4 = WorldDatabase.PQuery("SELECT spell, autocast FROM spell_area WHERE area = 4812 AND spell = 62702" );
-        if (buffs)
+        if (buff4)
         {
             Field *fields8 = buff4->Fetch();
             spellid4 = fields8[0].GetUInt32();
