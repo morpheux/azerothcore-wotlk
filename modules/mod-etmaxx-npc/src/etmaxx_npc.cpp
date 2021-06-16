@@ -3231,7 +3231,7 @@ public:
     uint spellid4 = 0;
     uint autocast4 = 0;
 
-    char tempo[100];
+    char tempo;
     
     
 
@@ -3493,9 +3493,8 @@ public:
                 QueryResult resultexpire1 = WorldDatabase.PQuery("SELECT FROM_UNIXTIME(expiredate, '%%d-%%m-%%Y..%%H:%%I:%%s') as expiredate FROM mod_icc_buff WHERE id = 9;");
                 if (resultexpire1) {
                     Field* fields = resultexpire1->Fetch();
-                    tempo = fields[0].GetCString());
+                    ChatHandler(player->GetSession()).PSendSysMessage("O Ritual está ativo! os Buffs em ICC estão habilitados até %s", fields[0].GetCString());
                 }
-                ChatHandler(player->GetSession()).PSendSysMessage("O Ritual está ativo! os Buffs em ICC estão habilitados até %s", tempo);
                 CloseGossipMenuFor(player);
             }else{
             ChatHandler(player->GetSession()).PSendSysMessage("-------------------------------");
@@ -3526,11 +3525,10 @@ public:
             QueryResult resultexpire2 = WorldDatabase.PQuery("SELECT FROM_UNIXTIME(expiredate, '%%d-%%m-%%Y..%%H:%%I:%%s') as expiredate FROM mod_icc_buff WHERE id = 9;");
             if (resultexpire2) {
                 Field* fields = resultexpire2->Fetch();
-                tempo = fields[0].GetCString());
+                char msg[1000];
+                sprintf(msg, "|cffFF0000[Ritual dos Titãns]|r Os Buffs em ICC Foram ativados até %s", fields[0].GetCString());
+                sWorld->SendGlobalText(msg, NULL);
             }
-            char msg[1000];
-            sprintf(msg, "|cffFF0000[Ritual dos Titãns]|r Os Buffs em ICC Foram ativados até %s", tempo);
-            sWorld->SendGlobalText(msg, NULL);
             CloseGossipMenuFor(player);
         }
         break;
