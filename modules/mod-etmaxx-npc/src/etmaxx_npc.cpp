@@ -3328,7 +3328,7 @@ public:
 
         //Buff Resilience of nature 62670
         QueryResult buff2 = WorldDatabase.PQuery("SELECT spell, autocast FROM spell_area WHERE area = 4812 AND spell = 62670" );
-        if (buff2
+        if (buff2)
         {
             Field *fields8 = buff2->Fetch();
             spellid2 = fields8[0].GetUInt32();
