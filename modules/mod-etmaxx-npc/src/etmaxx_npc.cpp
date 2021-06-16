@@ -3254,12 +3254,13 @@ public:
         //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar Badge of Justice", 6, 0);
         //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar Gold", 7, 0);
         //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tSacrificar sua propia vida!", 8, 0);
+        AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 1000, 0);
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tVerificar Items", 9, 0);
         player->SEND_GOSSIP_MENU(800810, creature->GetGUID());
         return true;
     }
 
-    bool OnGossipSelect(Player *player, Creature /*creature*/, uint32 sender, uint32 /*action*/)
+    bool OnGossipSelect(Player *player, Creature *creature, uint32 sender, uint32 /*action*/)
     {
         switch (sender)
         {
@@ -3283,12 +3284,21 @@ public:
 
         case 9:
         {
+            ChatHandler(player->GetSession()).PSendSysMessage("-------------------------------");
             ChatHandler(player->GetSession()).PSendSysMessage("RESUMO DOS ITEMS PARA O RITUAL");
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Mark, %u de 50.000", qty1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Mega Mark, %u de 500", qty2);
+            ChatHandler(player->GetSession()).PSendSysMessage("-------------------------------");
             CloseGossipMenuFor(player);
         }
         break;
+
+        case 1000: // Main menu
+        {
+            OnGossipHello(player, creature);
+        }
+        break;
+
         }
         return true;
     }
