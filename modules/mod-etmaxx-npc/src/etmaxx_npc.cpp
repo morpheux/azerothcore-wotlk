@@ -3222,20 +3222,80 @@ public:
         QueryResult result1 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 1" );
         if (result1)
         {
-            Field *fields = result1->Fetch();
-            itemid1 = fields[0].GetUInt32();
-            qty1 = fields[1].GetUInt32();
-            qtytotal1 = fields[2].GetUInt32();
+            Field *fields1 = result1->Fetch();
+            itemid1 = fields1[0].GetUInt32();
+            qty1 = fields1[1].GetUInt32();
+            qtytotal1 = fields1[2].GetUInt32();
         }
 
         //EtMaXx Mega Mark
         QueryResult result2 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 2" );
         if (result2)
         {
-            Field *fields = result2->Fetch();
-            itemid2 = fields[0].GetUInt32();
-            qty2 = fields[1].GetUInt32();
-            qtytotal2 = fields[2].GetUInt32();
+            Field *fields2 = result2->Fetch();
+            itemid2 = fields2[0].GetUInt32();
+            qty2 = fields2[1].GetUInt32();
+            qtytotal2 = fields2[2].GetUInt32();
+        }
+
+        //Enemy Head
+        QueryResult result3 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 3" );
+        if (result3)
+        {
+            Field *fields3 = result3->Fetch();
+            itemid3 = fields3[0].GetUInt32();
+            qty3 = fields3[1].GetUInt32();
+            qtytotal3 = fields3[2].GetUInt32();
+        }
+
+        //Emblem of Frost
+        QueryResult result4 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 4" );
+        if (result4)
+        {
+            Field *fields4 = result4->Fetch();
+            itemid4 = fields4[0].GetUInt32();
+            qty4 = fields4[1].GetUInt32();
+            qtytotal4 = fields4[2].GetUInt32();
+        }
+
+        //EtMaXx Event Mark
+        QueryResult result5 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 5" );
+        if (result5)
+        {
+            Field *fields5 = result5->Fetch();
+            itemid5 = fields5[0].GetUInt32();
+            qty5 = fields5[1].GetUInt32();
+            qtytotal5 = fields5[2].GetUInt32();
+        }
+
+        //Badge of Justice
+        QueryResult result6 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 6" );
+        if (result6)
+        {
+            Field *fields6 = result6->Fetch();
+            itemid6 = fields6[0].GetUInt32();
+            qty6 = fields6[1].GetUInt32();
+            qtytotal6 = fields6[2].GetUInt32();
+        }
+
+        //Gold
+        QueryResult result7 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 7" );
+        if (result7)
+        {
+            Field *fields7 = result7->Fetch();
+            itemid7 = fields7[0].GetUInt32();
+            qty7 = fields7[1].GetUInt32();
+            qtytotal7 = fields7[2].GetUInt32();
+        }
+
+        //Sacrificios
+        QueryResult result8 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 8" );
+        if (result8)
+        {
+            Field *fields8 = result8->Fetch();
+            itemid8 = fields8[0].GetUInt32();
+            qty8 = fields8[1].GetUInt32();
+            qtytotal8 = fields8[2].GetUInt32();
         }
 
         player->PlayerTalkClass->ClearMenus();
@@ -3247,13 +3307,31 @@ public:
         if (qty2 < qtytotal2 && player->HasItemCount(itemid2,10)){
             AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_jewelry_talisman_08:30:30:-18:0|tDoar EtMaXx Mega Mark", 2, 0, "Será Descontado 10 EtMaXx Mega Mark, Tem certeza?", 0, false);
         }
+
+        if (qty3 < qtytotal3 && player->HasItemCount(itemid3,100)){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_bone_humanskull_01:30:30:-18:0|tDoar Enemy Head", 3, 0, "Será Descontado 10 Enemy Head, Tem certeza?", 0, false);
+        }
+
+        if (qty4 < qtytotal4 && player->HasItemCount(itemid4,400)){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|tDoar Emblem of Frost", 4, 0, "Será Descontado 10 Emblem of Frost, Tem certeza?", 0, false);
+        }
+
+        if (qty5 < qtytotal5 && player->HasItemCount(itemid5,5)){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_bijou_gold:30:30:-18:0|tDoar EtMaXx Event Mark", 5, 0, "Será Descontado 1 EtMaXx Event Mark, Tem certeza?", 0, false);
+        }
         
-        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar Enemy Head", 3, 0);
-        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar Emblem of Frost", 4, 0);
-        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar EtMaXx Event Mark", 5, 0);
-        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar Badge of Justice", 6, 0);
-        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tDoar Gold", 7, 0);
-        //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tSacrificar sua propia vida!", 8, 0);
+        if (qty6 < qtytotal6 && player->HasItemCount(itemid6,200)){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_holy_championsbond:30:30:-18:0|tDoar Badge of Justice", 6, 0, "Será Descontado 10 Badge of Justice, Tem certeza?", 0, false);
+        }
+
+        if (qty7 < qtytotal7 && player->GetMoney() > 10000){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_coin_01:30:30:-18:0|tDoar Gold", 7, 0, "Será Descontado 10.000 de Gold, Tem certeza?", 0, false);
+        }
+
+        if (qty8 < qtytotal8){
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shadow_lifedrain:30:30:-18:0|tSacrificar sua propia vida!", 8, 0, "Essa Ação levará a sua morte! Tem certeza disso ?", 0, false);
+        }
+
         AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "----------------------------------------", 1000, 0);
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tVerificar Items", 9, 0);
         player->SEND_GOSSIP_MENU(800810, creature->GetGUID());
@@ -3268,7 +3346,7 @@ public:
         {
             player->DestroyItemCount(itemid1,1000,true);
             WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty1+1000, itemid1);
-            ChatHandler(player->GetSession()).PSendSysMessage("Obrigado, 1000 EtMaXx Marks foram removidasss");
+            ChatHandler(player->GetSession()).PSendSysMessage("1000 EtMaXx Marks foram removidas para o ritual");
             CloseGossipMenuFor(player);
         }
         break;
@@ -3277,7 +3355,61 @@ public:
         {
             player->DestroyItemCount(itemid2,10,true);
             WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty2+10, itemid2);
-            ChatHandler(player->GetSession()).PSendSysMessage("Obrigado, 10 EtMaXx Mega Marks foram removidas");
+            ChatHandler(player->GetSession()).PSendSysMessage("10 EtMaXx Mega Marks foram removidas para o ritual");
+            CloseGossipMenuFor(player);
+        }
+        break;
+
+        case 3:
+        {
+            player->DestroyItemCount(itemid3,10,true);
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty3+10, itemid3);
+            ChatHandler(player->GetSession()).PSendSysMessage("10 Enemy Heads foram removidas para o ritual");
+            CloseGossipMenuFor(player);
+        }
+        break;
+
+        case 4:
+        {
+            player->DestroyItemCount(itemid4,10,true);
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty4+10, itemid4);
+            ChatHandler(player->GetSession()).PSendSysMessage("10 Emblem of Frost foram removidos para o ritual");
+            CloseGossipMenuFor(player);
+        }
+        break;
+
+        case 5:
+        {
+            player->DestroyItemCount(itemid5,1,true);
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty5+1, itemid5);
+            ChatHandler(player->GetSession()).PSendSysMessage("1 EtMaXx Event Marks foi removida para o ritual");
+            CloseGossipMenuFor(player);
+        }
+        break;
+
+        case 6:
+        {
+            player->DestroyItemCount(itemid6,10,true);
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty6+10, itemid6);
+            ChatHandler(player->GetSession()).PSendSysMessage("10 Badge of Justice foram removidos para o ritual");
+            CloseGossipMenuFor(player);
+        }
+        break;
+
+        case 7:
+        {
+            player->ModifyMoney(100000000);
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty7+10000, itemid7);
+            ChatHandler(player->GetSession()).PSendSysMessage("10000 de Gold foram removidos para o Ritual");
+            CloseGossipMenuFor(player);
+        }
+        break;
+
+        case 8:
+        {
+            player->KillPlayer();
+            WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty8+1, itemid8);
+            ChatHandler(player->GetSession()).PSendSysMessage("Seu Sacrificio não será em vão");
             CloseGossipMenuFor(player);
         }
         break;
@@ -3286,8 +3418,14 @@ public:
         {
             ChatHandler(player->GetSession()).PSendSysMessage("-------------------------------");
             ChatHandler(player->GetSession()).PSendSysMessage("RESUMO DOS ITEMS PARA O RITUAL");
-            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Mark, %u de 50.000", qty1);
+            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Mark, %u de 50000", qty1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Mega Mark, %u de 500", qty2);
+            ChatHandler(player->GetSession()).PSendSysMessage("Enemy Head, %u de 100", qty3);
+            ChatHandler(player->GetSession()).PSendSysMessage("Emblem of Frost, %u de 400", qty4);
+            ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Event Mark, %u de 5", qty5);
+            ChatHandler(player->GetSession()).PSendSysMessage("Badge of Justice, %u de 200", qty6);
+            ChatHandler(player->GetSession()).PSendSysMessage("Gold, %u de 500000", qty7);
+            ChatHandler(player->GetSession()).PSendSysMessage("Sacrificios, %u de 10", qty8);
             ChatHandler(player->GetSession()).PSendSysMessage("-------------------------------");
             CloseGossipMenuFor(player);
         }
