@@ -3219,8 +3219,8 @@ public:
     bool OnGossipHello(Player *player, Creature *creature)
     {
         //EtMaXx Mark
-        QueryResult result = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 1" );
-        if (result)
+        QueryResult result1 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 1" );
+        if (result1)
         {
             Field *fields = result->Fetch();
             itemid1 = fields[0].GetUInt32();
@@ -3229,8 +3229,8 @@ public:
         }
 
         //EtMaXx Mega Mark
-        QueryResult result = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 2" );
-        if (result)
+        QueryResult result2 = WorldDatabase.PQuery("SELECT itemID, qty, qtytotal FROM mod_icc_buff WHERE id = 2" );
+        if (result2)
         {
             Field *fields = result->Fetch();
             itemid2 = fields[0].GetUInt32();
