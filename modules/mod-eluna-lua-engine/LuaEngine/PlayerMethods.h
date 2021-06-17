@@ -1370,14 +1370,14 @@ namespace LuaPlayer
      *
      * The item can be equipped, in bags or in bank.
      *
-     * @param ObjectGuid guid : an item guid
+     * @param uint64 guid : an item guid
      * @return [Item] item
      */
     int GetItemByGUID(lua_State* L, Player* player)
     {
-        ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 2);
+        uint64 guid = Eluna::CHECKVAL<uint64>(L, 2);
 
-        Eluna::Push(L, player->GetItemByGuid(guid));
+        Eluna::Push(L, player->GetItemByGuid(ObjectGuid(guid)));
         return 1;
     }
 
@@ -2135,18 +2135,18 @@ namespace LuaPlayer
     /**
      * Shows the mailbox window to the player from specified guid.
      *
-     * @param ObjectGuid guid = playerguid : guid of the mailbox window sender
+     * @param uint64 guid = playerguid : guid of the mailbox window sender
      */
     int SendShowMailBox(lua_State* L, Player* player)
     {
-        ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 2, player->GET_GUID());
+        uint64 guid = Eluna::CHECKVAL<uint64>(L, 2, player->GET_GUID());
 
 #if (defined(CLASSIC) || defined(TBC))
         WorldPacket data(CMSG_GET_MAIL_LIST, 8);
-        data << guid;
+        data << uint64(guid);
         player->GetSession()->HandleGetMailList(data);
 #else
-        player->GetSession()->SendShowMailBox(guid);
+        player->GetSession()->SendShowMailBox(ObjectGuid(guid));
 #endif
         return 0;
     }
@@ -2209,7 +2209,7 @@ namespace LuaPlayer
         player->SetSummonPoint(summoner->GetMapId(), x, y, z);
 
         WorldPacket data(SMSG_SUMMON_REQUEST, 8 + 4 + 4);
-        data << summoner->GET_GUID();
+        data << uint64(summoner->GetGUIDLow());
         data << uint32(summoner->GetZoneId());
         data << uint32(MAX_PLAYER_SUMMON_DELAY * IN_MILLISECONDS);
 #ifdef CMANGOS
@@ -2278,10 +2278,11 @@ namespace LuaPlayer
             return 0;
 
         WorldPacket data(MSG_AUCTION_HELLO, 12);
-        data << unit->GET_GUID();
 #ifdef TRINITY
+        data << uint64(unit->GetGUID().GetCounter());
         data << uint32(ahEntry->ID);
 #else
+        data << uint64(unit->GetGUIDLow());
         data << uint32(ahEntry->houseId);
 #endif
         data << uint8(1);
@@ -2433,7 +2434,7 @@ namespace LuaPlayer
 #ifndef AZEROTHCORE
             player->UnbindInstance(map, (Difficulty)difficulty);
 #else
-            sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUID(), map, Difficulty(difficulty), true, player);
+            sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), map, Difficulty(difficulty), true, player);
 #endif//AZEROTHCORE
 #else//CLASSIC
         player->UnbindInstance(map);
@@ -2458,12 +2459,12 @@ namespace LuaPlayer
 #elif defined AZEROTHCORE
         for (uint8 i = 0; i < MAX_DIFFICULTY; ++i)
         {
-            const BoundInstancesMap& binds = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUID(), Difficulty(i));
+            const BoundInstancesMap& binds = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
             for (BoundInstancesMap::const_iterator itr = binds.begin(); itr != binds.end();)
             {
                 if (itr->first != player->GetMapId())
                 {
-                    sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUID(), itr->first, Difficulty(i), true, player);
+                    sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), itr->first, Difficulty(i), true, player);
                     itr = binds.begin();
                 }
                 else
@@ -2869,7 +2870,11 @@ namespace LuaPlayer
             {
                 if (CreatureTemplate const* creatureInfo = sObjectMgr->GetCreatureTemplate(creature))
                     for (uint16 z = 0; z < creatureCount; ++z)
+#ifndef AZEROTHCORE
                         player->KilledMonster(creatureInfo, ObjectGuid::Empty);
+#else
+                        player->KilledMonster(creatureInfo, 0);
+#endif
             }
             else if (creature < 0)
                 for (uint16 z = 0; z < creatureCount; ++z)
@@ -3056,7 +3061,7 @@ namespace LuaPlayer
      * @param string text
      * @param uint32 lang : language the [Player] will speak
      * @param [Player] receiver : is the [Player] that will receive the whisper, if TrinityCore
-     * @param ObjectGuid guid : is the GUID of a [Player] that will receive the whisper, not TrinityCore
+     * @param uint64 guid : is the GUID of a [Player] that will receive the whisper, not TrinityCore
      */
     int Whisper(lua_State* L, Player* player)
     {
@@ -3065,12 +3070,12 @@ namespace LuaPlayer
 #ifdef TRINITY
         Player* receiver = Eluna::CHECKOBJ<Player>(L, 4);
 #else
-        ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 4);
+        uint64 guid = Eluna::CHECKVAL<uint64>(L, 4);
 #endif
 #ifdef TRINITY
         player->Whisper(text, (Language)lang, receiver);
 #else
-        player->Whisper(text, lang, guid);
+        player->Whisper(text, lang, ObjectGuid(guid));
 #endif
         return 0;
     }
@@ -3632,10 +3637,10 @@ namespace LuaPlayer
         WorldPacket data(SMSG_MESSAGECHAT, 100);
         data << uint8(channel);
         data << int32(LANG_ADDON);
-        data << player->GET_GUID();
+        data << uint64(player->GET_GUID());
 #ifndef CLASSIC
         data << uint32(0);
-        data << receiver->GET_GUID();
+        data << uint64(receiver->GET_GUID());
 #endif
         data << uint32(fullmsg.length() + 1);
         data << fullmsg;
@@ -4109,7 +4114,7 @@ namespace LuaPlayer
     /*int KillGOCredit(lua_State* L, Player* player)
     {
     uint32 entry = Eluna::CHECKVAL<uint32>(L, 2);
-    ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 3);
+    uint64 guid = Eluna::CHECKVAL<uint64>(L, 3);
     player->KillCreditGO(entry, guid);
     return 0;
     }*/

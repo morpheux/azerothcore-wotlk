@@ -92,7 +92,7 @@ namespace LuaGuild
     /**
      * Returns [Guild] leader GUID
      *
-     * @return ObjectGuid leaderGUID
+     * @return uint64 leaderGUID
      */
     int GetLeaderGUID(lua_State* L, Guild* guild)
     {

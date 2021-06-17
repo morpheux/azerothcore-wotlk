@@ -17,7 +17,7 @@ namespace LuaCorpse
     /**
      * Returns the GUID of the [Player] that left the [Corpse] behind.
      *
-     * @return ObjectGuid ownerGUID
+     * @return uint64 ownerGUID
      */
     int GetOwnerGUID(lua_State* L, Corpse* corpse)
     {

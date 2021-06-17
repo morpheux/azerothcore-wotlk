@@ -602,7 +602,7 @@ namespace LuaUnit
     /**
      * Returns the [Unit]'s owner's GUID.
      *
-     * @return ObjectGuid ownerGUID
+     * @return uint64 ownerGUID
      */
     int GetOwnerGUID(lua_State* L, Unit* unit)
     {
@@ -628,7 +628,7 @@ namespace LuaUnit
     /**
      * Returns the [Unit]'s creator's GUID.
      *
-     * @return ObjectGuid creatorGUID
+     * @return uint64 creatorGUID
      */
     int GetCreatorGUID(lua_State* L, Unit* unit)
     {
@@ -643,7 +643,7 @@ namespace LuaUnit
     /**
      * Returns the [Unit]'s charmer's GUID.
      *
-     * @return ObjectGuid charmerGUID
+     * @return uint64 charmerGUID
      */
     int GetCharmerGUID(lua_State* L, Unit* unit)
     {
@@ -658,7 +658,7 @@ namespace LuaUnit
     /**
      * Returns the GUID of the [Unit]'s charmed entity.
      *
-     * @return ObjectGuid charmedGUID
+     * @return uint64 charmedGUID
      */
     int GetCharmGUID(lua_State* L, Unit* unit)
     {
@@ -675,7 +675,7 @@ namespace LuaUnit
     /**
      * Returns the GUID of the [Unit]'s pet.
      *
-     * @return ObjectGuid petGUID
+     * @return uint64 petGUID
      */
     int GetPetGUID(lua_State* L, Unit* unit)
     {
@@ -690,7 +690,7 @@ namespace LuaUnit
     /**
      * Returns the GUID of the [Unit]'s charmer or owner.
      *
-     * @return ObjectGuid controllerGUID
+     * @return uint64 controllerGUID
      */
     int GetControllerGUID(lua_State* L, Unit* unit)
     {
@@ -705,7 +705,7 @@ namespace LuaUnit
     /**
      * Returns the GUID of the [Unit]'s charmer or owner or its own GUID.
      *
-     * @return ObjectGuid controllerGUID
+     * @return uint64 controllerGUID
      */
     int GetControllerGUIDS(lua_State* L, Unit* unit)
     {
@@ -1355,7 +1355,7 @@ namespace LuaUnit
     /**
      * Returns the Critter Guid
      *
-     * @return ObjectGuid critterGuid
+     * @return uint64 critterGuid
      */
     int GetCritterGUID(lua_State* L, Unit* unit)
     {
@@ -1444,16 +1444,16 @@ namespace LuaUnit
     /**
      * Sets the [Unit]'s owner GUID to given GUID.
      *
-     * @param ObjectGuid guid : new owner guid
+     * @param uint64 guid : new owner guid
      */
     int SetOwnerGUID(lua_State* L, Unit* unit)
     {
-        ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 2);
+        uint64 guid = Eluna::CHECKVAL<uint64>(L, 2);
 
 #if defined TRINITY || AZEROTHCORE
-        unit->SetOwnerGUID(guid);
+        unit->SetOwnerGUID(ObjectGuid(guid));
 #else
-        unit->SetOwnerGuid(guid);
+        unit->SetOwnerGuid(ObjectGuid(guid));
 #endif
         return 0;
     }
@@ -1785,15 +1785,15 @@ namespace LuaUnit
     /**
      * Sets creator GUID
      *
-     * @param ObjectGuid guid
+     * @param uint64 guid
      */
     int SetCreatorGUID(lua_State* L, Unit* unit)
     {
-        ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 2);
+        uint64 guid = Eluna::CHECKVAL<uint64>(L, 2);
 #if defined TRINITY || AZEROTHCORE
-        unit->SetCreatorGUID(guid);
+        unit->SetCreatorGUID(ObjectGuid(guid));
 #else
-        unit->SetCreatorGuid(guid);
+        unit->SetCreatorGuid(ObjectGuid(guid));
 #endif
         return 0;
     }
@@ -1801,15 +1801,15 @@ namespace LuaUnit
     /**
      * Sets pet GUID
      *
-     * @param ObjectGuid guid
+     * @param uint64 guid
      */
     int SetPetGUID(lua_State* L, Unit* unit)
     {
-        ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 2);
+        uint64 guid = Eluna::CHECKVAL<uint64>(L, 2);
 #if defined TRINITY || AZEROTHCORE
-        unit->SetPetGUID(guid);
+        unit->SetPetGUID(ObjectGuid(guid));
 #else
-        unit->SetPetGuid(guid);
+        unit->SetPetGuid(ObjectGuid(guid));
 #endif
         return 0;
     }
@@ -1907,11 +1907,11 @@ namespace LuaUnit
 
     int SetCritterGUID(lua_State* L, Unit* unit)
     {
-        ObjectGuid guid = Eluna::CHECKVAL<ObjectGuid>(L, 2);
+        uint64 guid = Eluna::CHECKVAL<uint64>(L, 2);
 #if defined TRINITY || AZEROTHCORE
-        unit->SetCritterGUID(guid);
+        unit->SetCritterGUID(ObjectGuid(guid));
 #else
-        unit->SetCritterGuid(guid);
+        unit->SetCritterGuid(ObjectGuid(guid));
 #endif
         return 0;
     }
@@ -2444,7 +2444,7 @@ namespace LuaUnit
      * @param int32 bp1 = nil : custom basepoints for [Spell] effect 2. If nil, no change is made
      * @param int32 bp2 = nil : custom basepoints for [Spell] effect 3. If nil, no change is made
      * @param [Item] castItem = nil
-     * @param ObjectGuid originalCaster = ObjectGuid()
+     * @param uint64 originalCaster = 0
      */
     int CastCustomSpell(lua_State* L, Unit* unit)
     {
@@ -2458,7 +2458,7 @@ namespace LuaUnit
         bool has_bp2 = !lua_isnoneornil(L, 7);
         int32 bp2 = Eluna::CHECKVAL<int32>(L, 7, 0);
         Item* castItem = Eluna::CHECKOBJ<Item>(L, 8, false);
-        ObjectGuid originalCaster = Eluna::CHECKVAL<ObjectGuid>(L, 9, ObjectGuid());
+        uint64 originalCaster = Eluna::CHECKVAL<uint64>(L, 9, 0);
 
 #ifdef TRINITY
         CastSpellExtraArgs args;
@@ -2473,7 +2473,7 @@ namespace LuaUnit
         if (castItem)
             args.SetCastItem(castItem);
         if (originalCaster)
-            args.SetOriginalCaster(originalCaster);
+            args.SetOriginalCaster(ObjectGuid(originalCaster));
         unit->CastSpell(target, spell, args);
 #else
         unit->CastCustomSpell(target, spell, has_bp0 ? &bp0 : NULL, has_bp1 ? &bp1 : NULL, has_bp2 ? &bp2 : NULL, triggered, castItem, NULL, ObjectGuid(originalCaster));
