@@ -3390,7 +3390,7 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_holy_championsbond:30:30:-18:0|tDoar Badge of Justice", 6, 0, "Será Descontado 10 Badge of Justice, Tem certeza?", 0, false);
             }
 
-            if (qty7 < qtytotal7 && player->GetMoney() > 10000){
+            if (qty7 < qtytotal7 && player->GetMoney() > 100000000){
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_coin_01:30:30:-18:0|tDoar Gold", 7, 0, "Será Descontado 10.000 de Gold, Tem certeza?", 0, false);
             }
 
