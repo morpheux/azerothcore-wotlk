@@ -235,20 +235,6 @@ namespace LuaCreature
     }
 
     /**
-     * Returns `true` if the [Creature]'s flags_extra includes Dungeon Boss (0x1000000),
-     *   and returns `false` otherwise.
-     *
-     * @return bool isDungeonBoss
-     */
-#if defined(TRINITY) || defined(AZEROTHCORE)
-    int IsDungeonBoss(lua_State* L, Creature* creature)
-    {
-        Eluna::Push(L, creature->IsDungeonBoss());
-        return 1;
-    }
-#endif
-
-    /**
      * Returns `true` if the [Creature]'s rank is Boss,
      *   and returns `false` otherwise.
      *
@@ -875,24 +861,6 @@ auto const& threatlist = creature->getThreatManager().getThreatList();
     int GetNPCFlags(lua_State* L, Creature* creature)
     {
         Eluna::Push(L, creature->GetUInt32Value(UNIT_NPC_FLAGS));
-        return 1;
-    }
-
-    /**
-     * Returns the [Creature]'s Extra flags.
-     *
-     * These are used to control whether the NPC is a civilian, uses pathfinding,
-     *   if it's a guard, etc.
-     *
-     * @return [ExtraFlags] extraFlags
-     */
-    int GetExtraFlags(lua_State* L, Creature* creature)
-    {
-#if defined(TRINITY) || defined(AZEROTHCORE)
-        Eluna::Push(L, creature->GetCreatureTemplate()->flags_extra);
-#else
-        Eluna::Push(L, creature->GetCreatureInfo()->ExtraFlags);
-#endif
         return 1;
     }
 

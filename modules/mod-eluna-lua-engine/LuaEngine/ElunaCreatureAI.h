@@ -38,16 +38,15 @@ struct ElunaCreatureAI : ScriptedAI
     void UpdateAI(uint32 diff) override
 #endif
     {
-#ifdef TRINITY
-        //Spawns are handled by Creature.cpp - in function Creature::Update() 
-#else
         if (justSpawned)
         {
             justSpawned = false;
-
+#ifdef TRINITY
+            JustAppeared();
+#else
             JustRespawned();
-        }
 #endif
+        }
 
         if (!movepoints.empty())
         {

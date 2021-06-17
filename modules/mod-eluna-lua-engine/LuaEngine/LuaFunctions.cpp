@@ -782,7 +782,6 @@ ElunaRegister<Creature> CreatureMethods[] =
     { "GetLootRecipient", &LuaCreature::GetLootRecipient },
     { "GetLootRecipientGroup", &LuaCreature::GetLootRecipientGroup },
     { "GetNPCFlags", &LuaCreature::GetNPCFlags },
-    { "GetExtraFlags", &LuaCreature::GetExtraFlags },
 #if defined(CLASSIC) || defined(TBC) || defined(WOTLK)
     { "GetShieldBlockValue", &LuaCreature::GetShieldBlockValue },
 #endif
@@ -810,9 +809,6 @@ ElunaRegister<Creature> CreatureMethods[] =
     { "SetEquipmentSlots", &LuaCreature::SetEquipmentSlots },
 
     // Boolean
-#if defined(TRINITY) || defined(AZEROTHCORE)
-    { "IsDungeonBoss", &LuaCreature::IsDungeonBoss },
-#endif
     { "IsWorldBoss", &LuaCreature::IsWorldBoss },
     { "IsRacialLeader", &LuaCreature::IsRacialLeader },
     { "IsCivilian", &LuaCreature::IsCivilian },

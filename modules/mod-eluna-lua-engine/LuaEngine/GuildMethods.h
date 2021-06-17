@@ -36,8 +36,10 @@ namespace LuaGuild
         });
 #else
         {
-#if defined TRINITY || AZEROTHCORE
+#ifdef TRINITY
             std::shared_lock<std::shared_mutex> lock(*HashMapHolder<Player>::GetLock());
+#elif defined(AZEROTHCORE)
+            ACORE_READ_GUARD(HashMapHolder<Player>::LockType, *HashMapHolder<Player>::GetLock());
 #else
             HashMapHolder<Player>::ReadGuard g(HashMapHolder<Player>::GetLock());
 #endif

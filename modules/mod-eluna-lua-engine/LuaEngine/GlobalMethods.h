@@ -10,9 +10,7 @@
 #include "BindingMap.h"
 
 #ifdef AZEROTHCORE
-
 #include "BanManager.h"
-
 enum BanMode
 {
     BAN_ACCOUNT = 1,
@@ -200,8 +198,10 @@ namespace LuaGlobalFunctions
         });
 #else
         {
-#if defined TRINITY || AZEROTHCORE
+#ifdef TRINITY
             std::shared_lock<std::shared_mutex> lock(*HashMapHolder<Player>::GetLock());
+#elif defined(AZEROTHCORE)
+            ACORE_READ_GUARD(HashMapHolder<Player>::LockType, *HashMapHolder<Player>::GetLock());
 #else
             HashMapHolder<Player>::ReadGuard g(HashMapHolder<Player>::GetLock());
 #endif
@@ -2093,7 +2093,6 @@ namespace LuaGlobalFunctions
      * @param uint32 cod = 0 : cod money amount
      * @param uint32 entry = 0 : entry of an [Item] to send with mail
      * @param uint32 amount = 0 : amount of the [Item] to send with mail
-     * @return uint32 itemGUIDlow : low GUID of the item. Up to 12 values returned, returns nil if no further items are sent
      */
     int SendMail(lua_State* L)
     {
@@ -2157,11 +2156,6 @@ namespace LuaGlobalFunctions
                 item->SaveToDB();
 #endif
                 draft.AddItem(item);
-#if defined TRINITY
-                Eluna::Push(L, item->GetGUID().GetCounter());
-#else
-                Eluna::Push(L, item->GetGUIDLow());
-#endif
                 ++addedItems;
             }
         }
@@ -2173,7 +2167,7 @@ namespace LuaGlobalFunctions
 #else
         draft.SendMailTo(MailReceiver(receiverPlayer, MAKE_NEW_GUID(receiverGUIDLow, 0, HIGHGUID_PLAYER)), sender);
 #endif
-        return addedItems;
+        return 0;
     }
 
     /**
