@@ -3481,7 +3481,7 @@ public:
 
         case 8:
         {
-            player->KillPlayer();
+            player->CastSpell(7);
             WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty8+1, itemid8);
             ChatHandler(player->GetSession()).PSendSysMessage("Seu Sacrificio não será em vão");
             CloseGossipMenuFor(player);
