@@ -3395,7 +3395,7 @@ public:
             }
 
             if (qty8 < qtytotal8){
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shadow_lifedrain:30:30:-18:0|tSacrificar sua propia vida!", 8, 0, "Essa Ação levará a sua morte! Tem certeza disso ?", 0, false);
+                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_shadow_lifedrain:30:30:-18:0|tSacrificar sua própria vida!", 8, 0, "Essa Ação levará a sua morte! Tem certeza disso ?", 0, false);
             }
             
             if(qty1 >= qtytotal1 && qty2 >= qtytotal2 && qty3 >= qtytotal3 && qty4 >= qtytotal4 && qty5 >= qtytotal5 && qty6 >= qtytotal6 && qty7 >= qtytotal7 && qty8 >= qtytotal8){
