@@ -1,3 +1,0 @@
-[submodule "modules/mod-eluna-lua-engine"]
-	path = modules/mod-eluna-lua-engine
-	url = https://github.com/azerothcore/mod-eluna-lua-engine/tree/6aa494f4b38fd1413e5c0f297aa6fa600f519cea
