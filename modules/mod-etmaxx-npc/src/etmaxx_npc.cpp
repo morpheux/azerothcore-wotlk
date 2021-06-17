@@ -3374,19 +3374,19 @@ public:
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_jewelry_talisman_08:30:30:-18:0|tDoar EtMaXx Mega Mark", 2, 0, "Será Descontado 10 EtMaXx Mega Mark, Tem certeza?", 0, false);
             }
 
-            if (qty3 < qtytotal3 && player->HasItemCount(itemid3,100)){
+            if (qty3 < qtytotal3 && player->HasItemCount(itemid3,10)){
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_bone_humanskull_01:30:30:-18:0|tDoar Enemy Head", 3, 0, "Será Descontado 10 Enemy Head, Tem certeza?", 0, false);
             }
 
-            if (qty4 < qtytotal4 && player->HasItemCount(itemid4,400)){
+            if (qty4 < qtytotal4 && player->HasItemCount(itemid4,10)){
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_frostemblem_01:30:30:-18:0|tDoar Emblem of Frost", 4, 0, "Será Descontado 10 Emblem of Frost, Tem certeza?", 0, false);
             }
 
-            if (qty5 < qtytotal5 && player->HasItemCount(itemid5,5)){
+            if (qty5 < qtytotal5 && player->HasItemCount(itemid5,1)){
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_bijou_gold:30:30:-18:0|tDoar EtMaXx Event Mark", 5, 0, "Será Descontado 1 EtMaXx Event Mark, Tem certeza?", 0, false);
             }
             
-            if (qty6 < qtytotal6 && player->HasItemCount(itemid6,200)){
+            if (qty6 < qtytotal6 && player->HasItemCount(itemid6,10)){
                 AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_holy_championsbond:30:30:-18:0|tDoar Badge of Justice", 6, 0, "Será Descontado 10 Badge of Justice, Tem certeza?", 0, false);
             }
 
