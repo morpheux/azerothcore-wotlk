@@ -3503,7 +3503,7 @@ public:
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Mark, %u de 50000", qty1);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Mega Mark, %u de 500", qty2);
             ChatHandler(player->GetSession()).PSendSysMessage("Enemy Head, %u de 100", qty3);
-            ChatHandler(player->GetSession()).PSendSysMessage("Emblem of Frost, %u de 400", qty4);
+            ChatHandler(player->GetSession()).PSendSysMessage("Emblem of Frost, %u de 500", qty4);
             ChatHandler(player->GetSession()).PSendSysMessage("EtMaXx Event Mark, %u de 5", qty5);
             ChatHandler(player->GetSession()).PSendSysMessage("Badge of Justice, %u de 200", qty6);
             ChatHandler(player->GetSession()).PSendSysMessage("Gold, %u de 500000", qty7);
