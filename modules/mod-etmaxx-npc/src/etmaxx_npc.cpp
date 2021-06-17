@@ -3401,11 +3401,12 @@ public:
             if(qty1 >= qtytotal1 && qty2 >= qtytotal2 && qty3 >= qtytotal3 && qty4 >= qtytotal4 && qty5 >= qtytotal5 && qty6 >= qtytotal6 && qty7 >= qtytotal7 && qty8 >= qtytotal8){
                 AddGossipItemFor(player, GOSSIP_ACTION_AUCTION, "|TInterface/Icons/spell_lightning_lightningbolt01:30:30:-18:0|tO RITUAL ESTÁ PRONTO, ATIVAR ?", 10, 0, "Isso Ativará os Buff em ICC por 24 horas, porém será possivel reativar dentro de 48 horas, tem certeza que deseja iniciar o ritual ?", 0, false);
             }
+
+            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tVerificar estado do ritual", 9, 0);
             
         }else{
             AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_scroll_03:30:30:-18:0|tVerificar estado do ritual", 9, 0);
         }
-
         
         player->SEND_GOSSIP_MENU(800810, creature->GetGUID());
         return true;
@@ -3471,7 +3472,7 @@ public:
 
         case 7:
         {
-            player->ModifyMoney(100000000);
+            player->ModifyMoney(-100000000);
             WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty7+10000, itemid7);
             ChatHandler(player->GetSession()).PSendSysMessage("10000 de Gold foram removidos para o Ritual");
             CloseGossipMenuFor(player);
@@ -3516,9 +3517,10 @@ public:
         case 10:
         {
             WorldDatabase.PExecute("UPDATE spell_area SET autocast = 1 WHERE area = 4812 AND spell = 62650");
+            WorldDatabase.PExecute("UPDATE spell_area SET autocast = 1 WHERE area = 4812 AND spell = 62702");
             WorldDatabase.PExecute("UPDATE spell_area SET autocast = 1 WHERE area = 4812 AND spell = 62670");
             WorldDatabase.PExecute("UPDATE spell_area SET autocast = 1 WHERE area = 4812 AND spell = 62671");
-            WorldDatabase.PExecute("UPDATE spell_area SET autocast = 1 WHERE area = 4812 AND spell = 62672");
+            sSpellMgr->LoadSpellAreas();
             WorldDatabase.PExecute("UPDATE mod_icc_buff SET qty = %u WHERE itemid = %u", qty9+1, itemid9);
             WorldDatabase.PExecute("UPDATE mod_icc_buff SET usedate = UNIX_TIMESTAMP(NOW()) WHERE id = 9");
             WorldDatabase.PExecute("UPDATE mod_icc_buff SET expiredate = UNIX_TIMESTAMP(NOW() + INTERVAL 24 HOUR) WHERE id = 9");
@@ -3529,6 +3531,7 @@ public:
                 sprintf(msg, "|cffFF0000[Ritual dos Titãns]|r Os Buffs em ICC Foram ativados até %s", fields[0].GetCString());
                 sWorld->SendGlobalText(msg, NULL);
             }
+
             CloseGossipMenuFor(player);
         }
         break;
