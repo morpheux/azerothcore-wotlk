@@ -113,6 +113,7 @@ public:
             { "playall",            SEC_GAMEMASTER,         false, HandlePlayAllCommand,                "" },
             { "skirmish",           SEC_ADMINISTRATOR,      false, HandleSkirmishCommand,               "" },
 	        { "desbugar",	        SEC_PLAYER,				false, HandleDesbugarCommand,	            "" },
+            { "duel",   	        SEC_PLAYER,				false, HandleDuelCommand,	                "" },
             { "mailbox",            SEC_MODERATOR,          false, &HandleMailBoxCommand,               "" },
             { "hplus",              SEC_MODERATOR,          false, &HandleHeroicPlusCommand,            "" }
         };
@@ -3380,6 +3381,33 @@ public:
 	    return true;
 
 	}
+
+    static bool HandleDuelCommand(ChatHandler* handler, const char* /*args*/)
+    {
+        Player* chr = handler->GetSession()->GetPlayer();
+
+        if (chr && chr->IsInCombat())
+        {
+            handler->SendSysMessage(LANG_YOU_IN_COMBAT);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        if (chr && chr->IsInFlight())
+        {
+            handler->SendSysMessage(LANG_YOU_IN_FLIGHT);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        if (chr && chr->isDead())
+            chr->ResurrectPlayer(0.1f);
+
+        chr->TeleportTo(0, -7322.390, -108.384, 559.457, 3.43);
+
+        return true;
+
+    }
 
     static bool HandleMailBoxCommand(ChatHandler* handler, char const* /*args*/)
     {
