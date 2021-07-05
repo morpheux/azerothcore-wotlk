@@ -3590,7 +3590,7 @@ public:
 };
 
 ///////////////////////////////////////////////////////////////////////////////////
-/////////////                 NPC tutorial                        	///////////////
+/////////////                 NPC Cassandra                        	///////////////
 ///////////////////////////////////////////////////////////////////////////////////;
 
 class etmaxx_tabard_up : public CreatureScript
@@ -3706,4 +3706,5 @@ void AddNpcEtmaxxScripts()
     new etmaxx_alc();
     new etmaxx_tutorial();
     new etmaxx_buff();
+    new etmaxx_blueaura();
 }
