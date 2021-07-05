@@ -3621,7 +3621,7 @@ public:
         }
         break;
 
-        case 2:
+        case 3:
         {
             ChatHandler(player->GetSession()).PSendSysMessage("Complete todas as missões iniciais, fala com o EtMaXx Start e depois volte até mim");
             CloseGossipMenuFor(player);
