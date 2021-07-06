@@ -3605,7 +3605,7 @@ public:
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shirt_15:30:30:-18:0|tAtualizar minha Tabard para o Rank 2", 2, 0);
         //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shirt_guildtabard_01:30:30:-18:0|tAtualizar minha Tabard para o Rank 3", 3, 0);
         //AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_misc_tabardsummer01:30:30:-18:0|tAtualizar minha Tabard para o Rank 4", 4, 0);
-        player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        player->SEND_GOSSIP_MENU(800811, creature->GetGUID());
         return true;
     }
 
@@ -3615,18 +3615,305 @@ public:
         {
         case 2:
         {
-            player->DestroyItemCount(70506, 1, true);
-            player->TeleportTo(571, 5920.42f, 646.38f, 644.69f, 0.49f);
-            CloseGossipMenuFor(player);
-        }
-        break;
+            if(player->HasItemCount(90100,30,true)){
+                if (player->getRace() == RACE_BLOODELF)
+            {
+                if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60059, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60061, 0);
+                }
 
-        case 3:
-        {
-            ChatHandler(player->GetSession()).PSendSysMessage("Complete todas as missões iniciais, fala com o EtMaXx Start e depois volte até mim");
-            CloseGossipMenuFor(player);
+                if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST || player->getClass() == CLASS_MAGE || player->getClass() == CLASS_WARLOCK)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60060, 0);
+                }
+
+                if (player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_HUNTER)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60062, 0);
+                }
+
+                if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60063, 0);
+                }
+            }
+            else if (player->getRace() == RACE_ORC)
+            {
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60044, 0);
+                }
+
+                if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_WARLOCK)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60045, 0);
+                }
+
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60046, 0);
+                }
+
+                if (player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_HUNTER || player->getClass() == CLASS_SHAMAN)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60047, 0);
+                }
+
+                if (player->getClass() == CLASS_SHAMAN)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60048, 0);
+                }
+            }
+            else if (player->getRace() == RACE_TROLL)
+            {
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60054, 0);
+                }
+
+                if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_PRIEST || player->getClass() == CLASS_MAGE)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60055, 0);
+                }
+
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60056, 0);
+                }
+
+                if (player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_HUNTER || player->getClass() == CLASS_SHAMAN)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60057, 0);
+                }
+
+                if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_PRIEST)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60058, 0);
+                }
+            }
+            else if (player->getRace() == RACE_UNDEAD_PLAYER)
+            {
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60064, 0);
+                }
+
+                if (player->getClass() == CLASS_PRIEST || player->getClass() == CLASS_MAGE || player->getClass() == CLASS_WARLOCK)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60065, 0);
+                }
+
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60066, 0);
+                }
+
+                if (player->getClass() == CLASS_ROGUE)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60067, 0);
+                }
+
+                if (player->getClass() == CLASS_PRIEST)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60068, 0);
+                }
+            }
+            else if (player->getRace() == RACE_TAUREN)
+            {
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT || player->getClass() == CLASS_DRUID)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60049, 0);
+                }
+
+                if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_DRUID)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60050, 0);
+                }
+
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60051, 0);
+                }
+
+                if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_DRUID || player->getClass() == CLASS_HUNTER)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60052, 0);
+                }
+
+                if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_DRUID)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60053, 0);
+                }
+            }
+
+            if (player->getRace() == RACE_HUMAN)
+            {
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT || player->getClass() == CLASS_PALADIN)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60020, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60022, 0);
+                }
+
+                if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST || player->getClass() == CLASS_MAGE || player->getClass() == CLASS_WARLOCK)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60021, 0);
+                }
+
+                if (player->getClass() == CLASS_ROGUE)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60023, 0);
+                }
+
+                if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60024, 0);
+                }
+            }
+            else if (player->getRace() == RACE_DWARF)
+            {
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT || player->getClass() == CLASS_PALADIN)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60030, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60032, 0);
+                }
+
+                if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60031, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60034, 0);
+                }
+
+                if (player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_HUNTER)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60033, 0);
+                }
+            }
+            else if (player->getRace() == RACE_GNOME)
+            {
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60040, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60042, 0);
+                }
+
+                if (player->getClass() == CLASS_MAGE || player->getClass() == CLASS_WARLOCK)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60041, 0);
+                }
+
+                if (player->getClass() == CLASS_ROGUE)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60043, 0);
+                }
+            }
+            else if (player->getRace() == RACE_DRAENEI)
+            {
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT || player->getClass() == CLASS_PALADIN)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60035, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60037, 0);
+                }
+
+                if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST || player->getClass() == CLASS_MAGE || player->getClass() == CLASS_SHAMAN)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60036, 0);
+                }
+
+                if (player->getClass() == CLASS_SHAMAN || player->getClass() == CLASS_HUNTER)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60038, 0);
+                }
+
+                if (player->getClass() == CLASS_PALADIN || player->getClass() == CLASS_PRIEST || player->getClass() == CLASS_SHAMAN)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60039, 0);
+                }
+            }
+            else if (player->getRace() == RACE_NIGHTELF)
+            {
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT || player->getClass() == CLASS_DRUID)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_shield_32:30:30:-18:0|tTANK", 60025, 0);
+                }
+
+                if (player->getClass() == CLASS_PRIEST || player->getClass() == CLASS_DRUID)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_staff_52:30:30:-18:0|tSPELL DPS", 60026, 0);
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/spell_nature_healingwavegreater:30:30:-18:0|tHEAL", 60029, 0);
+                }
+
+                if (player->getClass() == CLASS_WARRIOR || player->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_hammer_unique_sulfuras:30:30:-18:0|tSTRENGTH DPS", 60027, 0);
+                }
+
+                if (player->getClass() == CLASS_HUNTER || player->getClass() == CLASS_ROGUE || player->getClass() == CLASS_DRUID)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/Icons/inv_weapon_bow_39:30:30:-18:0|tAGILITY DPS", 60028, 0);
+                }
+            }
         }
-        break;
+        }
+        break;        
+
+        case 60044: //Tabard of Orgrimmar
+        case 60045: //Tabard of Orgrimmar
+        case 60046: //Tabard of Orgrimmar
+        case 60047: //Tabard of Orgrimmar
+        case 60048: //Tabard of Orgrimmar
+        case 60049: //Tabard of Thunder Bluff
+        case 60050: //Tabard of Thunder Bluff
+        case 60051: //Tabard of Thunder Bluff
+        case 60052: //Tabard of Thunder Bluff
+        case 60053: //Tabard of Thunder Bluff
+        case 60054: //Tabard of Sen'jin
+        case 60055: //Tabard of Sen'jin
+        case 60056: //Tabard of Sen'jin
+        case 60057: //Tabard of Sen'jin
+        case 60058: //Tabard of Sen'jin
+        case 60059: //Tabard of Silvermoon
+        case 60060: //Tabard of Silvermoon
+        case 60061: //Tabard of Silvermoon
+        case 60062: //Tabard of Silvermoon
+        case 60063: //Tabard of Silvermoon
+        case 60064: //Tabard of Undercity
+        case 60065: //Tabard of Undercity
+        case 60066: //Tabard of Undercity
+        case 60067: //Tabard of Undercity
+        case 60068: //Tabard of Undercity
+        case 60020: //Tabard of Stormwind
+        case 60021: //Tabard of Stormwind
+        case 60022: //Tabard of Stormwind
+        case 60023: //Tabard of Stormwind
+        case 60024: //Tabard of Stormwind
+        case 60025: //Tabard of Darnassus
+        case 60026: //Tabard of Darnassus
+        case 60027: //Tabard of Darnassus
+        case 60028: //Tabard of Darnassus
+        case 60029: //Tabard of Darnassus
+        case 60030: //Tabard of Ironforge
+        case 60031: //Tabard of Ironforge
+        case 60032: //Tabard of Ironforge
+        case 60033: //Tabard of Ironforge
+        case 60034: //Tabard of Ironforge
+        case 60035: //Tabard of Exodar
+        case 60036: //Tabard of Exodar
+        case 60037: //Tabard of Exodar
+        case 60038: //Tabard of Exodar
+        case 60039: //Tabard of Exodar
+        case 60040: //Tabard of Gnomeregan
+        case 60041: //Tabard of Gnomeregan
+        case 60042: //Tabard of Gnomeregan
+        case 60043: //Tabard of Gnomeregan
+            if (destroyTabard(player))
+            {
+                addTabard(sender, player);
+                CloseGossipMenuFor(player);
+            }
+            break;
+
         }
         return true;
     }
